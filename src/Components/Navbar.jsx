@@ -4,10 +4,10 @@ const linkStyle = 'underline-offset-2 hover:underline hover:decoration-wavy deco
 
 function Navbar() {
   return (
-    <div className='sticky top-0 left-0 bg-black/20 flex items-center justify-end text-white p-2 space-x-4 font-medium'>
-        <a className={`${linkStyle}`} href="#">About</a>
+    <div className=' text-white  text-center right-0 flex items-center justify-end p-2 gap-3 font-medium z-50 text-xl'>
+        <a className={`${linkStyle}`} href="/">Home</a>
+        <a className={`${linkStyle}`} href="/about">About</a>
         <a className={`${linkStyle}`} href="#">Contact</a>
-        <a className={`${linkStyle}`} href="#">Projects</a>
     </div>
   )
 }
