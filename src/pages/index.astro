@@ -1,6 +1,6 @@
 ---
-import Navbar from "../Components/Navbar.jsx";
-import Hero from "../Components/Hero.astro";
+import "./global.css"
+import About from "../Components/About.jsx"
 ---
 
 <html lang="en">
@@ -12,7 +12,18 @@ import Hero from "../Components/Hero.astro";
     <meta name="generator" content={Astro.generator} />
     <title>Hey Iam Adarsh</title>
   </head>
-  <body class="bg-[#90ee90] text-black">
-    <Hero />
+  <body>
+    <div class="grid lg:flex h-screen">
+      <div class="scroll-watcher bg-gradient-to-r from-pink-500 to-indigo-500"></div>
+       <!-- fixed section -->
+    <div class="w-full lg:w-1/2 min-h-screen bg-black flex items-center justify-center border-r ">
+      <img src="/assets/profile.png" alt="profile" class="object-contain">
+    </div>
+    <!-- scrollable section -->
+    <div class="flex-1 w-full lg:w-1/2 lg:overflow-auto min-h-screen">
+      <About/>
+      <div class="min-h-screen bg-white"></div>
+    </div>
+    </div>
   </body>
 </html>
