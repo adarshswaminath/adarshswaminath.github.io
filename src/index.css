@@ -1,7 +1,96 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.scroll-watcher {
+  scale: 0 1;
+  animation: scroll-watcher linear;
+  transform-origin: left;
+  animation-timeline: scroll();
+}
+@keyframes scroll-watcher{
+  to { scale: 1 1 ;}
+}
+
 body {
   background-color: #000;
   color: white;
 }
+/* cursor styling */
+
+.wrapper {
+  --size: 450px;
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: black;
+  filter:blur(10px) contrast(15);
+
+  span {
+    background: white;
+    position: absolute;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
+  p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+  
+  p:nth-child(1) {
+    position: absolute;
+    animation: skewing-child .2s ease-in-out infinite alternate;
+    
+    span {
+      width: calc(var(--size) / 20);
+      height: calc(var(--size) / 20);
+      margin: calc(var(--size) / -40);;
+    }
+  }
+  
+  p:nth-child(2) {
+    position: absolute;
+    animation: squishing 1s ease-in-out infinite alternate;
+    
+    span {
+      width: calc(var(--size) / 4);
+      height: calc(var(--size) / 4);
+      top: 50%;
+      left: 50%;
+      margin: calc(var(--size) / -8);
+      animation: skewing 2s 1.5s ease-in-out infinite;
+    }
+  } 
+}
+
+@keyframes skewing {
+  0% { transform: skewX(6deg); }
+  10% { transform: skewX(-6deg); }
+  20% { transform: skewX(4deg); }
+  30% { transform: skewX(-4deg); }
+  40% { transform: skewX(2deg); }
+  50% { transform: skewX(-6deg); }
+  55% { transform: skewX(6deg); }
+  60% { transform: skewX(-5deg); }
+  65% { transform: skewX(5deg); }
+  70% { transform: skewX(-4deg); }
+  75% { transform: skewX(4deg); }
+  80% { transform: skewX(-3deg); } 
+  85% { transform: skewX(3deg); }
+  90% { transform: skewX(-2deg); } 
+  95% { transform: skewX(2deg); }
+  100%   { transform: skewX(1deg); }
+}
+
+@keyframes skewing-child {
+  0%      { transform: skewX(-10deg); }
+  100%     { transform: skewX(10deg); }
+}
+
+@keyframes squishing {
+  10%, 40%, 80% { transform: scale(1, .9); }
+  0%, 30%, 60%, 100% {transform: scale(.9, 1);}
+}
+
