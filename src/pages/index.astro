@@ -4,6 +4,7 @@ import Button from '../components/Button.astro';
 import Section from '../components/Section.astro';
 import Tag from '../components/Tag.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import CodeWindow from '../components/CodeWindow.astro';
 import { Briefcase, Trophy, ArrowUpRight, Calendar } from 'lucide-astro';
 
 const navItems = ["About", "Projects", "Experience", "Achievements", "Blog", "Contact"];
@@ -97,8 +98,24 @@ const featuredBlogs = posts.sort((a: any, b: any) =>
       <Button>Contact Me</Button>
     </div>
 
-    <div class="bg-white border border-gray-200/80 shadow-sm rounded-lg p-5 font-mono text-sm max-w-2xl min-h-[116px] flex items-start">
-      <pre><code id="typing-code"></code><span class="animate-pulse font-bold ml-px">|</span></pre>
+    <div class="mb-4">
+      <CodeWindow 
+        title="stack.ts"
+        code={`const engineer = {
+  name: "Adarsh",
+  focus: [
+    "scalable systems",
+    "developer tooling",
+    "ai infrastructure",
+  ],
+  currentlyBuilding: "osquery-rs",
+  yearsExp: 3,
+  openToWork: true,
+}
+
+// let's build something great`}
+        class="max-w-2xl"
+      />
     </div>
 
     <div class="flex gap-2 mt-6 flex-wrap">
@@ -282,32 +299,79 @@ const featuredBlogs = posts.sort((a: any, b: any) =>
     });
   };
 
+  // Run on load and after soft navigation if ViewTransitions are used
+  setupTabs();
+  
   const setupTyping = () => {
-    const el = document.getElementById('typing-code');
-    if (!el) return;
+    const codeBlock = document.querySelector('.code-window-body code');
+    if (!codeBlock) return;
     
-    el.innerHTML = ''; // reset on navigation
+    // Check if already typed to avoid re-running on same page unnecessarily
+    if (codeBlock.hasAttribute('data-typed')) return;
+    codeBlock.setAttribute('data-typed', 'true');
     
-    const text = `const developer = {
-  stack: ["React", "Next.js", "TypeScript", "Solidity"],
-  focus: "scalable systems + clean architecture"
-};`;
+    // Create cursor
+    let cursor = document.getElementById('typing-cursor');
+    if (!cursor) {
+      cursor = document.createElement('span');
+      cursor.id = 'typing-cursor';
+      cursor.className = 'animate-pulse font-bold text-gray-400 ml-px';
+      cursor.textContent = '|';
+    }
+
+    // Freeze height to prevent jumping during animation
+    const preElement = codeBlock.closest('pre');
+    if (preElement) {
+      preElement.style.minHeight = preElement.offsetHeight + 'px';
+    }
     
-    let i = 0;
-    const typeWriter = () => {
-      if (i < text.length) {
-        el.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 40 + Math.random() * 40);
+    // Get all text nodes
+    const textNodes = [];
+    const walker = document.createTreeWalker(codeBlock, NodeFilter.SHOW_TEXT, null, false);
+    let node;
+    while ((node = walker.nextNode())) {
+      textNodes.push({ node, text: node.nodeValue || '' });
+    }
+    
+    // Clear all text nodes initially
+    textNodes.forEach(t => t.node.nodeValue = '');
+    
+    let nodeIndex = 0;
+    let charIndex = 0;
+    
+    const typeNextChar = () => {
+      if (nodeIndex >= textNodes.length) return; // Done typing
+      
+      const current = textNodes[nodeIndex];
+      // Skip empty text nodes immediately
+      if (current.text.length === 0) {
+        nodeIndex++;
+        typeNextChar();
+        return;
+      }
+      
+      if (charIndex < current.text.length) {
+        current.node.nodeValue += current.text.charAt(charIndex);
+        charIndex++;
+        
+        // Insert cursor right after the current text node
+        if (current.node.parentNode) {
+          current.node.parentNode.insertBefore(cursor, current.node.nextSibling);
+        }
+        
+        setTimeout(typeNextChar, 10 + Math.random() * 15);
+      } else {
+        nodeIndex++;
+        charIndex = 0;
+        typeNextChar();
       }
     };
     
-    setTimeout(typeWriter, 500);
+    setTimeout(typeNextChar, 200);
   };
 
-  // Run on load and after soft navigation if ViewTransitions are used
-  setupTabs();
   setupTyping();
+
   document.addEventListener('astro:page-load', () => {
     setupTabs();
     setupTyping();
