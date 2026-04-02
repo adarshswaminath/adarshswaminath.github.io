@@ -1,0 +1,29 @@
+---
+import Tag from './Tag.astro';
+import { Github, ExternalLink } from 'lucide-astro';
+
+const { project } = Astro.props;
+---
+
+<div class="group border border-gray-200 rounded-md p-5 bg-white hover:shadow-md transition-all">
+  <div class="flex justify-between items-start mb-2">
+    <h3 class="font-medium">{project.title}</h3>
+    <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition">
+      <Github size={16} />
+      <ExternalLink size={16} />
+    </div>
+  </div>
+
+  <p class="text-sm text-gray-600 mb-3">{project.desc}</p>
+
+  <div class="flex gap-2 mb-3 flex-wrap">
+    {project.tech.map((t: string) => (
+      <Tag>{t}</Tag>
+    ))}
+  </div>
+
+  <!-- subtle hover reveal -->
+  <div class="text-xs text-gray-400 opacity-0 group-hover:opacity-100 transition duration-300">
+    {project.highlight}
+  </div>
+</div>

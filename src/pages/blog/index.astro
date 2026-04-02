@@ -1,0 +1,52 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/Button.astro';
+import Section from '../../components/Section.astro';
+import { ExternalLink } from 'lucide-astro';
+
+// Fetch all markdown posts
+const posts = Object.values(import.meta.glob('./*.md', { eager: true }));
+
+// Sort by date DESC
+const sortedPosts = posts.sort((a: any, b: any) => 
+  new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf()
+);
+---
+
+<Layout title="Blog | Adarsh.dev">
+  <nav class="sticky top-0 bg-[#F1F1F1]/90 backdrop-blur border-b border-gray-200 z-50">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center text-sm">
+      <a href="/" class="font-semibold text-gray-800">Adarsh.dev</a>
+      <a href="/" class="hover:underline text-gray-600">Back Home</a>
+    </div>
+  </nav>
+
+  <Section title="Writing & Thoughts">
+    <p class="text-gray-600 mb-8 max-w-2xl">
+      Articles on Web3, React, scalable systems architecture, and my journey as a developer.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      {sortedPosts.map((post: any) => (
+        <a href={post.url} class="group border border-gray-200 rounded-md p-5 bg-white hover:shadow-md transition block relative">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-medium group-hover:text-slate-900">{post.frontmatter.title}</h3>
+            <div class="opacity-0 group-hover:opacity-100 transition absolute top-5 right-5 text-gray-400 hover:text-gray-800">
+              <ExternalLink size={16} />
+            </div>
+          </div>
+          
+          <p class="text-sm text-gray-600 mb-4 pr-6">{post.frontmatter.description}</p>
+          
+          <div class="text-xs text-gray-400 font-mono opacity-60 group-hover:opacity-100 transition duration-300">
+            {new Date(post.frontmatter.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+          </div>
+        </a>
+      ))}
+    </div>
+  </Section>
+
+  <footer class="text-center text-xs text-gray-400 py-8">
+    © 2026 Adarsh.dev
+  </footer>
+</Layout>

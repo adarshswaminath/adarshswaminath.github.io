@@ -1,0 +1,272 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import Section from '../components/Section.astro';
+import Tag from '../components/Tag.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { Briefcase, Trophy } from 'lucide-astro';
+
+const navItems = ["About", "Projects", "Experience", "Achievements", "Blog", "Contact"];
+const stackTags = ["React", "Next.js", "TypeScript", "Solidity", "Golang", "Tailwind"];
+
+const projects = [
+  {
+    title: "BlockSimulate",
+    desc: "Interactive blockchain simulator for learning core concepts.",
+    tech: ["Golang", "Fiber", "React"],
+    highlight: "Custom blockchain logic + cryptography implementation",
+  },
+  {
+    title: "Blockchain Complaint System",
+    desc: "Decentralized complaint system with privacy-first design.",
+    tech: ["React", "Solidity", "Thirdweb"],
+    highlight: "Smart contracts + secure public search",
+  },
+  {
+    title: "Copyslate",
+    desc: "Text sharing platform with custom branding and links.",
+    tech: ["Next.js", "MongoDB", "Prisma"],
+    highlight: "Fast sharing + user personalization",
+  },
+  {
+    title: "Blog2Buzz",
+    desc: "AI-powered content curation and social content generator.",
+    tech: ["Next.js", "AI", "Scraping"],
+    highlight: "Automated blog → social pipeline",
+  },
+];
+
+const experiences = [
+  {
+    role: "Associate Frontend Developer",
+    company: "UprootSecurity",
+    duration: "Nov 2024 - Present",
+    points: [
+      "Built AI-driven GRC platform UI",
+      "Improved developer experience with reusable components",
+    ],
+  },
+  {
+    role: "Frontend Developer",
+    company: "Igoraza",
+    duration: "Feb 2023 - Jun 2024",
+    points: [
+      "Developed scalable React apps",
+      "Collaborated across teams for delivery",
+    ],
+  },
+];
+
+const achievements = [
+  "Contributor to Coinbase OnChainKit",
+  "Certified Blockchain Practitioner",
+  "Hackerrank React Certification",
+];
+
+// Fetch and sort blogs safely
+const posts = Object.values(import.meta.glob('./blog/*.md', { eager: true }));
+const featuredBlogs = posts.sort((a: any, b: any) => 
+  new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf()
+).slice(0, 2);
+---
+
+<Layout>
+  <!-- Navbar -->
+  <nav class="sticky top-0 bg-[#F1F1F1]/90 backdrop-blur z-50 border-b border-gray-200">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="font-semibold">Adarsh.dev</div>
+      <div class="flex gap-6 text-sm">
+        {navItems.map((item) => (
+          <a href={item === 'Blog' ? '/blog' : `#${item.toLowerCase()}`} class="hover:underline cursor-pointer">{item}</a>
+        ))}
+      </div>
+      <Button>Resume</Button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="max-w-5xl mx-auto px-6 py-24">
+    <h1 class="text-4xl font-semibold mb-4">
+      Building scalable Web & Web3 systems
+    </h1>
+    <p class="text-gray-600 max-w-2xl mb-6">
+      Focused on developer-first platforms, AI systems, and clean architecture.
+    </p>
+    <div class="flex gap-4 mb-8">
+      <Button primary>View Projects</Button>
+      <Button>Contact Me</Button>
+    </div>
+
+    <div class="bg-white border border-gray-200 rounded-md p-4 font-mono text-sm max-w-2xl">
+      <pre><code>const developer = {'{'}
+  stack: ["React", "Next.js", "TypeScript", "Solidity"],
+  focus: "scalable systems + clean architecture"
+{'}'};</code></pre>
+    </div>
+
+    <div class="flex gap-2 mt-4 flex-wrap">
+      {stackTags.map((t) => (
+        <Tag>{t}</Tag>
+      ))}
+    </div>
+  </section>
+
+  <!-- About -->
+  <div id="about">
+    <Section title="About">
+      <p class="text-gray-600 mb-4">
+        Full-stack JavaScript developer with Web3 expertise, focused on building scalable, user-friendly applications and developer tooling.
+      </p>
+      <ul class="list-disc ml-5 text-gray-600">
+        <li>Experience: Frontend + Full-stack development</li>
+        <li>Domains: AI Platforms, Web3, Developer Tools</li>
+        <li>Strong focus on performance, UX, and maintainability</li>
+      </ul>
+    </Section>
+  </div>
+
+  <!-- Projects -->
+  <div id="projects">
+    <Section title="Projects">
+      <div class="grid md:grid-cols-2 gap-6">
+        {projects.map((p) => (
+          <ProjectCard project={p} />
+        ))}
+      </div>
+    </Section>
+  </div>
+
+  <!-- Experience (interactive) -->
+  <div id="experience">
+    <Section title="Experience">
+      <div class="grid md:grid-cols-3 gap-6" id="experience-section">
+        <!-- left nav -->
+        <div class="space-y-2">
+          {experiences.map((exp, i) => (
+            <button
+              class={`exp-tab w-full text-left p-3 border rounded-md cursor-pointer text-sm transition-colors ${
+                i === 0 ? "border-slate-800 bg-white" : "border-gray-200"
+              }`}
+              data-index={i}
+            >
+              <div class="flex items-center gap-2">
+                <Briefcase size={14} />
+                <span>{exp.company}</span>
+              </div>
+            </button>
+          ))}
+        </div>
+
+        <!-- detail panel (using slots/hidden logic) -->
+        <div class="md:col-span-2 border border-gray-200 rounded-md p-5 bg-white">
+          {experiences.map((exp, i) => (
+            <div class={`exp-content ${i !== 0 ? 'hidden' : ''}`} data-index={i}>
+              <h3 class="font-medium mb-1">
+                {exp.role}
+              </h3>
+              <p class="text-xs text-gray-500 mb-3">
+                {exp.duration}
+              </p>
+              <ul class="list-disc ml-5 text-sm text-gray-600">
+                {exp.points.map((p) => (
+                  <li>{p}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Section>
+  </div>
+
+  <!-- Achievements -->
+  <div id="achievements">
+    <Section title="Achievements">
+      <div class="grid md:grid-cols-3 gap-4">
+        {achievements.map((a) => (
+          <div class="border border-gray-200 bg-white p-4 rounded-md flex gap-3 items-start hover:shadow-sm transition">
+            <Trophy size={16} class="min-w-4 text-gray-800 mt-[1px]" />
+            <p class="text-sm text-gray-600">{a}</p>
+          </div>
+        ))}
+      </div>
+    </Section>
+  </div>
+
+  <!-- Featured Blog -->
+  <div id="blog">
+    <Section title="Blog">
+      <div class="grid md:grid-cols-2 gap-6 mb-6">
+        {featuredBlogs.map((post: any) => (
+          <a href={post.url} class="group block border border-gray-200 rounded-md p-4 bg-white hover:shadow-md transition">
+            <h3 class="font-medium mb-2 group-hover:text-blue-600 transition-colors">{post.frontmatter.title}</h3>
+            <p class="text-sm text-gray-600 mb-3 line-clamp-2">{post.frontmatter.description}</p>
+            <div class="text-xs text-gray-400 opacity-0 group-hover:opacity-100 transition duration-300">
+              Read article →
+            </div>
+          </a>
+        ))}
+      </div>
+      <a href="/blog" class="text-sm border border-gray-300 rounded-md px-4 py-2 hover:border-slate-800 transition-all inline-block bg-white">Read all posts</a>
+    </Section>
+  </div>
+
+  <!-- Contact -->
+  <div id="contact">
+    <Section title="Contact">
+      <p class="text-gray-600 mb-4">
+        adarshswaminath7@gmail.com
+      </p>
+      <div class="flex gap-4 text-sm">
+        <a class="underline" href="https://github.com/adarshswaminath">GitHub</a>
+        <a class="underline" href="https://www.linkedin.com/in/adarshswaminath/">LinkedIn</a>
+      </div>
+    </Section>
+  </div>
+
+  <footer class="text-center text-xs text-gray-400 py-8">
+    © 2026 Adarsh.dev
+  </footer>
+</Layout>
+
+<script>
+  let activeExp = 0;
+  
+  const setupTabs = () => {
+    const section = document.getElementById('experience-section');
+    if (!section) return;
+
+    const tabs = section.querySelectorAll('.exp-tab');
+    const contents = section.querySelectorAll('.exp-content');
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const index = parseInt(tab.getAttribute('data-index') || "0");
+        if (index === activeExp) return;
+        activeExp = index;
+
+        // Reset all tabs
+        tabs.forEach((t) => {
+          t.classList.remove('border-slate-800', 'bg-white');
+          t.classList.add('border-gray-200');
+        });
+
+        // Activate clicked tab
+        tab.classList.add('border-slate-800', 'bg-white');
+        tab.classList.remove('border-gray-200');
+
+        // Hide all contents
+        contents.forEach((c) => c.classList.add('hidden'));
+
+        // Show specific content
+        const targetContent = section.querySelector(`.exp-content[data-index="${index}"]`);
+        if (targetContent) targetContent.classList.remove('hidden');
+      });
+    });
+  };
+
+  // Run on load and after soft navigation if ViewTransitions are used
+  setupTabs();
+  document.addEventListener('astro:page-load', setupTabs);
+</script>
+
