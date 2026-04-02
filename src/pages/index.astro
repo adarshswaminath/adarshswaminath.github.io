@@ -7,7 +7,7 @@ import ProjectCard from '../components/ProjectCard.astro';
 import CodeWindow from '../components/CodeWindow.astro';
 import { Briefcase, Trophy, ArrowUpRight, Calendar } from 'lucide-astro';
 
-const navItems = ["About", "Projects", "Experience", "Achievements", "Blog", "Contact"];
+const navItems = ["About", "Projects", "Experience", "Blog", "Contact"];
 const stackTags = ["React", "Next.js", "TypeScript", "Solidity", "Golang", "Tailwind"];
 
 const projects = [
@@ -128,14 +128,44 @@ const featuredBlogs = posts.sort((a: any, b: any) =>
   <!-- About -->
   <div id="about">
     <Section title="About">
-      <p class="text-gray-600 mb-4">
-        Full-stack JavaScript developer with Web3 expertise, focused on building scalable, user-friendly applications and developer tooling.
-      </p>
-      <ul class="list-disc ml-5 text-gray-600">
-        <li>Experience: Frontend + Full-stack development</li>
-        <li>Domains: AI Platforms, Web3, Developer Tools</li>
-        <li>Strong focus on performance, UX, and maintainability</li>
-      </ul>
+      <div class="grid md:grid-cols-5 gap-8">
+        <div class="md:col-span-3 space-y-5 text-gray-600">
+          <p class="leading-relaxed text-[15px]">
+            I am a full-stack JavaScript developer with Web3 expertise, focused on building scalable, user-friendly applications and developer tooling. 
+            I deeply value solving complex problems with performance-first principles.
+          </p>
+          <div class="grid grid-flow-row sm:grid-cols-2 gap-4 pt-4 border-t border-gray-100">
+            <div>
+              <h4 class="font-medium text-gray-900 mb-3 text-[11px] tracking-widest uppercase">Expertise</h4>
+              <ul class="space-y-2 text-sm text-gray-500">
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>Frontend + Full-stack</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>AI Platforms & Tools</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>Web3 Infrastructure</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-medium text-gray-900 mb-3 text-[11px] tracking-widest uppercase">Core Focus</h4>
+              <ul class="space-y-2 text-sm text-gray-500">
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>Performance First</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>Clean Architecture</li>
+                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>Maintainability & UX</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="md:col-span-2 space-y-3">
+          <h4 class="font-medium text-gray-900 mb-3 text-[11px] tracking-widest uppercase md:mt-0">Key Achievements</h4>
+          {achievements.map((a) => (
+            <div class="border border-gray-200/80 bg-white p-3.5 rounded-lg flex gap-3.5 items-center shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:-translate-y-0.5 hover:shadow-[0_4px_24px_rgba(0,0,0,0.04)] transition-all duration-300">
+              <div class="bg-gray-50 flex items-center justify-center p-2 rounded-md border border-gray-100 shadow-sm">
+                <Trophy size={14} class="min-w-4 text-slate-700" />
+              </div>
+              <p class="text-[13px] font-medium text-gray-700 leading-snug flex-1">{a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </Section>
   </div>
 
@@ -150,62 +180,48 @@ const featuredBlogs = posts.sort((a: any, b: any) =>
     </Section>
   </div>
 
-  <!-- Experience (interactive) -->
-  <div id="experience">
-    <Section title="Experience">
-      <div class="grid md:grid-cols-3 gap-6" id="experience-section">
-        <!-- left nav -->
-        <div class="space-y-2">
-          {experiences.map((exp, i) => (
-            <button
-              class={`exp-tab w-full text-left p-4 border rounded-lg cursor-pointer text-sm transition-all duration-300 ${
-                i === 0 ? "border-gray-300 bg-white shadow-sm text-gray-900" : "border-transparent text-gray-500 hover:text-gray-900 hover:bg-gray-200/50"
-              }`}
-              data-index={i}
-            >
-              <div class="flex items-center gap-2">
-                <Briefcase size={14} />
-                <span>{exp.company}</span>
-              </div>
-            </button>
-          ))}
-        </div>
+  <!-- Experience (timeline) -->
+  <div id="experience" class="max-w-5xl mx-auto px-6 py-20">
+    <div class="mb-14">
+      <div class="flex items-center gap-4 mb-5">
+        <div class="w-8 h-px bg-gray-300"></div>
+        <span class="text-xs font-semibold tracking-[0.15em] text-gray-400 uppercase">Experience</span>
+      </div>
+      <h2 class="text-3xl md:text-[34px] font-medium text-gray-900 tracking-tight">Where I've worked</h2>
+    </div>
 
-        <!-- detail panel (using slots/hidden logic) -->
-        <div class="md:col-span-2 border border-gray-200/80 rounded-lg p-6 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.03)] h-full">
-          {experiences.map((exp, i) => (
-            <div class={`exp-content ${i !== 0 ? 'hidden' : ''}`} data-index={i}>
-              <h3 class="font-medium mb-1">
-                {exp.role}
-              </h3>
-              <p class="text-xs text-gray-500 mb-3">
-                {exp.duration}
-              </p>
-              <ul class="list-disc ml-5 text-sm text-gray-600">
-                {exp.points.map((p) => (
-                  <li>{p}</li>
-                ))}
-              </ul>
+    <div class="relative space-y-12">
+      <!-- Vertical line -->
+      <div class="absolute left-[5px] top-[8px] bottom-8 w-px bg-gray-200"></div>
+      
+      {experiences.map((exp, i) => (
+        <div class="relative pl-8 md:pl-12">
+          <!-- Timeline dot -->
+          <div class={`absolute left-0 top-[8px] w-3 h-3 rounded-full bg-white border-2 ${i === 0 ? 'border-slate-800' : 'border-gray-200'}`}></div>
+          
+          <div class="mb-5">
+            <h3 class="text-xl font-medium text-gray-900">{exp.role}</h3>
+            <div class="flex flex-wrap items-center gap-2 mt-1.5 text-sm">
+              <span class="text-slate-600 font-medium">{exp.company}</span>
+              <span class="text-gray-300">•</span>
+              <span class="text-gray-400 font-mono text-[13px] tracking-tight">{exp.duration.replace(' - ', ' — ').toLowerCase()}</span>
             </div>
-          ))}
+          </div>
+          
+          <div class="space-y-4">
+            {exp.points.map((p, pIndex) => (
+              <div class={`text-[15px] leading-relaxed text-gray-600 flex gap-4 ${pIndex !== exp.points.length - 1 ? 'pb-4 border-b border-gray-100' : ''}`}>
+                <span class="text-gray-400 select-none">–</span>
+                <p>{p}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </Section>
+      ))}
+    </div>
   </div>
 
-  <!-- Achievements -->
-  <div id="achievements">
-    <Section title="Achievements">
-      <div class="grid md:grid-cols-3 gap-4">
-        {achievements.map((a) => (
-          <div class="border border-gray-200/80 bg-white p-5 rounded-lg flex gap-3 items-center hover:shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:-translate-y-0.5 transition-all duration-300">
-            <Trophy size={16} class="min-w-4 text-gray-800" />
-            <p class="text-sm text-gray-600">{a}</p>
-          </div>
-        ))}
-      </div>
-    </Section>
-  </div>
+
 
   <!-- Featured Blog -->
   <div id="blog">
@@ -264,44 +280,6 @@ const featuredBlogs = posts.sort((a: any, b: any) =>
 </Layout>
 
 <script>
-  let activeExp = 0;
-  
-  const setupTabs = () => {
-    const section = document.getElementById('experience-section');
-    if (!section) return;
-
-    const tabs = section.querySelectorAll('.exp-tab');
-    const contents = section.querySelectorAll('.exp-content');
-
-    tabs.forEach((tab) => {
-      tab.addEventListener('click', () => {
-        const index = parseInt(tab.getAttribute('data-index') || "0");
-        if (index === activeExp) return;
-        activeExp = index;
-
-        // Reset all tabs
-        tabs.forEach((t) => {
-          t.classList.remove('border-gray-300', 'bg-white', 'shadow-sm', 'text-gray-900');
-          t.classList.add('border-transparent', 'text-gray-500');
-        });
-
-        // Activate clicked tab
-        tab.classList.add('border-gray-300', 'bg-white', 'shadow-sm', 'text-gray-900');
-        tab.classList.remove('border-transparent', 'text-gray-500');
-
-        // Hide all contents
-        contents.forEach((c) => c.classList.add('hidden'));
-
-        // Show specific content
-        const targetContent = section.querySelector(`.exp-content[data-index="${index}"]`);
-        if (targetContent) targetContent.classList.remove('hidden');
-      });
-    });
-  };
-
-  // Run on load and after soft navigation if ViewTransitions are used
-  setupTabs();
-  
   const setupTyping = () => {
     const codeBlock = document.querySelector('.code-window-body code');
     if (!codeBlock) return;
@@ -373,7 +351,6 @@ const featuredBlogs = posts.sort((a: any, b: any) =>
   setupTyping();
 
   document.addEventListener('astro:page-load', () => {
-    setupTabs();
     setupTyping();
   });
 </script>
