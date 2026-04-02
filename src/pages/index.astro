@@ -72,6 +72,35 @@ const featuredBlogs = posts.sort((a: any, b: any) =>
 ---
 
 <Layout>
+  <!-- Tracing Beam -->
+  <div class="fixed inset-y-0 w-full pointer-events-none z-50 flex justify-center">
+    <div class="w-full max-w-5xl relative h-full">
+      <div class="absolute left-3 md:left-[-1.5rem] top-0 bottom-0 py-24 w-[2px] hidden sm:block">
+    <!-- Glowing Dot -->
+    <div id="tracing-beam-dot" class="absolute top-[88px] -left-[7px] flex h-4 w-4 items-center justify-center rounded-full border shadow-sm transition-all duration-300 bg-white" style="border-color: rgba(0,0,0,0.24)">
+      <div id="tracing-beam-inner-dot" class="h-2 w-2 rounded-full border bg-slate-800 transition-colors duration-300 border border-slate-900"></div>
+    </div>
+
+    <svg class="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 2 100">
+      <!-- Background track -->
+      <line x1="1" y1="0" x2="1" y2="100" stroke="#9091A0" stroke-opacity="0.16" stroke-width="1.5" vector-effect="non-scaling-stroke" stroke-linecap="round" />
+      
+      <!-- Animated beam -->
+      <line x1="1" y1="0" x2="1" y2="100" stroke="url(#tracing-gradient)" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linecap="round" />
+      
+      <defs>
+        <linearGradient id="tracing-gradient" gradientUnits="userSpaceOnUse" x1="0" x2="0" y1="0" y2="-25">
+          <stop stop-color="#0f172a" stop-opacity="0"></stop>
+          <stop stop-color="#0f172a"></stop>
+          <stop offset="0.325" stop-color="#334155"></stop>
+          <stop offset="1" stop-color="#94a3b8" stop-opacity="0"></stop>
+        </linearGradient>
+      </defs>
+    </svg>
+      </div>
+    </div>
+  </div>
+
   <!-- Navbar -->
   <nav class="sticky top-0 bg-[#F1F1F1]/90 backdrop-blur z-50 border-b border-gray-200">
     <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -344,10 +373,89 @@ const featuredBlogs = posts.sort((a: any, b: any) =>
     setTimeout(typeNextChar, 200);
   };
 
+  const setupTracingBeam = () => {
+    const gradient = document.getElementById('tracing-gradient');
+    const dotContainer = document.getElementById('tracing-beam-dot');
+    const dotInner = document.getElementById('tracing-beam-inner-dot');
+    if (!gradient) return;
+
+    let scrollY = window.scrollY;
+    let currentY1 = 0;
+    let targetY1 = 0;
+    let currentY2 = -25;
+    let targetY2 = -25;
+    let isAnimating = true;
+
+    const updateScroll = () => {
+      scrollY = window.scrollY;
+      if (!isAnimating) {
+        isAnimating = true;
+        requestAnimationFrame(animateParams);
+      }
+    };
+    
+    window.addEventListener('scroll', updateScroll, { passive: true });
+
+    const animateParams = () => {
+      const windowHeight = window.innerHeight;
+      const documentHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+      const maxScroll = Math.max(0, documentHeight - windowHeight);
+      
+      let scrollPercent = maxScroll > 0 ? scrollY / maxScroll : 0;
+      scrollPercent = Math.max(0, Math.min(1, scrollPercent));
+
+      // Calculate target values in viewBox coordinates (0 to 100). The beam is 25 units long.
+      targetY1 = scrollPercent * 125;
+      targetY2 = targetY1 - 25;
+
+      // Lerp for smooth spring-like feel (buttery smooth)
+      const diff1 = targetY1 - currentY1;
+      const diff2 = targetY2 - currentY2;
+      currentY1 += diff1 * 0.08;
+      currentY2 += diff2 * 0.08;
+
+      gradient.setAttribute('y1', currentY1.toString());
+      gradient.setAttribute('y2', currentY2.toString());
+
+      // Dot styles based on scroll state
+      if (scrollY > 10) {
+        if (dotContainer) {
+          dotContainer.style.boxShadow = 'none';
+          dotContainer.style.borderColor = 'transparent';
+        }
+        if (dotInner) {
+          dotInner.style.backgroundColor = 'white';
+          dotInner.style.borderColor = 'white';
+        }
+      } else {
+        if (dotContainer) {
+          dotContainer.style.boxShadow = 'rgba(0, 0, 0, 0.24) 0px 3px 8px';
+          dotContainer.style.borderColor = 'rgba(0,0,0,0.24)';
+        }
+        if (dotInner) {
+          // Clear inline styles to let Tailwind slate classes take effect
+          dotInner.style.backgroundColor = '';
+          dotInner.style.borderColor = '';
+        }
+      }
+
+      if (Math.abs(diff1) < 0.1 && Math.abs(diff2) < 0.1) {
+        isAnimating = false;
+      } else {
+        requestAnimationFrame(animateParams);
+      }
+    };
+
+    updateScroll();
+    requestAnimationFrame(animateParams);
+  };
+
   setupTyping();
+  setupTracingBeam();
 
   document.addEventListener('astro:page-load', () => {
     setupTyping();
+    setupTracingBeam();
   });
 </script>
 
