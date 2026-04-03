@@ -1,6 +1,7 @@
 ---
 import Layout from "./Layout.astro";
 import Section from "../components/layout/Section.astro";
+import Navbar from "../components/layout/Navbar.astro";
 
 const { frontmatter } = Astro.props;
 ---
@@ -9,16 +10,7 @@ const { frontmatter } = Astro.props;
   title={`${frontmatter.title} - Adarsh.dev`}
   description={frontmatter.description}
 >
-  <nav
-    class="sticky top-0 bg-[#F1F1F1]/90 backdrop-blur border-b border-slate-200"
-  >
-    <div
-      class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center text-sm"
-    >
-      <a href="/" class="font-semibold text-slate-800">Adarsh.dev</a>
-      <a href="/blog" class="hover:underline text-slate-600">Back to Blog</a>
-    </div>
-  </nav>
+<Navbar />
 
   <Section
     id="article"
