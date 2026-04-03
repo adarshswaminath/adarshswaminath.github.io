@@ -77,39 +77,6 @@ import { achievements } from "../../../data/navigation";
       <Divider />
 
       <div>
-        <MetaLabel class="mb-3">Stats</MetaLabel>
-        <div class="grid grid-cols-3 gap-4">
-          {
-            [
-              {
-                label: "Years exp.",
-                value: "1+",
-              },
-              {
-                label: "Projects",
-                value: "10+",
-              },
-              {
-                label: "Certs",
-                value: "3",
-              },
-            ].map((stat) => (
-              <div class="list-disc">
-                <div class="text-lg font-semibold text-slate-900 font-mono text-center">
-                  {stat.value}
-                </div>
-                <div class="text-[11px] text-slate-400 mt-0.5 text-center">
-                  {stat.label}
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-
-      <Divider />
-
-      <div>
         <MetaLabel class="mb-3">Recognition</MetaLabel>
         <ul class="space-y-2">
           {
