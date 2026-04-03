@@ -16,8 +16,8 @@ import { navItems } from "../../data/navigation";
       {
         navItems.map((item) => (
           <a
-            href={item === "Blog" ? "/blog" : `#${item.toLowerCase()}`}
-            class="hover:underline cursor-pointer"
+            href={item === "Blog" ? "/blog" : `/#${item.toLowerCase()}`}
+            class="hover:underline cursor-pointer text-slate-600 hover:text-slate-900 transition-colors"
           >
             {item}
           </a>
