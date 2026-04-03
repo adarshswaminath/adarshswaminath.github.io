@@ -329,8 +329,8 @@ const featuredBlogs = posts.sort((a: any, b: any) =>
     }
     
     // Get all text nodes
-    const textNodes = [];
-    const walker = document.createTreeWalker(codeBlock, NodeFilter.SHOW_TEXT, null, false);
+    const textNodes: any[] = [];
+    const walker = document.createTreeWalker(codeBlock, NodeFilter.SHOW_TEXT, null);
     let node;
     while ((node = walker.nextNode())) {
       textNodes.push({ node, text: node.nodeValue || '' });
