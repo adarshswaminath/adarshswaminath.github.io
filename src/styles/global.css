@@ -56,5 +56,5 @@ html {
   .prose pre code { background-color: transparent; color: inherit; padding: 0; }
   .prose a { color: #2563eb; text-decoration: underline; font-weight: 500; transition: color 0.2s; }
   .prose a:hover { color: #1e40af; }
-  .prose blockquote { border-left: 4px solid #2563eb; padding: 1em 1.2em; font-style: italic; color: #334155; background-color: #f8fafc; border-radius: 0 0.75rem 0.75rem 0; margin-top: 1.6em; margin-bottom: 1.6em; }
+  .prose blockquote { border-left: 4px solid #cbd5e1; padding: 1em 1.5em; font-style: italic; color: #475569; background-color: #f8fafc; border-radius: 0 0.5rem 0.5rem 0; margin-top: 1.6em; margin-bottom: 1.6em; }
 }

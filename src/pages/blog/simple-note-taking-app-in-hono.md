@@ -10,22 +10,6 @@ author: "Adarsh"
 Build a Simple Note-Taking API with Bun, Hono, and Sequelize
 ============================================================
 
-[![Adarshswaminath](https://miro.medium.com/v2/da:true/resize:fill:64:64/0*fkvFuo34WNeXdIEE)](https://medium.com/@adarshswaminath7?source=post_page---byline--674e211047eb---------------------------------------)
-
-[Adarshswaminath](https://medium.com/@adarshswaminath7?source=post_page---byline--674e211047eb---------------------------------------)
-
-6 min read
-
-·
-
-Jun 23, 2025
-
---
-
-Listen
-
-Share
-
 _A beginner’s guide to understanding the fundamentals of building a CRUD backend_
 
 When learning a new framework or tool, I believe it’s better to start small and grasp the core fundamentals first. That’s why I built this minimal note-taking API using **Hono** (a lightweight web framework) and **Sequelize** (an ORM), all powered by **Bun** for speed.

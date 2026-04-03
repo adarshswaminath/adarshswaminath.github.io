@@ -7,13 +7,13 @@ category: "Web3"
 author: "Adarsh"
 ---
 
-This article is going to give you a couple of tips to reduce gas consumption in your smart contracts.
+# Solidity Gas Optimization Tips
+
+This article explores various techniques to reduce gas consumption in your Solidity smart contracts.
 
 ![Solidity Gas Optimization](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*ErvwwJ0lHnfZiryB7EpNnA.jpeg)
 
-Solidity is a programming language for creating smart contracts on the Ethereum blockchain, with features for handling cryptocurrency transactions and executing code under specific conditions. It’s commonly used in the creation of decentralised applications (dApps) like decentralised exchanges, non-fungible token (NFT) marketplaces, and decentralised finance (DeFi) platforms.
-
-Gas is the fuel that drives the execution of smart contracts on the Ethereum blockchain. A certain amount of gas is used each time a smart contract is executed, and the user must pay for that gas in Ether. This ensures that the network is used efficiently and that malicious code is not able to take over the network. Optimizing gas usage is important for smart contract developers because it reduces transaction costs and increases network efficiency by reducing the amount of gas required to execute a contract.
+# Simple Note-Taking API in Hono
 
 ## Gas Optimizing Techniques
 
