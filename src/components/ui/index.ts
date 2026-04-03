@@ -5,3 +5,4 @@ export { default as MetaLabel } from './meta-label.astro';
 export { default as Divider } from './divider.astro';
 export { default as SectionDivider } from './section-divider.astro';
 export { default as ClickSpark } from './click-spark.astro';
+export { default as ProjectCard } from './project-card.astro';

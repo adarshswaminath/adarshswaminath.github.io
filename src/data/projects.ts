@@ -8,6 +8,7 @@ export const projects: Project[] = [
     highlight: 'Multi-provider VCS integration + AI-powered PR reviews + Real-time job orchestration',
     github: 'https://github.com/adarshswaminath/PR-Analyzer',
     live: '#',
+    image: '/projects/pr-analyzer.png',
     problem:
       'Developers struggle to manage repositories across multiple VCS platforms (GitHub, GitLab, etc.) and need intelligent code review assistance to maintain code quality. Synchronizing data across platforms and generating contextual code reviews is tedious and time-consuming.',
     solution:
@@ -66,6 +67,7 @@ export const projects: Project[] = [
     highlight: 'Full-stack blockchain system with cryptographic operations + interactive frontend',
     github: 'https://github.com/adarshswaminath/BlockSimulate',
     live: 'https://block-simulate.vercel.app',
+    image: '/projects/blocksimulate.png',
     problem:
       'Learning blockchain mechanics and distributed system concepts is challenging without hands-on tools. Most resources are either overly theoretical or lack interactive components for real-time understanding of how blocks are created, validated, and transactions are processed.',
     solution:
@@ -101,6 +103,7 @@ export const projects: Project[] = [
     highlight: 'Decentralized complaint management + Wallet-based security',
     github: 'https://github.com/adarshswaminath/Blockcomplaint',
     live: 'https://blockcomplaint.vercel.app/',
+    image: '/projects/blockcomplaint.png',
     problem:
       'Traditional complaint registration systems lack transparency and security. Complaints can be modified, lost, or mishandled without accountability. Users have no way to verify complaint status or ensure their data remains immutable.',
     solution:
@@ -137,6 +140,7 @@ export const projects: Project[] = [
     highlight: 'URL-based text sharing with real-time data persistence',
     github: 'https://github.com/adarshswaminath/CopySlate',
     live: 'https://copyslate.vercel.app',
+    image: '/projects/copyslate.png',
     problem:
       'Sharing text snippets, code, or data quickly without complex setup or account creation is cumbersome. Most solutions require file uploads, account management, or complex sharing workflows.',
     solution:
@@ -172,6 +176,7 @@ export const projects: Project[] = [
     highlight: 'AI-powered content aggregation + web scraping',
     github: 'https://github.com/adarshswaminath/blog2buzz',
     live: 'https://blog2buzz.vercel.app',
+    image: '/projects/blog2buzz.png',
     problem:
       'Tech professionals struggle to stay updated with the latest industry trends across multiple platforms. Reading and summarizing blog posts from various sources is time-consuming, and creating engaging social media content requires additional effort.',
     solution:

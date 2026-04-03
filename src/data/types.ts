@@ -7,6 +7,7 @@ export interface Project {
   highlight: string;
   github?: string;
   live?: string;
+  image?: string;
   problem?: string;
   solution?: string;
   architecture?: string;
