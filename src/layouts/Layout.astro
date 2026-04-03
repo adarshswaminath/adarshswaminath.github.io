@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { ClickSpark } from "../components/ui";
 
 interface Props {
   title?: string;
@@ -52,5 +53,6 @@ const {
     <div class="relative z-10 w-full overflow-hidden">
       <slot />
     </div>
+    <ClickSpark />
   </body>
 </html>
