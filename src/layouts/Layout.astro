@@ -34,7 +34,12 @@ const { title = "Adarsh - Portfolio", description = "Full Stack JavaScript Devel
     </style>
   </head>
   <body class="bg-[#F1F1F1] text-gray-800">
-    <slot />
+    <div class="fixed inset-0 pointer-events-none flex justify-center z-0">
+      <div class="w-full max-w-5xl border-x border-dashed border-slate-300"></div>
+    </div>
+    <div class="relative z-10 w-full overflow-hidden">
+      <slot />
+    </div>
   </body>
 </html>
 

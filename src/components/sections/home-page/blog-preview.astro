@@ -14,7 +14,7 @@ const { posts } = Astro.props;
     {posts.map((post: any) => (
       <a
         href={post.url}
-        class="group flex items-center justify-between gap-6 py-5 border-b border-gray-200/80 hover:bg-white/50 hover:-translate-y-[1px] transition-all duration-200 -mx-4 px-4 rounded-lg"
+        class="group flex items-center justify-between gap-6 py-5 border-b border-dashed border-slate-300 hover:bg-white/50 hover:-translate-y-[1px] transition-all duration-200 -mx-4 px-4 rounded-lg"
       >
         <div class="flex-1 min-w-0">
           <div class="flex items-center gap-3 mb-1">
