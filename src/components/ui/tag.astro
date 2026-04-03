@@ -1,0 +1,10 @@
+---
+// tag.astro — minimal documentation-style tag
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+<span class={`px-2 py-0.5 bg-gray-100 text-[11px] text-gray-500 rounded font-mono tracking-tight ${className}`}>
+  <slot />
+</span>
