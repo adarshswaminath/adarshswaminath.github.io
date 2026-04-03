@@ -11,6 +11,8 @@ export interface Project {
   solution?: string;
   architecture?: string;
   impact?: string[];
+  features?: string[];
+  archImage?: string;
 }
 
 export interface Experience {

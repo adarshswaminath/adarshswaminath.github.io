@@ -17,7 +17,7 @@ const { projects } = Astro.props;
   <div id="drawer-backdrop" class="absolute inset-0 bg-black/40 backdrop-blur-[2px] drawer-backdrop cursor-pointer"></div>
   
   <!-- Drawer Panel -->
-  <div id="drawer-panel" class="drawer-panel absolute right-0 top-0 bottom-0 w-full max-w-2xl bg-[#F1F1F1] overflow-y-auto shadow-2xl">
+  <div id="drawer-panel" class="drawer-panel absolute right-0 top-0 bottom-0 w-full max-w-3xl bg-[#F1F1F1] overflow-y-auto shadow-2xl">
     
     <!-- Close button -->
     <button id="drawer-close-btn" class="sticky top-0 z-10 flex items-center justify-between w-full px-8 pt-6 pb-4 bg-[#F1F1F1]/95 backdrop-blur-sm">
@@ -80,11 +80,38 @@ const { projects } = Astro.props;
           </div>
         )}
 
+        <!-- Features -->
+        {p.features && p.features.length > 0 && (
+          <div class="mb-8">
+            <MetaLabel class="mb-4">Core Features</MetaLabel>
+            <div class="space-y-3">
+              {p.features.map((feature) => (
+                <div class="flex items-start gap-3">
+                  <div class="w-1 h-1 rounded-full bg-slate-400 mt-2 shrink-0"></div>
+                  <span class="text-[14px] text-slate-600 leading-relaxed">{feature}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         <!-- Architecture -->
-        {p.architecture && (
+        {(p.archImage || p.architecture) && (
           <div class="mb-8">
             <MetaLabel class="mb-3">Architecture</MetaLabel>
-            <pre class="bg-white border border-slate-200/80 rounded-lg p-4 text-[12px] text-slate-600 font-mono leading-relaxed overflow-x-auto whitespace-pre">{p.architecture}</pre>
+           <div class="flex items-center justify-center">
+             {p.archImage ? (
+              <div class="p-4 bg-white border border-slate-200 overflow-hidden group/arch">
+                <img 
+                  src={p.archImage} 
+                  alt={`${p.title} Architecture Diagram`}
+                  class="size-96 object-contain transition-transform duration-300 group-hover/arch:scale-[1.01]"
+                />
+              </div>
+            ) : (
+              <pre class="bg-white border border-slate-200/80 rounded-lg p-4 text-[12px] text-slate-600 font-mono leading-relaxed overflow-x-auto whitespace-pre">{p.architecture}</pre>
+            )}
+           </div>
           </div>
         )}
 

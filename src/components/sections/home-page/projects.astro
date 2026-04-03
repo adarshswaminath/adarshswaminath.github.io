@@ -27,9 +27,12 @@ import { projects } from '../../../data/projects';
         <!-- Right: Tech + Arrow -->
         <div class="flex items-center gap-4 shrink-0">
           <div class="hidden md:flex gap-1.5">
-            {p.tech.map((t) => (
+            {p.tech.slice(0, 3).map((t) => (
               <Tag class="text-[10px]">{t}</Tag>
             ))}
+            {p.tech.length > 3 && (
+              <Tag class="text-[10px] bg-slate-100/50">+{p.tech.length - 3}</Tag>
+            )}
           </div>
           <ArrowRight size={16} class="text-slate-400 group-hover:text-slate-700 group-hover:translate-x-1 transition-all duration-200" />
         </div>
