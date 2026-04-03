@@ -3,99 +3,94 @@ import type { Project } from './types';
 export const projects: Project[] = [
   {
     title: "BlockSimulate",
-    desc: "Interactive blockchain simulator for learning core concepts like mining, consensus, and cryptographic hashing.",
+    desc: "Interactive system simulator for understanding distributed data flow, state transitions, and cryptographic operations.",
     tech: ["Golang", "Fiber", "React"],
-    highlight: "Custom blockchain logic + cryptography implementation",
+    highlight: "Backend systems + real-time visualization",
     github: "https://github.com/adarshswaminath",
     live: "#",
-    problem: "Understanding blockchain internals is difficult without hands-on experience. Most educational tools are either too abstract or require deep prerequisite knowledge.",
-    solution: "Built an interactive simulator that lets users create blocks, mine them, and observe consensus in real-time. The backend runs actual cryptographic operations in Go, giving users authentic blockchain behavior rather than simulated mockups.",
+    problem: "Understanding how distributed systems and state transitions work in practice is difficult without interactive tooling. Most resources are either too theoretical or overly simplified.",
+    solution: "Built an interactive simulator that models block creation, validation, and state updates in real time. The backend handles actual cryptographic operations, while the frontend visualizes system behavior to make concepts easier to grasp.",
     architecture: `┌─────────────┐     ┌──────────────┐     ┌─────────────┐
-│   React UI  │────▶│  Fiber API   │────▶│  Blockchain  │
-│  (Frontend) │◀────│  (REST)      │◀────│  Engine (Go) │
+│   React UI  │────▶│  Fiber API   │────▶│  Core Engine │
+│  (Frontend) │◀────│  (REST)      │◀────│   (Go)       │
 └─────────────┘     └──────────────┘     └─────────────┘
-                           │                     │
-                           ▼                     ▼
-                    ┌──────────────┐     ┌─────────────┐
-                    │  WebSocket   │     │   Crypto     │
-                    │  (Live Sync) │     │   (SHA-256)  │
-                    └──────────────┘     └─────────────┘`,
+                           │
+                           ▼
+                    ┌──────────────┐
+                    │  WebSocket   │
+                    │  (Live Sync) │
+                    └──────────────┘`,
     impact: [
-      "Helped 500+ learners understand blockchain fundamentals",
-      "Custom SHA-256 mining implementation with adjustable difficulty",
-      "Real-time block propagation visualization across nodes",
+      "Improved understanding of system workflows through visual feedback",
+      "Implemented cryptographic hashing and validation logic in Go",
+      "Real-time UI updates reflecting backend state changes",
     ],
   },
+
   {
-    title: "Blockchain Complaint System",
-    desc: "Decentralized complaint management system with on-chain transparency and privacy-first architecture.",
+    title: "Complaint Management System",
+    desc: "Full-stack complaint tracking platform with structured workflows and secure data handling.",
     tech: ["React", "Solidity", "Thirdweb"],
-    highlight: "Smart contracts + secure public search",
+    highlight: "Structured workflows + secure data access",
     github: "https://github.com/adarshswaminath",
     live: "#",
-    problem: "Traditional complaint systems lack transparency and accountability. Citizens have no way to verify whether their complaints are being processed or if resolution timelines are being met.",
-    solution: "Designed a decentralized system where complaints are stored on-chain with cryptographic privacy. Complaint metadata is public for accountability, while sensitive details remain encrypted and accessible only to authorized parties.",
+    problem: "Traditional complaint systems lack clear tracking, structured workflows, and transparency, making it difficult for users to follow resolution progress.",
+    solution: "Built a system that enables structured complaint submission, tracking, and resolution. Focused on secure data handling and role-based access, while exploring decentralized storage concepts for auditability.",
     architecture: `┌──────────────┐     ┌───────────────┐
-│  React App   │────▶│  Thirdweb SDK │
+│  React App   │────▶│  API / SDK    │
 └──────────────┘     └───────┬───────┘
                              │
                      ┌───────▼───────┐
-                     │   Solidity    │
                      │   Contracts   │
-                     ├───────────────┤
-                     │ • Register    │
-                     │ • Resolve     │
-                     │ • Query       │
+                     │  / Services   │
                      └───────────────┘`,
     impact: [
-      "Immutable complaint records with on-chain timestamps",
-      "Privacy-preserving search across public complaint metadata",
-      "Zero admin overhead — fully decentralized resolution tracking",
+      "Clear complaint tracking with structured status updates",
+      "Improved data handling with separation of public/private fields",
+      "Explored decentralized approaches for auditability",
     ],
   },
+
   {
     title: "Copyslate",
-    desc: "Text sharing platform with custom branding, personalized links, and instant clipboard access.",
+    desc: "Lightweight text-sharing tool for fast, cross-device access with personalized links.",
     tech: ["Next.js", "MongoDB", "Prisma"],
-    highlight: "Fast sharing + user personalization",
+    highlight: "Fast sharing + clean UX",
     github: "https://github.com/adarshswaminath",
     live: "#",
-    problem: "Sharing text snippets across devices and teams requires friction — creating accounts, navigating dashboards, or dealing with expiring links. Most tools optimize for files, not raw text.",
-    solution: "Built a zero-friction text sharing tool where users create branded, permanent links in seconds. Content is stored with Prisma on MongoDB for speed, and custom slugs make links memorable and shareable.",
+    problem: "Sharing text snippets across devices or teams often involves unnecessary friction like authentication flows or complex dashboards.",
+    solution: "Developed a minimal, fast-sharing tool that allows users to generate and access text via simple links. Focused on speed, usability, and clean data modeling.",
     architecture: `┌──────────────┐     ┌───────────────┐     ┌──────────┐
 │  Next.js App │────▶│  API Routes   │────▶│  MongoDB │
 │  (SSR + CSR) │◀────│  (Prisma ORM) │◀────│  Atlas   │
 └──────────────┘     └───────────────┘     └──────────┘`,
     impact: [
-      "Sub-100ms paste retrieval via indexed MongoDB queries",
-      "Custom branded URLs with collision-free slug generation",
-      "Used by developer teams for quick code snippet sharing",
+      "Fast text retrieval with optimized database queries",
+      "Clean URL-based sharing for better usability",
+      "Designed for simplicity and low user friction",
     ],
   },
+
   {
     title: "Blog2Buzz",
-    desc: "AI-powered content curation tool that transforms blog posts into optimized social media content.",
+    desc: "Automated content pipeline that transforms long-form blogs into structured social media outputs.",
     tech: ["Next.js", "AI", "Scraping"],
-    highlight: "Automated blog → social pipeline",
+    highlight: "Automation + AI-assisted workflows",
     github: "https://github.com/adarshswaminath",
     live: "#",
-    problem: "Content creators spend hours manually repurposing blog posts into social media formats. The process is repetitive, inconsistent, and doesn't scale across multiple platforms.",
-    solution: "Created an automated pipeline that scrapes blog content, processes it through GPT-4 for platform-specific formatting, and generates ready-to-post social content for Twitter, LinkedIn, and more — all from a single URL input.",
+    problem: "Repurposing long-form content into multiple formats is time-consuming and repetitive for developers and content creators.",
+    solution: "Built a pipeline that extracts blog content, processes it using AI, and generates structured outputs for different platforms. Focused on automation and consistency rather than manual effort.",
     architecture: `URL Input
     │
     ▼
 ┌──────────┐     ┌──────────────┐     ┌────────────┐
-│ Scraper  │────▶│  AI Pipeline │────▶│  Formatter │
-│ (Cheerio)│     │  (GPT-4)     │     │  (Per-platform)│
-└──────────┘     └──────────────┘     └────────────┘
-                                            │
-                              ┌──────────────┼──────────────┐
-                              ▼              ▼              ▼
-                         Twitter        LinkedIn       Newsletter`,
+│ Scraper  │────▶│  Processing  │────▶│ Formatter  │
+│          │     │   (AI)       │     │            │
+└──────────┘     └──────────────┘     └────────────┘`,
     impact: [
-      "Reduced content repurposing time from 2 hours to 5 minutes",
-      "Generated platform-optimized copy with 3x higher engagement",
-      "Processed 1,000+ blog posts through the pipeline",
+      "Reduced manual effort in content repurposing",
+      "Consistent output formatting across platforms",
+      "Demonstrated practical use of AI in workflows",
     ],
   },
 ];

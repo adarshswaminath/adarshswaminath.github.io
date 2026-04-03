@@ -6,17 +6,19 @@ export const experiences: Experience[] = [
     company: "UprootSecurity",
     duration: "Nov 2024 — Present",
     contributions: [
-      "Built the frontend for an AI-driven GRC (Governance, Risk, Compliance) platform, implementing complex data visualization dashboards and real-time risk assessment interfaces.",
-      "Improved developer experience by architecting a reusable component library, reducing feature development time by 40% across the team.",
+      "Built and scaled frontend interfaces for an AI-driven GRC (Governance, Risk, Compliance) platform, translating complex workflows into intuitive user experiences.",
+      "Developed reusable component systems using Next.js, TypeScript, and Tailwind CSS to improve consistency and development efficiency.",
+      "Focused on performance, accessibility, and maintainable architecture across the application.",
     ],
   },
   {
-    role: "Frontend Developer",
+    role: "Frontend Developer (Part-time)",
     company: "Igoraza",
     duration: "Feb 2023 — Jun 2024",
     contributions: [
-      "Developed and maintained scalable React applications serving thousands of users, with a focus on performance optimization and clean component architecture.",
-      "Collaborated across cross-functional teams to deliver product features on tight timelines, establishing frontend testing patterns that reduced regression bugs by 30%.",
+      "Developed and maintained responsive React applications with a focus on performance and clean component architecture.",
+      "Collaborated with cross-functional teams to deliver features efficiently in a part-time capacity alongside academic work.",
+      "Improved UI consistency and maintainability using Tailwind CSS and reusable patterns.",
     ],
-  },
+  }
 ];

@@ -10,14 +10,19 @@ import { achievements } from "../../../data/navigation";
     <!-- Left: Narrative -->
     <div class="md:col-span-3 space-y-5">
       <p class="text-[15px] text-slate-600 leading-[1.8]">
-        I am a full-stack JavaScript developer with Web3 expertise, focused on
-        building scalable, user-friendly applications and developer tooling. I
-        deeply value solving complex problems with performance-first principles.
+        I’m a frontend-focused full-stack developer with experience building
+        scalable, production-grade web applications. Currently, I work on an
+        AI-driven Governance, Risk & Compliance (GRC) platform, where I design
+        and develop complex user interfaces, data-driven dashboards, and
+        reusable component systems.
       </p>
       <p class="text-[15px] text-slate-600 leading-[1.8]">
-        My work spans AI-driven platforms, decentralized systems, and modern web
-        applications. I believe in writing code that is maintainable, testable,
-        and designed to scale — shipping fast without sacrificing quality.
+        I enjoy solving problems that sit at the intersection of performance,
+        usability, and system design — turning complex workflows into simple,
+        intuitive user experiences. While I’ve explored areas like Web3 and AI
+        through projects, my core strength lies in building <strong
+          >reliable, maintainable, and scalable web systems.</strong
+        >
       </p>
 
       <!-- GitHub Contribution Graph -->
@@ -38,26 +43,35 @@ import { achievements } from "../../../data/navigation";
     <div class="md:col-span-2 space-y-8">
       <div>
         <MetaLabel class="mb-3">Expertise</MetaLabel>
-        <div class="space-y-2">
-          <p class="text-[14px] text-slate-600">Frontend + Full-stack</p>
-          <p class="text-[14px] text-slate-600">AI Platforms & Tools</p>
-          <p class="text-[14px] text-slate-600">Web3 Infrastructure</p>
-        </div>
+        <ul class="space-y-2">
+          {
+            [
+              "Frontend Engineering",
+              "System-Driven UI Development",
+              "Developer Experience",
+            ].map((expertise) => (
+              <li class="text-[14px] text-slate-600 list-disc">{expertise}</li>
+            ))
+          }
+        </ul>
       </div>
 
       <Divider />
 
       <div>
         <MetaLabel class="mb-3">Focus Areas</MetaLabel>
-        <div class="space-y-2">
-          <p class="text-[14px] text-slate-600">
-            Performance-first architecture
-          </p>
-          <p class="text-[14px] text-slate-600">Clean, maintainable systems</p>
-          <p class="text-[14px] text-slate-600">
-            Developer experience & tooling
-          </p>
-        </div>
+        <ul class="space-y-2">
+          {
+            [
+              "Performance-first architecture",
+              "Clean, maintainable systems",
+              "Scalable component systems",
+              "Developer productivity & tooling",
+            ].map((focusArea) => (
+              <li class="text-[14px] text-slate-600 list-disc">{focusArea}</li>
+            ))
+          }
+        </ul>
       </div>
 
       <Divider />
@@ -65,20 +79,31 @@ import { achievements } from "../../../data/navigation";
       <div>
         <MetaLabel class="mb-3">Stats</MetaLabel>
         <div class="grid grid-cols-3 gap-4">
-          <div>
-            <div class="text-xl font-semibold text-slate-900 font-mono">3+</div>
-            <div class="text-[11px] text-slate-400 mt-0.5">Years exp.</div>
-          </div>
-          <div>
-            <div class="text-xl font-semibold text-slate-900 font-mono">
-              10+
-            </div>
-            <div class="text-[11px] text-slate-400 mt-0.5">Projects</div>
-          </div>
-          <div>
-            <div class="text-xl font-semibold text-slate-900 font-mono">3</div>
-            <div class="text-[11px] text-slate-400 mt-0.5">Certs</div>
-          </div>
+          {
+            [
+              {
+                label: "Years exp.",
+                value: "1+",
+              },
+              {
+                label: "Projects",
+                value: "10+",
+              },
+              {
+                label: "Certs",
+                value: "3",
+              },
+            ].map((stat) => (
+              <div class="list-disc">
+                <div class="text-lg font-semibold text-slate-900 font-mono text-center">
+                  {stat.value}
+                </div>
+                <div class="text-[11px] text-slate-400 mt-0.5 text-center">
+                  {stat.label}
+                </div>
+              </div>
+            ))
+          }
         </div>
       </div>
 
@@ -86,13 +111,13 @@ import { achievements } from "../../../data/navigation";
 
       <div>
         <MetaLabel class="mb-3">Recognition</MetaLabel>
-        <div class="space-y-2">
+        <ul class="space-y-2">
           {
             achievements.map((a) => (
-              <p class="text-[13px] text-slate-500">{a}</p>
+              <li class="text-[13px] text-slate-500 list-disc">{a}</li>
             ))
           }
-        </div>
+        </ul>
       </div>
     </div>
   </div>
