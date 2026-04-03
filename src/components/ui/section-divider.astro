@@ -1,0 +1,15 @@
+---
+// section-divider.astro — A repeating-diagonal patterned divider
+interface Props {
+  className?: string;
+}
+const { className = "" } = Astro.props;
+---
+
+<div class={`w-full max-w-5xl mx-auto border-y border-dashed border-slate-300 ${className}`}>
+  <div
+    class="h-8 w-full opacity-[0.06]"
+    style="background-image:repeating-linear-gradient(-45deg, transparent, transparent 2px, currentcolor 2px, currentcolor 3px, transparent 3px, transparent 6px)"
+  >
+  </div>
+</div>
