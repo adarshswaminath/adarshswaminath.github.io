@@ -10,31 +10,32 @@ import { projects } from '../../../data/projects';
   <div class="space-y-0">
     {projects.map((p, i) => (
       <button
-        class="project-row group w-full text-left flex items-center justify-between gap-6 py-5 border-b border-dashed border-slate-300 hover:bg-white/50 transition-all duration-200 cursor-pointer -mx-4 px-4 rounded-lg"
+        type="button"
+        class="project-row group row-hover-sheen block w-full text-left cursor-pointer -mx-4 px-4 py-5 border-b border-dashed border-slate-300 rounded-lg transition-shadow duration-300 hover:shadow-[inset_0_-1px_0_0_rgb(226_232_240)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-400"
         data-project-index={i}
       >
-        <!-- Left: Title + Description -->
-        <div class="flex-1 min-w-0">
-          <div class="flex items-center gap-3 mb-1">
-            <h3 class="text-base font-medium text-slate-900 group-hover:text-slate-700 transition-colors">{p.title}</h3>
-            <span class="text-[11px] text-slate-400 font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:inline truncate">
-              {p.highlight}
-            </span>
+        <span class="row-hover-sheen__fill" aria-hidden="true" />
+        <div class="relative z-10 flex items-center justify-between gap-6">
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-3 mb-1">
+              <h3 class="text-base font-medium text-slate-900 group-hover:text-slate-800 transition-colors duration-300">{p.title}</h3>
+              <span class="text-[11px] text-slate-400 font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out hidden md:inline truncate">
+                {p.highlight}
+              </span>
+            </div>
+            <p class="text-[13px] text-slate-500 leading-relaxed truncate">{p.desc}</p>
           </div>
-          <p class="text-[13px] text-slate-500 leading-relaxed truncate">{p.desc}</p>
-        </div>
-
-        <!-- Right: Tech + Arrow -->
-        <div class="flex items-center gap-4 shrink-0">
-          <div class="hidden md:flex gap-1.5">
-            {p.tech.slice(0, 2).map((t) => (
-              <Tag class="text-[10px]">{t}</Tag>
-            ))}
-            {p.tech.length > 2 && (
-              <Tag class="text-[10px] bg-slate-100/50">+{p.tech.length - 2}</Tag>
-            )}
+          <div class="flex items-center gap-4 shrink-0">
+            <div class="hidden md:flex gap-1.5">
+              {p.tech.slice(0, 2).map((t) => (
+                <Tag class="text-[10px]">{t}</Tag>
+              ))}
+              {p.tech.length > 2 && (
+                <Tag class="text-[10px] bg-slate-100/50">+{p.tech.length - 2}</Tag>
+              )}
+            </div>
+            <ArrowRight size={16} class="text-slate-400 group-hover:text-slate-700 group-hover:translate-x-1 transition-transform duration-300 ease-out" />
           </div>
-          <ArrowRight size={16} class="text-slate-400 group-hover:text-slate-700 group-hover:translate-x-1 transition-all duration-200" />
         </div>
       </button>
     ))}

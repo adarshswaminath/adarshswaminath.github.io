@@ -45,6 +45,39 @@ html {
 }
 
 @layer components {
+  /**
+   * List rows (projects, blog): white background sweeps left → right on hover.
+   * Parent must include .group; child uses .row-hover-sheen__fill
+   */
+  .row-hover-sheen {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem;
+  }
+
+  .row-hover-sheen__fill {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    transform-origin: left center;
+    transform: scaleX(0);
+    background-color: rgb(255 255 255 / 0.94);
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .group:hover .row-hover-sheen__fill,
+  .group:focus-visible .row-hover-sheen__fill {
+    transform: scaleX(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .row-hover-sheen__fill {
+      transition-duration: 0.2s;
+      transition-timing-function: ease;
+    }
+  }
+
   /* Basic typography fallbacks */
   .prose h2 { font-size: 1.875em; margin-top: 2em; margin-bottom: 1em; font-weight: 700; color: #0f172a; }
   .prose h3 { font-size: 1.5em; margin-top: 1.6em; margin-bottom: 0.6em; font-weight: 700; color: #0f172a; }
