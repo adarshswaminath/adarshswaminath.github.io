@@ -1,22 +1,39 @@
 ---
-// Section.astro
+import { TextAnimate } from '../ui/text-animate';
+
 interface Props {
   id?: string;
   title: string;
   heading?: string;
 }
 const { id, title, heading } = Astro.props;
+const headingText = heading ?? title;
 ---
 
 <section id={id} class="py-16 relative">
   <div class="max-w-5xl mx-auto px-6">
     <header class="mb-10">
-      <p class="text-xs uppercase tracking-wider text-slate-400 mb-2">
-        {title}
-      </p>
-      <h2 class="text-2xl font-semibold text-slate-900">
-        {heading || title}
-      </h2>
+      <TextAnimate
+        client:visible
+        text={title}
+        as="p"
+        className="text-xs uppercase tracking-wider text-slate-400 mb-2"
+        by="word"
+        animation="slideUp"
+        once
+        startOnView
+      />
+      <TextAnimate
+        client:visible
+        text={headingText}
+        as="h2"
+        className="text-2xl font-semibold text-slate-900"
+        by="word"
+        animation="blurInUp"
+        delay={0.1}
+        once
+        startOnView
+      />
     </header>
     <slot />
   </div>
