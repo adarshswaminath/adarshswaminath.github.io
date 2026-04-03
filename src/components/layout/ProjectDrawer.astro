@@ -12,7 +12,7 @@ const { projects } = Astro.props;
 ---
 
 <!-- Drawer Overlay Container (hidden by default) -->
-<div id="project-drawer-overlay" class="fixed inset-0 z-[100] hidden">
+<div id="project-drawer-overlay" class="fixed inset-0 z-100 hidden">
   <!-- Backdrop -->
   <div id="drawer-backdrop" class="absolute inset-0 bg-black/40 backdrop-blur-[2px] drawer-backdrop cursor-pointer"></div>
   
@@ -95,23 +95,18 @@ const { projects } = Astro.props;
           </div>
         )}
 
-        <!-- Architecture -->
-        {(p.archImage || p.architecture) && (
+        <!-- Architecture (Mermaid + pan/zoom — see mermaid-drawer.ts) -->
+        {p.architecture && (
           <div class="mb-8">
             <MetaLabel class="mb-3">Architecture</MetaLabel>
-           <div class="flex items-center justify-center">
-             {p.archImage ? (
-              <div class="p-4 bg-white border border-slate-200 overflow-hidden group/arch">
-                <img 
-                  src={p.archImage} 
-                  alt={`${p.title} Architecture Diagram`}
-                  class="size-96 object-contain transition-transform duration-300 group-hover/arch:scale-[1.01]"
-                />
-              </div>
-            ) : (
-              <pre class="bg-white border border-slate-200/80 rounded-lg p-4 text-[12px] text-slate-600 font-mono leading-relaxed overflow-x-auto whitespace-pre">{p.architecture}</pre>
-            )}
-           </div>
+            <p class="text-[11px] text-slate-500 mb-2 select-none">
+              Drag to pan · Scroll wheel or pinch to zoom · Ctrl+scroll for finer zoom
+            </p>
+            <div
+              class="architecture-mermaid relative h-[min(70vh,28rem)] w-full overflow-hidden rounded-lg border border-slate-200 bg-white p-3 select-none [&_.mermaid]:flex [&_.mermaid]:min-h-full [&_.mermaid]:w-full [&_.mermaid]:items-center [&_.mermaid]:justify-center [&_svg]:max-w-none"
+            >
+              <div class="mermaid text-[13px] leading-snug text-slate-700">{p.architecture}</div>
+            </div>
           </div>
         )}
 

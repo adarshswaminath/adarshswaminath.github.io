@@ -1,3 +1,5 @@
+import { renderMermaidInVisibleDrawer } from './mermaid-drawer';
+
 // Project drawer open/close logic
 export function setupDrawer() {
   const overlay = document.getElementById('project-drawer-overlay');
@@ -22,6 +24,10 @@ export function setupDrawer() {
     // Reset animations
     panel.classList.remove('closing');
     backdrop.classList.remove('closing');
+
+    requestAnimationFrame(() => {
+      void renderMermaidInVisibleDrawer();
+    });
   };
 
   const closeDrawer = () => {
