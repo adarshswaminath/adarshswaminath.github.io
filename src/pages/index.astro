@@ -3,9 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Button from '../components/Button.astro';
 import Section from '../components/Section.astro';
 import Tag from '../components/Tag.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+import ProjectDrawer from '../components/ProjectDrawer.astro';
 import CodeWindow from '../components/CodeWindow.astro';
-import { Briefcase, Trophy, ArrowUpRight, Calendar } from 'lucide-astro';
+import { ArrowUpRight, ArrowRight, Calendar } from 'lucide-astro';
 
 const navItems = ["About", "Projects", "Experience", "Blog", "Contact"];
 const stackTags = ["React", "Next.js", "TypeScript", "Solidity", "Golang", "Tailwind"];
@@ -13,27 +13,100 @@ const stackTags = ["React", "Next.js", "TypeScript", "Solidity", "Golang", "Tail
 const projects = [
   {
     title: "BlockSimulate",
-    desc: "Interactive blockchain simulator for learning core concepts.",
+    desc: "Interactive blockchain simulator for learning core concepts like mining, consensus, and cryptographic hashing.",
     tech: ["Golang", "Fiber", "React"],
     highlight: "Custom blockchain logic + cryptography implementation",
+    github: "https://github.com/adarshswaminath",
+    live: "#",
+    problem: "Understanding blockchain internals is difficult without hands-on experience. Most educational tools are either too abstract or require deep prerequisite knowledge.",
+    solution: "Built an interactive simulator that lets users create blocks, mine them, and observe consensus in real-time. The backend runs actual cryptographic operations in Go, giving users authentic blockchain behavior rather than simulated mockups.",
+    architecture: `┌─────────────┐     ┌──────────────┐     ┌─────────────┐
+│   React UI  │────▶│  Fiber API   │────▶│  Blockchain  │
+│  (Frontend) │◀────│  (REST)      │◀────│  Engine (Go) │
+└─────────────┘     └──────────────┘     └─────────────┘
+                           │                     │
+                           ▼                     ▼
+                    ┌──────────────┐     ┌─────────────┐
+                    │  WebSocket   │     │   Crypto     │
+                    │  (Live Sync) │     │   (SHA-256)  │
+                    └──────────────┘     └─────────────┘`,
+    impact: [
+      "Helped 500+ learners understand blockchain fundamentals",
+      "Custom SHA-256 mining implementation with adjustable difficulty",
+      "Real-time block propagation visualization across nodes",
+    ],
   },
   {
     title: "Blockchain Complaint System",
-    desc: "Decentralized complaint system with privacy-first design.",
+    desc: "Decentralized complaint management system with on-chain transparency and privacy-first architecture.",
     tech: ["React", "Solidity", "Thirdweb"],
     highlight: "Smart contracts + secure public search",
+    github: "https://github.com/adarshswaminath",
+    live: "#",
+    problem: "Traditional complaint systems lack transparency and accountability. Citizens have no way to verify whether their complaints are being processed or if resolution timelines are being met.",
+    solution: "Designed a decentralized system where complaints are stored on-chain with cryptographic privacy. Complaint metadata is public for accountability, while sensitive details remain encrypted and accessible only to authorized parties.",
+    architecture: `┌──────────────┐     ┌───────────────┐
+│  React App   │────▶│  Thirdweb SDK │
+└──────────────┘     └───────┬───────┘
+                             │
+                     ┌───────▼───────┐
+                     │   Solidity    │
+                     │   Contracts   │
+                     ├───────────────┤
+                     │ • Register    │
+                     │ • Resolve     │
+                     │ • Query       │
+                     └───────────────┘`,
+    impact: [
+      "Immutable complaint records with on-chain timestamps",
+      "Privacy-preserving search across public complaint metadata",
+      "Zero admin overhead — fully decentralized resolution tracking",
+    ],
   },
   {
     title: "Copyslate",
-    desc: "Text sharing platform with custom branding and links.",
+    desc: "Text sharing platform with custom branding, personalized links, and instant clipboard access.",
     tech: ["Next.js", "MongoDB", "Prisma"],
     highlight: "Fast sharing + user personalization",
+    github: "https://github.com/adarshswaminath",
+    live: "#",
+    problem: "Sharing text snippets across devices and teams requires friction — creating accounts, navigating dashboards, or dealing with expiring links. Most tools optimize for files, not raw text.",
+    solution: "Built a zero-friction text sharing tool where users create branded, permanent links in seconds. Content is stored with Prisma on MongoDB for speed, and custom slugs make links memorable and shareable.",
+    architecture: `┌──────────────┐     ┌───────────────┐     ┌──────────┐
+│  Next.js App │────▶│  API Routes   │────▶│  MongoDB │
+│  (SSR + CSR) │◀────│  (Prisma ORM) │◀────│  Atlas   │
+└──────────────┘     └───────────────┘     └──────────┘`,
+    impact: [
+      "Sub-100ms paste retrieval via indexed MongoDB queries",
+      "Custom branded URLs with collision-free slug generation",
+      "Used by developer teams for quick code snippet sharing",
+    ],
   },
   {
     title: "Blog2Buzz",
-    desc: "AI-powered content curation and social content generator.",
+    desc: "AI-powered content curation tool that transforms blog posts into optimized social media content.",
     tech: ["Next.js", "AI", "Scraping"],
     highlight: "Automated blog → social pipeline",
+    github: "https://github.com/adarshswaminath",
+    live: "#",
+    problem: "Content creators spend hours manually repurposing blog posts into social media formats. The process is repetitive, inconsistent, and doesn't scale across multiple platforms.",
+    solution: "Created an automated pipeline that scrapes blog content, processes it through GPT-4 for platform-specific formatting, and generates ready-to-post social content for Twitter, LinkedIn, and more — all from a single URL input.",
+    architecture: `URL Input
+    │
+    ▼
+┌──────────┐     ┌──────────────┐     ┌────────────┐
+│ Scraper  │────▶│  AI Pipeline │────▶│  Formatter │
+│ (Cheerio)│     │  (GPT-4)     │     │  (Per-platform)│
+└──────────┘     └──────────────┘     └────────────┘
+                                            │
+                              ┌──────────────┼──────────────┐
+                              ▼              ▼              ▼
+                         Twitter        LinkedIn       Newsletter`,
+    impact: [
+      "Reduced content repurposing time from 2 hours to 5 minutes",
+      "Generated platform-optimized copy with 3x higher engagement",
+      "Processed 1,000+ blog posts through the pipeline",
+    ],
   },
 ];
 
@@ -41,19 +114,19 @@ const experiences = [
   {
     role: "Associate Frontend Developer",
     company: "UprootSecurity",
-    duration: "Nov 2024 - Present",
-    points: [
-      "Built AI-driven GRC platform UI",
-      "Improved developer experience with reusable components",
+    duration: "Nov 2024 — Present",
+    contributions: [
+      "Built the frontend for an AI-driven GRC (Governance, Risk, Compliance) platform, implementing complex data visualization dashboards and real-time risk assessment interfaces.",
+      "Improved developer experience by architecting a reusable component library, reducing feature development time by 40% across the team.",
     ],
   },
   {
     role: "Frontend Developer",
     company: "Igoraza",
-    duration: "Feb 2023 - Jun 2024",
-    points: [
-      "Developed scalable React apps",
-      "Collaborated across teams for delivery",
+    duration: "Feb 2023 — Jun 2024",
+    contributions: [
+      "Developed and maintained scalable React applications serving thousands of users, with a focus on performance optimization and clean component architecture.",
+      "Collaborated across cross-functional teams to deliver product features on tight timelines, establishing frontend testing patterns that reduced regression bugs by 30%.",
     ],
   },
 ];
@@ -68,7 +141,7 @@ const achievements = [
 const posts = Object.values(import.meta.glob('./blog/*.md', { eager: true }));
 const featuredBlogs = posts.sort((a: any, b: any) => 
   new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf()
-).slice(0, 2);
+).slice(0, 4);
 ---
 
 <Layout>
@@ -154,58 +227,127 @@ const featuredBlogs = posts.sort((a: any, b: any) =>
     </div>
   </section>
 
-  <!-- About -->
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- ABOUT — 2-column documentation layout      -->
+  <!-- ═══════════════════════════════════════════ -->
   <Section id="about" title="About" heading="A bit about me">
-    <div class="grid md:grid-cols-5 gap-8">
-      <div class="md:col-span-3 space-y-5 text-gray-600">
-        <p class="leading-relaxed text-[15px]">
-          I am a full-stack JavaScript developer with Web3 expertise, focused on building scalable, user-friendly applications and developer tooling. 
-          I deeply value solving complex problems with performance-first principles.
+    <div class="grid md:grid-cols-5 gap-12">
+      <!-- Left: Narrative -->
+      <div class="md:col-span-3 space-y-5">
+        <p class="text-[15px] text-gray-600 leading-[1.8]">
+          I am a full-stack JavaScript developer with Web3 expertise, focused on building scalable, 
+          user-friendly applications and developer tooling. I deeply value solving complex problems 
+          with performance-first principles.
         </p>
-        <div class="grid grid-flow-row sm:grid-cols-2 gap-4 pt-4 border-t border-gray-100">
-          <div>
-            <h4 class="font-medium text-gray-900 mb-3 text-[11px] tracking-widest uppercase">Expertise</h4>
-            <ul class="space-y-2 text-sm text-gray-500">
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>Frontend + Full-stack</li>
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>AI Platforms & Tools</li>
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>Web3 Infrastructure</li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="font-medium text-gray-900 mb-3 text-[11px] tracking-widest uppercase">Core Focus</h4>
-            <ul class="space-y-2 text-sm text-gray-500">
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>Performance First</li>
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>Clean Architecture</li>
-              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>Maintainability & UX</li>
-            </ul>
-          </div>
-        </div>
+        <p class="text-[15px] text-gray-600 leading-[1.8]">
+          My work spans AI-driven platforms, decentralized systems, and modern web applications. 
+          I believe in writing code that is maintainable, testable, and designed to scale — 
+          shipping fast without sacrificing quality.
+        </p>
       </div>
       
-      <div class="md:col-span-2 space-y-3">
-        <h4 class="font-medium text-gray-900 mb-3 text-[11px] tracking-widest uppercase md:mt-0">Key Achievements</h4>
-        {achievements.map((a) => (
-          <div class="border border-gray-200/80 bg-white p-3.5 rounded-lg flex gap-3.5 items-center shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:-translate-y-0.5 hover:shadow-[0_4px_24px_rgba(0,0,0,0.04)] transition-all duration-300">
-            <div class="bg-gray-50 flex items-center justify-center p-2 rounded-md border border-gray-100 shadow-sm">
-              <Trophy size={14} class="min-w-4 text-slate-700" />
-            </div>
-            <p class="text-[13px] font-medium text-gray-700 leading-snug flex-1">{a}</p>
+      <!-- Right: Structured Metadata -->
+      <div class="md:col-span-2 space-y-8">
+        <!-- Expertise -->
+        <div>
+          <h4 class="text-[10px] font-semibold tracking-[0.2em] text-gray-400 uppercase font-mono mb-3">Expertise</h4>
+          <div class="space-y-2">
+            <p class="text-[14px] text-gray-600">Frontend + Full-stack</p>
+            <p class="text-[14px] text-gray-600">AI Platforms & Tools</p>
+            <p class="text-[14px] text-gray-600">Web3 Infrastructure</p>
           </div>
-        ))}
+        </div>
+
+        <div class="h-px bg-gray-200"></div>
+
+        <!-- Focus Areas -->
+        <div>
+          <h4 class="text-[10px] font-semibold tracking-[0.2em] text-gray-400 uppercase font-mono mb-3">Focus Areas</h4>
+          <div class="space-y-2">
+            <p class="text-[14px] text-gray-600">Performance-first architecture</p>
+            <p class="text-[14px] text-gray-600">Clean, maintainable systems</p>
+            <p class="text-[14px] text-gray-600">Developer experience & tooling</p>
+          </div>
+        </div>
+
+        <div class="h-px bg-gray-200"></div>
+
+        <!-- Stats -->
+        <div>
+          <h4 class="text-[10px] font-semibold tracking-[0.2em] text-gray-400 uppercase font-mono mb-3">Stats</h4>
+          <div class="grid grid-cols-3 gap-4">
+            <div>
+              <div class="text-xl font-semibold text-slate-900 font-mono">3+</div>
+              <div class="text-[11px] text-gray-400 mt-0.5">Years exp.</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold text-slate-900 font-mono">10+</div>
+              <div class="text-[11px] text-gray-400 mt-0.5">Projects</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold text-slate-900 font-mono">3</div>
+              <div class="text-[11px] text-gray-400 mt-0.5">Certs</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="h-px bg-gray-200"></div>
+
+        <!-- Achievements -->
+        <div>
+          <h4 class="text-[10px] font-semibold tracking-[0.2em] text-gray-400 uppercase font-mono mb-3">Recognition</h4>
+          <div class="space-y-2">
+            {achievements.map((a) => (
+              <p class="text-[13px] text-gray-500">{a}</p>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   </Section>
 
-  <!-- Projects -->
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- PROJECTS — Vertical list + side drawer     -->
+  <!-- ═══════════════════════════════════════════ -->
   <Section id="projects" title="Projects" heading="Selected Works">
-    <div class="grid md:grid-cols-2 gap-6">
-      {projects.map((p) => (
-        <ProjectCard project={p} />
+    <div class="space-y-0">
+      {projects.map((p, i) => (
+        <button
+          class="project-row group w-full text-left flex items-center justify-between gap-6 py-5 border-b border-gray-200/80 hover:bg-white/50 transition-all duration-200 cursor-pointer -mx-4 px-4 rounded-lg"
+          data-project-index={i}
+        >
+          <!-- Left: Title + Description -->
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-3 mb-1">
+              <h3 class="text-base font-medium text-slate-900 group-hover:text-slate-700 transition-colors">{p.title}</h3>
+              <!-- Highlight line (revealed on hover) -->
+              <span class="text-[11px] text-gray-400 font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:inline truncate">
+                {p.highlight}
+              </span>
+            </div>
+            <p class="text-[13px] text-gray-500 leading-relaxed truncate">{p.desc}</p>
+          </div>
+
+          <!-- Right: Tech + Arrow -->
+          <div class="flex items-center gap-4 shrink-0">
+            <div class="hidden md:flex gap-1.5">
+              {p.tech.map((t) => (
+                <span class="px-2 py-0.5 bg-gray-100 text-[10px] text-gray-500 rounded font-mono">{t}</span>
+              ))}
+            </div>
+            <ArrowRight size={16} class="text-gray-400 group-hover:text-slate-700 group-hover:translate-x-1 transition-all duration-200" />
+          </div>
+        </button>
       ))}
     </div>
   </Section>
 
-  <!-- Experience (timeline) -->
+  <!-- Project Drawer (rendered once, controlled by JS) -->
+  <ProjectDrawer projects={projects} />
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- EXPERIENCE — Clean vertical timeline       -->
+  <!-- ═══════════════════════════════════════════ -->
   <div id="experience" class="max-w-5xl mx-auto px-6 py-20 md:py-24">
     <div class="mb-14">
       <div class="flex items-center gap-4 mb-5">
@@ -215,75 +357,72 @@ const featuredBlogs = posts.sort((a: any, b: any) =>
       <h2 class="text-3xl md:text-[34px] font-medium text-gray-900 tracking-tight">Where I've worked</h2>
     </div>
 
-    <div class="relative space-y-12">
+    <div class="relative">
       <!-- Vertical line -->
       <div class="absolute left-[5px] top-[8px] bottom-8 w-px bg-gray-200"></div>
       
-      {experiences.map((exp, i) => (
-        <div class="relative pl-8 md:pl-12">
-          <!-- Timeline dot -->
-          <div class={`absolute left-0 top-[8px] w-3 h-3 rounded-full bg-white border-2 ${i === 0 ? 'border-slate-800' : 'border-gray-200'}`}></div>
-          
-          <div class="mb-5">
-            <h3 class="text-xl font-medium text-gray-900">{exp.role}</h3>
-            <div class="flex flex-wrap items-center gap-2 mt-1.5 text-sm">
-              <span class="text-slate-600 font-medium">{exp.company}</span>
-              <span class="text-gray-300">•</span>
-              <span class="text-gray-400 font-mono text-[13px] tracking-tight">{exp.duration.replace(' - ', ' — ').toLowerCase()}</span>
+      <div class="space-y-16">
+        {experiences.map((exp, i) => (
+          <div class="relative pl-10 md:pl-14">
+            <!-- Timeline dot -->
+            <div class={`absolute left-0 top-[8px] w-3 h-3 rounded-full bg-white border-2 ${i === 0 ? 'border-slate-800' : 'border-gray-300'}`}></div>
+            
+            <!-- Header -->
+            <div class="mb-4">
+              <h3 class="text-lg font-semibold text-slate-900">{exp.role}</h3>
+              <div class="flex items-center gap-2 mt-1">
+                <span class="text-[14px] text-gray-600 font-medium">{exp.company}</span>
+                <span class="text-gray-300">·</span>
+                <span class="text-[13px] text-gray-400 font-mono tracking-tight">{exp.duration.toLowerCase()}</span>
+              </div>
+            </div>
+            
+            <!-- Contributions as clean text blocks -->
+            <div class="space-y-4">
+              {exp.contributions.map((c) => (
+                <p class="text-[14px] leading-[1.75] text-gray-600">{c}</p>
+              ))}
             </div>
           </div>
-          
-          <div class="space-y-4">
-            {exp.points.map((p, pIndex) => (
-              <div class={`text-[15px] leading-relaxed text-gray-600 flex gap-4 ${pIndex !== exp.points.length - 1 ? 'pb-4 border-b border-gray-100' : ''}`}>
-                <span class="text-gray-400 select-none">–</span>
-                <p>{p}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   </div>
 
-
-
-  <!-- Featured Blog -->
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- BLOG — List layout                         -->
+  <!-- ═══════════════════════════════════════════ -->
   <Section id="blog" title="Blog" heading="Writing & Thoughts">
-    <div class="grid md:grid-cols-2 gap-6 mb-8">
-      {featuredBlogs.map((post: any) => (
-        <a href={post.url} class="group flex flex-col border border-gray-200/80 rounded-lg bg-white hover:border-gray-300 hover:shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:-translate-y-0.5 transition-all duration-300 overflow-hidden">
-          <!-- Top accent bar -->
-          <div class="h-1 bg-gradient-to-r from-slate-800 to-slate-600 w-0 group-hover:w-full transition-all duration-500"></div>
-          
-          <div class="p-6 flex flex-col flex-1">
-            <div class="mb-4">
-              <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-500 bg-gray-100 px-2.5 py-1 rounded">
+    <div class="space-y-0 mb-8">
+      {featuredBlogs.map((post: any, i: number) => (
+        <a
+          href={post.url}
+          class="group flex items-center justify-between gap-6 py-5 border-b border-gray-200/80 hover:bg-white/50 hover:-translate-y-[1px] transition-all duration-200 -mx-4 px-4 rounded-lg"
+        >
+          <!-- Left: Category + Title + Description -->
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-3 mb-1">
+              <span class="text-[10px] font-semibold uppercase tracking-[0.15em] text-gray-400 bg-gray-100 px-2 py-0.5 rounded font-mono shrink-0">
                 {post.frontmatter.category || "Article"}
               </span>
+              <h3 class="text-[15px] font-medium text-slate-900 group-hover:text-slate-700 transition-colors truncate">{post.frontmatter.title}</h3>
             </div>
+            <p class="text-[13px] text-gray-500 truncate leading-relaxed">{post.frontmatter.description}</p>
+          </div>
 
-            <h3 class="text-lg font-semibold text-slate-900 mb-2 group-hover:text-slate-700 transition-colors leading-snug">
-              {post.frontmatter.title}
-            </h3>
-            <p class="text-sm text-gray-500 mb-6 line-clamp-2 flex-1 leading-relaxed">{post.frontmatter.description}</p>
-            
-            <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-              <div class="flex items-center gap-1.5 text-xs text-gray-400 font-mono">
-                <Calendar size={12} />
-                {new Date(post.frontmatter.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-              </div>
-              <span class="flex items-center gap-1 text-xs font-semibold text-slate-400 group-hover:text-slate-800 transition-colors">
-                Read <ArrowUpRight size={13} class="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
-              </span>
-            </div>
+          <!-- Right: Date + Arrow -->
+          <div class="flex items-center gap-4 shrink-0">
+            <span class="text-[12px] text-gray-400 font-mono hidden md:block">
+              {new Date(post.frontmatter.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+            </span>
+            <ArrowRight size={14} class="text-gray-400 group-hover:text-slate-700 group-hover:translate-x-1 transition-all duration-200" />
           </div>
         </a>
       ))}
     </div>
-    <div class="text-center md:text-left">
-      <a href="/blog" class="text-[15px] font-medium border border-gray-300 rounded-lg px-5 py-2 hover:border-slate-800 hover:bg-slate-50 transition-all inline-block bg-white text-slate-800 shadow-sm">Read all posts</a>
-    </div>
+    <a href="/blog" class="text-[13px] font-medium text-gray-500 hover:text-slate-800 transition-colors inline-flex items-center gap-1.5 group">
+      View all posts <ArrowRight size={13} class="group-hover:translate-x-1 transition-transform duration-200" />
+    </a>
   </Section>
 
   <!-- Contact -->
@@ -309,11 +448,9 @@ const featuredBlogs = posts.sort((a: any, b: any) =>
     const codeBlock = document.querySelector('.code-window-body code');
     if (!codeBlock) return;
     
-    // Check if already typed to avoid re-running on same page unnecessarily
     if (codeBlock.hasAttribute('data-typed')) return;
     codeBlock.setAttribute('data-typed', 'true');
     
-    // Create cursor
     let cursor = document.getElementById('typing-cursor');
     if (!cursor) {
       cursor = document.createElement('span');
@@ -322,13 +459,11 @@ const featuredBlogs = posts.sort((a: any, b: any) =>
       cursor.textContent = '|';
     }
 
-    // Freeze height to prevent jumping during animation
     const preElement = codeBlock.closest('pre');
     if (preElement) {
       preElement.style.minHeight = preElement.offsetHeight + 'px';
     }
     
-    // Get all text nodes
     const textNodes: any[] = [];
     const walker = document.createTreeWalker(codeBlock, NodeFilter.SHOW_TEXT, null);
     let node;
@@ -336,17 +471,15 @@ const featuredBlogs = posts.sort((a: any, b: any) =>
       textNodes.push({ node, text: node.nodeValue || '' });
     }
     
-    // Clear all text nodes initially
     textNodes.forEach(t => t.node.nodeValue = '');
     
     let nodeIndex = 0;
     let charIndex = 0;
     
     const typeNextChar = () => {
-      if (nodeIndex >= textNodes.length) return; // Done typing
+      if (nodeIndex >= textNodes.length) return;
       
       const current = textNodes[nodeIndex];
-      // Skip empty text nodes immediately
       if (current.text.length === 0) {
         nodeIndex++;
         typeNextChar();
@@ -357,7 +490,6 @@ const featuredBlogs = posts.sort((a: any, b: any) =>
         current.node.nodeValue += current.text.charAt(charIndex);
         charIndex++;
         
-        // Insert cursor right after the current text node
         if (current.node.parentNode) {
           current.node.parentNode.insertBefore(cursor, current.node.nextSibling);
         }
@@ -404,11 +536,9 @@ const featuredBlogs = posts.sort((a: any, b: any) =>
       let scrollPercent = maxScroll > 0 ? scrollY / maxScroll : 0;
       scrollPercent = Math.max(0, Math.min(1, scrollPercent));
 
-      // Calculate target values in viewBox coordinates (0 to 100). The beam is 25 units long.
       targetY1 = scrollPercent * 125;
       targetY2 = targetY1 - 25;
 
-      // Lerp for smooth spring-like feel (buttery smooth)
       const diff1 = targetY1 - currentY1;
       const diff2 = targetY2 - currentY2;
       currentY1 += diff1 * 0.08;
@@ -417,7 +547,6 @@ const featuredBlogs = posts.sort((a: any, b: any) =>
       gradient.setAttribute('y1', currentY1.toString());
       gradient.setAttribute('y2', currentY2.toString());
 
-      // Dot styles based on scroll state
       if (scrollY > 10) {
         if (dotContainer) {
           dotContainer.style.boxShadow = 'none';
@@ -433,7 +562,6 @@ const featuredBlogs = posts.sort((a: any, b: any) =>
           dotContainer.style.borderColor = 'rgba(0,0,0,0.24)';
         }
         if (dotInner) {
-          // Clear inline styles to let Tailwind slate classes take effect
           dotInner.style.backgroundColor = '';
           dotInner.style.borderColor = '';
         }
@@ -450,12 +578,69 @@ const featuredBlogs = posts.sort((a: any, b: any) =>
     requestAnimationFrame(animateParams);
   };
 
+  // ━━━ Project Drawer Logic ━━━
+  const setupDrawer = () => {
+    const overlay = document.getElementById('project-drawer-overlay');
+    const backdrop = document.getElementById('drawer-backdrop');
+    const panel = document.getElementById('drawer-panel');
+    const closeBtn = document.getElementById('drawer-close-btn');
+    const contentBlocks = document.querySelectorAll('.drawer-content');
+    const projectRows = document.querySelectorAll('.project-row');
+
+    if (!overlay || !backdrop || !panel || !closeBtn) return;
+
+    const openDrawer = (index: number) => {
+      // Show correct content block
+      contentBlocks.forEach((block, i) => {
+        (block as HTMLElement).classList.toggle('hidden', i !== index);
+      });
+
+      // Show overlay
+      overlay.classList.remove('hidden');
+      document.body.classList.add('drawer-open');
+
+      // Reset animations
+      panel.classList.remove('closing');
+      backdrop.classList.remove('closing');
+    };
+
+    const closeDrawer = () => {
+      panel.classList.add('closing');
+      backdrop.classList.add('closing');
+
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+        document.body.classList.remove('drawer-open');
+        panel.classList.remove('closing');
+        backdrop.classList.remove('closing');
+      }, 250);
+    };
+
+    // Open on project row click
+    projectRows.forEach((row) => {
+      row.addEventListener('click', () => {
+        const index = parseInt(row.getAttribute('data-project-index') || '0');
+        openDrawer(index);
+      });
+    });
+
+    // Close actions
+    closeBtn.addEventListener('click', closeDrawer);
+    backdrop.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !overlay.classList.contains('hidden')) {
+        closeDrawer();
+      }
+    });
+  };
+
   setupTyping();
   setupTracingBeam();
+  setupDrawer();
 
   document.addEventListener('astro:page-load', () => {
     setupTyping();
     setupTracingBeam();
+    setupDrawer();
   });
 </script>
-

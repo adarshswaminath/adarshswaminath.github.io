@@ -1,0 +1,128 @@
+---
+// ProjectDrawer.astro — Right-sliding panel for project details
+// This is rendered as a hidden overlay; opened via JS
+import { ArrowUpRight, X, Github, ExternalLink } from 'lucide-astro';
+
+interface Project {
+  title: string;
+  desc: string;
+  tech: string[];
+  highlight: string;
+  github?: string;
+  live?: string;
+  problem?: string;
+  solution?: string;
+  architecture?: string;
+  impact?: string[];
+}
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+---
+
+<!-- Drawer Overlay Container (hidden by default) -->
+<div id="project-drawer-overlay" class="fixed inset-0 z-[100] hidden">
+  <!-- Backdrop -->
+  <div id="drawer-backdrop" class="absolute inset-0 bg-black/40 backdrop-blur-[2px] drawer-backdrop cursor-pointer"></div>
+  
+  <!-- Drawer Panel -->
+  <div id="drawer-panel" class="drawer-panel absolute right-0 top-0 bottom-0 w-full max-w-[560px] bg-[#F1F1F1] overflow-y-auto shadow-2xl">
+    
+    <!-- Close button -->
+    <button id="drawer-close-btn" class="sticky top-0 z-10 flex items-center justify-between w-full px-8 pt-6 pb-4 bg-[#F1F1F1]/95 backdrop-blur-sm">
+      <span class="text-[10px] font-semibold tracking-[0.2em] text-gray-400 uppercase font-mono">Project Details</span>
+      <div class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-gray-200/80 transition-colors">
+        <X size={16} class="text-gray-500" />
+      </div>
+    </button>
+
+    <!-- Content (one block per project, toggled by JS) -->
+    {projects.map((p, i) => (
+      <div class="drawer-content px-8 pb-12 hidden" data-project-index={i}>
+        
+        <!-- Header -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-semibold text-slate-900 tracking-tight mb-2">{p.title}</h2>
+          <p class="text-[15px] text-gray-500 leading-relaxed mb-5">{p.desc}</p>
+          
+          <!-- Tech tags -->
+          <div class="flex flex-wrap gap-1.5 mb-5">
+            {p.tech.map((t) => (
+              <span class="px-2 py-0.5 bg-gray-200/60 text-[11px] text-gray-500 rounded font-mono tracking-tight">{t}</span>
+            ))}
+          </div>
+          
+          <!-- Action links -->
+          <div class="flex gap-3">
+            {p.github && (
+              <a href={p.github} target="_blank" rel="noopener" class="flex items-center gap-1.5 text-[13px] font-medium text-gray-600 hover:text-slate-900 transition-colors group">
+                <Github size={14} />
+                Source
+                <ArrowUpRight size={12} class="opacity-0 group-hover:opacity-100 transition-opacity" />
+              </a>
+            )}
+            {p.live && (
+              <a href={p.live} target="_blank" rel="noopener" class="flex items-center gap-1.5 text-[13px] font-medium text-gray-600 hover:text-slate-900 transition-colors group">
+                <ExternalLink size={14} />
+                Live Demo
+                <ArrowUpRight size={12} class="opacity-0 group-hover:opacity-100 transition-opacity" />
+              </a>
+            )}
+          </div>
+        </div>
+        
+        <div class="h-px bg-gray-200 mb-8"></div>
+
+        <!-- Problem -->
+        {p.problem && (
+          <div class="mb-8">
+            <h3 class="text-[10px] font-semibold tracking-[0.2em] text-gray-400 uppercase mb-3 font-mono">Problem</h3>
+            <p class="text-[14px] text-gray-600 leading-relaxed">{p.problem}</p>
+          </div>
+        )}
+
+        <!-- Solution -->
+        {p.solution && (
+          <div class="mb-8">
+            <h3 class="text-[10px] font-semibold tracking-[0.2em] text-gray-400 uppercase mb-3 font-mono">Solution</h3>
+            <p class="text-[14px] text-gray-600 leading-relaxed">{p.solution}</p>
+          </div>
+        )}
+
+        <!-- Architecture -->
+        {p.architecture && (
+          <div class="mb-8">
+            <h3 class="text-[10px] font-semibold tracking-[0.2em] text-gray-400 uppercase mb-3 font-mono">Architecture</h3>
+            <pre class="bg-white border border-gray-200/80 rounded-lg p-4 text-[12px] text-gray-600 font-mono leading-relaxed overflow-x-auto whitespace-pre">{p.architecture}</pre>
+          </div>
+        )}
+
+        <!-- Impact -->
+        {p.impact && p.impact.length > 0 && (
+          <div class="mb-8">
+            <h3 class="text-[10px] font-semibold tracking-[0.2em] text-gray-400 uppercase mb-4 font-mono">Impact</h3>
+            <div class="space-y-3">
+              {p.impact.map((item) => (
+                <div class="flex items-start gap-3">
+                  <div class="w-1 h-1 rounded-full bg-slate-400 mt-2 shrink-0"></div>
+                  <span class="text-[14px] text-gray-600 leading-relaxed">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Highlight -->
+        <div class="mt-8 pt-6 border-t border-gray-200">
+          <div class="flex items-start gap-3 bg-white/60 rounded-lg p-4">
+            <span class="text-[10px] font-semibold tracking-[0.2em] text-gray-400 uppercase font-mono whitespace-nowrap mt-0.5">Highlight</span>
+            <span class="text-[13px] text-slate-700 font-medium">{p.highlight}</span>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
