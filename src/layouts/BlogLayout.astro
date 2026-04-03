@@ -1,30 +1,50 @@
 ---
-import Layout from './Layout.astro';
-import Section from '../components/layout/Section.astro';
+import Layout from "./Layout.astro";
+import Section from "../components/layout/Section.astro";
 
 const { frontmatter } = Astro.props;
 ---
-<Layout title={`${frontmatter.title} - Adarsh.dev`} description={frontmatter.description}>
-  <nav class="sticky top-0 bg-[#F1F1F1]/90 backdrop-blur border-b border-gray-200">
-    <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center text-sm">
-      <a href="/" class="font-semibold text-gray-800">Adarsh.dev</a>
-      <a href="/blog" class="hover:underline text-gray-600">Back to Blog</a>
+
+<Layout
+  title={`${frontmatter.title} - Adarsh.dev`}
+  description={frontmatter.description}
+>
+  <nav
+    class="sticky top-0 bg-[#F1F1F1]/90 backdrop-blur border-b border-slate-200"
+  >
+    <div
+      class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center text-sm"
+    >
+      <a href="/" class="font-semibold text-slate-800">Adarsh.dev</a>
+      <a href="/blog" class="hover:underline text-slate-600">Back to Blog</a>
     </div>
   </nav>
 
-  <Section id="article" title={frontmatter.category || "Article"} heading={frontmatter.title}>
-    <div class="mb-8 border-b border-gray-200 pb-4">
-      <div class="text-sm text-gray-500">
-        <time datetime={frontmatter.date}>{new Date(frontmatter.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+  <Section
+    id="article"
+    title={frontmatter.category || "Article"}
+    heading={frontmatter.title}
+  >
+    <div class="mb-8 border-b border-slate-200 pb-4">
+      <div class="text-sm text-slate-500">
+        <time datetime={frontmatter.date}
+          >{
+            new Date(frontmatter.date).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          }</time
+        >
       </div>
     </div>
 
-    <article class="prose max-w-none text-gray-800">
+    <article class="prose max-w-none text-slate-800">
       <slot />
     </article>
   </Section>
-  
-  <footer class="text-center text-xs text-gray-400 py-8">
+
+  <footer class="text-center text-xs text-slate-400 py-8">
     © 2026 Adarsh.dev
   </footer>
 </Layout>
@@ -48,7 +68,7 @@ const { frontmatter } = Astro.props;
 
   /* Header Bar */
   .prose pre::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -61,15 +81,17 @@ const { frontmatter } = Astro.props;
 
   /* Mac Dots */
   .prose pre::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 1rem;
     left: 1rem;
     width: 0.75rem; /* 12px */
     height: 0.75rem; /* 12px */
     border-radius: 9999px;
-    background-color: #d1d5db; /* gray-300 */
-    box-shadow: 1.25rem 0 0 0 #d1d5db, 2.5rem 0 0 0 #d1d5db;
+    background-color: #d1d5db; /* slate-300 */
+    box-shadow:
+      1.25rem 0 0 0 #d1d5db,
+      2.5rem 0 0 0 #d1d5db;
     z-index: 10;
   }
 
@@ -80,4 +102,3 @@ const { frontmatter } = Astro.props;
     display: block;
   }
 </style>
-

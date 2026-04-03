@@ -6,7 +6,7 @@ import { experiences } from '../../../data/experiences';
 <Section id="experience" title="Experience" heading="Where I've worked">
   <div class="relative">
     <!-- Vertical line -->
-    <div class="absolute left-[5px] top-[8px] bottom-8 w-px bg-gray-200"></div>
+    <div class="absolute left-[5px] top-[8px] bottom-8 w-px bg-slate-200"></div>
     
     <div class="space-y-16">
       {experiences.map((exp, i) => (
@@ -17,15 +17,15 @@ import { experiences } from '../../../data/experiences';
           <div class="mb-4">
             <h3 class="text-lg font-semibold text-slate-900">{exp.role}</h3>
             <div class="flex items-center gap-2 mt-1">
-              <span class="text-[14px] text-gray-600 font-medium">{exp.company}</span>
-              <span class="text-gray-300">·</span>
-              <span class="text-[13px] text-gray-400 font-mono tracking-tight">{exp.duration.toLowerCase()}</span>
+              <span class="text-[14px] text-slate-600 font-medium">{exp.company}</span>
+              <span class="text-slate-300">·</span>
+              <span class="text-[13px] text-slate-400 font-mono tracking-tight">{exp.duration.toLowerCase()}</span>
             </div>
           </div>
           
           <div class="space-y-4">
             {exp.contributions.map((c) => (
-              <p class="text-[14px] leading-[1.75] text-gray-600">{c}</p>
+              <p class="text-[14px] leading-[1.75] text-slate-600">{c}</p>
             ))}
           </div>
         </div>

@@ -1,16 +1,28 @@
 ---
 // contact.astro
-import Section from '../../layout/Section.astro';
-import { socialLinks } from '../../../data/navigation';
+import Section from "../../layout/Section.astro";
+import { socialLinks } from "../../../data/navigation";
 ---
+
 <Section id="contact" title="Contact" heading="Let's Connect">
-  <p class="text-gray-600 mb-6 text-[15px] leading-relaxed max-w-xl">
-    I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions. Feel free to reach out.
+  <p class="text-slate-600 mb-6 text-[15px] leading-relaxed max-w-xl">
+    I'm always open to discussing new projects, creative ideas or opportunities
+    to be part of your visions. Feel free to reach out.
   </p>
-  
+
   <div class="flex gap-4 items-center">
-    <a href={socialLinks.email} class="text-[15px] font-medium border border-slate-800 bg-slate-800 text-white rounded-lg px-5 py-2 hover:opacity-90 shadow-sm transition-all">Email Me</a>
-    <a class="text-[15px] font-medium text-slate-600 hover:text-slate-900 underline underline-offset-4 decoration-gray-300 hover:decoration-slate-400 transition-all" href={socialLinks.github}>GitHub</a>
-    <a class="text-[15px] font-medium text-slate-600 hover:text-slate-900 underline underline-offset-4 decoration-gray-300 hover:decoration-slate-400 transition-all" href={socialLinks.linkedin}>LinkedIn</a>
+    <a
+      href={socialLinks.email}
+      class="text-[15px] font-medium border border-slate-800 bg-slate-800 text-white rounded-lg px-5 py-2 hover:opacity-90 shadow-sm transition-all"
+      >Email Me</a
+    >
+    <a
+      class="text-[15px] font-medium text-slate-600 hover:text-slate-900 underline underline-offset-4 decoration-slate-300 hover:decoration-slate-400 transition-all"
+      href={socialLinks.github}>GitHub</a
+    >
+    <a
+      class="text-[15px] font-medium text-slate-600 hover:text-slate-900 underline underline-offset-4 decoration-slate-300 hover:decoration-slate-400 transition-all"
+      href={socialLinks.linkedin}>LinkedIn</a
+    >
   </div>
 </Section>

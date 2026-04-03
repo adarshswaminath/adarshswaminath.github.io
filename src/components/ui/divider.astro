@@ -3,6 +3,7 @@
 interface Props {
   class?: string;
 }
-const { class: className = '' } = Astro.props;
+const { class: className = "" } = Astro.props;
 ---
-<div class={`h-px bg-gray-200 ${className}`}></div>
+
+<div class={`h-px bg-slate-200 ${className}`}></div>

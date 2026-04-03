@@ -22,8 +22,8 @@ const { projects } = Astro.props;
     <!-- Close button -->
     <button id="drawer-close-btn" class="sticky top-0 z-10 flex items-center justify-between w-full px-8 pt-6 pb-4 bg-[#F1F1F1]/95 backdrop-blur-sm">
       <MetaLabel>Project Details</MetaLabel>
-      <div class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-gray-200/80 transition-colors">
-        <X size={16} class="text-gray-500" />
+      <div class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-slate-200/80 transition-colors">
+        <X size={16} class="text-slate-500" />
       </div>
     </button>
 
@@ -34,26 +34,26 @@ const { projects } = Astro.props;
         <!-- Header -->
         <div class="mb-8">
           <h2 class="text-2xl font-semibold text-slate-900 tracking-tight mb-2">{p.title}</h2>
-          <p class="text-[15px] text-gray-500 leading-relaxed mb-5">{p.desc}</p>
+          <p class="text-[15px] text-slate-500 leading-relaxed mb-5">{p.desc}</p>
           
           <!-- Tech tags -->
           <div class="flex flex-wrap gap-1.5 mb-5">
             {p.tech.map((t) => (
-              <span class="px-2 py-0.5 bg-gray-200/60 text-[11px] text-gray-500 rounded font-mono tracking-tight">{t}</span>
+              <span class="px-2 py-0.5 bg-slate-200/60 text-[11px] text-slate-500 rounded font-mono tracking-tight">{t}</span>
             ))}
           </div>
           
           <!-- Action links -->
           <div class="flex gap-3">
             {p.github && (
-              <a href={p.github} target="_blank" rel="noopener" class="flex items-center gap-1.5 text-[13px] font-medium text-gray-600 hover:text-slate-900 transition-colors group">
+              <a href={p.github} target="_blank" rel="noopener" class="flex items-center gap-1.5 text-[13px] font-medium text-slate-600 hover:text-slate-900 transition-colors group">
                 <Github size={14} />
                 Source
                 <ArrowUpRight size={12} class="opacity-0 group-hover:opacity-100 transition-opacity" />
               </a>
             )}
             {p.live && (
-              <a href={p.live} target="_blank" rel="noopener" class="flex items-center gap-1.5 text-[13px] font-medium text-gray-600 hover:text-slate-900 transition-colors group">
+              <a href={p.live} target="_blank" rel="noopener" class="flex items-center gap-1.5 text-[13px] font-medium text-slate-600 hover:text-slate-900 transition-colors group">
                 <ExternalLink size={14} />
                 Live Demo
                 <ArrowUpRight size={12} class="opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -62,13 +62,13 @@ const { projects } = Astro.props;
           </div>
         </div>
         
-        <div class="h-px bg-gray-200 mb-8"></div>
+        <div class="h-px bg-slate-200 mb-8"></div>
 
         <!-- Problem -->
         {p.problem && (
           <div class="mb-8">
             <MetaLabel class="mb-3">Problem</MetaLabel>
-            <p class="text-[14px] text-gray-600 leading-relaxed">{p.problem}</p>
+            <p class="text-[14px] text-slate-600 leading-relaxed">{p.problem}</p>
           </div>
         )}
 
@@ -76,7 +76,7 @@ const { projects } = Astro.props;
         {p.solution && (
           <div class="mb-8">
             <MetaLabel class="mb-3">Solution</MetaLabel>
-            <p class="text-[14px] text-gray-600 leading-relaxed">{p.solution}</p>
+            <p class="text-[14px] text-slate-600 leading-relaxed">{p.solution}</p>
           </div>
         )}
 
@@ -84,7 +84,7 @@ const { projects } = Astro.props;
         {p.architecture && (
           <div class="mb-8">
             <MetaLabel class="mb-3">Architecture</MetaLabel>
-            <pre class="bg-white border border-gray-200/80 rounded-lg p-4 text-[12px] text-gray-600 font-mono leading-relaxed overflow-x-auto whitespace-pre">{p.architecture}</pre>
+            <pre class="bg-white border border-slate-200/80 rounded-lg p-4 text-[12px] text-slate-600 font-mono leading-relaxed overflow-x-auto whitespace-pre">{p.architecture}</pre>
           </div>
         )}
 
@@ -96,7 +96,7 @@ const { projects } = Astro.props;
               {p.impact.map((item) => (
                 <div class="flex items-start gap-3">
                   <div class="w-1 h-1 rounded-full bg-slate-400 mt-2 shrink-0"></div>
-                  <span class="text-[14px] text-gray-600 leading-relaxed">{item}</span>
+                  <span class="text-[14px] text-slate-600 leading-relaxed">{item}</span>
                 </div>
               ))}
             </div>
@@ -104,7 +104,7 @@ const { projects } = Astro.props;
         )}
 
         <!-- Highlight -->
-        <div class="mt-8 pt-6 border-t border-gray-200">
+        <div class="mt-8 pt-6 border-t border-slate-200">
           <div class="flex items-start gap-3 bg-white/60 rounded-lg p-4">
             <MetaLabel class="whitespace-nowrap mt-0.5">Highlight</MetaLabel>
             <span class="text-[13px] text-slate-700 font-medium">{p.highlight}</span>
