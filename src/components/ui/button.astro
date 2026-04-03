@@ -1,21 +1,67 @@
 ---
-// button.astro — Primary/secondary button
-interface Props {
+/**
+ * Pill button with dot + label; on hover the label slides out and
+ * label + arrow slide in (pure CSS; label HTML from slot rendered twice via slots.render).
+ */
+import { ArrowRight } from "lucide-astro";
+import { cn } from "@/lib/utils";
+
+export interface Props {
   primary?: boolean;
   href?: string;
   class?: string;
 }
-const { primary, href, class: className = "" } = Astro.props;
+
+const { primary, href, class: className = "" } = Astro.props as Props;
+
 const Tag = href ? "a" : "button";
+const labelHtml = Astro.slots.has("default")
+  ? await Astro.slots.render("default")
+  : "";
 ---
 
 <Tag
   href={href}
-  class={`px-4 py-2 text-[15px] font-medium rounded-lg border transition-all duration-300 flex items-center justify-center ${
+  {...!href ? ({ type: "button" } as const) : {}}
+  class={cn(
+    "interactive-hover-btn group relative inline-flex min-h-11 w-auto cursor-pointer select-none overflow-hidden rounded-full border text-center text-[15px] font-semibold antialiased transition-shadow duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
     primary
-      ? "bg-slate-800 text-white border-slate-800 hover:opacity-90"
-      : "border-slate-300 hover:border-slate-800"
-  } ${className}`}
+      ? "border-slate-800 bg-slate-800 text-white shadow-sm hover:shadow-md"
+      : "border-slate-300/90 bg-[#F1F1F1] text-slate-900 hover:border-slate-400 hover:shadow-sm",
+    className,
+  )}
 >
-  <slot />
+  <!-- Layer 1: dot + label (slides out on hover) -->
+  <div
+    class="relative z-0 flex min-h-11 items-center justify-center gap-2.5 px-7 py-2.5"
+  >
+    <span
+      class={cn(
+        "h-2 w-2 shrink-0 group-hover:opacity-0 rounded-full transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform",
+        primary ? "bg-white/90" : "bg-slate-800"
+      )}
+      aria-hidden="true"
+    />
+    <span
+      class={cn(
+        "interactive-hover-btn__label inline-block transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[transform,opacity]",
+        primary ? "text-white" : "text-slate-900",
+        "group-hover:translate-x-11 group-hover:opacity-0",
+      )}
+      set:html={labelHtml}
+    />
+  </div>
+
+  <!-- Layer 2: label + arrow (slides in on hover) -->
+  <div
+    class={cn(
+      "absolute inset-0 z-10 flex items-center justify-center gap-2.5 px-7 opacity-0 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[transform,opacity] text-nowrap",
+      "translate-x-11 group-hover:translate-x-0 group-hover:opacity-100",
+      primary ? "text-white" : "text-slate-900",
+    )}
+    aria-hidden="true"
+  >
+    <span class="inline-block" set:html={labelHtml} />
+    <ArrowRight size={18} class="shrink-0" aria-hidden="true" />
+  </div>
 </Tag>
