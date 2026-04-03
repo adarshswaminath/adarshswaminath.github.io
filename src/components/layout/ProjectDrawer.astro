@@ -1,20 +1,8 @@
 ---
 // ProjectDrawer.astro — Right-sliding panel for project details
-// This is rendered as a hidden overlay; opened via JS
 import { ArrowUpRight, X, Github, ExternalLink } from 'lucide-astro';
-
-interface Project {
-  title: string;
-  desc: string;
-  tech: string[];
-  highlight: string;
-  github?: string;
-  live?: string;
-  problem?: string;
-  solution?: string;
-  architecture?: string;
-  impact?: string[];
-}
+import { MetaLabel } from '../ui';
+import type { Project } from '../../data/types';
 
 interface Props {
   projects: Project[];
@@ -33,7 +21,7 @@ const { projects } = Astro.props;
     
     <!-- Close button -->
     <button id="drawer-close-btn" class="sticky top-0 z-10 flex items-center justify-between w-full px-8 pt-6 pb-4 bg-[#F1F1F1]/95 backdrop-blur-sm">
-      <span class="text-[10px] font-semibold tracking-[0.2em] text-gray-400 uppercase font-mono">Project Details</span>
+      <MetaLabel>Project Details</MetaLabel>
       <div class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-gray-200/80 transition-colors">
         <X size={16} class="text-gray-500" />
       </div>
@@ -79,7 +67,7 @@ const { projects } = Astro.props;
         <!-- Problem -->
         {p.problem && (
           <div class="mb-8">
-            <h3 class="text-[10px] font-semibold tracking-[0.2em] text-gray-400 uppercase mb-3 font-mono">Problem</h3>
+            <MetaLabel class="mb-3">Problem</MetaLabel>
             <p class="text-[14px] text-gray-600 leading-relaxed">{p.problem}</p>
           </div>
         )}
@@ -87,7 +75,7 @@ const { projects } = Astro.props;
         <!-- Solution -->
         {p.solution && (
           <div class="mb-8">
-            <h3 class="text-[10px] font-semibold tracking-[0.2em] text-gray-400 uppercase mb-3 font-mono">Solution</h3>
+            <MetaLabel class="mb-3">Solution</MetaLabel>
             <p class="text-[14px] text-gray-600 leading-relaxed">{p.solution}</p>
           </div>
         )}
@@ -95,7 +83,7 @@ const { projects } = Astro.props;
         <!-- Architecture -->
         {p.architecture && (
           <div class="mb-8">
-            <h3 class="text-[10px] font-semibold tracking-[0.2em] text-gray-400 uppercase mb-3 font-mono">Architecture</h3>
+            <MetaLabel class="mb-3">Architecture</MetaLabel>
             <pre class="bg-white border border-gray-200/80 rounded-lg p-4 text-[12px] text-gray-600 font-mono leading-relaxed overflow-x-auto whitespace-pre">{p.architecture}</pre>
           </div>
         )}
@@ -103,7 +91,7 @@ const { projects } = Astro.props;
         <!-- Impact -->
         {p.impact && p.impact.length > 0 && (
           <div class="mb-8">
-            <h3 class="text-[10px] font-semibold tracking-[0.2em] text-gray-400 uppercase mb-4 font-mono">Impact</h3>
+            <MetaLabel class="mb-4">Impact</MetaLabel>
             <div class="space-y-3">
               {p.impact.map((item) => (
                 <div class="flex items-start gap-3">
@@ -118,7 +106,7 @@ const { projects } = Astro.props;
         <!-- Highlight -->
         <div class="mt-8 pt-6 border-t border-gray-200">
           <div class="flex items-start gap-3 bg-white/60 rounded-lg p-4">
-            <span class="text-[10px] font-semibold tracking-[0.2em] text-gray-400 uppercase font-mono whitespace-nowrap mt-0.5">Highlight</span>
+            <MetaLabel class="whitespace-nowrap mt-0.5">Highlight</MetaLabel>
             <span class="text-[13px] text-slate-700 font-medium">{p.highlight}</span>
           </div>
         </div>

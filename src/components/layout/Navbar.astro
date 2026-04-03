@@ -1,0 +1,16 @@
+---
+// Navbar.astro
+import { Button } from '../ui';
+import { navItems } from '../../data/navigation';
+---
+<nav class="sticky top-0 bg-[#F1F1F1]/90 backdrop-blur z-50 border-b border-gray-200">
+  <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="/" class="font-semibold text-gray-800">Adarsh.dev</a>
+    <div class="flex gap-6 text-sm">
+      {navItems.map((item) => (
+        <a href={item === 'Blog' ? '/blog' : `#${item.toLowerCase()}`} class="hover:underline cursor-pointer">{item}</a>
+      ))}
+    </div>
+    <Button>Resume</Button>
+  </div>
+</nav>

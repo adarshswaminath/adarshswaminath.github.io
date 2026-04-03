@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Section from '../../components/Section.astro';
+import Section from '../../components/layout/Section.astro';
+import Footer from '../../components/layout/Footer.astro';
 import { ArrowRight } from 'lucide-astro';
 
 // Fetch all markdown posts
@@ -31,7 +32,6 @@ const sortedPosts = posts.sort((a: any, b: any) =>
           href={post.url}
           class="group flex items-center justify-between gap-6 py-5 border-b border-gray-200/80 hover:bg-white/50 hover:-translate-y-[1px] transition-all duration-200 -mx-4 px-4 rounded-lg"
         >
-          <!-- Left: Category + Title + Description -->
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-3 mb-1">
               <span class="text-[10px] font-semibold uppercase tracking-[0.15em] text-gray-400 bg-gray-100 px-2 py-0.5 rounded font-mono shrink-0">
@@ -46,7 +46,6 @@ const sortedPosts = posts.sort((a: any, b: any) =>
             </p>
           </div>
 
-          <!-- Right: Date + Arrow -->
           <div class="flex items-center gap-4 shrink-0">
             <span class="text-[12px] text-gray-400 font-mono hidden md:block">
               {new Date(post.frontmatter.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
@@ -58,7 +57,5 @@ const sortedPosts = posts.sort((a: any, b: any) =>
     </div>
   </Section>
 
-  <footer class="text-center text-xs text-gray-400 py-8">
-    © 2026 Adarsh.dev
-  </footer>
+  <Footer />
 </Layout>

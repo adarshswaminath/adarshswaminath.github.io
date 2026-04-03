@@ -1,0 +1,44 @@
+---
+// hero.astro
+import { Button, Tag } from '../../ui';
+import CodeWindow from '../../layout/CodeWindow.astro';
+import { stackTags } from '../../../data/navigation';
+---
+<section class="max-w-5xl mx-auto px-6 py-20 md:py-32">
+  <h1 class="text-4xl md:text-5xl font-extrabold mb-5 tracking-tight text-slate-900 leading-tight">
+    Building scalable Web & Web3 systems
+  </h1>
+  <p class="text-gray-600 mb-8 text-lg max-w-2xl">
+    Focused on developer-first platforms, AI systems, and clean architecture.
+  </p>
+  <div class="flex gap-4 mb-8">
+    <Button primary>View Projects</Button>
+    <Button>Contact Me</Button>
+  </div>
+
+  <div class="mb-4">
+    <CodeWindow 
+      title="stack.ts"
+      code={`const engineer = {
+  name: "Adarsh",
+  focus: [
+    "scalable systems",
+    "developer tooling",
+    "ai infrastructure",
+  ],
+  currentlyBuilding: "osquery-rs",
+  yearsExp: 3,
+  openToWork: true,
+}
+
+// let's build something great`}
+      class="max-w-2xl"
+    />
+  </div>
+
+  <div class="flex gap-2 mt-6 flex-wrap">
+    {stackTags.map((t) => (
+      <Tag>{t}</Tag>
+    ))}
+  </div>
+</section>

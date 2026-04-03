@@ -1,0 +1,90 @@
+---
+// about.astro
+import Section from '../../layout/Section.astro';
+import { MetaLabel, Divider } from '../../ui';
+import { achievements } from '../../../data/navigation';
+---
+<Section id="about" title="About" heading="A bit about me">
+  <div class="grid md:grid-cols-5 gap-12">
+    <!-- Left: Narrative -->
+    <div class="md:col-span-3 space-y-5">
+      <p class="text-[15px] text-gray-600 leading-[1.8]">
+        I am a full-stack JavaScript developer with Web3 expertise, focused on building scalable, 
+        user-friendly applications and developer tooling. I deeply value solving complex problems 
+        with performance-first principles.
+      </p>
+      <p class="text-[15px] text-gray-600 leading-[1.8]">
+        My work spans AI-driven platforms, decentralized systems, and modern web applications. 
+        I believe in writing code that is maintainable, testable, and designed to scale — 
+        shipping fast without sacrificing quality.
+      </p>
+
+      <!-- GitHub Contribution Graph -->
+      <div class="pt-6">
+        <MetaLabel class="mb-3">Contributions</MetaLabel>
+        <div class="overflow-x-auto">
+          <img 
+            src="https://ghchart.rshah.org/334155/adarshswaminath" 
+            alt="GitHub Contribution Graph" 
+            class="w-full opacity-80 hover:opacity-100 transition-opacity duration-300"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right: Structured Metadata -->
+    <div class="md:col-span-2 space-y-8">
+      <div>
+        <MetaLabel class="mb-3">Expertise</MetaLabel>
+        <div class="space-y-2">
+          <p class="text-[14px] text-gray-600">Frontend + Full-stack</p>
+          <p class="text-[14px] text-gray-600">AI Platforms & Tools</p>
+          <p class="text-[14px] text-gray-600">Web3 Infrastructure</p>
+        </div>
+      </div>
+
+      <Divider />
+
+      <div>
+        <MetaLabel class="mb-3">Focus Areas</MetaLabel>
+        <div class="space-y-2">
+          <p class="text-[14px] text-gray-600">Performance-first architecture</p>
+          <p class="text-[14px] text-gray-600">Clean, maintainable systems</p>
+          <p class="text-[14px] text-gray-600">Developer experience & tooling</p>
+        </div>
+      </div>
+
+      <Divider />
+
+      <div>
+        <MetaLabel class="mb-3">Stats</MetaLabel>
+        <div class="grid grid-cols-3 gap-4">
+          <div>
+            <div class="text-xl font-semibold text-slate-900 font-mono">3+</div>
+            <div class="text-[11px] text-gray-400 mt-0.5">Years exp.</div>
+          </div>
+          <div>
+            <div class="text-xl font-semibold text-slate-900 font-mono">10+</div>
+            <div class="text-[11px] text-gray-400 mt-0.5">Projects</div>
+          </div>
+          <div>
+            <div class="text-xl font-semibold text-slate-900 font-mono">3</div>
+            <div class="text-[11px] text-gray-400 mt-0.5">Certs</div>
+          </div>
+        </div>
+      </div>
+
+      <Divider />
+
+      <div>
+        <MetaLabel class="mb-3">Recognition</MetaLabel>
+        <div class="space-y-2">
+          {achievements.map((a) => (
+            <p class="text-[13px] text-gray-500">{a}</p>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</Section>
