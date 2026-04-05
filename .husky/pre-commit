@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+set -e
+
+# Same checks as CI (.github/workflows/deploy.yml): ESLint + Prettier
+bun run check
