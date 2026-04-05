@@ -2,9 +2,10 @@
 // blog-preview.astro — Featured blog posts list for the homepage
 import Section from '../../layout/Section.astro'
 import { ArrowRight } from 'lucide-astro'
+import type { MarkdownPost } from '../../../data/types'
 
 interface Props {
-  posts: any[]
+  posts: MarkdownPost[]
 }
 
 const { posts } = Astro.props
@@ -17,7 +18,7 @@ const { posts } = Astro.props
 >
   <div class="mb-8 space-y-0">
     {
-      posts.map((post: any) => (
+      posts.map((post) => (
         <a
           href={post.url}
           class="group row-hover-sheen -mx-4 block w-full rounded-lg border-b border-dashed border-slate-300 px-4 py-5 text-left transition-shadow duration-300 hover:shadow-[inset_0_-1px_0_0_rgb(226_232_240)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-400"

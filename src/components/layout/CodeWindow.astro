@@ -1,10 +1,11 @@
 ---
+import type { CodeLanguage } from 'astro'
 import { Code } from 'astro:components'
 
 interface Props {
   title?: string
   code: string
-  lang?: any
+  lang?: CodeLanguage
   class?: string
 }
 

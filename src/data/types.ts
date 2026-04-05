@@ -1,4 +1,17 @@
+import type { MarkdownInstance } from 'astro'
+
 // Types shared across data modules and components
+
+export interface BlogPost {
+  title: string
+  date: string
+  description: string
+  category?: string
+  author?: string
+  layout?: string
+}
+
+export type MarkdownPost = MarkdownInstance<BlogPost>
 
 export interface Project {
   title: string

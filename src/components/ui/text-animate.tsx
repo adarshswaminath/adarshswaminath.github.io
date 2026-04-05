@@ -330,22 +330,19 @@ const TextAnimateBase = ({
   const MotionComponent = motionElements[Component]
   const content = text ?? textFromAstroChildren(children)
 
-  let segments: string[] = []
-  switch (by) {
-    case 'word':
-      segments = content.split(/(\s+)/)
-      break
-    case 'character':
-      segments = content.split('')
-      break
-    case 'line':
-      segments = content.split('\n')
-      break
-    case 'text':
-    default:
-      segments = [content]
-      break
-  }
+  const segments: string[] = (() => {
+    switch (by) {
+      case 'word':
+        return content.split(/(\s+)/)
+      case 'character':
+        return content.split('')
+      case 'line':
+        return content.split('\n')
+      case 'text':
+      default:
+        return [content]
+    }
+  })()
 
   const finalVariants = variants
     ? {

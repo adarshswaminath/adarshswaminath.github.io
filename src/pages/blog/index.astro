@@ -4,13 +4,16 @@ import Section from '../../components/layout/Section.astro'
 import Footer from '../../components/layout/Footer.astro'
 import { ArrowRight } from 'lucide-astro'
 import Navbar from '../../components/layout/Navbar.astro'
+import type { MarkdownPost } from '../../data/types'
 
 // Fetch all markdown posts
-const posts = Object.values(import.meta.glob('./*.md', { eager: true }))
+const posts = Object.values(
+  import.meta.glob<MarkdownPost>('./*.md', { eager: true }),
+)
 
 // Sort by date DESC
 const sortedPosts = posts.sort(
-  (a: any, b: any) =>
+  (a, b) =>
     new Date(b.frontmatter.date).valueOf() -
     new Date(a.frontmatter.date).valueOf(),
 )
@@ -31,10 +34,10 @@ const sortedPosts = posts.sort(
 
     <div class="space-y-0">
       {
-        sortedPosts.map((post: any) => (
+        sortedPosts.map((post) => (
           <a
             href={post.url}
-            class="group row-hover-sheen -mx-4 block rounded-lg border-b border-dashed border-slate-300 px-4 py-5 transition-shadow duration-300 hover:shadow-[inset_0_-1px_0_0_rgb(226_232_240)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-400"
+            class="group row-hover-sheen -mx-4 block rounded-lg border-b border-dashed border-slate-300 px-4 py-5 transition-shadow duration-300 hover:shadow-[inset_0_-1px_0_0_rgb(226_232_240)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-400"
           >
             <span
               class="row-hover-sheen__fill"
