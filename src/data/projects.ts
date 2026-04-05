@@ -1,13 +1,24 @@
-import type { Project } from './types';
+import type { Project } from './types'
 
 export const projects: Project[] = [
   {
     title: 'PR-Analyzer',
     desc: 'A comprehensive Version Control System management platform with AI-powered code reviews, multi-provider VCS integration, and background job processing.',
-    tech: ['TypeScript', 'Express.js', 'Next.js', 'PostgreSQL', 'Redis', 'BullMQ', 'LangChain', 'OpenAI/Gemini'],
-    highlight: 'Multi-provider VCS integration + AI-powered PR reviews + Real-time job orchestration',
+    tech: [
+      'TypeScript',
+      'Express.js',
+      'Next.js',
+      'PostgreSQL',
+      'Redis',
+      'BullMQ',
+      'LangChain',
+      'OpenAI/Gemini',
+    ],
+    highlight:
+      'Multi-provider VCS integration + AI-powered PR reviews + Real-time job orchestration',
     github: 'https://github.com/adarshswaminath/PR-Analyzer',
-    image: 'https://res.cloudinary.com/dts1lgczb/image/upload/q_auto/f_auto/v1775301270/pr-analyzer_tsjebd.png',
+    image:
+      'https://res.cloudinary.com/dts1lgczb/image/upload/q_auto/f_auto/v1775301270/pr-analyzer_tsjebd.png',
     problem:
       'Developers struggle to manage repositories across multiple VCS platforms (GitHub, GitLab, etc.) and need intelligent code review assistance to maintain code quality. Synchronizing data across platforms and generating contextual code reviews is tedious and time-consuming.',
     solution:
@@ -63,9 +74,11 @@ export const projects: Project[] = [
     title: 'BlockSimulate',
     desc: 'Interactive blockchain simulator featuring wallet management, transaction signing, and real-time visualization of block creation and state transitions.',
     tech: ['Golang', 'Fiber', 'React', 'Docker'],
-    highlight: 'Full-stack blockchain system with cryptographic operations + interactive frontend',
+    highlight:
+      'Full-stack blockchain system with cryptographic operations + interactive frontend',
     github: 'https://github.com/adarshswaminath/BlockSimulate',
-    image: 'https://res.cloudinary.com/dts1lgczb/image/upload/q_auto/f_auto/v1775301270/blocksimulate_afd2fd.png',
+    image:
+      'https://res.cloudinary.com/dts1lgczb/image/upload/q_auto/f_auto/v1775301270/blocksimulate_afd2fd.png',
     problem:
       'Learning blockchain mechanics and distributed system concepts is challenging without hands-on tools. Most resources are either overly theoretical or lack interactive components for real-time understanding of how blocks are created, validated, and transactions are processed.',
     solution:
@@ -100,7 +113,8 @@ export const projects: Project[] = [
     tech: ['JavaScript', 'Blockchain', 'React', 'Smart Contracts'],
     highlight: 'Decentralized complaint management + Wallet-based security',
     github: 'https://github.com/adarshswaminath/Blockcomplaint',
-    image: 'https://res.cloudinary.com/dts1lgczb/image/upload/q_auto/f_auto/v1775301659/blockcomplaint_pthlho.png',
+    image:
+      'https://res.cloudinary.com/dts1lgczb/image/upload/q_auto/f_auto/v1775301659/blockcomplaint_pthlho.png',
     problem:
       'Traditional complaint registration systems lack transparency and security. Complaints can be modified, lost, or mishandled without accountability. Users have no way to verify complaint status or ensure their data remains immutable.',
     solution:
@@ -133,10 +147,18 @@ export const projects: Project[] = [
   {
     title: 'CopySlate',
     desc: 'A web application that allows you to share text instantly across the internet by encoding data directly in URLs, making content accessible from anywhere.',
-    tech: ['Next.js', 'JavaScript', 'Tailwind CSS', 'Prisma', 'MongoDB', 'Vercel'],
+    tech: [
+      'Next.js',
+      'JavaScript',
+      'Tailwind CSS',
+      'Prisma',
+      'MongoDB',
+      'Vercel',
+    ],
     highlight: 'URL-based text sharing with real-time data persistence',
     github: 'https://github.com/adarshswaminath/CopySlate',
-    image: 'https://res.cloudinary.com/dts1lgczb/image/upload/q_auto/f_auto/v1775301271/copyslate_axndvu.png',
+    image:
+      'https://res.cloudinary.com/dts1lgczb/image/upload/q_auto/f_auto/v1775301271/copyslate_axndvu.png',
     problem:
       'Sharing text snippets, code, or data quickly without complex setup or account creation is cumbersome. Most solutions require file uploads, account management, or complex sharing workflows.',
     solution:
@@ -168,10 +190,18 @@ export const projects: Project[] = [
   {
     title: 'Blog2Buzz',
     desc: 'An AI-powered content aggregation platform that scrapes the latest tech blogs and provides intelligent summaries and social media posts.',
-    tech: ['Next.js', 'React', 'Tailwind CSS', 'Node.js', 'Gemini AI', 'Web Scraping'],
+    tech: [
+      'Next.js',
+      'React',
+      'Tailwind CSS',
+      'Node.js',
+      'Gemini AI',
+      'Web Scraping',
+    ],
     highlight: 'AI-powered content aggregation + web scraping',
     github: 'https://github.com/adarshswaminath/blog2buzz',
-    image: 'https://res.cloudinary.com/dts1lgczb/image/upload/q_auto/f_auto/v1775301270/blog2buzz_m8cc3l.png',
+    image:
+      'https://res.cloudinary.com/dts1lgczb/image/upload/q_auto/f_auto/v1775301270/blog2buzz_m8cc3l.png',
     problem:
       'Tech professionals struggle to stay updated with the latest industry trends across multiple platforms. Reading and summarizing blog posts from various sources is time-consuming, and creating engaging social media content requires additional effort.',
     solution:
@@ -207,4 +237,4 @@ export const projects: Project[] = [
       'Environment-based configuration management',
     ],
   },
-];
+]

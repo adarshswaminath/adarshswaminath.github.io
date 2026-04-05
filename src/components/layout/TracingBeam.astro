@@ -1,25 +1,25 @@
 <div
-  class="fixed inset-y-0 w-full pointer-events-none z-50 flex justify-center"
+  class="pointer-events-none fixed inset-y-0 z-50 flex w-full justify-center"
 >
-  <div class="w-full max-w-5xl relative h-full">
+  <div class="relative h-full w-full max-w-5xl">
     <div
-      class="absolute left-4 md:left-[0.01rem] top-0 bottom-0 py-24 w-[2px] hidden sm:block"
+      class="absolute top-0 bottom-0 left-4 hidden w-[2px] py-24 sm:block md:left-[0.01rem]"
     >
       <!-- Glowing Dot -->
       <div
         id="tracing-beam-dot"
-        class="absolute top-[88px] -left-[7px] flex h-4 w-4 items-center justify-center rounded-full border shadow-sm transition-all duration-300 bg-white"
+        class="absolute top-[88px] -left-[7px] flex h-4 w-4 items-center justify-center rounded-full border bg-white shadow-sm transition-all duration-300"
         style="border-color: rgba(0,0,0,0.24)"
       >
         <div
           id="tracing-beam-inner-dot"
-          class="h-2 w-2 rounded-full border bg-slate-800 transition-colors duration-300 border border-slate-900"
+          class="h-2 w-2 rounded-full border border-slate-900 bg-slate-800 transition-colors duration-300"
         >
         </div>
       </div>
 
       <svg
-        class="w-full h-full overflow-visible"
+        class="h-full w-full overflow-visible"
         preserveAspectRatio="none"
         viewBox="0 0 2 100"
       >
@@ -33,7 +33,8 @@
           stroke-opacity="0.16"
           stroke-width="1.5"
           vector-effect="non-scaling-stroke"
-          stroke-linecap="round"></line>
+          stroke-linecap="round"
+        ></line>
 
         <!-- Animated beam -->
         <line
@@ -44,7 +45,8 @@
           stroke="url(#tracing-gradient)"
           stroke-width="2"
           vector-effect="non-scaling-stroke"
-          stroke-linecap="round"></line>
+          stroke-linecap="round"
+        ></line>
 
         <defs>
           <linearGradient
@@ -55,10 +57,20 @@
             y1="0"
             y2="-25"
           >
-            <stop stop-color="#0f172a" stop-opacity="0"></stop>
+            <stop
+              stop-color="#0f172a"
+              stop-opacity="0"
+            ></stop>
             <stop stop-color="#0f172a"></stop>
-            <stop offset="0.325" stop-color="#334155"></stop>
-            <stop offset="1" stop-color="#94a3b8" stop-opacity="0"></stop>
+            <stop
+              offset="0.325"
+              stop-color="#334155"
+            ></stop>
+            <stop
+              offset="1"
+              stop-color="#94a3b8"
+              stop-opacity="0"
+            ></stop>
           </linearGradient>
         </defs>
       </svg>

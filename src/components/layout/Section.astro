@@ -1,23 +1,26 @@
 ---
-import { TextAnimate } from '../ui/text-animate';
+import { TextAnimate } from '../ui/text-animate'
 
 interface Props {
-  id?: string;
-  title: string;
-  heading?: string;
+  id?: string
+  title: string
+  heading?: string
 }
-const { id, title, heading } = Astro.props;
-const headingText = heading ?? title;
+const { id, title, heading } = Astro.props
+const headingText = heading ?? title
 ---
 
-<section id={id} class="py-16 relative">
-  <div class="max-w-5xl mx-auto px-6">
+<section
+  id={id}
+  class="relative py-16"
+>
+  <div class="mx-auto max-w-5xl px-6">
     <header class="mb-10">
       <TextAnimate
         client:visible
         text={title}
         as="p"
-        className="text-xs uppercase tracking-wider text-slate-400 mb-2"
+        className="mb-2 text-xs tracking-wider text-slate-400 uppercase"
         by="word"
         animation="slideUp"
         once

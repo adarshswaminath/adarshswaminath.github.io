@@ -1,39 +1,65 @@
 ---
-import "../styles/global.css";
-import { ClickSpark } from "../components/ui";
+import '../styles/global.css'
+import { ClickSpark } from '../components/ui'
 
 interface Props {
-  title?: string;
-  description?: string;
+  title?: string
+  description?: string
 }
 
 const {
-  title = "Adarsh - Portfolio",
-  description = "Full Stack JavaScript Developer",
-} = Astro.props;
+  title = 'Adarsh - Portfolio',
+  description = 'Full Stack JavaScript Developer',
+} = Astro.props
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta property="og:image" content="/og-image.png" />
-    <meta property="twitter:image" content="/og-image.png" />
-    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="viewport"
+      content="width=device-width"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon.svg"
+    />
+    <meta
+      property="og:image"
+      content="/og-image.png"
+    />
+    <meta
+      property="twitter:image"
+      content="/og-image.png"
+    />
+    <meta
+      name="generator"
+      content={Astro.generator}
+    />
     <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta
+      name="description"
+      content={description}
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <style is:global>
       :root {
-        --font-sans: "Manrope", sans-serif;
-        --font-mono: "JetBrains Mono", monospace;
+        --font-sans: 'Manrope', sans-serif;
+        --font-mono: 'JetBrains Mono', monospace;
       }
       body {
         font-family: var(--font-sans);
@@ -48,7 +74,7 @@ const {
     </style>
   </head>
   <body class="bg-[#F1F1F1] text-slate-800">
-    <div class="fixed inset-0 pointer-events-none flex justify-center z-0">
+    <div class="pointer-events-none fixed inset-0 z-0 flex justify-center">
       <div class="w-full max-w-5xl border-x border-dashed border-slate-300">
       </div>
     </div>

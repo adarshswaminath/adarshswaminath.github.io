@@ -1,6 +1,7 @@
 # Adarsh.dev — Portfolio
 
-Personal portfolio built with **Astro**, **Tailwind CSS v4**, and **TypeScript**.
+Personal portfolio built with **Astro**, **Tailwind CSS v4**, and
+**TypeScript**.
 
 ## Quick Start
 
@@ -52,28 +53,35 @@ src/
 
 ## How It's Organized
 
-- **`pages/index.astro`** is just composition — it imports sections and wires them together (~45 lines)
-- **`data/`** holds all content separately from UI, so you can update projects/experience without touching components
-- **`components/ui/`** has small reusable pieces (buttons, tags, labels) used across multiple sections
-- **`components/layout/`** contains structural wrappers and global UI elements like the Navbar, Footer, and sliding Drawer
-- **`components/sections/`** has self-contained page sections — each one owns its own markup and imports its data
-- **`scripts/`** has client-side JS split by feature — each file exports one setup function
+- **`pages/index.astro`** is just composition — it imports sections and wires
+  them together (~45 lines)
+- **`data/`** holds all content separately from UI, so you can update
+  projects/experience without touching components
+- **`components/ui/`** has small reusable pieces (buttons, tags, labels) used
+  across multiple sections
+- **`components/layout/`** contains structural wrappers and global UI elements
+  like the Navbar, Footer, and sliding Drawer
+- **`components/sections/`** has self-contained page sections — each one owns
+  its own markup and imports its data
+- **`scripts/`** has client-side JS split by feature — each file exports one
+  setup function
 
 ## Key Patterns
 
-| Pattern | Where | Why |
-|---|---|---|
-| Data separated from UI | `data/*.ts` → `sections/*.astro` | Update content without touching components |
-| Reusable UI atoms | `ui/index.ts` (barrel export) | Consistent styling, single source of truth |
-| Shared types | `data/types.ts` | Type safety between data files and components |
-| Script modules | `scripts/*.ts` | Clean separation, tree-shakeable |
+| Pattern                | Where                            | Why                                           |
+| ---------------------- | -------------------------------- | --------------------------------------------- |
+| Data separated from UI | `data/*.ts` → `sections/*.astro` | Update content without touching components    |
+| Reusable UI atoms      | `ui/index.ts` (barrel export)    | Consistent styling, single source of truth    |
+| Shared types           | `data/types.ts`                  | Type safety between data files and components |
+| Script modules         | `scripts/*.ts`                   | Clean separation, tree-shakeable              |
 
 ## Adding Content
 
 - **New project** → add entry to `src/data/projects.ts`
 - **New blog post** → create `src/pages/blog/your-post.md` with frontmatter
 - **New experience** → add entry to `src/data/experiences.ts`
-- **New section** → create `src/components/sections/YourSection.astro`, add to `pages/index.astro`
+- **New section** → create `src/components/sections/YourSection.astro`, add to
+  `pages/index.astro`
 
 ## Tech
 

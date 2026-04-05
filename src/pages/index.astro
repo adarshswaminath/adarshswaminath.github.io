@@ -1,9 +1,9 @@
 ---
 // index.astro — Page composition using barrel imports
-import Layout from "../layouts/Layout.astro";
-import TracingBeam from "../components/layout/TracingBeam.astro";
-import Navbar from "../components/layout/Navbar.astro";
-import Footer from "../components/layout/Footer.astro";
+import Layout from '../layouts/Layout.astro'
+import TracingBeam from '../components/layout/TracingBeam.astro'
+import Navbar from '../components/layout/Navbar.astro'
+import Footer from '../components/layout/Footer.astro'
 import {
   Hero,
   About,
@@ -11,18 +11,18 @@ import {
   Experience,
   BlogPreview,
   Contact,
-} from "../components/sections/home-page";
-import { SectionDivider } from "../components/ui";
+} from '../components/sections/home-page'
+import { SectionDivider } from '../components/ui'
 
 // Blog posts (glob imports must happen in pages)
-const posts = Object.values(import.meta.glob("./blog/*.md", { eager: true }));
+const posts = Object.values(import.meta.glob('./blog/*.md', { eager: true }))
 const featuredBlogs = posts
   .sort(
     (a: any, b: any) =>
       new Date(b.frontmatter.date).valueOf() -
       new Date(a.frontmatter.date).valueOf(),
   )
-  .slice(0, 4);
+  .slice(0, 4)
 ---
 
 <Layout>
@@ -44,17 +44,17 @@ const featuredBlogs = posts
 </Layout>
 
 <script>
-  import { setupTyping } from "../scripts/typing";
-  import { setupTracingBeam } from "../scripts/tracing-beam";
-  import { setupDrawer } from "../scripts/drawer";
+  import { setupTyping } from '../scripts/typing'
+  import { setupTracingBeam } from '../scripts/tracing-beam'
+  import { setupDrawer } from '../scripts/drawer'
 
-  setupTyping();
-  setupTracingBeam();
-  setupDrawer();
+  setupTyping()
+  setupTracingBeam()
+  setupDrawer()
 
-  document.addEventListener("astro:page-load", () => {
-    setupTyping();
-    setupTracingBeam();
-    setupDrawer();
-  });
+  document.addEventListener('astro:page-load', () => {
+    setupTyping()
+    setupTracingBeam()
+    setupDrawer()
+  })
 </script>

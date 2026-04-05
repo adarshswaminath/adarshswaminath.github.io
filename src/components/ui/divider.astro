@@ -1,9 +1,9 @@
 ---
 // divider.astro — Subtle separator line
 interface Props {
-  class?: string;
+  class?: string
 }
-const { class: className = "" } = Astro.props;
+const { class: className = '' } = Astro.props
 ---
 
 <div class={`h-px bg-slate-200 ${className}`}></div>

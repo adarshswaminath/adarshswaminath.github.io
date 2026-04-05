@@ -1,22 +1,26 @@
 ---
 // about.astro
-import Section from "../../layout/Section.astro";
-import { MetaLabel, Divider } from "../../ui";
-import { achievements } from "../../../data/navigation";
+import Section from '../../layout/Section.astro'
+import { MetaLabel, Divider } from '../../ui'
+import { achievements } from '../../../data/navigation'
 ---
 
-<Section id="about" title="About" heading="A bit about me">
-  <div class="grid md:grid-cols-5 gap-12">
+<Section
+  id="about"
+  title="About"
+  heading="A bit about me"
+>
+  <div class="grid gap-12 md:grid-cols-5">
     <!-- Left: Narrative -->
-    <div class="md:col-span-3 space-y-5">
-      <p class="text-[15px] text-slate-600 leading-[1.8]">
+    <div class="space-y-5 md:col-span-3">
+      <p class="text-[15px] leading-[1.8] text-slate-600">
         I’m a frontend-focused full-stack developer with experience building
         scalable, production-grade web applications. Currently, I work on an
         AI-driven Governance, Risk & Compliance (GRC) platform, where I design
         and develop complex user interfaces, data-driven dashboards, and
         reusable component systems.
       </p>
-      <p class="text-[15px] text-slate-600 leading-[1.8]">
+      <p class="text-[15px] leading-[1.8] text-slate-600">
         I enjoy solving problems that sit at the intersection of performance,
         usability, and system design — turning complex workflows into simple,
         intuitive user experiences. While I’ve explored areas like Web3 and AI
@@ -28,11 +32,16 @@ import { achievements } from "../../../data/navigation";
       <!-- GitHub Contribution Graph -->
       <div class="pt-6">
         <MetaLabel class="mb-3">Contributions</MetaLabel>
-        <a href="https://github.com/adarshswaminath" target="_blank" rel="noopener" class="overflow-x-auto">
+        <a
+          href="https://github.com/adarshswaminath"
+          target="_blank"
+          rel="noopener"
+          class="overflow-x-auto"
+        >
           <img
             src="https://ghchart.rshah.org/334155/adarshswaminath"
             alt="GitHub Contribution Graph"
-            class="w-full opacity-80 hover:opacity-100 transition-opacity duration-300"
+            class="w-full opacity-80 transition-opacity duration-300 hover:opacity-100"
             loading="lazy"
           />
         </a>
@@ -40,17 +49,17 @@ import { achievements } from "../../../data/navigation";
     </div>
 
     <!-- Right: Structured Metadata -->
-    <div class="md:col-span-2 space-y-8">
+    <div class="space-y-8 md:col-span-2">
       <div>
         <MetaLabel class="mb-3">Expertise</MetaLabel>
         <ul class="space-y-2">
           {
             [
-              "Frontend Engineering",
-              "System-Driven UI Development",
-              "Developer Experience",
+              'Frontend Engineering',
+              'System-Driven UI Development',
+              'Developer Experience',
             ].map((expertise) => (
-              <li class="text-[14px] text-slate-600 list-disc">{expertise}</li>
+              <li class="list-disc text-[14px] text-slate-600">{expertise}</li>
             ))
           }
         </ul>
@@ -63,12 +72,12 @@ import { achievements } from "../../../data/navigation";
         <ul class="space-y-2">
           {
             [
-              "Performance-first architecture",
-              "Clean, maintainable systems",
-              "Scalable component systems",
-              "Developer productivity & tooling",
+              'Performance-first architecture',
+              'Clean, maintainable systems',
+              'Scalable component systems',
+              'Developer productivity & tooling',
             ].map((focusArea) => (
-              <li class="text-[14px] text-slate-600 list-disc">{focusArea}</li>
+              <li class="list-disc text-[14px] text-slate-600">{focusArea}</li>
             ))
           }
         </ul>
@@ -81,7 +90,7 @@ import { achievements } from "../../../data/navigation";
         <ul class="space-y-2">
           {
             achievements.map((a) => (
-              <li class="text-[13px] text-slate-500 list-disc">{a}</li>
+              <li class="list-disc text-[13px] text-slate-500">{a}</li>
             ))
           }
         </ul>

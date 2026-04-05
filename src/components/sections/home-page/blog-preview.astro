@@ -1,49 +1,56 @@
 ---
 // blog-preview.astro — Featured blog posts list for the homepage
-import Section from "../../layout/Section.astro";
-import { ArrowRight } from "lucide-astro";
+import Section from '../../layout/Section.astro'
+import { ArrowRight } from 'lucide-astro'
 
 interface Props {
-  posts: any[];
+  posts: any[]
 }
 
-const { posts } = Astro.props;
+const { posts } = Astro.props
 ---
 
-<Section id="blog" title="Blog" heading="Writing & Thoughts">
-  <div class="space-y-0 mb-8">
+<Section
+  id="blog"
+  title="Blog"
+  heading="Writing & Thoughts"
+>
+  <div class="mb-8 space-y-0">
     {
       posts.map((post: any) => (
         <a
           href={post.url}
-          class="group row-hover-sheen block w-full text-left -mx-4 px-4 py-5 border-b border-dashed border-slate-300 rounded-lg transition-shadow duration-300 hover:shadow-[inset_0_-1px_0_0_rgb(226_232_240)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-400"
+          class="group row-hover-sheen -mx-4 block w-full rounded-lg border-b border-dashed border-slate-300 px-4 py-5 text-left transition-shadow duration-300 hover:shadow-[inset_0_-1px_0_0_rgb(226_232_240)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-400"
         >
-          <span class="row-hover-sheen__fill" aria-hidden="true" />
+          <span
+            class="row-hover-sheen__fill"
+            aria-hidden="true"
+          />
           <div class="relative z-10 flex items-center justify-between gap-6">
-            <div class="flex-1 min-w-0">
-              <div class="flex items-center gap-3 mb-1">
-                <span class="text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-400 bg-slate-100 px-2 py-0.5 rounded font-mono shrink-0">
-                  {post.frontmatter.category || "Article"}
+            <div class="min-w-0 flex-1">
+              <div class="mb-1 flex items-center gap-3">
+                <span class="shrink-0 rounded bg-slate-100 px-2 py-0.5 font-mono text-[10px] font-semibold tracking-[0.15em] text-slate-400 uppercase">
+                  {post.frontmatter.category || 'Article'}
                 </span>
-                <h3 class="text-[15px] font-medium text-slate-900 group-hover:text-slate-800 transition-colors duration-300 truncate">
+                <h3 class="truncate text-[15px] font-medium text-slate-900 transition-colors duration-300 group-hover:text-slate-800">
                   {post.frontmatter.title}
                 </h3>
               </div>
-              <p class="text-[13px] text-slate-500 truncate leading-relaxed">
+              <p class="truncate text-[13px] leading-relaxed text-slate-500">
                 {post.frontmatter.description}
               </p>
             </div>
-            <div class="flex items-center gap-4 shrink-0">
-              <span class="text-[12px] text-slate-400 font-mono hidden md:block">
-                {new Date(post.frontmatter.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
+            <div class="flex shrink-0 items-center gap-4">
+              <span class="hidden font-mono text-[12px] text-slate-400 md:block">
+                {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
                 })}
               </span>
               <ArrowRight
                 size={14}
-                class="text-slate-400 group-hover:text-slate-700 group-hover:translate-x-1 transition-transform duration-300 ease-out shrink-0"
+                class="shrink-0 text-slate-400 transition-transform duration-300 ease-out group-hover:translate-x-1 group-hover:text-slate-700"
               />
             </div>
           </div>
@@ -55,7 +62,10 @@ const { posts } = Astro.props;
     href="/blog"
     class="group row-hover-sheen relative mt-2 inline-flex items-center gap-1.5 rounded-lg px-4 py-3 text-[13px] font-medium text-slate-600 transition-shadow duration-300 hover:text-slate-900 hover:shadow-[inset_0_-1px_0_0_rgb(226_232_240)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-400"
   >
-    <span class="row-hover-sheen__fill" aria-hidden="true" />
+    <span
+      class="row-hover-sheen__fill"
+      aria-hidden="true"
+    ></span>
     <span class="relative z-10 inline-flex items-center gap-1.5">
       View all posts
       <ArrowRight

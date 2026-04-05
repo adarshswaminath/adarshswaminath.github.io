@@ -1,18 +1,25 @@
 ---
 // projects.astro
-import Section from "../../layout/Section.astro";
-import { ProjectCard } from "../../ui";
-import ProjectDrawer from "../../layout/ProjectDrawer.astro";
-import { projects } from "../../../data/projects";
-import { ArrowUpRight } from "lucide-astro";
+import Section from '../../layout/Section.astro'
+import { ProjectCard } from '../../ui'
+import ProjectDrawer from '../../layout/ProjectDrawer.astro'
+import { projects } from '../../../data/projects'
+import { ArrowUpRight } from 'lucide-astro'
 ---
 
-<Section id="projects" title="Projects" heading="Selected Works">
-  <div class="flex flex-wrap justify-center -mx-4 md:mx-0 overflow-hidden">
+<Section
+  id="projects"
+  title="Projects"
+  heading="Selected Works"
+>
+  <div class="-mx-4 flex flex-wrap justify-center overflow-hidden md:mx-0">
     {
       projects.slice(0, 6).map((p, i) => (
-        <div class="w-full md:w-1/2 lg:w-1/3 bg-[#F1F1F1] p-2">
-          <ProjectCard project={p} index={i} />
+        <div class="w-full bg-[#F1F1F1] p-2 md:w-1/2 lg:w-1/3">
+          <ProjectCard
+            project={p}
+            index={i}
+          />
         </div>
       ))
     }

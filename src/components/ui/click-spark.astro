@@ -1,26 +1,27 @@
 ---
 interface Props {
-  sparkColor?: string;
-  sparkSize?: number;
-  sparkWidth?: number;
-  sparkRadius?: number;
-  sparkCount?: number;
-  duration?: number;
+  sparkColor?: string
+  sparkSize?: number
+  sparkWidth?: number
+  sparkRadius?: number
+  sparkCount?: number
+  duration?: number
 }
 
 const {
-  sparkColor = "rgba(30, 41, 59, 1)", // blue-500
+  sparkColor = 'rgba(30, 41, 59, 1)', // blue-500
   sparkSize = 16,
   sparkWidth = 2,
   sparkRadius = 18,
   sparkCount = 8,
   duration = 400,
-} = Astro.props;
+} = Astro.props
 ---
 
 <canvas
   id="click-spark"
-  class="fixed inset-0 pointer-events-none z-[100] w-full h-full"></canvas>
+  class="pointer-events-none fixed inset-0 z-[100] h-full w-full"
+></canvas>
 
 <script
   define:vars={{
@@ -37,107 +38,107 @@ const {
    * Draws radiating strokes and expanding rings on mouse click.
    */
   const initClickSpark = () => {
-    const canvas = document.getElementById("click-spark");
-    if (!canvas) return;
+    const canvas = document.getElementById('click-spark')
+    if (!canvas) return
 
-    const ctx = canvas.getContext("2d");
-    let effects = [];
-    let lastTime = performance.now();
+    const ctx = canvas.getContext('2d')
+    let effects = []
+    let lastTime = performance.now()
 
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+    }
 
     class Spark {
       constructor(x, y, angle) {
-        this.x = x;
-        this.y = y;
-        this.angle = angle;
-        this.velocity = 1.2 + Math.random() * 1.5;
-        this.friction = 0.94;
-        this.size = sparkSize * (0.6 + Math.random() * 0.8);
-        this.life = duration;
-        this.remaining = duration;
+        this.x = x
+        this.y = y
+        this.angle = angle
+        this.velocity = 1.2 + Math.random() * 1.5
+        this.friction = 0.94
+        this.size = sparkSize * (0.6 + Math.random() * 0.8)
+        this.life = duration
+        this.remaining = duration
       }
       update(dt) {
-        this.remaining -= dt;
-        this.velocity *= this.friction;
-        this.x += Math.cos(this.angle) * this.velocity;
-        this.y += Math.sin(this.angle) * this.velocity;
+        this.remaining -= dt
+        this.velocity *= this.friction
+        this.x += Math.cos(this.angle) * this.velocity
+        this.y += Math.sin(this.angle) * this.velocity
       }
       draw(ctx) {
-        const opacity = Math.max(0, this.remaining / this.life);
-        ctx.save();
-        ctx.translate(this.x, this.y);
-        ctx.rotate(this.angle);
-        ctx.globalAlpha = opacity;
-        ctx.strokeStyle = sparkColor;
-        ctx.lineWidth = sparkWidth;
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.lineTo(this.size, 0);
-        ctx.stroke();
-        ctx.restore();
+        const opacity = Math.max(0, this.remaining / this.life)
+        ctx.save()
+        ctx.translate(this.x, this.y)
+        ctx.rotate(this.angle)
+        ctx.globalAlpha = opacity
+        ctx.strokeStyle = sparkColor
+        ctx.lineWidth = sparkWidth
+        ctx.beginPath()
+        ctx.moveTo(0, 0)
+        ctx.lineTo(this.size, 0)
+        ctx.stroke()
+        ctx.restore()
       }
     }
 
     class Ring {
       constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.life = duration;
-        this.remaining = duration;
-        this.maxRadius = sparkRadius;
+        this.x = x
+        this.y = y
+        this.life = duration
+        this.remaining = duration
+        this.maxRadius = sparkRadius
       }
       update(dt) {
-        this.remaining -= dt;
+        this.remaining -= dt
       }
       draw(ctx) {
-        const progress = 1 - this.remaining / this.life;
-        const opacity = Math.max(0, (1 - progress) * 0.4);
-        const radius = progress * this.maxRadius;
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, radius, 0, Math.PI * 2);
-        ctx.strokeStyle = sparkColor;
-        ctx.globalAlpha = opacity;
-        ctx.lineWidth = 0.5;
-        ctx.stroke();
-        ctx.restore();
+        const progress = 1 - this.remaining / this.life
+        const opacity = Math.max(0, (1 - progress) * 0.4)
+        const radius = progress * this.maxRadius
+        ctx.save()
+        ctx.beginPath()
+        ctx.arc(this.x, this.y, radius, 0, Math.PI * 2)
+        ctx.strokeStyle = sparkColor
+        ctx.globalAlpha = opacity
+        ctx.lineWidth = 0.5
+        ctx.stroke()
+        ctx.restore()
       }
     }
 
     const addEffect = (e) => {
-      const x = e.clientX;
-      const y = e.clientY;
-      effects.push(new Ring(x, y));
+      const x = e.clientX
+      const y = e.clientY
+      effects.push(new Ring(x, y))
       for (let i = 0; i < sparkCount; i++) {
         const angle =
-          (Math.PI * 2 * i) / sparkCount + (Math.random() - 0.5) * 0.3;
-        effects.push(new Spark(x, y, angle));
+          (Math.PI * 2 * i) / sparkCount + (Math.random() - 0.5) * 0.3
+        effects.push(new Spark(x, y, angle))
       }
-    };
+    }
 
     const animate = (time) => {
-      const dt = time - lastTime;
-      lastTime = time;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const dt = time - lastTime
+      lastTime = time
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
       effects = effects.filter((eff) => {
-        eff.update(dt);
-        eff.draw(ctx);
-        return eff.remaining > 0;
-      });
-      requestAnimationFrame(animate);
-    };
+        eff.update(dt)
+        eff.draw(ctx)
+        return eff.remaining > 0
+      })
+      requestAnimationFrame(animate)
+    }
 
-    window.addEventListener("resize", resize);
-    window.addEventListener("mousedown", addEffect);
-    resize();
-    requestAnimationFrame(animate);
-  };
+    window.addEventListener('resize', resize)
+    window.addEventListener('mousedown', addEffect)
+    resize()
+    requestAnimationFrame(animate)
+  }
 
   // Run immediately and on page load for Astro View Transitions
-  initClickSpark();
-  document.addEventListener("astro:page-load", initClickSpark);
+  initClickSpark()
+  document.addEventListener('astro:page-load', initClickSpark)
 </script>

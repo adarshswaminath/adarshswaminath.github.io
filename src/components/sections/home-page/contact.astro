@@ -1,31 +1,36 @@
 ---
 // contact.astro
-import Section from "../../layout/Section.astro";
-import { socialLinks } from "../../../data/navigation";
-import { Button } from "@/components/ui";
+import Section from '../../layout/Section.astro'
+import { socialLinks } from '../../../data/navigation'
+import { Button } from '@/components/ui'
 ---
 
-<Section id="contact" title="Contact" heading="Let's Connect">
-  <p class="text-slate-600 mb-6 text-[15px] leading-relaxed max-w-xl">
+<Section
+  id="contact"
+  title="Contact"
+  heading="Let's Connect"
+>
+  <p class="mb-6 max-w-xl text-[15px] leading-relaxed text-slate-600">
     I'm always open to discussing new projects, creative ideas or opportunities
     to be part of your visions. Feel free to reach out.
   </p>
 
-  <div class="flex gap-4 items-center">
+  <div class="flex items-center gap-4">
     <a
       href={socialLinks.email}
       class="button primary"
-      >
+    >
       <Button primary>Email Me</Button>
-      </a
+    </a>
+    <a
+      class="text-[15px] font-medium text-slate-600 underline decoration-slate-300 underline-offset-4 transition-all hover:text-slate-900 hover:decoration-slate-400"
+      href={socialLinks.github}
+      >GitHub</a
     >
     <a
-      class="text-[15px] font-medium text-slate-600 hover:text-slate-900 underline underline-offset-4 decoration-slate-300 hover:decoration-slate-400 transition-all"
-      href={socialLinks.github}>GitHub</a
-    >
-    <a
-      class="text-[15px] font-medium text-slate-600 hover:text-slate-900 underline underline-offset-4 decoration-slate-300 hover:decoration-slate-400 transition-all"
-      href={socialLinks.linkedin}>LinkedIn</a
+      class="text-[15px] font-medium text-slate-600 underline decoration-slate-300 underline-offset-4 transition-all hover:text-slate-900 hover:decoration-slate-400"
+      href={socialLinks.linkedin}
+      >LinkedIn</a
     >
   </div>
 </Section>

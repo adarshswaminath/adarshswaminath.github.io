@@ -1,22 +1,23 @@
-import { memo, type ReactNode } from 'react';
+import { memo, type ReactNode } from 'react'
 import {
   AnimatePresence,
   motion,
   type Variants,
   type MotionProps,
   type DOMMotionComponents,
-} from 'motion/react';
+} from 'motion/react'
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils'
 
 function textFromAstroChildren(value: ReactNode): string {
-  if (value == null || typeof value === 'boolean') return '';
-  if (typeof value === 'string' || typeof value === 'number') return String(value);
-  if (Array.isArray(value)) return value.map(textFromAstroChildren).join('');
-  return '';
+  if (value == null || typeof value === 'boolean') return ''
+  if (typeof value === 'string' || typeof value === 'number')
+    return String(value)
+  if (Array.isArray(value)) return value.map(textFromAstroChildren).join('')
+  return ''
 }
 
-type AnimationType = 'text' | 'word' | 'character' | 'line';
+type AnimationType = 'text' | 'word' | 'character' | 'line'
 type AnimationVariant =
   | 'fadeIn'
   | 'blurIn'
@@ -27,7 +28,7 @@ type AnimationVariant =
   | 'slideLeft'
   | 'slideRight'
   | 'scaleUp'
-  | 'scaleDown';
+  | 'scaleDown'
 
 const motionElements = {
   article: motion.article,
@@ -42,26 +43,29 @@ const motionElements = {
   p: motion.p,
   section: motion.section,
   span: motion.span,
-} as const;
+} as const
 
-type MotionElementType = Extract<keyof DOMMotionComponents, keyof typeof motionElements>;
+type MotionElementType = Extract<
+  keyof DOMMotionComponents,
+  keyof typeof motionElements
+>
 
 interface TextAnimateProps extends Omit<MotionProps, 'children'> {
   /** Plain string (recommended when used from Astro). */
-  text?: string;
+  text?: string
   /** String or Astro-passed slot content; coerced to string for animation. */
-  children?: ReactNode;
-  className?: string;
-  segmentClassName?: string;
-  delay?: number;
-  duration?: number;
-  variants?: Variants;
-  as?: MotionElementType;
-  by?: AnimationType;
-  startOnView?: boolean;
-  once?: boolean;
-  animation?: AnimationVariant;
-  accessible?: boolean;
+  children?: ReactNode
+  className?: string
+  segmentClassName?: string
+  delay?: number
+  duration?: number
+  variants?: Variants
+  as?: MotionElementType
+  by?: AnimationType
+  startOnView?: boolean
+  once?: boolean
+  animation?: AnimationVariant
+  accessible?: boolean
 }
 
 const staggerTimings: Record<AnimationType, number> = {
@@ -69,7 +73,7 @@ const staggerTimings: Record<AnimationType, number> = {
   word: 0.05,
   character: 0.03,
   line: 0.06,
-};
+}
 
 const defaultContainerVariants = {
   hidden: { opacity: 1 },
@@ -87,7 +91,7 @@ const defaultContainerVariants = {
       staggerDirection: -1,
     },
   },
-};
+}
 
 const defaultItemVariants: Variants = {
   hidden: { opacity: 0 },
@@ -97,7 +101,7 @@ const defaultItemVariants: Variants = {
   exit: {
     opacity: 0,
   },
-};
+}
 
 const defaultItemAnimationVariants: Record<
   AnimationVariant,
@@ -305,7 +309,7 @@ const defaultItemAnimationVariants: Record<
       },
     },
   },
-};
+}
 
 const TextAnimateBase = ({
   text,
@@ -323,24 +327,24 @@ const TextAnimateBase = ({
   accessible = true,
   ...props
 }: TextAnimateProps) => {
-  const MotionComponent = motionElements[Component];
-  const content = text ?? textFromAstroChildren(children);
+  const MotionComponent = motionElements[Component]
+  const content = text ?? textFromAstroChildren(children)
 
-  let segments: string[] = [];
+  let segments: string[] = []
   switch (by) {
     case 'word':
-      segments = content.split(/(\s+)/);
-      break;
+      segments = content.split(/(\s+)/)
+      break
     case 'character':
-      segments = content.split('');
-      break;
+      segments = content.split('')
+      break
     case 'line':
-      segments = content.split('\n');
-      break;
+      segments = content.split('\n')
+      break
     case 'text':
     default:
-      segments = [content];
-      break;
+      segments = [content]
+      break
   }
 
   const finalVariants = variants
@@ -386,7 +390,10 @@ const TextAnimateBase = ({
           },
           item: defaultItemAnimationVariants[animation].item,
         }
-      : { container: defaultContainerVariants, item: defaultItemVariants };
+      : {
+          container: defaultContainerVariants,
+          item: defaultItemVariants,
+        }
 
   return (
     <AnimatePresence mode="popLayout">
@@ -418,7 +425,7 @@ const TextAnimateBase = ({
         ))}
       </MotionComponent>
     </AnimatePresence>
-  );
-};
+  )
+}
 
-export const TextAnimate = memo(TextAnimateBase);
+export const TextAnimate = memo(TextAnimateBase)

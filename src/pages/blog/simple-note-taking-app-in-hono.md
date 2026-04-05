@@ -1,41 +1,52 @@
 ---
-layout: "../../layouts/BlogLayout.astro"
-title: "Simple Note-Taking API in Hono"
-date: "2023-03-30"
-description: "A simple note-taking API using Bun, Hono, and Sequelize."
-category: "Backend"
-author: "Adarsh"
+layout: '../../layouts/BlogLayout.astro'
+title: 'Simple Note-Taking API in Hono'
+date: '2023-03-30'
+description: 'A simple note-taking API using Bun, Hono, and Sequelize.'
+category: 'Backend'
+author: 'Adarsh'
 ---
 
-Build a Simple Note-Taking API with Bun, Hono, and Sequelize
-============================================================
+# Build a Simple Note-Taking API with Bun, Hono, and Sequelize
 
-_A beginner’s guide to understanding the fundamentals of building a CRUD backend_
+_A beginner’s guide to understanding the fundamentals of building a CRUD
+backend_
 
-When learning a new framework or tool, I believe it’s better to start small and grasp the core fundamentals first. That’s why I built this minimal note-taking API using **Hono** (a lightweight web framework) and **Sequelize** (an ORM), all powered by **Bun** for speed.
+When learning a new framework or tool, I believe it’s better to start small and
+grasp the core fundamentals first. That’s why I built this minimal note-taking
+API using **Hono** (a lightweight web framework) and **Sequelize** (an ORM), all
+powered by **Bun** for speed.
 
-This guide is perfect for anyone starting with REST APIs, TypeScript, or backend development in general.
+This guide is perfect for anyone starting with REST APIs, TypeScript, or backend
+development in general.
 
-What We’re Building
--------------------
+## What We’re Building
 
 We’ll create a simple **CRUD API** for managing notes:
 
-*   Create a note
-*   Read all notes or one by ID
-*   Update a note
-*   Delete a note
+- Create a note
+- Read all notes or one by ID
+- Update a note
+- Delete a note
 
 It uses:
 
-*   **Hono** for handling HTTP routes
-*   **Sequelize** is a promise-based [Node.js](https://nodejs.org/en/about/) [ORM tool](https://en.wikipedia.org/wiki/Object-relational_mapping) for [Postgres](https://en.wikipedia.org/wiki/PostgreSQL), [MySQL](https://en.wikipedia.org/wiki/MySQL), [MariaDB](https://en.wikipedia.org/wiki/MariaDB), [SQLite](https://en.wikipedia.org/wiki/SQLite), [Microsoft SQL Server](https://en.wikipedia.org/wiki/Microsoft_SQL_Server), [Oracle Database](https://en.wikipedia.org/wiki/Oracle_Database), [Amazon Redshift](https://docs.aws.amazon.com/redshift/index.html) and [Snowflake’s Data Cloud](https://docs.snowflake.com/en/user-guide/intro-key-concepts.html)
-*   **TypeScript** for better structure and type safety
-*   **SQLite** for lightweight local storage
-*   **Bun** for fast runtime and package management
+- **Hono** for handling HTTP routes
+- **Sequelize** is a promise-based [Node.js](https://nodejs.org/en/about/)
+  [ORM tool](https://en.wikipedia.org/wiki/Object-relational_mapping) for
+  [Postgres](https://en.wikipedia.org/wiki/PostgreSQL),
+  [MySQL](https://en.wikipedia.org/wiki/MySQL),
+  [MariaDB](https://en.wikipedia.org/wiki/MariaDB),
+  [SQLite](https://en.wikipedia.org/wiki/SQLite),
+  [Microsoft SQL Server](https://en.wikipedia.org/wiki/Microsoft_SQL_Server),
+  [Oracle Database](https://en.wikipedia.org/wiki/Oracle_Database),
+  [Amazon Redshift](https://docs.aws.amazon.com/redshift/index.html) and
+  [Snowflake’s Data Cloud](https://docs.snowflake.com/en/user-guide/intro-key-concepts.html)
+- **TypeScript** for better structure and type safety
+- **SQLite** for lightweight local storage
+- **Bun** for fast runtime and package management
 
-Folder Structure Overview
--------------------------
+## Folder Structure Overview
 
 ```
 make-note/
@@ -65,8 +76,7 @@ make-note/
         └── handle-delete-note.ts  # HTTP handler for DELETE /note/:id
 ```
 
-Step 1: Set Up the Project
---------------------------
+## Step 1: Set Up the Project
 
 Install Bun (if you haven’t already):
 
@@ -90,8 +100,7 @@ bun add sequelize sqlite3
 bun add -d typescript @types/node
 ```
 
-Step 2: Configure SQLite with Sequelize
----------------------------------------
+## Step 2: Configure SQLite with Sequelize
 
 `src/config/db.ts`
 
@@ -106,12 +115,12 @@ export const sequelizeInstance = new Sequelize({
 });
 ```
 
-Step 3: Define the Note Model
------------------------------
+## Step 3: Define the Note Model
 
 `src/models/Notes.model.ts`
 
-> **_Purpose_**_: Defines the Note model schema with fields like_ `_title_`_,_ `_content_`_,_ `_createdAt_`_, and_ `_updatedAt_`
+> **_Purpose_**_: Defines the Note model schema with fields like_ `_title_`_,_
+> `_content_`_,_ `_createdAt_`_, and_ `_updatedAt_`
 
 ```
 import { DataTypes, Model } from "sequelize";
@@ -132,8 +141,7 @@ Note.init({
 });
 ```
 
-Step 4: Add Type Definitions
-----------------------------
+## Step 4: Add Type Definitions
 
 `src/types/notes.ts`
 
@@ -147,10 +155,10 @@ export type NoteAttribute = {
 };
 ```
 
-Step 5: Add Service Logic
--------------------------
+## Step 5: Add Service Logic
 
-Each file here performs the business logic — database operations for each endpoint.
+Each file here performs the business logic — database operations for each
+endpoint.
 
 `src/service/create-note.ts`
 
@@ -214,8 +222,7 @@ export const deleteNote = async (id: number) => {
 };
 ```
 
-Step 6: Add Controllers
------------------------
+## Step 6: Add Controllers
 
 These map service logic to API routes using Hono’s context.
 
@@ -289,8 +296,7 @@ export const handleDeleteNote = async (c: Context) => {
 };
 ```
 
-Step 7: Bootstrap the Server
-----------------------------
+## Step 7: Bootstrap the Server
 
 `src/index.ts`
 
@@ -308,7 +314,7 @@ import {
   handleDeleteNote,
 } from "./controller/index.js";
 const app = new Hono();
-/*  .sync() ensures your model schema is applied to the DB. In dev, 
+/*  .sync() ensures your model schema is applied to the DB. In dev,
 it helps auto-create the table if not present. */
 await sequelizeInstance.sync()
 app.get("/notes", handleAllNotes);
@@ -321,8 +327,7 @@ serve({ fetch: app.fetch, port: 3000 }, (info) =>
 );
 ```
 
-Step 8: Test the API
---------------------
+## Step 8: Test the API
 
 Start the server:
 
@@ -330,8 +335,7 @@ Start the server:
 bun run dev
 ```
 
-Example requests
-----------------
+## Example requests
 
 **Create a note:**
 
@@ -367,33 +371,37 @@ curl -X PUT http://localhost:3000/note/1 \
 curl -X DELETE http://localhost:3000/note/1
 ```
 
-🎯 Why Start Simple?
---------------------
+## 🎯 Why Start Simple?
 
-Instead of diving into advanced topics like authentication or validation, this project helped me build a strong foundation in:
+Instead of diving into advanced topics like authentication or validation, this
+project helped me build a strong foundation in:
 
-*   Routing with **Hono**
-*   Working with **Sequelize** models
-*   Clean project structuring
-*   Using **Bun** for a snappy dev experience
+- Routing with **Hono**
+- Working with **Sequelize** models
+- Clean project structuring
+- Using **Bun** for a snappy dev experience
 
-What’s Next?
-------------
+## What’s Next?
 
 You can easily extend this API with:
 
-*   Input validation using [Zod](https://github.com/colinhacks/zod)
-*   JWT-based user authentication
-*   Deploy to [Render](https://render.com/) or [Vercel](https://vercel.com/)
-*   Add a frontend using React or SvelteKit
+- Input validation using [Zod](https://github.com/colinhacks/zod)
+- JWT-based user authentication
+- Deploy to [Render](https://render.com/) or [Vercel](https://vercel.com/)
+- Add a frontend using React or SvelteKit
 
-Final Thoughts
---------------
+## Final Thoughts
 
-This project started as a way for me to explore the fundamentals of building a backend with **Bun**, **Hono**, and **Sequelize** — and it’s been an incredibly fun and fast experience. If you’re just getting into backend development, I **highly recommend** creating a simple CRUD API like this from scratch. You’ll gain a deeper understanding of routing, databases, and project structuring by doing it yourself.
+This project started as a way for me to explore the fundamentals of building a
+backend with **Bun**, **Hono**, and **Sequelize** — and it’s been an incredibly
+fun and fast experience. If you’re just getting into backend development, I
+**highly recommend** creating a simple CRUD API like this from scratch. You’ll
+gain a deeper understanding of routing, databases, and project structuring by
+doing it yourself.
 
-🛠️ **Want to build on this or learn by contributing?**
-The project is open-source and beginner-friendly! Whether you’re exploring Bun, learning REST APIs, or just want to help improve this project, your contributions are welcome.
+🛠️ **Want to build on this or learn by contributing?** The project is
+open-source and beginner-friendly! Whether you’re exploring Bun, learning REST
+APIs, or just want to help improve this project, your contributions are welcome.
 
 👉 Check it out here:
 [**github.com/adarshswaminath/bun-hono-notes-api**](https://github.com/adarshswaminath/bun-hono-notes-api.git)

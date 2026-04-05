@@ -1,0 +1,19 @@
+# Build artifacts
+dist/
+.astro/
+node_modules/
+
+# Lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+bun.lock
+
+# Public assets
+public/
+
+# VS Code settings
+.vscode/
+
+# GitHub files
+.github/

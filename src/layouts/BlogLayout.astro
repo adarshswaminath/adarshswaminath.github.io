@@ -1,30 +1,30 @@
 ---
-import Layout from "./Layout.astro";
-import Section from "../components/layout/Section.astro";
-import Navbar from "../components/layout/Navbar.astro";
+import Layout from './Layout.astro'
+import Section from '../components/layout/Section.astro'
+import Navbar from '../components/layout/Navbar.astro'
 
-const { frontmatter } = Astro.props;
+const { frontmatter } = Astro.props
 ---
 
 <Layout
   title={`${frontmatter.title} - Adarsh.dev`}
   description={frontmatter.description}
 >
-<Navbar />
+  <Navbar />
 
   <Section
     id="article"
-    title={frontmatter.category || "Article"}
+    title={frontmatter.category || 'Article'}
     heading={frontmatter.title}
   >
     <div class="mb-8 border-b border-slate-200 pb-4">
       <div class="text-sm text-slate-500">
         <time datetime={frontmatter.date}
           >{
-            new Date(frontmatter.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
+            new Date(frontmatter.date).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
             })
           }</time
         >
@@ -36,7 +36,7 @@ const { frontmatter } = Astro.props;
     </article>
   </Section>
 
-  <footer class="text-center text-xs text-slate-400 py-8">
+  <footer class="py-8 text-center text-xs text-slate-400">
     © 2026 Adarsh.dev
   </footer>
 </Layout>
@@ -55,12 +55,14 @@ const { frontmatter } = Astro.props;
     margin-top: 2rem;
     margin-bottom: 2rem;
     overflow-x: auto;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    box-shadow:
+      0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
   }
 
   /* Header Bar */
   .prose pre::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -73,7 +75,7 @@ const { frontmatter } = Astro.props;
 
   /* Mac Dots */
   .prose pre::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0.875rem;
     left: 1rem;
@@ -82,8 +84,8 @@ const { frontmatter } = Astro.props;
     border-radius: 9999px;
     background-color: #ef4444; /* Red dot */
     box-shadow:
-      1.1rem 0 0 0 #f59e0b, /* Orange dot */
-      2.2rem 0 0 0 #10b981; /* Green dot */
+      1.1rem 0 0 0 #f59e0b,
+      /* Orange dot */ 2.2rem 0 0 0 #10b981; /* Green dot */
     z-index: 10;
   }
 
