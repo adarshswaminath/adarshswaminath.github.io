@@ -1,7 +1,7 @@
 ---
 import Layout from './Layout.astro'
 import Section from '../components/layout/Section.astro'
-import Navbar from '../components/layout/Navbar.astro'
+import Navbar from '../components/layout/Navbar'
 
 const { frontmatter } = Astro.props
 ---
@@ -10,7 +10,7 @@ const { frontmatter } = Astro.props
   title={`${frontmatter.title} - Adarsh.dev`}
   description={frontmatter.description}
 >
-  <Navbar />
+  <Navbar client:load />
 
   <Section
     id="article"

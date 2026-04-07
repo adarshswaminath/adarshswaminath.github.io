@@ -2,7 +2,7 @@
 // index.astro — Page composition using barrel imports
 import Layout from '../layouts/Layout.astro'
 import TracingBeam from '../components/layout/TracingBeam.astro'
-import Navbar from '../components/layout/Navbar.astro'
+import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer.astro'
 import {
   Hero,
@@ -30,7 +30,7 @@ const featuredBlogs = posts
 
 <Layout>
   <TracingBeam />
-  <Navbar />
+  <Navbar client:load />
   <Hero />
   <SectionDivider />
   <Projects />

@@ -1,6 +1,6 @@
 // Navigation & site-wide constants
 
-export const navItems = ['Projects', 'Blog']
+export const navItems = ['Projects', 'Blog', 'About', 'Contact']
 
 export const stackTags = [
   'React',
