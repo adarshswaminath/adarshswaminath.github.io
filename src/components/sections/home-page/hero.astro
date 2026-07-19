@@ -1,8 +1,29 @@
 ---
-// hero.astro
-import { Button, Tag } from '../../ui'
+import { Tag } from '../../ui'
 import CodeWindow from '../../layout/CodeWindow.astro'
 import { stackTags } from '../../../data/navigation'
+const socialLinks = [
+  {
+    label: 'github',
+    link: 'https://github.com/adarshswaminath',
+    icon: '/github-icon.svg',
+  },
+  {
+    label: 'linkedin',
+    link: 'https://www.linkedin.com/in/adarshswaminath/',
+    icon: '/linkedin-icon.svg',
+  },
+  {
+    label: 'twitter',
+    link: 'https://x.com/adarshswaminath',
+    icon: '/twitter-icon.svg',
+  },
+  {
+    label: 'medium',
+    link: 'https://medium.com/@adarshswaminath7',
+    icon: '/medium-icon.svg',
+  },
+]
 ---
 
 <section class="mx-auto max-w-5xl px-6 py-20 md:py-32">
@@ -15,17 +36,22 @@ import { stackTags } from '../../../data/navigation'
     Focused on performance, clean architecture, and developer experience.
   </p>
   <div class="mb-8 flex gap-4">
-    <Button
-      primary
-      href="#projects"
-      class="cursor-pointer"
-      >Projects</Button
-    >
-    <Button
-      href="#contact"
-      class="cursor-pointer"
-      >Contact Me</Button
-    >
+    {
+      socialLinks.map((link) => (
+        <a
+          href={link.link}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src={link.icon}
+            alt={link.label}
+            width={35}
+            height={35}
+          />
+        </a>
+      ))
+    }
   </div>
 
   <div class="mb-4">
