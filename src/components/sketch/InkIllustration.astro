@@ -1,0 +1,569 @@
+---
+/**
+ * Hero field-note illustration.
+ *
+ * Visual direction:
+ * - Blue ballpoint / technical ink drawing
+ * - Warm paper background comes from the page
+ * - Mountain landscape + developer workspace
+ * - Technical annotations are embedded into the artwork
+ * - No generic UI / API / DB icon diagram
+ */
+
+ interface Props {
+  class?: string
+}
+
+const { class: className = '' } = Astro.props
+---
+
+<figure class={`relative ${className}`}>
+  <svg
+    viewBox="0 0 760 520"
+    class="h-auto w-full overflow-visible"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+    aria-label="Blue ink field-note illustration of a developer workspace overlooking a mountain landscape"
+  >
+    <defs>
+      <!-- Very subtle organic ink texture -->
+      <filter id="ink-soft">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.8"
+          numOctaves="2"
+          seed="8"
+          result="noise"
+        />
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="noise"
+          scale="0.35"
+        />
+      </filter>
+
+      <!-- Clip lower landscape -->
+      <clipPath id="landscape-clip">
+        <rect x="0" y="120" width="760" height="400" rx="4" />
+      </clipPath>
+    </defs>
+
+    <!-- ========================================================= -->
+    <!-- ATMOSPHERE / DISTANT MOUNTAINS                             -->
+    <!-- ========================================================= -->
+
+    <g
+      clip-path="url(#landscape-clip)"
+      filter="url(#ink-soft)"
+      stroke="var(--ink)"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <!-- Very distant mountain range -->
+      <path
+        class="ink-stroke-muted"
+        d="
+          M0 300
+          C55 270 90 280 130 258
+          C170 235 205 270 245 248
+          C290 225 315 260 355 240
+          C400 218 430 252 470 232
+          C520 205 555 245 600 218
+          C650 190 700 225 760 195
+        "
+        opacity=".28"
+        stroke-width="1.2"
+      />
+
+      <!-- Main mountain silhouette -->
+      <path
+        class="ink-stroke"
+        d="
+          M80 350
+          L150 292
+          L190 315
+          L245 255
+          L285 295
+          L355 205
+          L392 250
+          L450 150
+          L485 205
+          L530 170
+          L575 245
+          L620 220
+          L680 290
+          L760 255
+        "
+        stroke-width="2"
+      />
+
+      <!-- Main mountain internal ridges -->
+      <path
+        class="ink-stroke-muted"
+        d="
+          M355 205 L320 295
+          M355 205 L405 278
+          M450 150 L405 280
+          M450 150 L500 280
+          M530 170 L490 280
+          M530 170 L575 245
+        "
+        stroke-width="1.25"
+        opacity=".72"
+      />
+
+      <!-- Mountain snow / highlight contours -->
+      <path
+        class="ink-stroke-muted"
+        d="
+          M445 170 L430 210 L452 202 L470 230
+          M345 222 L330 250 L350 245 L370 270
+          M525 193 L505 220 L530 216 L548 238
+        "
+        stroke-width="1"
+        opacity=".65"
+      />
+
+      <!-- Mountain hatching -->
+      <g class="ink-stroke-muted" opacity=".42" stroke-width=".8">
+        <path d="M430 215 l-30 35" />
+        <path d="M438 220 l-35 42" />
+        <path d="M447 226 l-37 45" />
+
+        <path d="M475 210 l28 45" />
+        <path d="M482 207 l32 50" />
+        <path d="M490 215 l34 48" />
+
+        <path d="M325 263 l-20 25" />
+        <path d="M334 267 l-22 30" />
+
+        <path d="M545 225 l30 30" />
+        <path d="M552 222 l34 34" />
+      </g>
+
+      <!-- ======================================================= -->
+      <!-- VALLEY -->
+      <!-- ======================================================= -->
+
+      <path
+        class="ink-stroke"
+        d="
+          M0 355
+          C95 325 170 335 245 320
+          C330 303 395 315 470 300
+          C555 282 650 315 760 285
+          L760 520
+          L0 520 Z
+        "
+        stroke-width="1.6"
+      />
+
+      <!-- Layered valley contours -->
+      <path
+        class="ink-stroke-muted"
+        d="
+          M0 382
+          C100 350 190 360 280 345
+          C380 328 455 345 550 326
+          C635 310 700 330 760 315
+
+          M0 405
+          C100 378 195 390 290 370
+          C390 350 470 370 560 350
+          C650 335 710 350 760 340
+
+          M0 430
+          C100 405 205 420 300 397
+          C390 378 475 395 565 378
+          C650 362 710 380 760 368
+        "
+        stroke-width=".9"
+        opacity=".48"
+      />
+
+      <!-- ======================================================= -->
+      <!-- LAKE -->
+      <!-- ======================================================= -->
+
+      <path
+        class="ink-stroke-muted"
+        d="
+          M185 365
+          C255 348 345 348 420 363
+          C480 375 520 398 485 412
+          C430 435 315 430 245 412
+          C200 400 170 382 185 365 Z
+        "
+        stroke-width="1"
+        opacity=".55"
+      />
+
+      <path
+        class="ink-stroke-muted"
+        d="
+          M220 374 C290 365 370 370 440 380
+          M205 386 C285 378 370 385 455 394
+          M230 398 C300 393 375 400 430 405
+        "
+        stroke-width=".8"
+        opacity=".42"
+      />
+
+      <!-- ======================================================= -->
+      <!-- FOREST -->
+      <!-- ======================================================= -->
+
+      <g class="ink-stroke" stroke-width="1.1">
+        <!-- left forest -->
+        <path d="M25 385 l12 -27 l7 17 l9 -23 l12 33" />
+        <path d="M62 390 l11 -31 l9 20 l10 -28 l13 38" />
+        <path d="M105 378 l12 -27 l9 18 l10 -25 l12 32" />
+        <path d="M145 382 l10 -25 l9 16 l8 -22 l13 31" />
+
+        <!-- middle forest -->
+        <path d="M255 395 l10 -26 l9 17 l8 -22 l12 31" />
+        <path d="M285 402 l11 -30 l9 18 l10 -25 l12 35" />
+        <path d="M330 400 l10 -27 l8 16 l10 -22 l11 31" />
+        <path d="M375 396 l11 -28 l9 18 l10 -24 l12 33" />
+
+        <!-- right forest -->
+        <path d="M570 350 l12 -35 l10 22 l10 -31 l13 43" />
+        <path d="M610 365 l12 -40 l10 24 l11 -33 l14 47" />
+        <path d="M660 345 l12 -38 l10 23 l11 -32 l14 45" />
+        <path d="M710 350 l12 -42 l10 26 l12 -35 l14 50" />
+      </g>
+
+      <!-- ======================================================= -->
+      <!-- RIGHT PINE TREES -->
+      <!-- ======================================================= -->
+
+      <g class="ink-stroke" stroke-width="1.4">
+        <!-- large pine -->
+        <path d="M720 365 L720 120" />
+
+        <path d="M720 150 L690 190 L707 188 L678 225 L705 220 L670 265 L708 258" />
+        <path d="M720 175 L748 207 L735 205 L760 240 L738 235 L765 275 L735 265" />
+
+        <!-- second pine -->
+        <path d="M665 365 L665 205" />
+        <path d="M665 230 L643 258 L654 256 L635 285 L654 280 L630 315 L655 305" />
+        <path d="M665 250 L686 275 L676 273 L694 300 L678 295 L700 325 L676 315" />
+      </g>
+
+      <!-- ======================================================= -->
+      <!-- ROCKY FOREGROUND -->
+      <!-- ======================================================= -->
+
+      <path
+        class="ink-stroke"
+        d="
+          M0 445
+          C80 425 130 450 190 438
+          C240 428 280 448 330 438
+          C390 425 435 448 490 430
+          C550 410 620 432 680 410
+          C715 398 740 410 760 405
+          L760 520
+          L0 520 Z
+        "
+        stroke-width="1.5"
+      />
+
+      <!-- Rock contours -->
+      <g class="ink-stroke-muted" stroke-width=".8" opacity=".6">
+        <path d="M35 470 l45 -22 l40 8 l-30 25" />
+        <path d="M145 465 l35 -20 l42 13 l-25 24" />
+        <path d="M490 460 l42 -25 l38 9 l-25 26" />
+        <path d="M610 448 l35 -24 l45 8 l-20 26" />
+      </g>
+    </g>
+
+    <!-- ========================================================= -->
+    <!-- DESK / WORKSPACE                                           -->
+    <!-- ========================================================= -->
+
+    <g class="ink-stroke" stroke-linecap="round" stroke-linejoin="round">
+      <!-- wooden / rock ledge -->
+      <path
+        d="M30 430 C170 418 300 426 420 420 C545 414 650 420 735 410"
+        stroke-width="2"
+      />
+
+      <path
+        class="ink-stroke-muted"
+        d="M35 440 C170 430 300 437 420 430 C550 425 650 432 735 422"
+        stroke-width=".9"
+        opacity=".55"
+      />
+
+      <!-- ======================================================= -->
+      <!-- LAPTOP -->
+      <!-- ======================================================= -->
+
+      <!-- screen -->
+      <path
+        d="
+          M365 300
+          C405 295 485 296 522 302
+          L535 404
+          C490 401 410 402 352 405
+          Z
+        "
+        stroke-width="2"
+      />
+
+      <!-- screen inner -->
+      <path
+        class="ink-stroke-muted"
+        d="
+          M376 311
+          C415 307 475 308 510 312
+          L519 389
+          C475 386 415 387 365 391
+          Z
+        "
+        stroke-width="1"
+      />
+
+      <!-- code -->
+      <g class="ink-stroke-muted" stroke-width=".85" opacity=".75">
+        <path d="M386 325 L425 325" />
+        <path d="M386 336 L470 336" />
+        <path d="M397 348 L447 348" />
+        <path d="M397 360 L482 360" />
+        <path d="M386 372 L430 372" />
+      </g>
+
+      <!-- laptop base -->
+      <path
+        d="
+          M350 405
+          C410 400 490 400 535 404
+          L565 431
+          C500 438 400 438 325 432
+          Z
+        "
+        stroke-width="2"
+      />
+
+      <!-- keyboard -->
+      <path
+        class="ink-stroke-muted"
+        d="M365 410 C415 407 485 408 525 411"
+        stroke-width="1"
+        opacity=".65"
+      />
+
+      <!-- ======================================================= -->
+      <!-- BACKPACK -->
+      <!-- ======================================================= -->
+
+      <path
+        d="
+          M555 375
+          C555 348 568 331 588 332
+          C608 332 621 350 621 379
+          L618 425
+          C598 432 575 430 554 422
+          Z
+        "
+        stroke-width="1.7"
+      />
+
+      <path
+        class="ink-stroke-muted"
+        d="
+          M565 350
+          C570 330 605 330 613 352
+          M562 385
+          C578 391 602 390 619 383
+          M570 405
+          C585 410 603 410 616 405
+        "
+        stroke-width="1"
+      />
+
+      <!-- backpack straps -->
+      <path
+        d="M565 350 C550 365 550 397 558 420"
+        stroke-width="1.2"
+      />
+
+      <path
+        d="M610 351 C628 365 628 398 618 422"
+        stroke-width="1.2"
+      />
+
+      <!-- ======================================================= -->
+      <!-- NOTEBOOK -->
+      <!-- ======================================================= -->
+
+      <path
+        d="
+          M635 423
+          C657 417 688 419 710 425
+          L704 470
+          C680 465 655 465 632 469
+          Z
+        "
+        stroke-width="1.5"
+      />
+
+      <path
+        class="ink-stroke-muted"
+        d="
+          M645 434 L694 437
+          M643 444 L687 447
+          M642 454 L681 456
+        "
+        stroke-width=".8"
+      />
+
+      <!-- ======================================================= -->
+      <!-- WATER BOTTLE -->
+      <!-- ======================================================= -->
+
+      <path
+        d="
+          M704 370
+          L716 370
+          L720 419
+          C716 426 704 426 700 419
+          Z
+        "
+        stroke-width="1.4"
+      />
+
+      <path d="M705 365 L715 365 L716 370 L704 370 Z" stroke-width="1" />
+
+      <!-- pen -->
+      <path
+        d="M620 470 L675 486"
+        stroke-width="1.7"
+      />
+
+      <path
+        d="M675 486 L682 488 L676 482"
+        stroke-width="1"
+      />
+    </g>
+
+    <!-- ========================================================= -->
+    <!-- TECHNICAL FIELD NOTES — integrated, not UI diagrams       -->
+    <!-- ========================================================= -->
+
+    <g
+      fill="var(--ink)"
+      font-family="Caveat, cursive"
+      font-size="15"
+    >
+      <text
+        x="90"
+        y="150"
+        transform="rotate(-4 90 150)"
+        opacity=".9"
+      >
+        build
+      </text>
+
+      <text
+        x="112"
+        y="170"
+        transform="rotate(-4 112 170)"
+        opacity=".85"
+      >
+        improve
+      </text>
+
+      <text
+        x="136"
+        y="190"
+        transform="rotate(-4 136 190)"
+        opacity=".8"
+      >
+        repeat
+      </text>
+    </g>
+
+    <!-- Technical sketch -->
+    <g
+      class="ink-stroke-muted"
+      stroke-width="1"
+      opacity=".7"
+      stroke-linecap="round"
+    >
+      <!-- abstract architecture -->
+      <rect x="95" y="235" width="65" height="38" rx="3" />
+      <rect x="190" y="220" width="65" height="38" rx="3" />
+      <rect x="185" y="285" width="65" height="38" rx="3" />
+
+      <path d="M160 254 C175 254 180 242 190 239" />
+      <path d="M222 258 L222 285" />
+
+      <!-- tiny system marks -->
+      <path d="M108 248 h28" />
+      <path d="M108 258 h18" />
+
+      <path d="M203 233 h30" />
+      <path d="M203 243 h20" />
+
+      <path d="M198 298 h34" />
+      <path d="M198 308 h25" />
+    </g>
+
+    <!-- Annotation arrows -->
+    <g class="ink-stroke-muted" stroke-width="1" opacity=".65">
+      <path d="M255 180 C280 195 300 210 320 230" />
+      <path d="M315 225 L320 230 L313 231" />
+
+      <path d="M535 125 C560 135 575 145 588 160" />
+      <path d="M583 155 L588 160 L581 161" />
+    </g>
+
+    <!-- Compass -->
+    <g
+      class="ink-stroke-muted"
+      transform="translate(635 115)"
+      opacity=".75"
+    >
+      <circle cx="0" cy="0" r="24" stroke-width="1" />
+      <circle cx="0" cy="0" r="20" stroke-width=".7" />
+
+      <path d="M0 -28 V28 M-28 0 H28" stroke-width=".7" />
+
+      <path d="M0 -17 L5 0 L0 17 L-5 0 Z" stroke-width=".8" />
+
+      <text
+        x="0"
+        y="-34"
+        text-anchor="middle"
+        fill="var(--ink-muted)"
+        font-size="9"
+        font-family="JetBrains Mono, monospace"
+      >
+        N
+      </text>
+    </g>
+
+    <!-- Small handwritten note -->
+    <text
+      x="510"
+      y="105"
+      fill="var(--ink)"
+      font-size="15"
+      font-family="Caveat, cursive"
+      transform="rotate(-6 510 105)"
+      opacity=".8"
+    >
+      systems → products
+    </text>
+
+    <!-- Ground pen strokes -->
+    <g class="ink-stroke-muted" stroke-width=".8" opacity=".4">
+      <path d="M40 490 C180 478 270 492 380 480" />
+      <path d="M400 495 C500 483 610 496 735 482" />
+      <path d="M80 505 C180 496 270 507 345 500" />
+    </g>
+  </svg>
+</figure>

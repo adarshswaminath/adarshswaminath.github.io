@@ -1,5 +1,5 @@
 ---
-// section-divider.astro — A repeating-diagonal patterned divider
+// section-divider.astro — kept for compatibility; prefer SketchDivider
 interface Props {
   className?: string
 }
@@ -7,11 +7,11 @@ const { className = '' } = Astro.props
 ---
 
 <div
-  class={`w-full max-w-5xl mx-auto border-y border-dashed border-slate-300 ${className}`}
+  class={`mx-auto w-full max-w-5xl border-y border-[var(--ink-faint)] ${className}`}
 >
   <div
-    class="h-8 w-full opacity-[0.06]"
-    style="background-image:repeating-linear-gradient(-45deg, transparent, transparent 2px, currentcolor 2px, currentcolor 3px, transparent 3px, transparent 6px)"
+    class="h-6 w-full opacity-[0.08]"
+    style="background-image:repeating-linear-gradient(-45deg, transparent, transparent 2px, var(--ink) 2px, var(--ink) 3px, transparent 3px, transparent 6px)"
   >
   </div>
 </div>

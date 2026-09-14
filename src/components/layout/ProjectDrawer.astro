@@ -1,7 +1,8 @@
 ---
-// ProjectDrawer.astro — Right-sliding panel for project details
+// ProjectDrawer — notebook case-study panel
 import { ArrowUpRight, X, Github } from 'lucide-astro'
 import { MetaLabel } from '../ui'
+import { SketchBorder } from '../sketch'
 import type { Project } from '../../data/types'
 
 interface Props {
@@ -11,113 +12,116 @@ interface Props {
 const { projects } = Astro.props
 ---
 
-<!-- Drawer Overlay Container (hidden by default) -->
 <div
   id="project-drawer-overlay"
   class="fixed inset-0 z-100 hidden"
 >
-  <!-- Backdrop -->
   <div
     id="drawer-backdrop"
-    class="drawer-backdrop absolute inset-0 cursor-pointer bg-black/40 backdrop-blur-[2px]"
+    class="drawer-backdrop absolute inset-0 cursor-pointer bg-[color-mix(in_srgb,var(--ink-deep)_35%,transparent)]"
   >
   </div>
 
-  <!-- Drawer Panel -->
   <div
     id="drawer-panel"
-    class="drawer-panel absolute top-0 right-0 bottom-0 w-full max-w-3xl overflow-y-auto bg-[#F1F1F1] shadow-2xl"
+    class="drawer-panel absolute top-0 right-0 bottom-0 w-full max-w-3xl overflow-y-auto bg-[var(--paper)]"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Field note details"
   >
-    <!-- Close button -->
+    <div class="pointer-events-none absolute inset-3 hidden sm:block" aria-hidden="true">
+      <SketchBorder class="opacity-40" />
+    </div>
+
     <button
       id="drawer-close-btn"
-      class="sticky top-0 z-10 flex w-full items-center justify-between bg-[#F1F1F1]/95 px-8 pt-6 pb-4 backdrop-blur-sm"
+      type="button"
+      aria-label="Close field note"
+      class="focus-ink sticky top-0 z-10 flex w-full items-center justify-between border-b border-[var(--ink-faint)] bg-[color-mix(in_srgb,var(--paper)_94%,transparent)] px-6 pt-5 pb-4 backdrop-blur-sm md:px-8"
     >
-      <MetaLabel>Project Details</MetaLabel>
-      <div
-        class="flex h-8 w-8 items-center justify-center rounded-md transition-colors hover:bg-slate-200/80"
+      <MetaLabel>Field Note / Case Study</MetaLabel>
+      <span
+        class="flex h-8 w-8 items-center justify-center border border-[var(--ink-faint)] transition-colors hover:border-[var(--ink)]"
+        aria-hidden="true"
       >
         <X
           size={16}
-          class="text-slate-500"
+          class="text-[var(--ink-muted)]"
         />
-      </div>
+      </span>
     </button>
 
-    <!-- Content (one block per project, toggled by JS) -->
     {
       projects.map((p, i) => (
         <div
-          class="drawer-content hidden px-8 pb-12"
+          class="drawer-content relative z-10 hidden px-6 pb-14 md:px-8"
           data-project-index={i}
         >
-          {/* <!-- Header --> */}
           <div class="mb-8">
-            <h2 class="mb-2 text-2xl font-semibold tracking-tight text-slate-900">
+            <p class="mb-2 font-mono text-[10px] tracking-[0.2em] text-[var(--ink-muted)] uppercase">
+              Note / {String(i + 1).padStart(3, '0')}
+            </p>
+            <h2 class="mb-3 text-2xl font-semibold tracking-tight text-[var(--ink-deep)] md:text-3xl">
               {p.title}
             </h2>
-            <p class="mb-5 text-[15px] leading-relaxed text-slate-500">
+            <p class="mb-5 text-[15px] leading-relaxed text-[var(--ink-muted)]">
               {p.desc}
             </p>
             <div class="mb-5 flex flex-wrap gap-1.5">
               {p.tech.map((t) => (
-                <span class="rounded bg-slate-200/60 px-2 py-0.5 font-mono text-[11px] tracking-tight text-slate-500">
+                <span class="border border-[var(--ink-faint)] bg-[var(--paper-dark)] px-2 py-0.5 font-mono text-[11px] tracking-tight text-[var(--ink-muted)]">
                   {t}
                 </span>
               ))}
             </div>
 
-            {/* <!-- Action links --> */}
             <div class="flex gap-3">
               {p.github && (
                 <a
                   href={p.github}
                   target="_blank"
                   rel="noopener"
-                  class="group flex items-center gap-1.5 text-[13px] font-medium text-slate-600 transition-colors hover:text-slate-900"
+                  class="sketch-link focus-ink group flex items-center gap-1.5 font-mono text-[12px] tracking-wide uppercase"
                 >
                   <Github size={14} />
                   Source
                   <ArrowUpRight
                     size={12}
-                    class="opacity-0 transition-opacity group-hover:opacity-100"
+                    class="opacity-60"
                   />
                 </a>
               )}
             </div>
           </div>
 
-          <div class="mb-8 h-px bg-slate-200" />
+          <div class="mb-8 h-px bg-[var(--ink-faint)]" />
 
-          {/* <!-- Problem --> */}
           {p.problem && (
             <div class="mb-8">
               <MetaLabel class="mb-3">Problem</MetaLabel>
-              <p class="text-[14px] leading-relaxed text-slate-600">
+              <p class="text-[14px] leading-relaxed text-[color-mix(in_srgb,var(--ink-deep)_80%,#64748b)]">
                 {p.problem}
               </p>
             </div>
           )}
 
-          {/* <!-- Solution --> */}
           {p.solution && (
             <div class="mb-8">
               <MetaLabel class="mb-3">Solution</MetaLabel>
-              <p class="text-[14px] leading-relaxed text-slate-600">
+              <p class="text-[14px] leading-relaxed text-[color-mix(in_srgb,var(--ink-deep)_80%,#64748b)]">
                 {p.solution}
               </p>
             </div>
           )}
 
-          {/* <!-- Features --> */}
           {p.features && p.features.length > 0 && (
             <div class="mb-8">
               <MetaLabel class="mb-4">Core Features</MetaLabel>
               <div class="space-y-3">
                 {p.features.map((feature) => (
                   <div class="flex items-start gap-3">
-                    <div class="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400" />
-                    <span class="text-[14px] leading-relaxed text-slate-600">
+                    <div class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--ink)]" />
+                    <span class="text-[14px] leading-relaxed text-[color-mix(in_srgb,var(--ink-deep)_80%,#64748b)]">
                       {feature}
                     </span>
                   </div>
@@ -126,31 +130,28 @@ const { projects } = Astro.props
             </div>
           )}
 
-          {/* <!-- Architecture (Mermaid + pan/zoom — see mermaid-drawer.ts) --> */}
           {p.architecture && (
             <div class="mb-8">
               <MetaLabel class="mb-3">Architecture</MetaLabel>
-              <p class="mb-2 text-[11px] text-slate-500 select-none">
-                Drag to pan · Scroll wheel or pinch to zoom · Ctrl+scroll for
-                finer zoom
+              <p class="mb-2 font-mono text-[10px] tracking-wide text-[var(--ink-muted)] select-none uppercase">
+                Drag to pan · Scroll or pinch to zoom
               </p>
-              <div class="architecture-mermaid relative h-[min(70vh,28rem)] w-full overflow-hidden rounded-lg border border-slate-200 bg-white p-3 select-none [&_.mermaid]:flex [&_.mermaid]:min-h-full [&_.mermaid]:w-full [&_.mermaid]:items-center [&_.mermaid]:justify-center [&_svg]:max-w-none">
-                <div class="mermaid text-[13px] leading-snug text-slate-700">
+              <div class="architecture-mermaid relative h-[min(70vh,28rem)] w-full overflow-hidden border border-[var(--ink-faint)] bg-[color-mix(in_srgb,var(--paper)_90%,white)] p-3 select-none [&_.mermaid]:flex [&_.mermaid]:min-h-full [&_.mermaid]:w-full [&_.mermaid]:items-center [&_.mermaid]:justify-center [&_svg]:max-w-none">
+                <div class="mermaid text-[13px] leading-snug text-[var(--ink-deep)]">
                   {p.architecture}
                 </div>
               </div>
             </div>
           )}
 
-          {/* <!-- Impact --> */}
           {p.impact && p.impact.length > 0 && (
             <div class="mb-8">
               <MetaLabel class="mb-4">Impact</MetaLabel>
               <div class="space-y-3">
                 {p.impact.map((item) => (
                   <div class="flex items-start gap-3">
-                    <div class="mt-2 h-1 w-1 shrink-0 rounded-full bg-slate-400" />
-                    <span class="text-[14px] leading-relaxed text-slate-600">
+                    <div class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--ink-muted)]" />
+                    <span class="text-[14px] leading-relaxed text-[color-mix(in_srgb,var(--ink-deep)_80%,#64748b)]">
                       {item}
                     </span>
                   </div>
@@ -159,11 +160,10 @@ const { projects } = Astro.props
             </div>
           )}
 
-          {/* <!-- Highlight --> */}
-          <div class="mt-8 border-t border-slate-200 pt-6">
-            <div class="flex items-start gap-3 rounded-lg bg-white/60 p-4">
+          <div class="mt-8 border-t border-[var(--ink-faint)] pt-6">
+            <div class="flex items-start gap-3 border border-[var(--ink-faint)] bg-[var(--paper-dark)]/60 p-4">
               <MetaLabel class="mt-0.5 whitespace-nowrap">Highlight</MetaLabel>
-              <span class="text-[13px] font-medium text-slate-700">
+              <span class="text-[13px] font-medium text-[var(--ink-deep)]">
                 {p.highlight}
               </span>
             </div>

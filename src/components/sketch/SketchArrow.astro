@@ -1,0 +1,28 @@
+---
+interface Props {
+  class?: string
+  direction?: 'right' | 'down' | 'left' | 'up'
+}
+const { class: className = '', direction = 'right' } = Astro.props
+
+const paths = {
+  right: 'M3,10 C18,9.2 32,10.8 52,10 M42,4.5 C48,7.5 51,9 53,10 C50,11.5 46,14 42,16',
+  down: 'M10,3 C9.2,18 10.8,32 10,52 M4.5,42 C7.5,48 9,51 10,53 C11.5,50 14,46 16,42',
+  left: 'M53,10 C38,10.8 24,9.2 4,10 M14,16 C8,13 5,11 3,10 C6,8.5 10,6 14,4',
+  up: 'M10,53 C10.8,38 9.2,24 10,4 M16,14 C13,8 11,5 10,3 C8.5,6 6,10 4,14',
+}
+---
+
+<svg
+  class={className}
+  width="56"
+  height="56"
+  viewBox="0 0 56 56"
+  fill="none"
+  aria-hidden="true"
+>
+  <path
+    class="ink-stroke"
+    d={paths[direction]}
+  ></path>
+</svg>

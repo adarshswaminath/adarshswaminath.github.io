@@ -1,36 +1,26 @@
 ---
-// contact.astro
 import Section from '../../layout/Section.astro'
-import { socialLinks } from '../../../data/navigation'
-import { Button } from '@/components/ui'
+import SocialLinks from '../../layout/SocialLinks.astro'
+import { SketchAnnotation } from '../../sketch'
 ---
 
 <Section
   id="contact"
   title="Contact"
-  heading="Let's Connect"
+  heading="Let's connect"
 >
-  <p class="mb-6 max-w-xl text-[15px] leading-relaxed text-slate-600">
-    I'm always open to discussing new projects, creative ideas or opportunities
-    to be part of your visions. Feel free to reach out.
-  </p>
-
-  <div class="flex items-center gap-4">
-    <a
-      href={socialLinks.email}
-      class="button primary"
+  <div class="relative max-w-xl">
+    <SketchAnnotation
+      label="open channel"
+      class="absolute -top-2 -right-4 hidden sm:block"
+      rotate={6}
+    />
+    <p
+      class="mb-6 text-[15px] leading-relaxed text-[color-mix(in_srgb,var(--ink-deep)_78%,#64748b)]"
     >
-      <Button primary>Email Me</Button>
-    </a>
-    <a
-      class="text-[15px] font-medium text-slate-600 underline decoration-slate-300 underline-offset-4 transition-all hover:text-slate-900 hover:decoration-slate-400"
-      href={socialLinks.github}
-      >GitHub</a
-    >
-    <a
-      class="text-[15px] font-medium text-slate-600 underline decoration-slate-300 underline-offset-4 transition-all hover:text-slate-900 hover:decoration-slate-400"
-      href={socialLinks.linkedin}
-      >LinkedIn</a
-    >
+      I’m always open to discussing new projects, creative ideas, or
+      opportunities to be part of your visions. Feel free to reach out.
+    </p>
+    <SocialLinks />
   </div>
 </Section>

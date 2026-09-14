@@ -1,0 +1,23 @@
+---
+interface Props {
+  class?: string
+  width?: number
+}
+const { class: className = '', width = 120 } = Astro.props
+---
+
+<svg
+  class={`ink-underline ${className}`}
+  width={width}
+  height="8"
+  viewBox={`0 0 ${width} 8`}
+  fill="none"
+  aria-hidden="true"
+>
+  <path
+    class="ink-stroke ink-draw"
+    d={`M2,5.2 C${width * 0.2},3.8 ${width * 0.45},6.1 ${width * 0.7},4.4 C${width * 0.85},3.6 ${width * 0.95},5 ${width - 2},4.8`}
+    pathLength="1"
+    style={`stroke-dasharray:1;stroke-dashoffset:1`}
+  ></path>
+</svg>

@@ -1,7 +1,7 @@
 ---
-// project-card.astro — Compact redesign with Image Support
+// Field Note card — editorial project entry
 import type { Project } from '../../data/types'
-import { ArrowUpRight } from 'lucide-astro'
+import { SketchBorder } from '../sketch'
 
 interface Props {
   project: Project
@@ -9,67 +9,67 @@ interface Props {
 }
 
 const { project, index } = Astro.props
+const noteNum = String(index + 1).padStart(3, '0')
 ---
 
 <button
   type="button"
-  class="project-card project-row group relative flex w-full cursor-pointer flex-col gap-3 rounded-xl border border-dashed border-slate-300 bg-white/40 p-3 text-left transition-all duration-300 hover:bg-white"
+  class="project-card project-row group focus-ink relative flex w-full cursor-pointer flex-col gap-3 p-3 text-left transition-colors"
   data-project-index={index}
 >
-  <!-- Image Area -->
+  <SketchBorder class="opacity-60 transition-opacity group-hover:opacity-100" />
+
+  <!-- Image as notebook artifact -->
   <div
-    class="relative flex aspect-[16/10] items-center justify-center overflow-hidden rounded-lg border border-slate-200 bg-slate-100"
+    class="relative aspect-[16/10] overflow-hidden border border-[var(--ink-faint)] bg-[var(--paper-dark)]"
   >
     {
       project.image ? (
         <img
           src={project.image}
           alt={project.title}
-          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          class="h-full w-full object-cover opacity-95 transition-transform duration-500 group-hover:scale-[1.02]"
+          loading="lazy"
         />
       ) : (
-        <div class="flex h-full w-full items-center justify-center bg-slate-200">
-          <ArrowUpRight
-            size={24}
-            class="text-slate-400 opacity-20"
-          />
+        <div class="flex h-full w-full items-center justify-center font-mono text-[11px] tracking-widest text-[var(--ink-muted)] uppercase">
+          No preview
         </div>
       )
     }
-
-    <!-- Hover Overlay -->
     <div
-      class="absolute inset-0 bg-slate-900/0 transition-colors duration-300 group-hover:bg-slate-900/5"
+      class="pointer-events-none absolute inset-0 border border-[var(--ink)] opacity-0 mix-blend-multiply transition-opacity group-hover:opacity-20"
+      aria-hidden="true"
     >
     </div>
+    <span
+      class="absolute top-2 left-2 bg-[var(--paper)]/90 px-1.5 py-0.5 font-mono text-[9px] tracking-[0.16em] text-[var(--ink)] uppercase"
+    >
+      Note / {noteNum}
+    </span>
   </div>
 
-  <!-- Content Area -->
-  <div class="flex flex-col gap-1.5 px-0.5">
-    <div class="flex items-center justify-between gap-3">
-      <h3
-        class="text-[14px] leading-none font-bold tracking-tight text-slate-800 transition-colors"
-      >
-        {project.title}
-      </h3>
-    </div>
+  <div class="relative flex flex-col gap-2 px-0.5 pb-1">
+    <h3
+      class="text-[15px] leading-tight font-semibold tracking-tight text-[var(--ink-deep)]"
+    >
+      {project.title}
+    </h3>
 
-    <p class="line-clamp-2 text-[11.5px] leading-snug text-slate-500">
+    <p class="line-clamp-2 text-[12.5px] leading-snug text-[var(--ink-muted)]">
       {project.desc}
     </p>
 
     <div
-      class="mt-0.5 border-t border-transparent pt-1 transition-colors group-hover:border-slate-100"
+      class="mt-1 flex flex-wrap gap-x-3 gap-y-1 border-t border-[var(--ink-faint)] pt-2 font-mono text-[9px] tracking-[0.08em] text-[var(--ink-muted)] uppercase"
     >
-      <div
-        class="flex items-center gap-1 text-[11px] font-semibold text-slate-400 group-hover:text-slate-900"
-      >
-        View Project
-        <ArrowUpRight
-          size={11}
-          class="translate-y-[0.5px]"
-        />
-      </div>
+      <span>Tech · {project.tech.slice(0, 3).join(' / ')}</span>
     </div>
+
+    <span
+      class="sketch-link mt-1 font-mono text-[11px] tracking-[0.12em] uppercase"
+    >
+      → Open Field Note
+    </span>
   </div>
 </button>

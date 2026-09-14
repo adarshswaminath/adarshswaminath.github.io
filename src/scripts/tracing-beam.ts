@@ -1,9 +1,13 @@
-// Tracing beam scroll animation
+// Tracing beam scroll animation — starts at #projects
 export function setupTracingBeam() {
   const gradient = document.getElementById('tracing-gradient')
+  const beamRoot = document.getElementById('tracing-beam')
+  const beamRail = document.getElementById('tracing-beam-rail')
   const dotContainer = document.getElementById('tracing-beam-dot')
   const dotInner = document.getElementById('tracing-beam-inner-dot')
-  if (!gradient) return
+  const projects = document.getElementById('projects')
+
+  if (!gradient || !beamRail) return
 
   let scrollY = window.scrollY
   let currentY1 = 0
@@ -12,8 +16,25 @@ export function setupTracingBeam() {
   let targetY2 = -25
   let isAnimating = true
 
+  const syncRailToProjects = () => {
+    if (!projects || !beamRoot) {
+      beamRail.style.top = '0px'
+      return
+    }
+
+    const rect = projects.getBoundingClientRect()
+    // Keep the rail starting at the projects section (or viewport top once passed)
+    const top = Math.max(0, rect.top)
+    beamRail.style.top = `${top}px`
+
+    // Hide while the projects section is still fully below the fold
+    const visible = rect.top < window.innerHeight - 40
+    beamRoot.style.opacity = visible ? '1' : '0'
+  }
+
   const updateScroll = () => {
     scrollY = window.scrollY
+    syncRailToProjects()
     if (!isAnimating) {
       isAnimating = true
       requestAnimationFrame(animateParams)
@@ -21,6 +42,9 @@ export function setupTracingBeam() {
   }
 
   window.addEventListener('scroll', updateScroll, {
+    passive: true,
+  })
+  window.addEventListener('resize', syncRailToProjects, {
     passive: true,
   })
 
@@ -32,7 +56,14 @@ export function setupTracingBeam() {
     )
     const maxScroll = Math.max(0, documentHeight - windowHeight)
 
-    let scrollPercent = maxScroll > 0 ? scrollY / maxScroll : 0
+    // Progress relative to reaching #projects, not the hero
+    const projectsTop = projects
+      ? projects.getBoundingClientRect().top + scrollY
+      : 0
+    const startScroll = Math.max(0, projectsTop - windowHeight * 0.15)
+    const range = Math.max(1, maxScroll - startScroll)
+    let scrollPercent =
+      maxScroll > 0 ? (scrollY - startScroll) / range : 0
     scrollPercent = Math.max(0, Math.min(1, scrollPercent))
 
     targetY1 = scrollPercent * 125
@@ -46,19 +77,19 @@ export function setupTracingBeam() {
     gradient.setAttribute('y1', currentY1.toString())
     gradient.setAttribute('y2', currentY2.toString())
 
-    if (scrollY > 10) {
+    if (scrollPercent > 0.02) {
       if (dotContainer) {
         dotContainer.style.boxShadow = 'none'
         dotContainer.style.borderColor = 'transparent'
       }
       if (dotInner) {
-        dotInner.style.backgroundColor = 'white'
-        dotInner.style.borderColor = 'white'
+        dotInner.style.backgroundColor = '#174A91'
+        dotInner.style.borderColor = '#174A91'
       }
     } else {
       if (dotContainer) {
-        dotContainer.style.boxShadow = 'rgba(0, 0, 0, 0.24) 0px 3px 8px'
-        dotContainer.style.borderColor = 'rgba(0,0,0,0.24)'
+        dotContainer.style.boxShadow = 'none'
+        dotContainer.style.borderColor = ''
       }
       if (dotInner) {
         dotInner.style.backgroundColor = ''
@@ -73,6 +104,7 @@ export function setupTracingBeam() {
     }
   }
 
+  syncRailToProjects()
   updateScroll()
   requestAnimationFrame(animateParams)
 }

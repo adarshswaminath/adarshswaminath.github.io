@@ -10,7 +10,8 @@ export function setupTyping() {
   if (!cursor) {
     cursor = document.createElement('span')
     cursor.id = 'typing-cursor'
-    cursor.className = 'animate-pulse font-bold text-slate-400 ml-px'
+    cursor.className =
+      'animate-pulse font-bold ml-px text-[var(--ink-muted)]'
     cursor.textContent = '|'
   }
 

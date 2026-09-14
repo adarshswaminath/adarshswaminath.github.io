@@ -1,0 +1,49 @@
+---
+const socialLinks = [
+  {
+    label: 'GitHub',
+    link: 'https://github.com/adarshswaminath',
+    icon: '/github-icon.svg',
+  },
+  {
+    label: 'LinkedIn',
+    link: 'https://www.linkedin.com/in/adarshswaminath/',
+    icon: '/linkedin-icon.svg',
+  },
+  {
+    label: 'Twitter',
+    link: 'https://x.com/adarshswaminath',
+    icon: '/twitter-icon.svg',
+  },
+  {
+    label: 'Medium',
+    link: 'https://medium.com/@adarshswaminath7',
+    icon: '/medium-icon.svg',
+  },
+]
+---
+
+<section class="mb-8 flex flex-wrap gap-3">
+  {
+    socialLinks.map((link) => (
+      <a
+        href={link.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="focus-ink group inline-flex items-center gap-2 border border-[var(--ink-faint)] bg-[color-mix(in_srgb,var(--paper)_80%,white)] px-2.5 py-1.5 transition-colors hover:border-[var(--ink-muted)]"
+        aria-label={link.label}
+      >
+        <img
+          src={link.icon}
+          alt=""
+          width={18}
+          height={18}
+          class="opacity-70 transition-opacity group-hover:opacity-100"
+        />
+        <span class="font-mono text-[10px] tracking-[0.12em] text-[var(--ink-muted)] uppercase group-hover:text-[var(--ink)]">
+          {link.label}
+        </span>
+      </a>
+    ))
+  }
+</section>

@@ -1,0 +1,31 @@
+---
+interface Props {
+  class?: string
+}
+const { class: className = '' } = Astro.props
+---
+
+<div
+  class={`relative my-2 flex w-full items-center justify-center ${className}`}
+  aria-hidden="true"
+>
+  <svg
+    class="h-4 w-full max-w-5xl"
+    viewBox="0 0 800 16"
+    preserveAspectRatio="none"
+    fill="none"
+  >
+    <path
+      class="ink-stroke-muted"
+      d="M8,8.5 C80,6 160,11 240,7.5 C320,4 400,12 480,8 C560,4.5 640,10.5 720,7 C750,6 780,9 792,8"
+      stroke-width="1.25"
+    ></path>
+    <circle
+      cx="400"
+      cy="8"
+      r="2.2"
+      fill="var(--ink-muted)"
+      opacity="0.7"
+    ></circle>
+  </svg>
+</div>

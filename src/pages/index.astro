@@ -1,5 +1,4 @@
 ---
-// index.astro — Page composition using barrel imports
 import Layout from '../layouts/Layout.astro'
 import TracingBeam from '../components/layout/TracingBeam.astro'
 import Navbar from '../components/layout/Navbar'
@@ -12,10 +11,9 @@ import {
   BlogPreview,
   Contact,
 } from '../components/sections/home-page'
-import { SectionDivider } from '../components/ui'
+import { SketchDivider } from '../components/sketch'
 import type { MarkdownPost } from '../data/types'
 
-// Blog posts (glob imports must happen in pages)
 const posts = Object.values(
   import.meta.glob<MarkdownPost>('./blog/*.md', { eager: true }),
 )
@@ -29,22 +27,38 @@ const featuredBlogs = posts
 ---
 
 <Layout>
+  <div class="home-sheet">
+    <Navbar client:load />
+    <Hero />
+  </div>
   <TracingBeam />
-  <Navbar client:load />
-  <Hero />
-  <SectionDivider />
+  <SketchDivider />
   <Projects />
-  <SectionDivider />
+  <SketchDivider />
   <About />
-  <SectionDivider />
+  <SketchDivider />
   <Experience />
-  <SectionDivider />
+  <SketchDivider />
   <BlogPreview posts={featuredBlogs} />
-  <SectionDivider />
+  <SketchDivider />
   <Contact />
-  <SectionDivider />
   <Footer />
 </Layout>
+
+<style is:global>
+  .home-sheet {
+    position: relative;
+    margin: 0.65rem 0.75rem 0;
+    border: 1px solid color-mix(in srgb, var(--ink) 45%, transparent);
+    background: var(--paper);
+  }
+
+  @media (min-width: 1024px) {
+    .home-sheet {
+      margin: 0.85rem 1rem 0;
+    }
+  }
+</style>
 
 <script>
   import { setupTyping } from '../scripts/typing'

@@ -1,0 +1,26 @@
+---
+interface Props {
+  class?: string
+  variant?: 'default' | 'muted'
+}
+const { class: className = '', variant = 'default' } = Astro.props
+const stroke = variant === 'muted' ? 'var(--ink-muted)' : 'var(--ink)'
+---
+
+<svg
+  class={`pointer-events-none absolute inset-0 h-full w-full ${className}`}
+  viewBox="0 0 100 100"
+  preserveAspectRatio="none"
+  aria-hidden="true"
+>
+  <path
+    d="M2.2,3.1 C28,1.8 55,2.4 97.4,2.8 C98.6,28 98.2,55 97.6,97.1 C72,98.4 42,98.1 2.8,97.3 C1.4,72 1.8,42 2.2,3.1 Z"
+    fill="none"
+    stroke={stroke}
+    stroke-width="1.1"
+    vector-effect="non-scaling-stroke"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    opacity="0.85"
+  ></path>
+</svg>

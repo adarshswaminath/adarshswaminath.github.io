@@ -1,7 +1,49 @@
 ---
-// Footer.astro
+import { navItems } from '../../data/navigation'
+import { SketchDivider, SketchAnnotation, InkIllustration } from '../sketch'
 ---
 
-<footer class="py-8 text-center text-xs text-slate-400">
-  © {new Date().getFullYear()} Adarsh.dev
+<footer class="relative mx-auto max-w-5xl px-6 pt-8 pb-12">
+  <SketchDivider class="mb-10" />
+
+  <div class="grid gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-end">
+    <div>
+      <p
+        class="mb-2 font-mono text-[10px] tracking-[0.24em] text-[var(--ink-muted)] uppercase"
+      >
+        End of page
+      </p>
+      <p class="mb-4 text-2xl font-semibold tracking-tight text-[var(--ink-deep)] md:text-3xl">
+        More notes to come
+        <span class="text-[var(--ink)]">→</span>
+      </p>
+      <SketchAnnotation
+        label="keep building"
+        rotate={-4}
+      />
+
+      <ul class="mt-8 flex flex-wrap gap-x-5 gap-y-2">
+        {
+          navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="focus-ink font-mono text-[11px] tracking-[0.16em] text-[var(--ink-muted)] uppercase transition-colors hover:text-[var(--ink)]"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="mt-8 font-mono text-[11px] text-[var(--ink-muted)]">
+        © {new Date().getFullYear()} Adarsh Swaminath
+      </p>
+    </div>
+
+    <div class="mx-auto w-full max-w-[240px] opacity-80 md:mx-0 md:justify-self-end">
+      <InkIllustration />
+    </div>
+  </div>
 </footer>

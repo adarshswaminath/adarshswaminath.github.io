@@ -1,78 +1,434 @@
 ---
-import { Tag } from '../../ui'
-import CodeWindow from '../../layout/CodeWindow.astro'
-import { stackTags } from '../../../data/navigation'
-const socialLinks = [
-  {
-    label: 'github',
-    link: 'https://github.com/adarshswaminath',
-    icon: '/github-icon.svg',
-  },
-  {
-    label: 'linkedin',
-    link: 'https://www.linkedin.com/in/adarshswaminath/',
-    icon: '/linkedin-icon.svg',
-  },
-  {
-    label: 'twitter',
-    link: 'https://x.com/adarshswaminath',
-    icon: '/twitter-icon.svg',
-  },
-  {
-    label: 'medium',
-    link: 'https://medium.com/@adarshswaminath7',
-    icon: '/medium-icon.svg',
-  },
-]
+/**
+ * Hero — field notebook page.
+ * Artwork keeps natural aspect; copy sits in the empty left paper.
+ */
 ---
 
-<section class="mx-auto max-w-5xl px-6 py-20 md:py-32">
-  <h1
-    class="mb-5 text-4xl leading-tight font-semibold tracking-tight text-slate-900 md:text-5xl"
-  >
-    Building scalable, user-focused web applications
-  </h1>
-  <p class="mb-8 max-w-2xl text-lg text-slate-600">
-    Focused on performance, clean architecture, and developer experience.
-  </p>
-  <div class="mb-8 flex gap-4">
-    {
-      socialLinks.map((link) => (
+<section
+  class="hero-notebook relative w-full overflow-x-hidden"
+  aria-label="Introduction"
+>
+  <div class="hero-stage relative w-full">
+    <!-- Left margin gutter -->
+    <div
+      class="hero-gutter"
+      aria-hidden="true"
+    >
+      <span class="hero-gutter__line"></span>
+      <span class="hero-gutter__ticks"></span>
+    </div>
+
+    <!-- Artwork — natural aspect, drives height -->
+    <div class="hero-bg">
+      <img
+        src="/bg-image.png"
+        alt=""
+        width="1672"
+        height="940"
+        class="hero-anim hero-anim--art hero-bg__img select-none"
+        decoding="async"
+        fetchpriority="high"
+        loading="eager"
+        aria-hidden="true"
+      />
+    </div>
+
+    <span class="sr-only">
+      Blue-ink engineering field notebook illustration: workstation overlooking
+      a mountain landscape with system diagrams.
+    </span>
+
+    <!-- Margin note — left -->
+    <div
+      class="hero-aside hero-aside--left hero-anim-fade hero-anim--aside"
+      aria-hidden="true"
+    >
+      <span class="hero-aside__text font-hand">
+        better systems for a simpler tomorrow
+      </span>
+      <svg
+        class="hero-aside__arrow"
+        viewBox="0 0 56 48"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M6,40 C16,38 26,28 36,16 C42,8 48,5 52,6"
+          stroke="currentColor"
+          stroke-width="1.35"
+          stroke-linecap="round"
+          fill="none"></path>
+        <path
+          d="M44,3 C48,5 50.5,6 53,7 C49,10 45,13 41,16"
+          stroke="currentColor"
+          stroke-width="1.35"
+          stroke-linecap="round"
+          fill="none"></path>
+      </svg>
+    </div>
+
+    <!-- Editorial copy — left paper -->
+    <div class="hero-copy">
+      <p
+        class="hero-anim hero-anim--label hero-kicker font-mono text-[10px] tracking-[0.2em] text-[var(--ink)] uppercase sm:text-[11px]"
+      >
+        Field Notes / 001
+      </p>
+      <svg
+        class="hero-kicker-rule hero-anim hero-anim--label"
+        viewBox="0 0 120 6"
+        width="120"
+        height="6"
+        aria-hidden="true"
+      >
+        <path
+          d="M1,3.2 C28,1.8 62,4.4 90,2.8 C105,2 114,3.6 119,3"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"></path>
+      </svg>
+
+      <h1
+        class="hero-anim hero-anim--title font-display text-[var(--ink-deep)]"
+      >
+        I build software that makes complex systems feel simple.
+      </h1>
+
+      <p class="hero-anim hero-anim--body hero-lede font-mono">
+        Frontend-focused full-stack engineer working across interfaces, systems,
+        AI and developer tooling.
+      </p>
+
+      <div class="hero-anim hero-anim--cta">
         <a
-          href={link.link}
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#projects"
+          class="hero-cta focus-ink group relative inline-flex items-center gap-2.5 px-5 py-3 font-mono text-[11px] tracking-[0.14em] text-[var(--ink)] uppercase sm:text-[12px]"
         >
-          <img
-            src={link.icon}
-            alt={link.label}
-            width={35}
-            height={35}
-          />
+          <svg
+            class="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
+            viewBox="0 0 168 46"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path
+              class="hero-cta__path"
+              d="M2.5,6.5 C22,2.8 55,2.2 95,2.8 C130,3.4 155,5 165,7.2 C166.5,16 166,28 164.5,37.5 C140,42.5 90,43.8 50,43 C20,42.2 6,40 3.2,36 C1.8,26 1.9,14 2.5,6.5 Z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.25"
+              vector-effect="non-scaling-stroke"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+          <span
+            class="hero-cta__arrow relative transition-transform duration-300 ease-out group-hover:translate-x-1"
+            aria-hidden="true">→</span
+          >
+          <span class="relative">View Work</span>
         </a>
-      ))
-    }
-  </div>
+      </div>
+    </div>
 
-  <div class="mb-4">
-    <CodeWindow
-      title="stack.ts"
-      code={`const engineer = {
-  name: "Adarsh",
-  currently: "building AI-powered platforms",
-  focus: [
-    "scalable systems",
-    "developer tooling",
-    "clarity over complexity",
-  ]
-}
-
-// let's build something great`}
-      class="max-w-2xl"
-    />
-  </div>
-
-  <div class="mt-6 flex flex-wrap gap-2">
-    {stackTags.map((t) => <Tag>{t}</Tag>)}
+    <!-- Margin note — right -->
+    <div
+      class="hero-aside hero-aside--right hero-anim-fade hero-anim--aside-right"
+      aria-hidden="true"
+    >
+      <span class="hero-aside__text font-hand">
+        same curiosity, new systems
+      </span>
+    </div>
   </div>
 </section>
+
+<style>
+  .hero-stage {
+    position: relative;
+    background-color: var(--paper);
+  }
+
+  .hero-gutter {
+    display: none;
+  }
+
+  .hero-bg__img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .hero-copy {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.75rem 1.25rem 1.35rem;
+  }
+
+  .hero-kicker {
+    margin-bottom: 0.15rem;
+  }
+
+  .hero-kicker-rule {
+    margin-bottom: 0.95rem;
+    color: var(--ink);
+    opacity: 0.7;
+  }
+
+  .hero-copy h1 {
+    max-width: 24ch;
+    margin-bottom: 0.95rem;
+    font-size: 2.05rem;
+    line-height: 1.12;
+  }
+
+  .hero-lede {
+    max-width: 32rem;
+    margin-bottom: 1.5rem;
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--ink-muted);
+  }
+
+  .hero-aside {
+    display: none;
+  }
+
+  @media (max-width: 1023px) {
+    .hero-stage {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-copy {
+      order: 1;
+    }
+
+    .hero-bg {
+      order: 2;
+    }
+
+    .hero-bg__img {
+      height: 15rem;
+      object-fit: cover;
+      object-position: 80% 40%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    /* Image keeps natural proportions — no cover crop */
+    .hero-bg {
+      position: relative;
+      z-index: 0;
+    }
+
+    .hero-bg__img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .hero-gutter {
+      position: absolute;
+      top: 8%;
+      bottom: 8%;
+      left: 1.1rem;
+      z-index: 15;
+      display: block;
+      width: 0.85rem;
+      pointer-events: none;
+    }
+
+    .hero-gutter__line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0.4rem;
+      width: 1px;
+      background: color-mix(in srgb, var(--ink) 32%, transparent);
+    }
+
+    .hero-gutter__ticks {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 1.4rem,
+        color-mix(in srgb, var(--ink) 38%, transparent) 1.4rem,
+        color-mix(in srgb, var(--ink) 38%, transparent) 1.48rem
+      );
+    }
+
+    .hero-copy {
+      position: absolute;
+      inset: 0 auto 0 0;
+      z-index: 10;
+      width: min(38rem, 40%);
+      justify-content: center;
+      padding: 1.5rem 1rem 1.5rem clamp(3.25rem, 5vw, 5.75rem);
+    }
+
+    .hero-copy h1 {
+      max-width: 18ch;
+      margin-bottom: 1.05rem;
+      font-size: clamp(2.05rem, 2.4vw, 2.95rem);
+    }
+
+    .hero-lede {
+      max-width: 22rem;
+      margin-bottom: 1.65rem;
+      font-size: 13px;
+    }
+
+    .hero-aside {
+      position: absolute;
+      z-index: 12;
+      display: flex;
+      pointer-events: none;
+      color: var(--ink);
+    }
+
+    .hero-aside__text {
+      font-size: clamp(1.05rem, 1.15vw, 1.3rem);
+      line-height: 1.15;
+      white-space: nowrap;
+    }
+
+    .hero-aside--left {
+      left: 1.65rem;
+      top: 56%;
+      flex-direction: row;
+      align-items: flex-end;
+      gap: 0.05rem;
+      transform: translateY(-40%);
+    }
+
+    .hero-aside--left .hero-aside__text {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    .hero-aside__arrow {
+      width: 2.8rem;
+      height: 2.2rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-aside--right {
+      top: 30%;
+      right: 5%;
+    }
+
+    .hero-aside--right .hero-aside__text {
+      writing-mode: vertical-rl;
+      transform: rotate(186deg);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .hero-copy {
+      width: min(42rem, 38%);
+      padding-left: clamp(4rem, 5.5vw, 6.5rem);
+    }
+
+    .hero-copy h1 {
+      max-width: 20ch;
+      font-size: clamp(2.25rem, 2.5vw, 3.15rem);
+    }
+
+    .hero-lede {
+      max-width: 24rem;
+    }
+
+    .hero-aside--left {
+      left: 2rem;
+    }
+
+    .hero-aside--right {
+      right: 5.5%;
+      top: 28%;
+    }
+  }
+
+  .hero-cta__path {
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transform-origin: center;
+  }
+
+  .hero-cta:hover .hero-cta__path,
+  .hero-cta:focus-visible .hero-cta__path {
+    transform: scale(1.02) rotate(-0.5deg);
+  }
+
+  @keyframes heroFadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes heroArtIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .hero-anim {
+    opacity: 0;
+    animation: heroFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .hero-anim--art {
+    animation-name: heroArtIn;
+    animation-duration: 0.9s;
+    animation-delay: 0.04s;
+  }
+
+  .hero-anim--label {
+    animation-delay: 0.22s;
+  }
+  .hero-anim--title {
+    animation-delay: 0.36s;
+  }
+  .hero-anim--body {
+    animation-delay: 0.5s;
+  }
+  .hero-anim--cta {
+    animation-delay: 0.64s;
+  }
+  .hero-anim-fade {
+    opacity: 0;
+    animation: heroArtIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .hero-anim--aside {
+    animation-delay: 0.55s;
+  }
+  .hero-anim--aside-right {
+    animation-delay: 0.62s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-anim {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .hero-anim-fade {
+      animation: none !important;
+      opacity: 1 !important;
+    }
+  }
+</style>

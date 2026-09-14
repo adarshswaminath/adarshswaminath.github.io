@@ -8,8 +8,9 @@ interface Props {
 }
 
 const {
-  title = 'Adarsh - Portfolio',
-  description = 'Full Stack JavaScript Developer',
+  title = 'Adarsh Swaminath - Portfolio',
+  description =
+    'Frontend-focused full-stack engineer. Field notes on interfaces, systems, AI, and developer tooling.',
 } = Astro.props
 ---
 
@@ -17,13 +18,26 @@ const {
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <meta
       name="google-site-verification"
       content="xDtl1J1YesgmipXRZY2wtkc6Eky8YQruopfQ2LemW1M"
     />
     <meta
       name="viewport"
-      content="width=device-width"
+      content="width=device-width, initial-scale=1"
     />
     <link
       rel="icon"
@@ -47,24 +61,7 @@ const {
       name="description"
       content={description}
     />
-    <link
-      rel="preconnect"
-      href="https://fonts.googleapis.com"
-    />
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
     <style is:global>
-      :root {
-        --font-sans: 'Manrope', sans-serif;
-        --font-mono: 'JetBrains Mono', monospace;
-      }
       body {
         font-family: var(--font-sans);
         font-optical-sizing: auto;
@@ -77,12 +74,24 @@ const {
       }
     </style>
   </head>
-  <body class="bg-[#F1F1F1] text-slate-800">
-    <div class="pointer-events-none fixed inset-0 z-0 flex justify-center">
-      <div class="w-full max-w-5xl border-x border-dashed border-slate-300">
+  <body class="relative min-h-screen text-[var(--ink-deep)] antialiased">
+    <!-- Notebook margin gutter -->
+    <div
+      class="pointer-events-none fixed inset-0 z-0 flex justify-center"
+      aria-hidden="true"
+    >
+      <div class="relative h-full w-full max-w-5xl">
+        <div
+          class="absolute top-0 bottom-0 left-3 hidden w-px bg-[var(--ink-faint)] sm:block md:left-0"
+        >
+        </div>
+        <div
+          class="absolute top-0 bottom-0 right-3 hidden w-px bg-[var(--ink-faint)] sm:block md:right-0"
+        >
+        </div>
       </div>
     </div>
-    <div class="relative z-10 w-full overflow-hidden">
+    <div class="relative z-10 w-full overflow-x-hidden">
       <slot />
     </div>
     <ClickSpark />

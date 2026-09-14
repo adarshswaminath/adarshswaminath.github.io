@@ -1,5 +1,6 @@
 ---
 import { TextAnimate } from '../ui/text-animate'
+import { SketchUnderline } from '../sketch'
 
 interface Props {
   id?: string
@@ -12,7 +13,7 @@ const headingText = heading ?? title
 
 <section
   id={id}
-  class="relative py-16"
+  class="relative py-16 md:py-20"
 >
   <div class="mx-auto max-w-5xl px-6">
     <header class="mb-10">
@@ -20,23 +21,29 @@ const headingText = heading ?? title
         client:visible
         text={title}
         as="p"
-        className="mb-2 text-xs tracking-wider text-slate-400 uppercase"
+        className="mb-2 font-mono text-[10px] tracking-[0.22em] text-[var(--ink-muted)] uppercase"
         by="word"
         animation="slideUp"
         once
         startOnView
       />
-      <TextAnimate
-        client:visible
-        text={headingText}
-        as="h2"
-        className="text-2xl font-semibold text-slate-900"
-        by="word"
-        animation="blurInUp"
-        delay={0.1}
-        once
-        startOnView
-      />
+      <div class="relative inline-block">
+        <TextAnimate
+          client:visible
+          text={headingText}
+          as="h2"
+          className="text-2xl font-semibold tracking-tight text-[var(--ink-deep)] md:text-3xl"
+          by="word"
+          animation="blurInUp"
+          delay={0.08}
+          once
+          startOnView
+        />
+        <SketchUnderline
+          class="mt-1 opacity-70"
+          width={140}
+        />
+      </div>
     </header>
     <slot />
   </div>
