@@ -1,7 +1,6 @@
 ---
 /**
- * Pill button with dot + label; on hover the label slides out and
- * label + arrow slide in (pure CSS; label HTML from slot rendered twice via slots.render).
+ * Ink-styled interactive button
  */
 import { ArrowRight } from 'lucide-astro'
 import { cn } from '@/lib/utils'
@@ -24,40 +23,36 @@ const labelHtml = Astro.slots.has('default')
   href={href}
   {...!href ? ({ type: 'button' } as const) : {}}
   class={cn(
-    'interactive-hover-btn group relative inline-flex min-h-11 w-auto cursor-pointer select-none overflow-hidden rounded-full border text-center text-[15px] font-semibold antialiased transition-shadow duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]',
+    'interactive-hover-btn group focus-ink relative inline-flex min-h-11 w-auto cursor-pointer select-none overflow-hidden border text-center text-[14px] font-semibold antialiased transition-colors duration-300',
     primary
-      ? 'border-slate-800 bg-slate-800 text-white shadow-sm hover:shadow-md'
-      : 'border-slate-300/90 bg-[#F1F1F1] text-slate-900 hover:border-slate-400 hover:shadow-sm',
+      ? 'border-(--ink) bg-(--ink) text-(--paper) hover:bg-(--ink-deep)'
+      : 'border-(--ink) bg-(--paper) text-(--ink) hover:bg-(--paper-dark)',
     className,
   )}
 >
-  <!-- Layer 1: dot + label (slides out on hover) -->
   <div
     class="relative z-0 flex min-h-11 items-center justify-center gap-2.5 px-7 py-2.5"
   >
     <span
       class={cn(
-        'h-2 w-2 shrink-0 group-hover:opacity-0 rounded-full transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform',
-        primary ? 'bg-white/90' : 'bg-slate-800',
+        'h-1.5 w-1.5 shrink-0 rounded-full transition-opacity duration-300 group-hover:opacity-0',
+        primary ? 'bg-(--paper)' : 'bg-(--ink)',
       )}
       aria-hidden="true"
     ></span>
     <span
       class={cn(
-        'interactive-hover-btn__label inline-block transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[transform,opacity]',
-        primary ? 'text-white' : 'text-slate-900',
+        'interactive-hover-btn__label inline-block transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[transform,opacity]',
         'group-hover:translate-x-11 group-hover:opacity-0',
       )}
       set:html={labelHtml}
     />
   </div>
 
-  <!-- Layer 2: label + arrow (slides in on hover) -->
   <div
     class={cn(
-      'absolute inset-0 z-10 flex items-center justify-center gap-2.5 px-7 opacity-0 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[transform,opacity] text-nowrap',
+      'absolute inset-0 z-10 flex items-center justify-center gap-2.5 px-7 text-nowrap opacity-0 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[transform,opacity]',
       'translate-x-11 group-hover:translate-x-0 group-hover:opacity-100',
-      primary ? 'text-white' : 'text-slate-900',
     )}
     aria-hidden="true"
   >
@@ -66,7 +61,7 @@ const labelHtml = Astro.slots.has('default')
       set:html={labelHtml}
     />
     <ArrowRight
-      size={18}
+      size={16}
       class="shrink-0"
       aria-hidden="true"
     />

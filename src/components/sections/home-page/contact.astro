@@ -1,36 +1,40 @@
 ---
-// contact.astro
 import Section from '../../layout/Section.astro'
-import { socialLinks } from '../../../data/navigation'
-import { Button } from '@/components/ui'
+import SocialLinks from '../../layout/SocialLinks.astro'
 ---
 
 <Section
   id="contact"
-  title="Contact"
-  heading="Let's Connect"
+  kicker="Field Notes / 006"
+  heading="Have an idea? Let's build it."
 >
-  <p class="mb-6 max-w-xl text-[15px] leading-relaxed text-slate-600">
-    I'm always open to discussing new projects, creative ideas or opportunities
-    to be part of your visions. Feel free to reach out.
-  </p>
+  <div class="relative max-w-2xl">
+    <p
+      class="mb-8 max-w-lg text-[15px] leading-relaxed text-(--ink-deep)/80"
+    >
+      I’m always open to discussing new projects, creative ideas, or
+      opportunities to be part of your visions. Feel free to reach out.
+    </p>
 
-  <div class="flex items-center gap-4">
-    <a
-      href={socialLinks.email}
-      class="button primary"
+    <SocialLinks />
+
+    <p
+      class="mt-10 font-hand text-[1.2rem] text-(--ink)/55"
+      aria-hidden="true"
     >
-      <Button primary>Email Me</Button>
-    </a>
-    <a
-      class="text-[15px] font-medium text-slate-600 underline decoration-slate-300 underline-offset-4 transition-all hover:text-slate-900 hover:decoration-slate-400"
-      href={socialLinks.github}
-      >GitHub</a
-    >
-    <a
-      class="text-[15px] font-medium text-slate-600 underline decoration-slate-300 underline-offset-4 transition-all hover:text-slate-900 hover:decoration-slate-400"
-      href={socialLinks.linkedin}
-      >LinkedIn</a
-    >
+      last page leave a mark
+    </p>
   </div>
 </Section>
+
+<style>
+  .contact-cta__path {
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transform-origin: center;
+  }
+
+  .contact-cta:hover .contact-cta__path,
+  .contact-cta:focus-visible .contact-cta__path {
+    transform: scale(1.02) rotate(-0.5deg);
+  }
+</style>

@@ -1,5 +1,5 @@
 ---
-// tag.astro — minimal documentation-style tag
+// tag.astro notebook-style tech tag
 interface Props {
   class?: string
 }
@@ -7,7 +7,7 @@ const { class: className = '' } = Astro.props
 ---
 
 <span
-  class={`px-2 py-0.5 bg-slate-100 text-[11px] text-slate-500 rounded font-mono tracking-tight ${className}`}
+  class={`border border-(--ink-faint) bg-(--paper-dark) px-2 py-0.5 font-mono text-[11px] tracking-tight text-(--ink-muted) ${className}`}
 >
   <slot />
 </span>

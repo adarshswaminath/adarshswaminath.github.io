@@ -1,46 +1,92 @@
 ---
-// experience.astro
 import Section from '../../layout/Section.astro'
 import { experiences } from '../../../data/experiences'
+import { SketchAnnotation } from '../../sketch'
 ---
 
 <Section
   id="experience"
-  title="Experience"
+  kicker="Field Notes / 004"
   heading="Where I've worked"
 >
   <div class="relative">
-    <!-- Vertical line -->
-    <div class="absolute top-[8px] bottom-8 left-[5px] w-px bg-slate-200"></div>
+    <!-- Hand-drawn timeline path -->
+    <svg
+      class="pointer-events-none absolute top-3 bottom-8 left-0 hidden h-[calc(100%-2rem)] w-4 text-(--ink) sm:block"
+      viewBox="0 0 16 400"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M8,0 C6,80 10,160 7,240 C5,300 9,350 8,400"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.4"
+        stroke-linecap="round"
+        vector-effect="non-scaling-stroke"
+        opacity="0.55"></path>
+    </svg>
 
-    <div class="space-y-16">
+    <div class="space-y-14 md:space-y-16">
       {
-        experiences.map((exp) => (
-          <div class="relative pl-10 md:pl-14">
-            {/* <!-- Timeline dot --> */}
+        experiences.map((exp, i) => (
+          <article class="relative pl-0 sm:pl-10 md:pl-14">
             <div
-              class={`absolute top-[8px] left-0 h-3 w-3 rounded-full border-2 border-slate-800 bg-white`}
-            />
-
-            <div class="mb-4">
-              <h3 class="text-lg font-semibold text-slate-900">{exp.role}</h3>
-              <div class="mt-1 flex items-center gap-2">
-                <span class="text-[14px] font-medium text-slate-600">
-                  {exp.company}
-                </span>
-                <span class="text-slate-300">·</span>
-                <span class="font-mono text-[13px] tracking-tight text-slate-400">
-                  {exp.duration.toLowerCase()}
-                </span>
-              </div>
+              class="absolute top-[7px] left-0 hidden h-3.5 w-3.5 items-center justify-center sm:flex"
+              aria-hidden="true"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                class="text-(--ink)"
+              >
+                <circle
+                  cx="7"
+                  cy="7"
+                  r="5.2"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                />
+                <circle
+                  cx="7"
+                  cy="7"
+                  r="1.8"
+                  fill="currentColor"
+                />
+              </svg>
             </div>
 
-            <div class="space-y-4">
+            {i === 0 && (
+              <SketchAnnotation
+                label="current"
+                class="absolute -top-5 left-10 hidden sm:block"
+                rotate={-8}
+              />
+            )}
+
+            <header class="mb-4">
+              <p class="mb-1.5 font-mono text-[10px] tracking-[0.18em] text-(--ink-muted) uppercase">
+                {exp.duration}
+              </p>
+              <h3 class="font-display text-[1.35rem] leading-snug text-(--ink-deep) md:text-[1.5rem]">
+                {exp.role}
+              </h3>
+              <p class="mt-1 text-[14px] font-medium text-(--ink)">
+                {exp.company}
+              </p>
+            </header>
+
+            <div class="max-w-2xl space-y-3.5">
               {exp.contributions.map((c) => (
-                <p class="text-[14px] leading-[1.75] text-slate-600">{c}</p>
+                <p class="text-[14px] leading-[1.75] text-(--ink-deep)/80">
+                  {c}
+                </p>
               ))}
             </div>
-          </div>
+          </article>
         ))
       }
     </div>

@@ -1,42 +1,42 @@
 ---
-import { TextAnimate } from '../ui/text-animate'
+/**
+ * Notebook section shell shared kicker + editorial heading.
+ * Keep markup boring; sections own their compositions.
+ */
+import { SketchUnderline } from '../sketch'
 
 interface Props {
   id?: string
-  title: string
-  heading?: string
+  /** Mono label, e.g. "Field Notes / 002" */
+  kicker: string
+  heading: string
 }
-const { id, title, heading } = Astro.props
-const headingText = heading ?? title
+
+const { id, kicker, heading } = Astro.props
 ---
 
 <section
   id={id}
-  class="relative py-16"
+  class="relative py-16 md:py-20 lg:py-24"
 >
   <div class="mx-auto max-w-5xl px-6">
-    <header class="mb-10">
-      <TextAnimate
-        client:visible
-        text={title}
-        as="p"
-        className="mb-2 text-xs tracking-wider text-slate-400 uppercase"
-        by="word"
-        animation="slideUp"
-        once
-        startOnView
-      />
-      <TextAnimate
-        client:visible
-        text={headingText}
-        as="h2"
-        className="text-2xl font-semibold text-slate-900"
-        by="word"
-        animation="blurInUp"
-        delay={0.1}
-        once
-        startOnView
-      />
+    <header class="mb-10 md:mb-12">
+      <p
+        class="mb-3 font-mono text-[10px] tracking-[0.22em] text-(--ink-muted) uppercase"
+      >
+        {kicker}
+      </p>
+      <div class="relative inline-block">
+        <h2
+          class="font-display text-[1.85rem] leading-[1.15] tracking-tight text-(--ink-deep) md:text-[2.15rem]"
+        >
+          {heading}
+        </h2>
+        <SketchUnderline
+          class="mt-1.5 opacity-70"
+          width={140}
+        />
+      </div>
     </header>
     <slot />
   </div>

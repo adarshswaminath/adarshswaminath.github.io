@@ -1,4 +1,4 @@
-# Adarsh.dev — Portfolio
+# Adarsh.dev Portfolio
 
 Personal portfolio built with **Astro**, **Tailwind CSS v4**, and
 **TypeScript**.
@@ -40,7 +40,7 @@ src/
 │
 ├── assets/                       # Images and SVGs used in components
 │
-├── scripts/                      # Client-side JS (browser) — one setup per file
+├── scripts/                      # Client-side JS (browser) one setup per file
 │   ├── typing.ts
 │   ├── tracing-beam.ts
 │   ├── drawer.ts
@@ -51,7 +51,7 @@ src/
 │   └── BlogLayout.astro          # Blog post wrapper
 │
 ├── pages/
-│   ├── index.astro               # Homepage — composes sections
+│   ├── index.astro               # Homepage composes sections
 │   └── blog/
 │       ├── index.astro           # Blog listing
 │       └── *.md                  # Blog posts

@@ -162,7 +162,7 @@ export const projects: Project[] = [
     problem:
       'Sharing text snippets, code, or data quickly without complex setup or account creation is cumbersome. Most solutions require file uploads, account management, or complex sharing workflows.',
     solution:
-      'Built CopySlate to enable instant text sharing by embedding data directly in URLs. Users can enter text once, and the URL becomes shareable immediately—no authentication, no file storage complexity. The backend persists data efficiently while the frontend provides a seamless user experience.',
+      'Built CopySlate to enable instant text sharing by embedding data directly in URLs. Users can enter text once, and the URL becomes shareable immediately no authentication, no file storage complexity. The backend persists data efficiently while the frontend provides a seamless user experience.',
     architecture: `flowchart LR
   UI["Next.js UI"]
   API["API routes"]

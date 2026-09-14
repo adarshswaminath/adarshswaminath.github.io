@@ -1,75 +1,61 @@
 ---
-// project-card.astro — Compact redesign with Image Support
+/**
+ * Compact notebook project card equal height, SVG diagram, opens drawer.
+ */
 import type { Project } from '../../data/types'
-import { ArrowUpRight } from 'lucide-astro'
+import ProjectDiagram from './ProjectDiagram.astro'
 
 interface Props {
   project: Project
   index: number
+  /** Desktop: offset last-row cards for centering in a 6-col grid */
+  centerStart?: boolean
 }
 
-const { project, index } = Astro.props
+const { project, index, centerStart = false } = Astro.props
+const noteNum = String(index + 1).padStart(2, '0')
 ---
 
 <button
   type="button"
-  class="project-card project-row group relative flex w-full cursor-pointer flex-col gap-3 rounded-xl border border-dashed border-slate-300 bg-white/40 p-3 text-left transition-all duration-300 hover:bg-white"
+  class:list={[
+    'project-row group focus-ink flex h-full w-full cursor-pointer flex-col border border-(--ink)/35 bg-(--paper) p-4 text-left transition-colors duration-300 hover:border-(--ink)/60 sm:p-5',
+    'lg:col-span-2',
+    centerStart && 'lg:col-start-2',
+  ]}
   data-project-index={index}
 >
-  <!-- Image Area -->
+  <!-- Diagram -->
   <div
-    class="relative flex aspect-[16/10] items-center justify-center overflow-hidden rounded-lg border border-slate-200 bg-slate-100"
+    class="mb-4 border border-(--ink-faint) bg-(--paper-dark)/40 px-2 py-3 transition-transform duration-300 ease-out group-hover:-translate-y-0.5"
   >
-    {
-      project.image ? (
-        <img
-          src={project.image}
-          alt={project.title}
-          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-      ) : (
-        <div class="flex h-full w-full items-center justify-center bg-slate-200">
-          <ArrowUpRight
-            size={24}
-            class="text-slate-400 opacity-20"
-          />
-        </div>
-      )
-    }
-
-    <!-- Hover Overlay -->
-    <div
-      class="absolute inset-0 bg-slate-900/0 transition-colors duration-300 group-hover:bg-slate-900/5"
-    >
-    </div>
+    <ProjectDiagram title={project.title} />
   </div>
 
-  <!-- Content Area -->
-  <div class="flex flex-col gap-1.5 px-0.5">
-    <div class="flex items-center justify-between gap-3">
-      <h3
-        class="text-[14px] leading-none font-bold tracking-tight text-slate-800 transition-colors"
-      >
-        {project.title}
-      </h3>
-    </div>
+  <p class="mb-1.5 font-mono text-[10px] tracking-[0.2em] text-(--ink) uppercase">
+    {noteNum}
+  </p>
 
-    <p class="line-clamp-2 text-[11.5px] leading-snug text-slate-500">
-      {project.desc}
-    </p>
+  <h3
+    class="mb-2 font-display text-[1.2rem] leading-snug tracking-tight text-(--ink-deep) transition-colors group-hover:text-(--ink)"
+  >
+    {project.title}
+  </h3>
 
-    <div
-      class="mt-0.5 border-t border-transparent pt-1 transition-colors group-hover:border-slate-100"
+  <p class="mb-3 line-clamp-3 text-[13px] leading-relaxed text-(--ink-muted)">
+    {project.desc}
+  </p>
+
+
+  <div class="mt-auto border-t border-(--ink-faint) pt-3">
+    <span
+      class="inline-flex items-center font-mono text-[11px] tracking-[0.14em] text-(--ink) uppercase"
     >
-      <div
-        class="flex items-center gap-1 text-[11px] font-semibold text-slate-400 group-hover:text-slate-900"
+      {project.github ? 'GitHub' : 'Open'}
+      <span
+        class="ml-1.5 inline-block transition-transform duration-300 ease-out group-hover:translate-x-1"
+        aria-hidden="true">→</span
       >
-        View Project
-        <ArrowUpRight
-          size={11}
-          class="translate-y-[0.5px]"
-        />
-      </div>
-    </div>
+    </span>
   </div>
 </button>

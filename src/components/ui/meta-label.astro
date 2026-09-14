@@ -1,14 +1,13 @@
 ---
-// meta-label.astro — Docs-style uppercase section label
-// Used throughout: About metadata, Drawer sections, etc.
+// meta-label.astro technical uppercase label
 interface Props {
   class?: string
 }
 const { class: className = '' } = Astro.props
 ---
 
-<h4
-  class={`text-[10px] font-semibold tracking-[0.2em] text-slate-400 uppercase font-mono ${className}`}
+<p
+  class={`font-mono text-[10px] tracking-[0.2em] text-(--ink-muted) uppercase ${className}`}
 >
   <slot />
-</h4>
+</p>

@@ -1,6 +1,7 @@
 ---
 import type { CodeLanguage } from 'astro'
 import { Code } from 'astro:components'
+import { SketchBorder } from '../sketch'
 
 interface Props {
   title?: string
@@ -17,33 +18,31 @@ const {
 } = Astro.props
 ---
 
-<div
-  class={`border border-slate-200/80 shadow-sm rounded-xl overflow-hidden flex flex-col ${className}`}
->
-  <!-- Header -->
+<div class={`relative ${className}`}>
   <div
-    class="relative flex items-center border-b border-slate-200/80 bg-[#f5f5f5] px-4 py-3"
+    class="relative overflow-hidden bg-[color-mix(in_srgb,var(--paper-dark)_55%,white)]"
   >
-    <div class="relative z-10 flex gap-2">
-      <div class="h-3 w-3 rounded-full bg-red-300"></div>
-      <div class="h-3 w-3 rounded-full bg-yellow-300"></div>
-      <div class="h-3 w-3 rounded-full bg-green-300"></div>
+    <SketchBorder />
+    <div
+      class="relative flex items-center border-b border-(--ink-faint) px-4 py-2.5"
+    >
+      <span class="font-mono text-[11px] tracking-wide text-(--ink-muted)"
+        >{title}</span
+      >
+      <span
+        class="font-hand ml-auto text-sm text-(--ink) opacity-80"
+        aria-hidden="true">terminal</span
+      >
     </div>
     <div
-      class="pointer-events-none absolute inset-0 flex items-center justify-center"
+      class="code-window-body flex-1 overflow-x-auto p-5 font-mono text-sm md:p-6"
     >
-      <span class="font-mono text-xs text-slate-400">{title}</span>
+      <Code
+        code={code}
+        lang={lang}
+        theme="github-light"
+      />
     </div>
-  </div>
-  <!-- Body -->
-  <div
-    class="code-window-body flex-1 overflow-x-auto bg-[#fdfdfd] p-6 font-mono text-sm"
-  >
-    <Code
-      code={code}
-      lang={lang}
-      theme="github-light"
-    />
   </div>
 </div>
 

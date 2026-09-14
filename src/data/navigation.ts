@@ -1,6 +1,12 @@
 // Navigation & site-wide constants
 
-export const navItems = ['Projects', 'Blog', 'About', 'Contact']
+export const navItems = [
+  { label: 'Work', href: '/#projects' },
+  { label: 'About', href: '/#about' },
+  { label: 'Experience', href: '/#experience' },
+  { label: 'Notes', href: '/blog' },
+  { label: 'Contact', href: '/#contact' },
+]
 
 export const stackTags = [
   'React',
@@ -21,4 +27,5 @@ export const socialLinks = {
   email: 'mailto:adarshswaminath7@gmail.com',
   github: 'https://github.com/adarshswaminath',
   linkedin: 'https://www.linkedin.com/in/adarshswaminath/',
+  twitter: 'https://x.com/adarshswaminath',
 }

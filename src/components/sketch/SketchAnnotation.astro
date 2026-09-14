@@ -1,0 +1,16 @@
+---
+interface Props {
+  class?: string
+  label: string
+  rotate?: number
+}
+const { class: className = '', label, rotate = -6 } = Astro.props
+---
+
+<span
+  class={`font-hand inline-block text-[1.15rem] leading-none text-(--ink) ${className}`}
+  style={`transform: rotate(${rotate}deg)`}
+  aria-hidden="true"
+>
+  {label}
+</span>

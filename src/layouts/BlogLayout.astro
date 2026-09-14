@@ -2,23 +2,27 @@
 import Layout from './Layout.astro'
 import Section from '../components/layout/Section.astro'
 import Navbar from '../components/layout/Navbar'
+import Footer from '@/components/layout/Footer.astro'
+import { SketchUnderline } from '../components/sketch'
 
 const { frontmatter } = Astro.props
 ---
 
 <Layout
-  title={`${frontmatter.title} - Adarsh.dev`}
+  title={`${frontmatter.title} Adarsh Notes`}
   description={frontmatter.description}
 >
   <Navbar client:load />
 
   <Section
     id="article"
-    title={frontmatter.category || 'Article'}
+    kicker={frontmatter.category || 'Engineering Note'}
     heading={frontmatter.title}
   >
-    <div class="mb-8 border-b border-slate-200 pb-4">
-      <div class="text-sm text-slate-500">
+    <div class="mb-8 border-b border-(--ink-faint) pb-4">
+      <div
+        class="flex flex-wrap items-center gap-3 font-mono text-[12px] text-(--ink-muted)"
+      >
         <time datetime={frontmatter.date}
           >{
             new Date(frontmatter.date).toLocaleDateString('en-US', {
@@ -28,15 +32,34 @@ const { frontmatter } = Astro.props
             })
           }</time
         >
+        {
+          frontmatter.author && (
+            <>
+              <span aria-hidden="true">·</span>
+              <span>{frontmatter.author}</span>
+            </>
+          )
+        }
       </div>
+      <SketchUnderline
+        class="mt-3 opacity-60"
+        width={100}
+      />
     </div>
 
-    <article class="prose mx-auto max-w-4xl min-w-0 text-slate-800">
+    <article class="prose mx-auto max-w-3xl min-w-0">
       <slot />
     </article>
+
+    <p class="mt-12">
+      <a
+        href="/blog"
+        class="sketch-link focus-ink font-mono text-[12px] tracking-[0.14em] uppercase"
+      >
+        ← Back to notes
+      </a>
+    </p>
   </Section>
 
-  <footer class="py-8 text-center text-xs text-slate-400">
-    © 2026 Adarsh.dev
-  </footer>
+  <Footer />
 </Layout>
