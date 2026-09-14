@@ -1,26 +1,40 @@
 ---
 import Section from '../../layout/Section.astro'
 import SocialLinks from '../../layout/SocialLinks.astro'
-import { SketchAnnotation } from '../../sketch'
 ---
 
 <Section
   id="contact"
-  title="Contact"
-  heading="Let's connect"
+  kicker="Field Notes / 006"
+  heading="Have an idea? Let's build it."
 >
-  <div class="relative max-w-xl">
-    <SketchAnnotation
-      label="open channel"
-      class="absolute -top-2 -right-4 hidden sm:block"
-      rotate={6}
-    />
+  <div class="relative max-w-2xl">
     <p
-      class="mb-6 text-[15px] leading-relaxed text-[color-mix(in_srgb,var(--ink-deep)_78%,#64748b)]"
+      class="mb-8 max-w-lg text-[15px] leading-relaxed text-(--ink-deep)/80"
     >
       I’m always open to discussing new projects, creative ideas, or
       opportunities to be part of your visions. Feel free to reach out.
     </p>
+
     <SocialLinks />
+
+    <p
+      class="mt-10 font-hand text-[1.2rem] text-(--ink)/55"
+      aria-hidden="true"
+    >
+      last page leave a mark
+    </p>
   </div>
 </Section>
+
+<style>
+  .contact-cta__path {
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transform-origin: center;
+  }
+
+  .contact-cta:hover .contact-cta__path,
+  .contact-cta:focus-visible .contact-cta__path {
+    transform: scale(1.02) rotate(-0.5deg);
+  }
+</style>

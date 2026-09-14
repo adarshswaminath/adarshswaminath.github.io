@@ -3,7 +3,7 @@ layout: '../../layouts/BlogLayout.astro'
 title: 'The Hidden Risk in AI Agents: A Threat Model for LLM API Routers'
 date: '2026-04-19'
 description:
-  'A practical threat model for LLM API routers—how malicious intermediaries can
+  'A practical threat model for LLM API routers how malicious intermediaries can
   hijack AI agents, exfiltrate secrets, and inject malicious tool calls.'
 category: 'AI Security'
 author: 'Adarsh'
@@ -48,7 +48,7 @@ thousands of open-source templates like sub2api and new-api
 ![captionless image](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*RiX7jnKu2MkD2OvhGZdXjg.png)
 
 In real production systems, it’s rarely just one hop. Traffic often travels
-through multiple routers — a reseller → aggregator → OpenRouter → final
+through multiple routers a reseller → aggregator → OpenRouter → final
 provider.
 
 ![captionless image](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*JJwL-t19dXv5-xBqWsLdaw.png)
@@ -134,7 +134,7 @@ The router simply reads and stores secrets while forwarding traffic unchanged.
 
 Targets: OpenAI keys, AWS credentials, GitHub PATs, Ethereum private keys, etc.
 
-This attack is invisible — no errors, no anomalies.
+This attack is invisible no errors, no anomalies.
 
 ### AC-1.a: Dependency-Targeted Injection (Sneaky Supply-Chain Attack)
 
@@ -211,14 +211,14 @@ All three can be added today without provider changes.
 The fundamental gap remains: **no way to verify the tool call came from the
 model**. The paper proposes a simple signed response envelope (similar to DKIM
 for email) that providers could add. Clients would verify the signature before
-executing anything. Routers could still translate formats — they just couldn’t
+executing anything. Routers could still translate formats they just couldn’t
 tamper with the signed payload
 
 ## Final Thoughts
 
 LLM API routers are often treated as simple infrastructure. The research paper
-_“Your Agent Is Mine”_ shows they are actually a critical — and currently
-unsecured — part of the AI supply chain.
+_“Your Agent Is Mine”_ shows they are actually a critical and currently
+unsecured part of the AI supply chain.
 
 In a world of increasingly autonomous agents that auto-approve tool calls, a
 single compromised router can hand an attacker full control of your systems.
@@ -226,7 +226,7 @@ single compromised router can hand an attacker full control of your systems.
 Whoever controls the router ultimately controls the agent.
 
 If you run AI agents that touch code, credentials, or real infrastructure, it’s
-time to treat routers as part of your threat model — not just a convenience
+time to treat routers as part of your threat model not just a convenience
 layer.
 
 Read the full paper here:

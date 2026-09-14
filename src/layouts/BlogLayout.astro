@@ -9,18 +9,20 @@ const { frontmatter } = Astro.props
 ---
 
 <Layout
-  title={`${frontmatter.title} — Adarsh Notes`}
+  title={`${frontmatter.title} Adarsh Notes`}
   description={frontmatter.description}
 >
   <Navbar client:load />
 
   <Section
     id="article"
-    title={frontmatter.category || 'Engineering Note'}
+    kicker={frontmatter.category || 'Engineering Note'}
     heading={frontmatter.title}
   >
-    <div class="mb-8 border-b border-[var(--ink-faint)] pb-4">
-      <div class="flex flex-wrap items-center gap-3 font-mono text-[12px] text-[var(--ink-muted)]">
+    <div class="mb-8 border-b border-(--ink-faint) pb-4">
+      <div
+        class="flex flex-wrap items-center gap-3 font-mono text-[12px] text-(--ink-muted)"
+      >
         <time datetime={frontmatter.date}
           >{
             new Date(frontmatter.date).toLocaleDateString('en-US', {

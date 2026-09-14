@@ -1,0 +1,634 @@
+---
+/**
+ * Hand-drawn blue-ink diagram for a project card.
+ * One file, five readable sketches no illustration framework.
+ */
+interface Props {
+  title: string
+}
+
+const { title } = Astro.props
+---
+
+<svg
+  viewBox="0 0 320 160"
+  class="h-auto w-full text-(--ink)"
+  fill="none"
+  aria-hidden="true"
+>
+  {
+    title === 'PR-Analyzer' && (
+      <>
+        <path
+          d="M118,8 C148,6 178,7 202,10 C204,20 203,30 200,38 C172,41 142,40 120,37 C116,26 115,16 118,8 Z"
+          stroke="currentColor"
+          stroke-width="1.2"
+          stroke-linecap="round"
+        />
+        <text
+          x="160"
+          y="27"
+          text-anchor="middle"
+          fill="currentColor"
+          font-family="JetBrains Mono, monospace"
+          font-size="9"
+          letter-spacing="0.08em"
+          opacity="0.85"
+        >
+          REPO / VCS
+        </text>
+        <path
+          d="M160,40 L160,52 M156,48 L160,53 L164,48"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"
+        />
+        <path
+          d="M108,56 C145,53 185,54 212,58 C214,68 213,78 210,86 C178,90 138,89 110,85 C106,74 105,64 108,56 Z"
+          stroke="currentColor"
+          stroke-width="1.2"
+          stroke-linecap="round"
+        />
+        <text
+          x="160"
+          y="75"
+          text-anchor="middle"
+          fill="currentColor"
+          font-family="JetBrains Mono, monospace"
+          font-size="9"
+          letter-spacing="0.06em"
+          opacity="0.85"
+        >
+          PULL REQUEST
+        </text>
+        <path
+          d="M160,88 L160,98 M156,94 L160,99 L164,94"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"
+        />
+        <path
+          d="M128,102 C148,100 172,101 192,104 C193,112 192,120 190,126 C168,129 144,128 130,125 C127,116 126,108 128,102 Z"
+          stroke="currentColor"
+          stroke-width="1.15"
+          stroke-linecap="round"
+        />
+        <text
+          x="160"
+          y="118"
+          text-anchor="middle"
+          fill="currentColor"
+          font-family="JetBrains Mono, monospace"
+          font-size="8"
+          letter-spacing="0.08em"
+          opacity="0.8"
+        >
+          BullMQ → AI
+        </text>
+        <path
+          d="M160,128 L160,138 M156,134 L160,139 L164,134"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"
+        />
+        <path
+          d="M122,140 C150,138 180,139 198,142"
+          stroke="currentColor"
+          stroke-width="1"
+          stroke-linecap="round"
+          opacity="0.7"
+        />
+        <text
+          x="160"
+          y="154"
+          text-anchor="middle"
+          fill="currentColor"
+          font-family="JetBrains Mono, monospace"
+          font-size="8"
+          letter-spacing="0.06em"
+          opacity="0.75"
+        >
+          review result
+        </text>
+        <text
+          x="248"
+          y="72"
+          fill="currentColor"
+          font-family="Caveat, cursive"
+          font-size="13"
+          opacity="0.55"
+          transform="rotate(8 248 72)"
+        >
+          automated review loop
+        </text>
+      </>
+    )
+  }
+
+  {
+    title === 'BlockSimulate' && (
+      <>
+        <path
+          d="M28,28 C42,26 58,27 70,30 C71,40 70,50 68,58 C52,61 36,60 30,57 C27,46 26,36 28,28 Z"
+          stroke="currentColor"
+          stroke-width="1.15"
+          stroke-linecap="round"
+        />
+        <text
+          x="49"
+          y="47"
+          text-anchor="middle"
+          fill="currentColor"
+          font-family="JetBrains Mono, monospace"
+          font-size="8"
+          opacity="0.85"
+        >
+          wallet
+        </text>
+        <path
+          d="M72,44 L98,44 M92,40 L99,44 L92,48"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"
+        />
+        <path
+          d="M102,34 C118,32 134,33 146,36 C147,46 146,56 144,64 C128,67 112,66 104,63 C101,52 100,42 102,34 Z"
+          stroke="currentColor"
+          stroke-width="1.15"
+          stroke-linecap="round"
+        />
+        <text
+          x="124"
+          y="53"
+          text-anchor="middle"
+          fill="currentColor"
+          font-family="JetBrains Mono, monospace"
+          font-size="8"
+          opacity="0.85"
+        >
+          tx
+        </text>
+        <path
+          d="M148,50 L172,70 M166,68 L173,71 L168,64"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"
+        />
+        {/* block chain */}
+        <rect
+          x="168"
+          y="78"
+          width="36"
+          height="28"
+          rx="1.5"
+          stroke="currentColor"
+          stroke-width="1.2"
+        />
+        <text
+          x="186"
+          y="95"
+          text-anchor="middle"
+          fill="currentColor"
+          font-family="JetBrains Mono, monospace"
+          font-size="7"
+          opacity="0.8"
+        >
+          block
+        </text>
+        <path
+          d="M206,92 L218,92"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"
+        />
+        <rect
+          x="220"
+          y="78"
+          width="36"
+          height="28"
+          rx="1.5"
+          stroke="currentColor"
+          stroke-width="1.2"
+        />
+        <text
+          x="238"
+          y="95"
+          text-anchor="middle"
+          fill="currentColor"
+          font-family="JetBrains Mono, monospace"
+          font-size="7"
+          opacity="0.8"
+        >
+          hash
+        </text>
+        <path
+          d="M258,92 L270,92"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"
+        />
+        <rect
+          x="272"
+          y="78"
+          width="36"
+          height="28"
+          rx="1.5"
+          stroke="currentColor"
+          stroke-width="1.2"
+        />
+        <text
+          x="290"
+          y="95"
+          text-anchor="middle"
+          fill="currentColor"
+          font-family="JetBrains Mono, monospace"
+          font-size="7"
+          opacity="0.8"
+        >
+          block
+        </text>
+        <path
+          d="M40,100 C80,118 140,128 200,122"
+          stroke="currentColor"
+          stroke-width="0.9"
+          stroke-linecap="round"
+          opacity="0.45"
+          stroke-dasharray="3 3"
+        />
+        <text
+          x="48"
+          y="142"
+          fill="currentColor"
+          font-family="Caveat, cursive"
+          font-size="13"
+          opacity="0.55"
+        >
+          chain state
+        </text>
+      </>
+    )
+  }
+
+  {
+    title === 'BlockComplaint' && (
+      <>
+        <path
+          d="M40,22 C54,20 70,21 82,24 C83,34 82,44 80,52 C64,55 48,54 42,51 C39,40 38,30 40,22 Z"
+          stroke="currentColor"
+          stroke-width="1.15"
+          stroke-linecap="round"
+        />
+        <text
+          x="61"
+          y="41"
+          text-anchor="middle"
+          fill="currentColor"
+          font-family="JetBrains Mono, monospace"
+          font-size="8"
+          opacity="0.85"
+        >
+          wallet
+        </text>
+        <path
+          d="M84,38 L112,38 M106,34 L113,38 L106,42"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"
+        />
+        <path
+          d="M116,26 C138,24 162,25 180,29 C182,40 181,52 178,62 C154,66 130,65 118,61 C114,48 113,36 116,26 Z"
+          stroke="currentColor"
+          stroke-width="1.2"
+          stroke-linecap="round"
+        />
+        <text
+          x="148"
+          y="48"
+          text-anchor="middle"
+          fill="currentColor"
+          font-family="JetBrains Mono, monospace"
+          font-size="8"
+          opacity="0.85"
+        >
+          complaint
+        </text>
+        <path
+          d="M148,64 L148,78 M144,74 L148,79 L152,74"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"
+        />
+        <path
+          d="M108,82 C138,79 178,80 208,85 C210,98 209,112 205,124 C168,130 128,128 112,122 C106,108 105,94 108,82 Z"
+          stroke="currentColor"
+          stroke-width="1.2"
+          stroke-linecap="round"
+        />
+        <text
+          x="158"
+          y="108"
+          text-anchor="middle"
+          fill="currentColor"
+          font-family="JetBrains Mono, monospace"
+          font-size="8"
+          letter-spacing="0.04em"
+          opacity="0.85"
+        >
+          SMART CONTRACT
+        </text>
+        {/* ledger ticks */}
+        <path
+          d="M230,88 L300,88 M230,100 L290,100 M230,112 L280,112 M230,124 L270,124"
+          stroke="currentColor"
+          stroke-width="1"
+          stroke-linecap="round"
+          opacity="0.55"
+        />
+        <path
+          d="M230,84 L230,128"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"
+          opacity="0.6"
+        />
+        <text
+          x="265"
+          y="78"
+          text-anchor="middle"
+          fill="currentColor"
+          font-family="JetBrains Mono, monospace"
+          font-size="7"
+          opacity="0.7"
+        >
+          ledger
+        </text>
+        <text
+          x="52"
+          y="148"
+          fill="currentColor"
+          font-family="Caveat, cursive"
+          font-size="13"
+          opacity="0.55"
+        >
+          tamper resistant
+        </text>
+      </>
+    )
+  }
+
+  {
+    title === 'CopySlate' && (
+      <>
+        {/* document */}
+        <path
+          d="M48,24 L108,22 L112,108 L52,112 Z"
+          stroke="currentColor"
+          stroke-width="1.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M60,42 L98,40 M62,54 L96,52 M64,66 L90,64 M66,78 L88,76"
+          stroke="currentColor"
+          stroke-width="1"
+          stroke-linecap="round"
+          opacity="0.65"
+        />
+        <text
+          x="80"
+          y="100"
+          text-anchor="middle"
+          fill="currentColor"
+          font-family="JetBrains Mono, monospace"
+          font-size="8"
+          opacity="0.8"
+        >
+          TEXT
+        </text>
+        <path
+          d="M118,66 L148,66 M142,62 L149,66 L142,70"
+          stroke="currentColor"
+          stroke-width="1.15"
+          stroke-linecap="round"
+        />
+        <path
+          d="M154,48 C178,45 202,46 220,50 C222,66 221,84 218,98 C192,103 164,102 156,96 C152,78 151,62 154,48 Z"
+          stroke="currentColor"
+          stroke-width="1.2"
+          stroke-linecap="round"
+        />
+        <text
+          x="187"
+          y="78"
+          text-anchor="middle"
+          fill="currentColor"
+          font-family="JetBrains Mono, monospace"
+          font-size="9"
+          letter-spacing="0.06em"
+          opacity="0.85"
+        >
+          ENCODE
+        </text>
+        <path
+          d="M222,74 L248,74 M242,70 L249,74 L242,78"
+          stroke="currentColor"
+          stroke-width="1.15"
+          stroke-linecap="round"
+        />
+        {/* url bar */}
+        <path
+          d="M252,62 C268,60 292,61 304,64 C305,72 304,82 302,90 C284,93 264,92 254,89 C251,80 250,70 252,62 Z"
+          stroke="currentColor"
+          stroke-width="1.15"
+          stroke-linecap="round"
+        />
+        <text
+          x="278"
+          y="80"
+          text-anchor="middle"
+          fill="currentColor"
+          font-family="JetBrains Mono, monospace"
+          font-size="8"
+          opacity="0.85"
+        >
+          URL
+        </text>
+        <path
+          d="M278,92 L278,118 M274,112 L278,119 L282,112"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"
+        />
+        <text
+          x="278"
+          y="138"
+          text-anchor="middle"
+          fill="currentColor"
+          font-family="JetBrains Mono, monospace"
+          font-size="8"
+          letter-spacing="0.08em"
+          opacity="0.75"
+        >
+          SHARE
+        </text>
+        <text
+          x="40"
+          y="148"
+          fill="currentColor"
+          font-family="Caveat, cursive"
+          font-size="13"
+          opacity="0.55"
+        >
+          data → link
+        </text>
+      </>
+    )
+  }
+
+  {
+    title === 'Blog2Buzz' && (
+      <>
+        {/* articles */}
+        <path
+          d="M24,28 L58,26 L60,70 L26,72 Z"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"
+        />
+        <path
+          d="M32,40 L50,38 M34,50 L48,48"
+          stroke="currentColor"
+          stroke-width="0.9"
+          opacity="0.6"
+        />
+        <path
+          d="M68,22 L102,20 L104,66 L70,68 Z"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"
+        />
+        <path
+          d="M76,34 L94,32 M78,44 L92,42"
+          stroke="currentColor"
+          stroke-width="0.9"
+          opacity="0.6"
+        />
+        <path
+          d="M112,30 L146,28 L148,72 L114,74 Z"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"
+        />
+        <path
+          d="M120,42 L138,40 M122,52 L136,50"
+          stroke="currentColor"
+          stroke-width="0.9"
+          opacity="0.6"
+        />
+        <path
+          d="M86,74 L86,90 M82,86 L86,91 L90,86"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"
+        />
+        <path
+          d="M58,94 C78,91 108,92 130,96 C132,106 131,116 128,124 C100,128 72,127 60,122 C56,112 55,102 58,94 Z"
+          stroke="currentColor"
+          stroke-width="1.2"
+          stroke-linecap="round"
+        />
+        <text
+          x="94"
+          y="114"
+          text-anchor="middle"
+          fill="currentColor"
+          font-family="JetBrains Mono, monospace"
+          font-size="8"
+          opacity="0.85"
+        >
+          SCRAPER
+        </text>
+        <path
+          d="M132,110 L158,110 M152,106 L159,110 L152,114"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"
+        />
+        <circle
+          cx="178"
+          cy="110"
+          r="18"
+          stroke="currentColor"
+          stroke-width="1.2"
+        />
+        <text
+          x="178"
+          y="114"
+          text-anchor="middle"
+          fill="currentColor"
+          font-family="JetBrains Mono, monospace"
+          font-size="9"
+          opacity="0.85"
+        >
+          AI
+        </text>
+        <path
+          d="M192,100 L230,78 M224,80 L231,77 L226,86"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"
+        />
+        <path
+          d="M192,120 L230,138 M224,134 L231,139 L226,130"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"
+        />
+        <path
+          d="M234,64 C258,61 286,62 302,66 C303,74 302,84 300,90 C276,94 250,93 236,89 C233,80 232,70 234,64 Z"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"
+        />
+        <text
+          x="268"
+          y="81"
+          text-anchor="middle"
+          fill="currentColor"
+          font-family="JetBrains Mono, monospace"
+          font-size="7"
+          opacity="0.8"
+        >
+          summary
+        </text>
+        <path
+          d="M234,128 C258,125 286,126 302,130 C303,138 302,148 300,154 C276,158 250,157 236,153 C233,144 232,134 234,128 Z"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"
+        />
+        <text
+          x="268"
+          y="145"
+          text-anchor="middle"
+          fill="currentColor"
+          font-family="JetBrains Mono, monospace"
+          font-size="7"
+          opacity="0.8"
+        >
+          social post
+        </text>
+        <text
+          x="24"
+          y="152"
+          fill="currentColor"
+          font-family="Caveat, cursive"
+          font-size="12"
+          opacity="0.55"
+        >
+          collect → summarize → publish
+        </text>
+      </>
+    )
+  }
+</svg>

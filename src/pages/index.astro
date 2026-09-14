@@ -27,7 +27,9 @@ const featuredBlogs = posts
 ---
 
 <Layout>
-  <div class="home-sheet">
+  <div
+    class="relative mx-3 mt-2.5 border border-(--ink)/45 bg-(--paper) lg:mx-4 lg:mt-3.5"
+  >
     <Navbar client:load />
     <Hero />
   </div>
@@ -44,21 +46,6 @@ const featuredBlogs = posts
   <Contact />
   <Footer />
 </Layout>
-
-<style is:global>
-  .home-sheet {
-    position: relative;
-    margin: 0.65rem 0.75rem 0;
-    border: 1px solid color-mix(in srgb, var(--ink) 45%, transparent);
-    background: var(--paper);
-  }
-
-  @media (min-width: 1024px) {
-    .home-sheet {
-      margin: 0.85rem 1rem 0;
-    }
-  }
-</style>
 
 <script>
   import { setupTyping } from '../scripts/typing'

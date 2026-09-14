@@ -1,5 +1,5 @@
 ---
-// section-divider.astro — kept for compatibility; prefer SketchDivider
+// section-divider.astro kept for compatibility; prefer SketchDivider
 interface Props {
   className?: string
 }
@@ -7,7 +7,7 @@ const { className = '' } = Astro.props
 ---
 
 <div
-  class={`mx-auto w-full max-w-5xl border-y border-[var(--ink-faint)] ${className}`}
+  class={`mx-auto w-full max-w-5xl border-y border-(--ink-faint) ${className}`}
 >
   <div
     class="h-6 w-full opacity-[0.08]"

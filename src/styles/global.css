@@ -16,7 +16,7 @@
   --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
 }
 
-/* ===== Drawer Animations ===== */
+/* ===== Drawer ===== */
 @keyframes slideInRight {
   from {
     transform: translateX(100%);
@@ -52,16 +52,6 @@
 @keyframes inkDraw {
   to {
     stroke-dashoffset: 0;
-  }
-}
-@keyframes inkFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -104,7 +94,7 @@ html {
   }
 }
 
-/* Paper grain — lightweight SVG noise */
+/* Paper grain keep subtle */
 body {
   background-color: var(--paper);
   color: var(--ink-deep);
@@ -122,7 +112,7 @@ body::before {
   background-size: 180px 180px;
 }
 
-  .font-hand {
+.font-hand {
   font-family: var(--font-hand);
 }
 
@@ -211,19 +201,21 @@ body::before {
     transform: scaleX(1);
   }
 
-  /* Blog / notes prose — ink on paper */
+  /* Blog / notes prose ink on paper */
   .prose h2 {
+    font-family: var(--font-display);
     font-size: 1.6em;
     margin-top: 2em;
     margin-bottom: 0.75em;
-    font-weight: 700;
+    font-weight: 400;
     color: var(--ink-deep);
   }
   .prose h3 {
+    font-family: var(--font-display);
     font-size: 1.3em;
     margin-top: 1.6em;
     margin-bottom: 0.5em;
-    font-weight: 700;
+    font-weight: 400;
     color: var(--ink-deep);
   }
   .prose p {
@@ -287,7 +279,6 @@ body::before {
   }
   .prose img {
     border: 1px solid var(--ink-faint);
-    border-radius: 0.15rem;
   }
 }
 

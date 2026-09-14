@@ -1,34 +1,51 @@
 ---
 import { navItems } from '../../data/navigation'
-import { SketchDivider, SketchAnnotation, InkIllustration } from '../sketch'
 ---
 
-<footer class="relative mx-auto max-w-5xl px-6 pt-8 pb-12">
-  <SketchDivider class="mb-10" />
+<footer class="relative mx-auto max-w-5xl px-6 pt-6 pb-14">
+  <!-- Hand-drawn end rule -->
+  <svg
+    class="mb-10 h-4 w-full text-(--ink-muted)"
+    viewBox="0 0 800 16"
+    preserveAspectRatio="none"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M8,8.5 C80,6 160,11 240,7.5 C320,4 400,12 480,8 C560,4.5 640,10.5 720,7 C750,6 780,9 792,8"
+      stroke="currentColor"
+      stroke-width="1.2"
+      stroke-linecap="round"
+      opacity="0.5"></path>
+    <path
+      d="M380,4 L380,12 M400,3 L400,13 M420,4 L420,12"
+      stroke="currentColor"
+      stroke-width="1"
+      stroke-linecap="round"
+      opacity="0.4"></path>
+  </svg>
 
-  <div class="grid gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-end">
+  <div class="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
     <div>
       <p
-        class="mb-2 font-mono text-[10px] tracking-[0.24em] text-[var(--ink-muted)] uppercase"
+        class="mb-2 font-mono text-[10px] tracking-[0.24em] text-(--ink-muted) uppercase"
       >
-        End of page
+        Field Notes / End
       </p>
-      <p class="mb-4 text-2xl font-semibold tracking-tight text-[var(--ink-deep)] md:text-3xl">
+      <p
+        class="mb-5 font-display text-2xl tracking-tight text-(--ink-deep) md:text-[1.85rem]"
+      >
         More notes to come
-        <span class="text-[var(--ink)]">→</span>
+        <span class="text-(--ink)">→</span>
       </p>
-      <SketchAnnotation
-        label="keep building"
-        rotate={-4}
-      />
 
-      <ul class="mt-8 flex flex-wrap gap-x-5 gap-y-2">
+      <ul class="flex flex-wrap gap-x-5 gap-y-2">
         {
           navItems.map((item) => (
             <li>
               <a
                 href={item.href}
-                class="focus-ink font-mono text-[11px] tracking-[0.16em] text-[var(--ink-muted)] uppercase transition-colors hover:text-[var(--ink)]"
+                class="focus-ink font-mono text-[11px] tracking-[0.16em] text-(--ink-muted) uppercase transition-colors hover:text-(--ink)"
               >
                 {item.label}
               </a>
@@ -36,14 +53,34 @@ import { SketchDivider, SketchAnnotation, InkIllustration } from '../sketch'
           ))
         }
       </ul>
-
-      <p class="mt-8 font-mono text-[11px] text-[var(--ink-muted)]">
-        © {new Date().getFullYear()} Adarsh Swaminath
-      </p>
     </div>
 
-    <div class="mx-auto w-full max-w-[240px] opacity-80 md:mx-0 md:justify-self-end">
-      <InkIllustration />
+    <div class="flex flex-col items-start gap-3 md:items-end">
+      <svg
+        class="h-10 w-14 text-(--ink)/40"
+        viewBox="0 0 56 40"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M4,32 L14,18 L22,26 L32,10 L42,22 L52,14"
+          stroke="currentColor"
+          stroke-width="1.15"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+        <path
+          d="M8,34 C18,30 30,31 48,33"
+          stroke="currentColor"
+          stroke-width="0.9"
+          stroke-linecap="round"
+          opacity="0.7"></path>
+      </svg>
+      <p class="font-mono text-[11px] text-(--ink-muted)">
+        <span
+          class="mr-1.5 inline-block size-1.5 shrink-0 animate-pulse rounded-full bg-emerald-500 align-middle"
+          aria-hidden="true"></span
+        >{new Date().getFullYear()} AdarshSwaminath
+      </p>
     </div>
   </div>
 </footer>

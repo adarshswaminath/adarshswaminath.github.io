@@ -30,7 +30,7 @@ const socialLinks = [
         href={link.link}
         target="_blank"
         rel="noopener noreferrer"
-        class="focus-ink group inline-flex items-center gap-2 border border-[var(--ink-faint)] bg-[color-mix(in_srgb,var(--paper)_80%,white)] px-2.5 py-1.5 transition-colors hover:border-[var(--ink-muted)]"
+        class="focus-ink group inline-flex items-center gap-2 border border-(--ink-faint) px-2.5 py-1.5 transition-colors hover:border-(--ink-muted)"
         aria-label={link.label}
       >
         <img
@@ -40,7 +40,7 @@ const socialLinks = [
           height={18}
           class="opacity-70 transition-opacity group-hover:opacity-100"
         />
-        <span class="font-mono text-[10px] tracking-[0.12em] text-[var(--ink-muted)] uppercase group-hover:text-[var(--ink)]">
+        <span class="font-mono text-[10px] tracking-[0.12em] text-(--ink-muted) uppercase group-hover:text-(--ink)">
           {link.label}
         </span>
       </a>

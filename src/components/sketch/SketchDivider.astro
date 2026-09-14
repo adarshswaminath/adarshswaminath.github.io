@@ -1,4 +1,7 @@
 ---
+/**
+ * Hand-drawn ink divider between notebook sections.
+ */
 interface Props {
   class?: string
 }
@@ -6,26 +9,28 @@ const { class: className = '' } = Astro.props
 ---
 
 <div
-  class={`relative my-2 flex w-full items-center justify-center ${className}`}
+  class={`relative my-1 flex w-full items-center justify-center px-6 ${className}`}
   aria-hidden="true"
 >
   <svg
-    class="h-4 w-full max-w-5xl"
-    viewBox="0 0 800 16"
+    class="h-5 w-full max-w-5xl text-(--ink-muted)"
+    viewBox="0 0 800 20"
     preserveAspectRatio="none"
     fill="none"
   >
     <path
-      class="ink-stroke-muted"
-      d="M8,8.5 C80,6 160,11 240,7.5 C320,4 400,12 480,8 C560,4.5 640,10.5 720,7 C750,6 780,9 792,8"
-      stroke-width="1.25"
-    ></path>
-    <circle
-      cx="400"
-      cy="8"
-      r="2.2"
-      fill="var(--ink-muted)"
-      opacity="0.7"
-    ></circle>
+      d="M8,10.5 C80,7.5 160,13.5 240,9 C320,4.5 400,14 480,9.5 C560,5 640,12.5 720,8.5 C750,7 780,11 792,9.5"
+      stroke="currentColor"
+      stroke-width="1.2"
+      stroke-linecap="round"
+      fill="none"
+      opacity="0.55"></path>
+    <!-- measurement ticks -->
+    <path
+      d="M200,6 L200,14 M400,4 L400,16 M600,6 L600,14"
+      stroke="currentColor"
+      stroke-width="1"
+      stroke-linecap="round"
+      opacity="0.4"></path>
   </svg>
 </div>

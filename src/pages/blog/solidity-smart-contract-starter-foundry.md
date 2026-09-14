@@ -29,12 +29,12 @@ to get started.
 
 ## Part of the Foundry Toolkit
 
-- **Forge** — A command-line tool that ships with Foundry. Forge tests, builds,
+- **Forge** A command-line tool that ships with Foundry. Forge tests, builds,
   and deploys your smart contracts.
-- **Cast** — Foundry's command-line tool for performing Ethereum RPC calls. You
+- **Cast** Foundry's command-line tool for performing Ethereum RPC calls. You
   can make smart contract calls, send transactions, or retrieve any type of
-  chain data — all from your command-line.
-- **Anvil** — A local testnet node shipped with Foundry. You can use it for
+  chain data all from your command-line.
+- **Anvil** A local testnet node shipped with Foundry. You can use it for
   testing your contracts from frontends or for interacting over RPC.
 
 ## Setting Up the Project
@@ -95,19 +95,19 @@ contract Message {
 
 ### Code Walkthrough
 
-`// SPDX-License-Identifier: MIT` — Indicates the contract is released under the
+`// SPDX-License-Identifier: MIT` Indicates the contract is released under the
 MIT open-source license.
 
-`pragma solidity ^0.8.19;` — Specifies that Solidity version 0.8.19 or higher is
+`pragma solidity ^0.8.19;` Specifies that Solidity version 0.8.19 or higher is
 required to compile the contract.
 
-`string public current_message;` — A public state variable that stores the
+`string public current_message;` A public state variable that stores the
 current message.
 
-`string public previous_message;` — A public state variable that stores the
+`string public previous_message;` A public state variable that stores the
 previous message.
 
-`ChangeMessage(string calldata _message)` — A public function that updates
+`ChangeMessage(string calldata _message)` A public function that updates
 `current_message` with the new value and saves the old value to
 `previous_message`, allowing users to track changes.
 
@@ -130,8 +130,8 @@ Compiler run successful
 
 Two new directories will appear after a successful build:
 
-- **`out/`** — Contains your contract artifacts, such as the ABI.
-- **`cache/`** — Used by Forge to avoid recompiling unchanged files.
+- **`out/`** Contains your contract artifacts, such as the ABI.
+- **`cache/`** Used by Forge to avoid recompiling unchanged files.
 
 ## Writing Tests
 
@@ -166,18 +166,18 @@ contract MessageTest is Test {
 
 ### Test Code Walkthrough
 
-`import "forge-std/Test.sol";` — Imports the Forge standard library, which
+`import "forge-std/Test.sol";` Imports the Forge standard library, which
 provides testing utilities.
 
-`import "../src/Message.sol";` — Imports the contract being tested.
+`import "../src/Message.sol";` Imports the contract being tested.
 
-`contract MessageTest is Test` — Declares the test contract, inheriting Forge's
+`contract MessageTest is Test` Declares the test contract, inheriting Forge's
 `Test` utilities.
 
-`setUp()` — An optional function that runs before each test case. Here it
+`setUp()` An optional function that runs before each test case. Here it
 creates a fresh `Message` instance.
 
-`testChange()` — Calls `ChangeMessage` twice, then uses `assertEq` to verify
+`testChange()` Calls `ChangeMessage` twice, then uses `assertEq` to verify
 that `current_message` is `"Second"` and `previous_message` is `"First"`.
 
 Run the tests:
@@ -236,7 +236,7 @@ Test result: ok. 1 passed; 0 failed; finished in 18.42ms
 | previous_message                 | 1191            | 1191  | 1191   | 1191  | 1       |
 ```
 
-## Anvil — Local Testnet Node
+## Anvil Local Testnet Node
 
 Anvil is a local testnet node that ships with Foundry. It is installed alongside
 `forge`, `cast`, and `chisel`. Start it with:

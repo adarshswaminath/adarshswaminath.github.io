@@ -1,4 +1,4 @@
-// Tracing beam scroll animation — starts at #projects
+// Tracing beam scroll animation starts at #projects
 export function setupTracingBeam() {
   const gradient = document.getElementById('tracing-gradient')
   const beamRoot = document.getElementById('tracing-beam')

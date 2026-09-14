@@ -55,7 +55,7 @@ make-note/
 ├── package.json            # Scripts and dependencies
 ├── tsconfig.json           # TypeScript config
 └── src/
-    ├── index.ts                  # Main entry — bootstraps server & routes
+    ├── index.ts                  # Main entry bootstraps server & routes
     ├── config/
     │   └── db.ts                 # Sequelize DB instance setup
     ├── models/
@@ -157,7 +157,7 @@ export type NoteAttribute = {
 
 ## Step 5: Add Service Logic
 
-Each file here performs the business logic — database operations for each
+Each file here performs the business logic database operations for each
 endpoint.
 
 `src/service/create-note.ts`
@@ -228,7 +228,7 @@ These map service logic to API routes using Hono’s context.
 
 `src/controller/handle-create-note.ts`
 
-> **_POST /note_** _— Creates a new note_
+> **_POST /note_** _  Creates a new note_
 
 ```
 import { createNote } from "../service/create-note.js";
@@ -242,7 +242,7 @@ export const handleCreateNote = async (c: Context) => {
 
 `src/controller/handle-all-notes.ts`
 
-> **_GET /notes_** _— Gets all notes_
+> **_GET /notes_** _  Gets all notes_
 
 ```
 import { allNotes } from "../service/list-all.js";
@@ -255,7 +255,7 @@ export const handleAllNotes = async (c: Context) => {
 
 `src/controller/handle-note-by-id.ts`
 
-> **_GET /note/:id_** _— Gets a single note_
+> **_GET /note/:id_** _  Gets a single note_
 
 ```
 import { listNoteById } from "../service/list-note-by-id.js";
@@ -269,7 +269,7 @@ export const handleNoteById = async (c: Context) => {
 
 `src/controller/handle-update-note.ts`
 
-> **_PUT /note/:id_** _— Updates a note_
+> **_PUT /note/:id_** _  Updates a note_
 
 ```
 import { updateNote } from "../service/update-note.js";
@@ -284,7 +284,7 @@ export const handleUpdateNote = async (c: Context) => {
 
 `src/controller/handle-delete-note.ts`
 
-> **_DELETE /note/:id_** _— Deletes a note_
+> **_DELETE /note/:id_** _  Deletes a note_
 
 ```
 import { deleteNote } from "../service/delete-note.js";
@@ -393,7 +393,7 @@ You can easily extend this API with:
 ## Final Thoughts
 
 This project started as a way for me to explore the fundamentals of building a
-backend with **Bun**, **Hono**, and **Sequelize** — and it’s been an incredibly
+backend with **Bun**, **Hono**, and **Sequelize** and it’s been an incredibly
 fun and fast experience. If you’re just getting into backend development, I
 **highly recommend** creating a simple CRUD API like this from scratch. You’ll
 gain a deeper understanding of routing, databases, and project structuring by

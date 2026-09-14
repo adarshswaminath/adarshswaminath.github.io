@@ -1,37 +1,71 @@
 ---
 /**
- * Hero — field notebook page.
- * Artwork keeps natural aspect; copy sits in the empty left paper.
+ * Hero one page from an engineer's field notebook.
+ * Artwork (/bg-image.png) keeps natural aspect; copy sits in the quiet left paper.
  */
 ---
 
 <section
-  class="hero-notebook relative w-full overflow-x-hidden"
+  class="relative w-full overflow-x-hidden bg-(--paper)"
   aria-label="Introduction"
 >
-  <div class="hero-stage relative w-full">
-    <!-- Left margin gutter -->
+  <div class="relative flex w-full flex-col lg:block">
+    <!-- Left margin gutter (desktop) -->
     <div
-      class="hero-gutter"
+      class="hero-gutter pointer-events-none absolute top-[8%] bottom-[8%] left-4 z-20 hidden w-3.5 lg:block"
       aria-hidden="true"
     >
-      <span class="hero-gutter__line"></span>
-      <span class="hero-gutter__ticks"></span>
+      <span
+        class="absolute inset-y-0 left-1.5 w-px bg-(--ink)/30"
+      ></span>
+      <span class="hero-gutter__ticks absolute inset-0"></span>
     </div>
 
-    <!-- Artwork — natural aspect, drives height -->
-    <div class="hero-bg">
+    <!-- Artwork natural aspect on desktop; deliberate crop on mobile -->
+    <div class="relative order-2 lg:z-0">
       <img
         src="/bg-image.png"
         alt=""
         width="1672"
         height="940"
-        class="hero-anim hero-anim--art hero-bg__img select-none"
+        class="hero-anim hero-anim--art block h-60 w-full select-none object-cover object-[80%_40%] sm:h-72 md:h-80 lg:h-auto lg:object-contain lg:object-center"
         decoding="async"
         fetchpriority="high"
         loading="eager"
         aria-hidden="true"
       />
+
+      <!-- Mobile / tablet annotations live on the artwork plane -->
+      <p
+        class="hero-anim-fade hero-anim--aside pointer-events-none absolute right-4 bottom-4 z-10 font-hand text-[1.05rem] leading-none text-(--ink)/55 lg:hidden"
+        aria-hidden="true"
+      >
+        observe → build → repeat
+      </p>
+
+      <svg
+        class="hero-anim-fade hero-anim--sketch pointer-events-none absolute bottom-6 left-4 z-10 hidden h-12 w-18 text-(--ink)/50 md:block lg:hidden"
+        viewBox="0 0 96 64"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          class="hero-sketch-stroke"
+          pathLength="1"
+          d="M4,52 L22,28 L34,40 L48,16 L62,34 L78,22 L92,48"
+          stroke="currentColor"
+          stroke-width="1.1"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+        <path
+          class="hero-sketch-stroke"
+          pathLength="1"
+          d="M18,52 C28,46 40,48 52,44 C64,40 76,46 88,50"
+          stroke="currentColor"
+          stroke-width="0.9"
+          stroke-linecap="round"
+          opacity="0.7"></path>
+      </svg>
     </div>
 
     <span class="sr-only">
@@ -39,44 +73,18 @@
       a mountain landscape with system diagrams.
     </span>
 
-    <!-- Margin note — left -->
+    <!-- Editorial copy -->
     <div
-      class="hero-aside hero-aside--left hero-anim-fade hero-anim--aside"
-      aria-hidden="true"
+      class="order-1 relative z-10 flex flex-col items-start px-5 pt-7 pb-5 sm:px-8 lg:absolute lg:inset-y-0 lg:left-0 lg:w-[min(38rem,40%)] lg:justify-center lg:px-4 lg:py-6 lg:pl-[clamp(3.25rem,5vw,5.75rem)] xl:w-[min(42rem,38%)] xl:pl-[clamp(4rem,5.5vw,6.5rem)]"
     >
-      <span class="hero-aside__text font-hand">
-        better systems for a simpler tomorrow
-      </span>
-      <svg
-        class="hero-aside__arrow"
-        viewBox="0 0 56 48"
-        fill="none"
-        aria-hidden="true"
-      >
-        <path
-          d="M6,40 C16,38 26,28 36,16 C42,8 48,5 52,6"
-          stroke="currentColor"
-          stroke-width="1.35"
-          stroke-linecap="round"
-          fill="none"></path>
-        <path
-          d="M44,3 C48,5 50.5,6 53,7 C49,10 45,13 41,16"
-          stroke="currentColor"
-          stroke-width="1.35"
-          stroke-linecap="round"
-          fill="none"></path>
-      </svg>
-    </div>
-
-    <!-- Editorial copy — left paper -->
-    <div class="hero-copy">
       <p
-        class="hero-anim hero-anim--label hero-kicker font-mono text-[10px] tracking-[0.2em] text-[var(--ink)] uppercase sm:text-[11px]"
+        class="hero-anim hero-anim--label mb-3 font-mono text-[10px] tracking-[0.22em] text-(--ink-muted) uppercase"
       >
         Field Notes / 001
       </p>
+
       <svg
-        class="hero-kicker-rule hero-anim hero-anim--label"
+        class="hero-anim hero-anim--label mb-3.5 text-(--ink) opacity-70"
         viewBox="0 0 120 6"
         width="120"
         height="6"
@@ -91,20 +99,22 @@
       </svg>
 
       <h1
-        class="hero-anim hero-anim--title font-display text-[var(--ink-deep)]"
+        class="hero-anim hero-anim--title mb-4 max-w-[24ch] font-display text-[2.05rem] leading-[1.12] text-(--ink-deep) lg:mb-[1.05rem] lg:max-w-[18ch] lg:text-[clamp(2.05rem,2.4vw,2.95rem)] xl:max-w-[20ch] xl:text-[clamp(2.25rem,2.5vw,3.15rem)]"
       >
         I build software that makes complex systems feel simple.
       </h1>
 
-      <p class="hero-anim hero-anim--body hero-lede font-mono">
+      <p
+        class="hero-anim hero-anim--body mb-6 max-w-lg font-mono text-[12px] leading-[1.7] text-(--ink-muted) lg:mb-[1.65rem] lg:max-w-88 lg:text-[13px] xl:max-w-96"
+      >
         Frontend-focused full-stack engineer working across interfaces, systems,
         AI and developer tooling.
       </p>
 
-      <div class="hero-anim hero-anim--cta">
+      <div class="hero-anim hero-anim--cta px-5 pb-4">
         <a
           href="#projects"
-          class="hero-cta focus-ink group relative inline-flex items-center gap-2.5 px-5 py-3 font-mono text-[11px] tracking-[0.14em] text-[var(--ink)] uppercase sm:text-[12px]"
+          class="hero-cta focus-ink group relative inline-flex items-center gap-2.5 px-5 py-3 font-mono text-[11px] tracking-[0.14em] text-(--ink) uppercase sm:text-[12px]"
         >
           <svg
             class="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
@@ -123,7 +133,7 @@
               stroke-linejoin="round"></path>
           </svg>
           <span
-            class="hero-cta__arrow relative transition-transform duration-300 ease-out group-hover:translate-x-1"
+            class="relative transition-transform duration-300 ease-out group-hover:translate-x-1"
             aria-hidden="true">→</span
           >
           <span class="relative">View Work</span>
@@ -131,229 +141,228 @@
       </div>
     </div>
 
-    <!-- Margin note — right -->
+    <!-- Vertical margin note left (desktop) -->
     <div
-      class="hero-aside hero-aside--right hero-anim-fade hero-anim--aside-right"
+      class="hero-anim-fade hero-anim--aside pointer-events-none absolute top-[56%] left-[1.65rem] z-20 hidden -translate-y-[40%] flex-row items-end gap-0.5 text-(--ink) xl:left-8 lg:flex"
       aria-hidden="true"
     >
-      <span class="hero-aside__text font-hand">
+      <span
+        class="hero-aside-vertical font-hand text-[clamp(1.05rem,1.15vw,1.3rem)] leading-[1.15] whitespace-nowrap"
+      >
+        better systems for a simpler tomorrow
+      </span>
+      <svg
+        class="mb-1 h-[2.2rem] w-11 text-(--ink)"
+        viewBox="0 0 56 48"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          class="hero-sketch-stroke"
+          pathLength="1"
+          d="M6,40 C16,38 26,28 36,16 C42,8 48,5 52,6"
+          stroke="currentColor"
+          stroke-width="1.35"
+          stroke-linecap="round"
+          fill="none"></path>
+        <path
+          class="hero-sketch-stroke"
+          pathLength="1"
+          d="M44,3 C48,5 50.5,6 53,7 C49,10 45,13 41,16"
+          stroke="currentColor"
+          stroke-width="1.35"
+          stroke-linecap="round"
+          fill="none"></path>
+      </svg>
+    </div>
+
+    <!-- Vertical margin note right (desktop) -->
+    <div
+      class="hero-anim-fade hero-anim--aside-right pointer-events-none absolute top-[30%] right-[5%] z-20 hidden text-(--ink) xl:top-[28%] xl:right-[5.5%] lg:block"
+      aria-hidden="true"
+    >
+      <span
+        class="hero-aside-vertical hero-aside-vertical--tilted font-hand text-[clamp(1.05rem,1.15vw,1.3rem)] leading-[1.15] whitespace-nowrap"
+      >
         same curiosity, new systems
       </span>
     </div>
+
+    <!-- Tiny mountain contour (desktop overlay) -->
+    <svg
+      class="hero-anim-fade hero-anim--sketch pointer-events-none absolute bottom-[20%] left-[48%] z-10 hidden h-16 w-24 text-(--ink)/55 lg:block"
+      viewBox="0 0 96 64"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        class="hero-sketch-stroke"
+        pathLength="1"
+        d="M4,52 L22,28 L34,40 L48,16 L62,34 L78,22 L92,48"
+        stroke="currentColor"
+        stroke-width="1.1"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+      <path
+        class="hero-sketch-stroke"
+        pathLength="1"
+        d="M18,52 C28,46 40,48 52,44 C64,40 76,46 88,50"
+        stroke="currentColor"
+        stroke-width="0.9"
+        stroke-linecap="round"
+        opacity="0.7"></path>
+    </svg>
+
+    <!-- Tiny system sketch imperfect ink boxes (desktop) -->
+    <svg
+      class="hero-anim-fade hero-anim--sketch-delay pointer-events-none absolute top-[16%] left-[46%] z-10 hidden h-16 w-28 text-(--ink)/45 lg:block"
+      viewBox="0 0 112 68"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        class="hero-sketch-stroke"
+        pathLength="1"
+        d="M10,6 C18,5.2 30,5.6 42,6.4 C43.2,10 43.5,14 42.8,18 C32,19.2 18,19 9.5,18.2 C8.8,14 8.6,10 10,6 Z"
+        stroke="currentColor"
+        stroke-width="1"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+      <text
+        x="26"
+        y="15"
+        text-anchor="middle"
+        fill="currentColor"
+        font-family="JetBrains Mono, monospace"
+        font-size="7"
+        letter-spacing="0.08em"
+        opacity="0.75">IN</text
+      >
+      <path
+        class="hero-sketch-stroke"
+        pathLength="1"
+        d="M26,20 L25.5,29 M23,26.5 L25.5,30 L28.5,26"
+        stroke="currentColor"
+        stroke-width="1"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+      <path
+        class="hero-sketch-stroke"
+        pathLength="1"
+        d="M6,33 C16,31.8 34,32.2 46,33.5 C47.2,37 47.5,41 46.5,45 C34,46.8 16,46.5 5.5,45.2 C4.8,41 4.6,37 6,33 Z"
+        stroke="currentColor"
+        stroke-width="1"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+      <text
+        x="26"
+        y="42"
+        text-anchor="middle"
+        fill="currentColor"
+        font-family="JetBrains Mono, monospace"
+        font-size="6.5"
+        letter-spacing="0.06em"
+        opacity="0.75">PROCESS</text
+      >
+      <path
+        class="hero-sketch-stroke"
+        pathLength="1"
+        d="M26,47 L26.2,55 M23.5,52 L26.2,56 L29,51.5"
+        stroke="currentColor"
+        stroke-width="1"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+      <path
+        class="hero-sketch-stroke"
+        pathLength="1"
+        d="M8,56 C18,55 34,55.4 44,56.8 C45,59.5 44.8,62 43.5,64.5 C32,66 16,65.8 7.2,64.2 C6.4,61 6.2,58 8,56 Z"
+        stroke="currentColor"
+        stroke-width="1"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+      <text
+        x="26"
+        y="62.5"
+        text-anchor="middle"
+        fill="currentColor"
+        font-family="JetBrains Mono, monospace"
+        font-size="7"
+        letter-spacing="0.08em"
+        opacity="0.75">OUT</text
+      >
+    </svg>
+
+    <!-- Measurement ticks + degrees (desktop) -->
+    <div
+      class="hero-anim-fade hero-anim--sketch pointer-events-none absolute right-[28%] bottom-[12%] z-10 hidden text-(--ink)/55 lg:block"
+      aria-hidden="true"
+    >
+      <p class="mb-0.5 font-mono text-[9px] tracking-wider">120°</p>
+      <svg
+        class="h-3 w-24"
+        viewBox="0 0 96 12"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          class="hero-sketch-stroke"
+          pathLength="1"
+          d="M2,8 L94,8"
+          stroke="currentColor"
+          stroke-width="1"
+          stroke-linecap="round"></path>
+        <path
+          class="hero-sketch-stroke"
+          pathLength="1"
+          d="M2,4 L2,10 M26,5 L26,10 M50,3 L50,11 M74,5 L74,10 M94,4 L94,10"
+          stroke="currentColor"
+          stroke-width="1"
+          stroke-linecap="round"></path>
+      </svg>
+    </div>
+
+    <!-- Coordinate notation (desktop) -->
+    <p
+      class="hero-anim-fade hero-anim--sketch-delay pointer-events-none absolute top-[42%] right-[6%] z-10 hidden font-mono text-[9px] leading-relaxed tracking-wider text-(--ink)/45 lg:block"
+      aria-hidden="true"
+    >
+      N 12°···<br />
+      E 77°···
+    </p>
+
+    <!-- Handwritten observation (desktop) -->
+    <p
+      class="hero-anim-fade hero-anim--aside pointer-events-none absolute bottom-[8%] left-[clamp(3.25rem,5vw,5.75rem)] z-10 hidden font-hand text-[1.15rem] leading-none text-(--ink)/55 lg:block"
+      aria-hidden="true"
+    >
+      observe → build → repeat
+    </p>
   </div>
 </section>
 
 <style>
-  .hero-stage {
-    position: relative;
-    background-color: var(--paper);
+  /* Notebook gutter ticks awkward in Tailwind */
+  .hero-gutter__ticks {
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 1.4rem,
+      color-mix(in srgb, var(--ink) 38%, transparent) 1.4rem,
+      color-mix(in srgb, var(--ink) 38%, transparent) 1.48rem
+    );
   }
 
-  .hero-gutter {
-    display: none;
+  /* Vertical margin notes */
+  .hero-aside-vertical {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
   }
 
-  .hero-bg__img {
-    display: block;
-    width: 100%;
-    height: auto;
+  .hero-aside-vertical--tilted {
+    transform: rotate(186deg);
   }
 
-  .hero-copy {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1.75rem 1.25rem 1.35rem;
-  }
-
-  .hero-kicker {
-    margin-bottom: 0.15rem;
-  }
-
-  .hero-kicker-rule {
-    margin-bottom: 0.95rem;
-    color: var(--ink);
-    opacity: 0.7;
-  }
-
-  .hero-copy h1 {
-    max-width: 24ch;
-    margin-bottom: 0.95rem;
-    font-size: 2.05rem;
-    line-height: 1.12;
-  }
-
-  .hero-lede {
-    max-width: 32rem;
-    margin-bottom: 1.5rem;
-    font-size: 12px;
-    line-height: 1.7;
-    color: var(--ink-muted);
-  }
-
-  .hero-aside {
-    display: none;
-  }
-
-  @media (max-width: 1023px) {
-    .hero-stage {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .hero-copy {
-      order: 1;
-    }
-
-    .hero-bg {
-      order: 2;
-    }
-
-    .hero-bg__img {
-      height: 15rem;
-      object-fit: cover;
-      object-position: 80% 40%;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    /* Image keeps natural proportions — no cover crop */
-    .hero-bg {
-      position: relative;
-      z-index: 0;
-    }
-
-    .hero-bg__img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-    }
-
-    .hero-gutter {
-      position: absolute;
-      top: 8%;
-      bottom: 8%;
-      left: 1.1rem;
-      z-index: 15;
-      display: block;
-      width: 0.85rem;
-      pointer-events: none;
-    }
-
-    .hero-gutter__line {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0.4rem;
-      width: 1px;
-      background: color-mix(in srgb, var(--ink) 32%, transparent);
-    }
-
-    .hero-gutter__ticks {
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        to bottom,
-        transparent 0,
-        transparent 1.4rem,
-        color-mix(in srgb, var(--ink) 38%, transparent) 1.4rem,
-        color-mix(in srgb, var(--ink) 38%, transparent) 1.48rem
-      );
-    }
-
-    .hero-copy {
-      position: absolute;
-      inset: 0 auto 0 0;
-      z-index: 10;
-      width: min(38rem, 40%);
-      justify-content: center;
-      padding: 1.5rem 1rem 1.5rem clamp(3.25rem, 5vw, 5.75rem);
-    }
-
-    .hero-copy h1 {
-      max-width: 18ch;
-      margin-bottom: 1.05rem;
-      font-size: clamp(2.05rem, 2.4vw, 2.95rem);
-    }
-
-    .hero-lede {
-      max-width: 22rem;
-      margin-bottom: 1.65rem;
-      font-size: 13px;
-    }
-
-    .hero-aside {
-      position: absolute;
-      z-index: 12;
-      display: flex;
-      pointer-events: none;
-      color: var(--ink);
-    }
-
-    .hero-aside__text {
-      font-size: clamp(1.05rem, 1.15vw, 1.3rem);
-      line-height: 1.15;
-      white-space: nowrap;
-    }
-
-    .hero-aside--left {
-      left: 1.65rem;
-      top: 56%;
-      flex-direction: row;
-      align-items: flex-end;
-      gap: 0.05rem;
-      transform: translateY(-40%);
-    }
-
-    .hero-aside--left .hero-aside__text {
-      writing-mode: vertical-rl;
-      transform: rotate(180deg);
-    }
-
-    .hero-aside__arrow {
-      width: 2.8rem;
-      height: 2.2rem;
-      margin-bottom: 1.4rem;
-    }
-
-    .hero-aside--right {
-      top: 30%;
-      right: 5%;
-    }
-
-    .hero-aside--right .hero-aside__text {
-      writing-mode: vertical-rl;
-      transform: rotate(186deg);
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .hero-copy {
-      width: min(42rem, 38%);
-      padding-left: clamp(4rem, 5.5vw, 6.5rem);
-    }
-
-    .hero-copy h1 {
-      max-width: 20ch;
-      font-size: clamp(2.25rem, 2.5vw, 3.15rem);
-    }
-
-    .hero-lede {
-      max-width: 24rem;
-    }
-
-    .hero-aside--left {
-      left: 2rem;
-    }
-
-    .hero-aside--right {
-      right: 5.5%;
-      top: 28%;
-    }
-  }
-
+  /* Hand-drawn CTA outline reacts on hover */
   .hero-cta__path {
     transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     transform-origin: center;
@@ -364,6 +373,7 @@
     transform: scale(1.02) rotate(-0.5deg);
   }
 
+  /* Entrance */
   @keyframes heroFadeUp {
     from {
       opacity: 0;
@@ -381,6 +391,12 @@
     }
     to {
       opacity: 1;
+    }
+  }
+
+  @keyframes heroInkDraw {
+    to {
+      stroke-dashoffset: 0;
     }
   }
 
@@ -407,28 +423,44 @@
   .hero-anim--cta {
     animation-delay: 0.64s;
   }
+
   .hero-anim-fade {
     opacity: 0;
     animation: heroArtIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 
   .hero-anim--aside {
-    animation-delay: 0.55s;
+    animation-delay: 0.72s;
   }
   .hero-anim--aside-right {
-    animation-delay: 0.62s;
+    animation-delay: 0.78s;
+  }
+  .hero-anim--sketch {
+    animation-delay: 0.85s;
+  }
+  .hero-anim--sketch-delay {
+    animation-delay: 0.95s;
+  }
+
+  .hero-sketch-stroke {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: heroInkDraw 1.1s ease forwards;
+    animation-delay: 0.9s;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-anim {
+    .hero-anim,
+    .hero-anim-fade {
       animation: none !important;
       opacity: 1 !important;
       transform: none !important;
     }
 
-    .hero-anim-fade {
+    .hero-sketch-stroke {
       animation: none !important;
-      opacity: 1 !important;
+      stroke-dasharray: none !important;
+      stroke-dashoffset: 0 !important;
     }
   }
 </style>

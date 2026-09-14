@@ -59,8 +59,8 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 border-b border-[var(--ink-faint)] bg-[var(--paper)]">
-        <div className="relative mx-auto flex w-full max-w-[90rem] items-center justify-between px-5 py-3.5 pt-6 md:px-8 lg:px-10">
+      <nav className="sticky top-0 z-50 border-b border-(--ink-faint) bg-(--paper)">
+        <div className="relative mx-auto flex w-full max-w-360 items-center justify-between px-5 py-3.5 pt-6 md:px-8 lg:px-10">
           <a
             href="/"
             className="group focus-ink flex items-center gap-2.5"
@@ -76,12 +76,12 @@ export default function Navbar() {
           {/* Desktop nav */}
           <div className="relative hidden items-center gap-8 md:flex">
             <span
-              className="pointer-events-none absolute -top-5 right-0 font-hand text-[1.05rem] leading-none text-[var(--ink)]"
+              className="pointer-events-none absolute -top-5 right-0 font-hand text-[1.05rem] leading-none text-(--ink)"
               aria-hidden="true"
             >
               building things
               <svg
-                className="ml-0.5 inline-block h-3 w-5 align-middle text-[var(--ink)]"
+                className="ml-0.5 inline-block h-3 w-5 align-middle text-(--ink)"
                 viewBox="0 0 20 12"
                 fill="none"
                 aria-hidden="true"
@@ -105,12 +105,12 @@ export default function Navbar() {
                 <li key={item.label}>
                   <a
                     href={item.href}
-                    className="focus-ink group/nav relative font-mono text-[11px] tracking-[0.18em] text-[var(--ink-muted)] uppercase transition-colors hover:text-[var(--ink)]"
+                    className="focus-ink group/nav relative font-mono text-[11px] tracking-[0.18em] text-(--ink-muted) uppercase transition-colors hover:text-(--ink)"
                   >
                     {item.label}
                     {i === 0 && (
                       <svg
-                        className="pointer-events-none absolute -bottom-1 left-0 h-2 w-full overflow-visible text-[var(--ink)]"
+                        className="pointer-events-none absolute -bottom-1 left-0 h-2 w-full overflow-visible text-(--ink)"
                         viewBox="0 0 64 8"
                         preserveAspectRatio="none"
                         aria-hidden="true"
@@ -134,7 +134,7 @@ export default function Navbar() {
           <div className="relative h-11 w-28 shrink-0 md:hidden">
             <motion.div
               ref={menuPanelRef}
-              className="absolute top-0 right-0 z-50 overflow-hidden border border-[var(--ink)] bg-[var(--paper)] text-[var(--ink-deep)]"
+              className="absolute top-0 right-0 z-50 overflow-hidden border border-(--ink) bg-(--paper) text-(--ink-deep)"
               initial={false}
               animate={{
                 width: open ? 200 : 112,
@@ -182,7 +182,7 @@ export default function Navbar() {
                         <a
                           href={item.href}
                           onClick={() => setOpen(false)}
-                          className="focus-ink block font-mono text-sm tracking-wide text-[var(--ink)]"
+                          className="focus-ink block font-mono text-sm tracking-wide text-(--ink)"
                         >
                           {item.label}
                         </a>

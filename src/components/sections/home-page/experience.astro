@@ -6,31 +6,33 @@ import { SketchAnnotation } from '../../sketch'
 
 <Section
   id="experience"
-  title="Experience"
+  kicker="Field Notes / 004"
   heading="Where I've worked"
 >
   <div class="relative">
     <!-- Hand-drawn timeline path -->
     <svg
-      class="pointer-events-none absolute top-3 bottom-8 left-0 h-[calc(100%-2rem)] w-4"
+      class="pointer-events-none absolute top-3 bottom-8 left-0 hidden h-[calc(100%-2rem)] w-4 text-(--ink) sm:block"
       viewBox="0 0 16 400"
       preserveAspectRatio="none"
       aria-hidden="true"
     >
       <path
-        class="ink-stroke"
         d="M8,0 C6,80 10,160 7,240 C5,300 9,350 8,400"
-        stroke-width="1.5"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.4"
+        stroke-linecap="round"
         vector-effect="non-scaling-stroke"
-      ></path>
+        opacity="0.55"></path>
     </svg>
 
-    <div class="space-y-16">
+    <div class="space-y-14 md:space-y-16">
       {
         experiences.map((exp, i) => (
-          <div class="relative pl-10 md:pl-14">
+          <article class="relative pl-0 sm:pl-10 md:pl-14">
             <div
-              class="absolute top-[6px] left-0 flex h-3.5 w-3.5 items-center justify-center"
+              class="absolute top-[7px] left-0 hidden h-3.5 w-3.5 items-center justify-center sm:flex"
               aria-hidden="true"
             >
               <svg
@@ -38,19 +40,21 @@ import { SketchAnnotation } from '../../sketch'
                 height="14"
                 viewBox="0 0 14 14"
                 fill="none"
+                class="text-(--ink)"
               >
                 <circle
                   cx="7"
                   cy="7"
                   r="5.2"
-                  class="ink-stroke"
+                  fill="none"
+                  stroke="currentColor"
                   stroke-width="1.4"
                 />
                 <circle
                   cx="7"
                   cy="7"
-                  r="2"
-                  fill="var(--ink)"
+                  r="1.8"
+                  fill="currentColor"
                 />
               </svg>
             </div>
@@ -58,34 +62,31 @@ import { SketchAnnotation } from '../../sketch'
             {i === 0 && (
               <SketchAnnotation
                 label="current"
-                class="absolute -top-5 left-10"
+                class="absolute -top-5 left-10 hidden sm:block"
                 rotate={-8}
               />
             )}
 
-            <div class="mb-4">
-              <h3 class="text-lg font-semibold text-[var(--ink-deep)]">
+            <header class="mb-4">
+              <p class="mb-1.5 font-mono text-[10px] tracking-[0.18em] text-(--ink-muted) uppercase">
+                {exp.duration}
+              </p>
+              <h3 class="font-display text-[1.35rem] leading-snug text-(--ink-deep) md:text-[1.5rem]">
                 {exp.role}
               </h3>
-              <div class="mt-1 flex flex-wrap items-center gap-2">
-                <span class="text-[14px] font-medium text-[var(--ink)]">
-                  {exp.company}
-                </span>
-                <span class="text-[var(--ink-faint)]">·</span>
-                <span class="font-mono text-[12px] tracking-tight text-[var(--ink-muted)]">
-                  {exp.duration}
-                </span>
-              </div>
-            </div>
+              <p class="mt-1 text-[14px] font-medium text-(--ink)">
+                {exp.company}
+              </p>
+            </header>
 
-            <div class="space-y-4">
+            <div class="max-w-2xl space-y-3.5">
               {exp.contributions.map((c) => (
-                <p class="text-[14px] leading-[1.75] text-[color-mix(in_srgb,var(--ink-deep)_78%,#64748b)]">
+                <p class="text-[14px] leading-[1.75] text-(--ink-deep)/80">
                   {c}
                 </p>
               ))}
             </div>
-          </div>
+          </article>
         ))
       }
     </div>

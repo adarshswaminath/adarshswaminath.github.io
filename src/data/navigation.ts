@@ -27,4 +27,5 @@ export const socialLinks = {
   email: 'mailto:adarshswaminath7@gmail.com',
   github: 'https://github.com/adarshswaminath',
   linkedin: 'https://www.linkedin.com/in/adarshswaminath/',
+  twitter: 'https://x.com/adarshswaminath',
 }

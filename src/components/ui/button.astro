@@ -25,8 +25,8 @@ const labelHtml = Astro.slots.has('default')
   class={cn(
     'interactive-hover-btn group focus-ink relative inline-flex min-h-11 w-auto cursor-pointer select-none overflow-hidden border text-center text-[14px] font-semibold antialiased transition-colors duration-300',
     primary
-      ? 'border-[var(--ink)] bg-[var(--ink)] text-[var(--paper)] hover:bg-[var(--ink-deep)]'
-      : 'border-[var(--ink)] bg-[var(--paper)] text-[var(--ink)] hover:bg-[var(--paper-dark)]',
+      ? 'border-(--ink) bg-(--ink) text-(--paper) hover:bg-(--ink-deep)'
+      : 'border-(--ink) bg-(--paper) text-(--ink) hover:bg-(--paper-dark)',
     className,
   )}
 >
@@ -36,7 +36,7 @@ const labelHtml = Astro.slots.has('default')
     <span
       class={cn(
         'h-1.5 w-1.5 shrink-0 rounded-full transition-opacity duration-300 group-hover:opacity-0',
-        primary ? 'bg-[var(--paper)]' : 'bg-[var(--ink)]',
+        primary ? 'bg-(--paper)' : 'bg-(--ink)',
       )}
       aria-hidden="true"
     ></span>

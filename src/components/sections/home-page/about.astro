@@ -2,38 +2,34 @@
 import Section from '../../layout/Section.astro'
 import { MetaLabel, Divider } from '../../ui'
 import { achievements } from '../../../data/navigation'
-import { TechnicalDiagram, SketchAnnotation } from '../../sketch'
 ---
 
 <Section
   id="about"
-  title="About"
+  kicker="Field Notes / 003"
   heading="A bit about me"
 >
-  <div class="grid gap-12 lg:grid-cols-5">
-    <div class="space-y-5 lg:col-span-3">
-      <p
-        class="text-[15px] leading-[1.8] text-[color-mix(in_srgb,var(--ink-deep)_78%,#64748b)]"
-      >
+  <div class="grid gap-12 lg:grid-cols-12 lg:gap-14">
+    <!-- Journal entry -->
+    <div class="space-y-5 lg:col-span-7">
+      <p class="text-[15px] leading-[1.8] text-(--ink-deep)/80">
         I’m a frontend-focused full-stack developer with experience building
         scalable, production-grade web applications. Currently, I work on an
         AI-driven Governance, Risk & Compliance (GRC) platform, where I design
         and develop complex user interfaces, data-driven dashboards, and
         reusable component systems.
       </p>
-      <p
-        class="text-[15px] leading-[1.8] text-[color-mix(in_srgb,var(--ink-deep)_78%,#64748b)]"
-      >
+      <p class="text-[15px] leading-[1.8] text-(--ink-deep)/80">
         I enjoy solving problems that sit at the intersection of performance,
-        usability, and system design — turning complex workflows into simple,
+        usability, and system design turning complex workflows into simple,
         intuitive user experiences. While I’ve explored areas like Web3 and AI
         through projects, my core strength lies in building <strong
-          class="font-semibold text-[var(--ink-deep)]"
+          class="font-semibold text-(--ink-deep)"
           >reliable, maintainable, and scalable web systems.</strong
         >
       </p>
 
-      <div class="pt-6">
+      <div class="pt-4">
         <MetaLabel class="mb-3">Contributions</MetaLabel>
         <a
           href="https://github.com/adarshswaminath"
@@ -51,19 +47,27 @@ import { TechnicalDiagram, SketchAnnotation } from '../../sketch'
       </div>
     </div>
 
-    <div class="relative space-y-8 lg:col-span-2">
+    <!-- Margin notes -->
+    <aside class="relative space-y-8 lg:col-span-5">
+      <p
+        class="absolute -top-1 right-0 hidden font-hand text-[1.1rem] text-(--ink)/50 lg:block"
+        aria-hidden="true"
+      >
+        currently exploring systems
+      </p>
+
       <div>
         <MetaLabel class="mb-3">Expertise</MetaLabel>
-        <ul class="space-y-2">
+        <ul class="space-y-2.5">
           {
             [
               'Frontend Engineering',
               'System-Driven UI Development',
               'Developer Experience',
             ].map((expertise) => (
-              <li class="flex items-start gap-2 text-[14px] text-[color-mix(in_srgb,var(--ink-deep)_75%,#64748b)]">
+              <li class="flex items-start gap-2.5 text-[14px] text-(--ink-deep)/75">
                 <span
-                  class="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--ink)]"
+                  class="mt-[0.55rem] h-px w-3 shrink-0 bg-(--ink)/50"
                   aria-hidden="true"
                 />
                 {expertise}
@@ -77,7 +81,7 @@ import { TechnicalDiagram, SketchAnnotation } from '../../sketch'
 
       <div>
         <MetaLabel class="mb-3">Focus Areas</MetaLabel>
-        <ul class="space-y-2">
+        <ul class="space-y-2.5">
           {
             [
               'Performance-first architecture',
@@ -85,9 +89,9 @@ import { TechnicalDiagram, SketchAnnotation } from '../../sketch'
               'Scalable component systems',
               'Developer productivity & tooling',
             ].map((focusArea) => (
-              <li class="flex items-start gap-2 text-[14px] text-[color-mix(in_srgb,var(--ink-deep)_75%,#64748b)]">
+              <li class="flex items-start gap-2.5 text-[14px] text-(--ink-deep)/75">
                 <span
-                  class="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--ink-muted)]"
+                  class="mt-[0.55rem] h-px w-3 shrink-0 bg-(--ink-muted)/60"
                   aria-hidden="true"
                 />
                 {focusArea}
@@ -101,12 +105,12 @@ import { TechnicalDiagram, SketchAnnotation } from '../../sketch'
 
       <div>
         <MetaLabel class="mb-3">Recognition</MetaLabel>
-        <ul class="space-y-2">
+        <ul class="space-y-2.5">
           {
             achievements.map((a) => (
-              <li class="flex items-start gap-2 text-[13px] text-[var(--ink-muted)]">
+              <li class="flex items-start gap-2.5 text-[13px] text-(--ink-muted)">
                 <span
-                  class="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--ink-muted)]"
+                  class="mt-[0.55rem] h-px w-3 shrink-0 bg-(--ink-muted)/50"
                   aria-hidden="true"
                 />
                 {a}
@@ -116,17 +120,5 @@ import { TechnicalDiagram, SketchAnnotation } from '../../sketch'
         </ul>
       </div>
 
-      <!-- <div class="relative pt-4">
-        <SketchAnnotation
-          label="things I like building"
-          class="mb-2"
-          rotate={-3}
-        />
-        <TechnicalDiagram
-          compact
-          class="opacity-90"
-        />
-      </div> -->
-    </div>
   </div>
 </Section>

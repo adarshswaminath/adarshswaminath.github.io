@@ -11,7 +11,7 @@ const { posts } = Astro.props
 
 <Section
   id="blog"
-  title="Engineering Notes"
+  kicker="Field Notes / 005"
   heading="Writing & thoughts"
 >
   <div class="mb-8 space-y-0">
@@ -19,7 +19,7 @@ const { posts } = Astro.props
       posts.map((post, i) => (
         <a
           href={post.url}
-          class="group row-hover-sheen focus-ink -mx-4 block w-full border-b border-[var(--ink-faint)] px-4 py-5 text-left"
+          class="group row-hover-sheen focus-ink -mx-4 block w-full border-b border-(--ink-faint) px-4 py-5 text-left"
         >
           <span
             class="row-hover-sheen__fill"
@@ -28,22 +28,22 @@ const { posts } = Astro.props
           <div class="relative z-10 flex items-center justify-between gap-6">
             <div class="min-w-0 flex-1">
               <div class="mb-1.5 flex flex-wrap items-center gap-x-3 gap-y-1">
-                <span class="shrink-0 font-mono text-[10px] font-medium tracking-[0.18em] text-[var(--ink)] uppercase">
+                <span class="shrink-0 font-mono text-[10px] font-medium tracking-[0.18em] text-(--ink) uppercase">
                   Note / {String(posts.length - i).padStart(3, '0')}
                 </span>
-                <span class="hidden font-mono text-[10px] tracking-[0.12em] text-[var(--ink-muted)] uppercase sm:inline">
+                <span class="hidden font-mono text-[10px] tracking-[0.12em] text-(--ink-muted) uppercase sm:inline">
                   {post.frontmatter.category || 'Article'}
                 </span>
               </div>
-              <h3 class="truncate text-[15px] font-medium text-[var(--ink-deep)] transition-colors group-hover:text-[var(--ink)]">
+              <h3 class="truncate text-[15px] font-medium text-(--ink-deep) transition-colors group-hover:text-(--ink)">
                 {post.frontmatter.title}
               </h3>
-              <p class="mt-1 truncate text-[13px] leading-relaxed text-[var(--ink-muted)]">
+              <p class="mt-1 truncate text-[13px] leading-relaxed text-(--ink-muted)">
                 {post.frontmatter.description}
               </p>
             </div>
             <div class="flex shrink-0 flex-col items-end gap-2">
-              <span class="hidden font-mono text-[11px] text-[var(--ink-muted)] md:block">
+              <span class="hidden font-mono text-[11px] text-(--ink-muted) md:block">
                 {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
                   year: 'numeric',
                   month: 'short',
