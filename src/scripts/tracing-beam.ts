@@ -62,8 +62,7 @@ export function setupTracingBeam() {
       : 0
     const startScroll = Math.max(0, projectsTop - windowHeight * 0.15)
     const range = Math.max(1, maxScroll - startScroll)
-    let scrollPercent =
-      maxScroll > 0 ? (scrollY - startScroll) / range : 0
+    let scrollPercent = maxScroll > 0 ? (scrollY - startScroll) / range : 0
     scrollPercent = Math.max(0, Math.min(1, scrollPercent))
 
     targetY1 = scrollPercent * 125

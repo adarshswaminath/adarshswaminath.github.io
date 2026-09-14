@@ -76,7 +76,7 @@ export default function Navbar() {
           {/* Desktop nav */}
           <div className="relative hidden items-center gap-8 md:flex">
             <span
-              className="pointer-events-none absolute -top-5 right-0 font-hand text-[1.05rem] leading-none text-(--ink)"
+              className="font-hand pointer-events-none absolute -top-5 right-0 text-[1.05rem] leading-none text-(--ink)"
               aria-hidden="true"
             >
               building things

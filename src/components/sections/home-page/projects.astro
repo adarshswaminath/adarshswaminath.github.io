@@ -26,7 +26,7 @@ const entries = projects.slice(0, 5)
       SYSTEM 01
     </p>
     <p
-      class="mt-3 hidden font-hand text-[1.1rem] text-(--ink)/50 md:block"
+      class="font-hand mt-3 hidden text-[1.1rem] text-(--ink)/50 md:block"
       aria-hidden="true"
     >
       five artifacts on the bench
@@ -37,9 +37,7 @@ const entries = projects.slice(0, 5)
     lg: 6-col grid, each card spans 2 → three per row.
     Cards 4–5 use col-start-2 / natural flow so the last row is centered.
   -->
-  <div
-    class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-6 lg:gap-7"
-  >
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-6 lg:gap-7">
     {
       entries.map((p, i) => (
         <ProjectCard
@@ -62,12 +60,14 @@ const entries = projects.slice(0, 5)
       d="M2,8 L126,8"
       stroke="currentColor"
       stroke-width="1"
-      stroke-linecap="round"></path>
+      stroke-linecap="round"
+    ></path>
     <path
       d="M2,4 L2,10 M32,5 L32,10 M64,3 L64,11 M96,5 L96,10 M126,4 L126,10"
       stroke="currentColor"
       stroke-width="1"
-      stroke-linecap="round"></path>
+      stroke-linecap="round"
+    ></path>
   </svg>
 </Section>
 

@@ -6,9 +6,7 @@ interface Props {
 const { class: className = '', ruled = false } = Astro.props
 ---
 
-<div
-  class={`relative bg-(--paper) ${className}`}
->
+<div class={`relative bg-(--paper) ${className}`}>
   {
     ruled && (
       <div

@@ -32,12 +32,14 @@ const noteNum = String(index + 1).padStart(2, '0')
     <ProjectDiagram title={project.title} />
   </div>
 
-  <p class="mb-1.5 font-mono text-[10px] tracking-[0.2em] text-(--ink) uppercase">
+  <p
+    class="mb-1.5 font-mono text-[10px] tracking-[0.2em] text-(--ink) uppercase"
+  >
     {noteNum}
   </p>
 
   <h3
-    class="mb-2 font-display text-[1.2rem] leading-snug tracking-tight text-(--ink-deep) transition-colors group-hover:text-(--ink)"
+    class="font-display mb-2 text-[1.2rem] leading-snug tracking-tight text-(--ink-deep) transition-colors group-hover:text-(--ink)"
   >
     {project.title}
   </h3>
@@ -46,7 +48,6 @@ const noteNum = String(index + 1).padStart(2, '0')
     {project.desc}
   </p>
 
-
   <div class="mt-auto border-t border-(--ink-faint) pt-3">
     <span
       class="inline-flex items-center font-mono text-[11px] tracking-[0.14em] text-(--ink) uppercase"
@@ -54,7 +55,8 @@ const noteNum = String(index + 1).padStart(2, '0')
       {project.github ? 'GitHub' : 'Open'}
       <span
         class="ml-1.5 inline-block transition-transform duration-300 ease-out group-hover:translate-x-1"
-        aria-hidden="true">→</span
+        aria-hidden="true"
+        >→</span
       >
     </span>
   </div>

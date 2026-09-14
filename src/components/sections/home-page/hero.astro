@@ -15,9 +15,7 @@
       class="hero-gutter pointer-events-none absolute top-[8%] bottom-[8%] left-4 z-20 hidden w-3.5 lg:block"
       aria-hidden="true"
     >
-      <span
-        class="absolute inset-y-0 left-1.5 w-px bg-(--ink)/30"
-      ></span>
+      <span class="absolute inset-y-0 left-1.5 w-px bg-(--ink)/30"></span>
       <span class="hero-gutter__ticks absolute inset-0"></span>
     </div>
 
@@ -28,7 +26,7 @@
         alt=""
         width="1672"
         height="940"
-        class="hero-anim hero-anim--art block h-60 w-full select-none object-cover object-[80%_40%] sm:h-72 md:h-80 lg:h-auto lg:object-contain lg:object-center"
+        class="hero-anim hero-anim--art block h-60 w-full object-cover object-[80%_40%] select-none sm:h-72 md:h-80 lg:h-auto lg:object-contain lg:object-center"
         decoding="async"
         fetchpriority="high"
         loading="eager"
@@ -37,7 +35,7 @@
 
       <!-- Mobile / tablet annotations live on the artwork plane -->
       <p
-        class="hero-anim-fade hero-anim--aside pointer-events-none absolute right-4 bottom-4 z-10 font-hand text-[1.05rem] leading-none text-(--ink)/55 lg:hidden"
+        class="hero-anim-fade hero-anim--aside font-hand pointer-events-none absolute right-4 bottom-4 z-10 text-[1.05rem] leading-none text-(--ink)/55 lg:hidden"
         aria-hidden="true"
       >
         observe → build → repeat
@@ -56,7 +54,8 @@
           stroke="currentColor"
           stroke-width="1.1"
           stroke-linecap="round"
-          stroke-linejoin="round"></path>
+          stroke-linejoin="round"
+        ></path>
         <path
           class="hero-sketch-stroke"
           pathLength="1"
@@ -64,7 +63,8 @@
           stroke="currentColor"
           stroke-width="0.9"
           stroke-linecap="round"
-          opacity="0.7"></path>
+          opacity="0.7"
+        ></path>
       </svg>
     </div>
 
@@ -75,7 +75,7 @@
 
     <!-- Editorial copy -->
     <div
-      class="order-1 relative z-10 flex flex-col items-start px-5 pt-7 pb-5 sm:px-8 lg:absolute lg:inset-y-0 lg:left-0 lg:w-[min(38rem,40%)] lg:justify-center lg:px-4 lg:py-6 lg:pl-[clamp(3.25rem,5vw,5.75rem)] xl:w-[min(42rem,38%)] xl:pl-[clamp(4rem,5.5vw,6.5rem)]"
+      class="relative z-10 order-1 flex flex-col items-start px-5 pt-7 pb-5 sm:px-8 lg:absolute lg:inset-y-0 lg:left-0 lg:w-[min(38rem,40%)] lg:justify-center lg:px-4 lg:py-6 lg:pl-[clamp(3.25rem,5vw,5.75rem)] xl:w-[min(42rem,38%)] xl:pl-[clamp(4rem,5.5vw,6.5rem)]"
     >
       <p
         class="hero-anim hero-anim--label mb-3 font-mono text-[10px] tracking-[0.22em] text-(--ink-muted) uppercase"
@@ -95,11 +95,12 @@
           fill="none"
           stroke="currentColor"
           stroke-width="1.1"
-          stroke-linecap="round"></path>
+          stroke-linecap="round"
+        ></path>
       </svg>
 
       <h1
-        class="hero-anim hero-anim--title mb-4 max-w-[24ch] font-display text-[2.05rem] leading-[1.12] text-(--ink-deep) lg:mb-[1.05rem] lg:max-w-[18ch] lg:text-[clamp(2.05rem,2.4vw,2.95rem)] xl:max-w-[20ch] xl:text-[clamp(2.25rem,2.5vw,3.15rem)]"
+        class="hero-anim hero-anim--title font-display mb-4 max-w-[24ch] text-[2.05rem] leading-[1.12] text-(--ink-deep) lg:mb-[1.05rem] lg:max-w-[18ch] lg:text-[clamp(2.05rem,2.4vw,2.95rem)] xl:max-w-[20ch] xl:text-[clamp(2.25rem,2.5vw,3.15rem)]"
       >
         I build software that makes complex systems feel simple.
       </h1>
@@ -130,11 +131,13 @@
               stroke-width="1.25"
               vector-effect="non-scaling-stroke"
               stroke-linecap="round"
-              stroke-linejoin="round"></path>
+              stroke-linejoin="round"
+            ></path>
           </svg>
           <span
             class="relative transition-transform duration-300 ease-out group-hover:translate-x-1"
-            aria-hidden="true">→</span
+            aria-hidden="true"
+            >→</span
           >
           <span class="relative">View Work</span>
         </a>
@@ -143,7 +146,7 @@
 
     <!-- Vertical margin note left (desktop) -->
     <div
-      class="hero-anim-fade hero-anim--aside pointer-events-none absolute top-[56%] left-[1.65rem] z-20 hidden -translate-y-[40%] flex-row items-end gap-0.5 text-(--ink) xl:left-8 lg:flex"
+      class="hero-anim-fade hero-anim--aside pointer-events-none absolute top-[56%] left-[1.65rem] z-20 hidden -translate-y-[40%] flex-row items-end gap-0.5 text-(--ink) lg:flex xl:left-8"
       aria-hidden="true"
     >
       <span
@@ -164,7 +167,8 @@
           stroke="currentColor"
           stroke-width="1.35"
           stroke-linecap="round"
-          fill="none"></path>
+          fill="none"
+        ></path>
         <path
           class="hero-sketch-stroke"
           pathLength="1"
@@ -172,13 +176,14 @@
           stroke="currentColor"
           stroke-width="1.35"
           stroke-linecap="round"
-          fill="none"></path>
+          fill="none"
+        ></path>
       </svg>
     </div>
 
     <!-- Vertical margin note right (desktop) -->
     <div
-      class="hero-anim-fade hero-anim--aside-right pointer-events-none absolute top-[30%] right-[5%] z-20 hidden text-(--ink) xl:top-[28%] xl:right-[5.5%] lg:block"
+      class="hero-anim-fade hero-anim--aside-right pointer-events-none absolute top-[30%] right-[5%] z-20 hidden text-(--ink) lg:block xl:top-[28%] xl:right-[5.5%]"
       aria-hidden="true"
     >
       <span
@@ -202,7 +207,8 @@
         stroke="currentColor"
         stroke-width="1.1"
         stroke-linecap="round"
-        stroke-linejoin="round"></path>
+        stroke-linejoin="round"
+      ></path>
       <path
         class="hero-sketch-stroke"
         pathLength="1"
@@ -210,7 +216,8 @@
         stroke="currentColor"
         stroke-width="0.9"
         stroke-linecap="round"
-        opacity="0.7"></path>
+        opacity="0.7"
+      ></path>
     </svg>
 
     <!-- Tiny system sketch imperfect ink boxes (desktop) -->
@@ -227,7 +234,8 @@
         stroke="currentColor"
         stroke-width="1"
         stroke-linecap="round"
-        stroke-linejoin="round"></path>
+        stroke-linejoin="round"
+      ></path>
       <text
         x="26"
         y="15"
@@ -236,7 +244,8 @@
         font-family="JetBrains Mono, monospace"
         font-size="7"
         letter-spacing="0.08em"
-        opacity="0.75">IN</text
+        opacity="0.75"
+        >IN</text
       >
       <path
         class="hero-sketch-stroke"
@@ -245,7 +254,8 @@
         stroke="currentColor"
         stroke-width="1"
         stroke-linecap="round"
-        stroke-linejoin="round"></path>
+        stroke-linejoin="round"
+      ></path>
       <path
         class="hero-sketch-stroke"
         pathLength="1"
@@ -253,7 +263,8 @@
         stroke="currentColor"
         stroke-width="1"
         stroke-linecap="round"
-        stroke-linejoin="round"></path>
+        stroke-linejoin="round"
+      ></path>
       <text
         x="26"
         y="42"
@@ -262,7 +273,8 @@
         font-family="JetBrains Mono, monospace"
         font-size="6.5"
         letter-spacing="0.06em"
-        opacity="0.75">PROCESS</text
+        opacity="0.75"
+        >PROCESS</text
       >
       <path
         class="hero-sketch-stroke"
@@ -271,7 +283,8 @@
         stroke="currentColor"
         stroke-width="1"
         stroke-linecap="round"
-        stroke-linejoin="round"></path>
+        stroke-linejoin="round"
+      ></path>
       <path
         class="hero-sketch-stroke"
         pathLength="1"
@@ -279,7 +292,8 @@
         stroke="currentColor"
         stroke-width="1"
         stroke-linecap="round"
-        stroke-linejoin="round"></path>
+        stroke-linejoin="round"
+      ></path>
       <text
         x="26"
         y="62.5"
@@ -288,7 +302,8 @@
         font-family="JetBrains Mono, monospace"
         font-size="7"
         letter-spacing="0.08em"
-        opacity="0.75">OUT</text
+        opacity="0.75"
+        >OUT</text
       >
     </svg>
 
@@ -310,14 +325,16 @@
           d="M2,8 L94,8"
           stroke="currentColor"
           stroke-width="1"
-          stroke-linecap="round"></path>
+          stroke-linecap="round"
+        ></path>
         <path
           class="hero-sketch-stroke"
           pathLength="1"
           d="M2,4 L2,10 M26,5 L26,10 M50,3 L50,11 M74,5 L74,10 M94,4 L94,10"
           stroke="currentColor"
           stroke-width="1"
-          stroke-linecap="round"></path>
+          stroke-linecap="round"
+        ></path>
       </svg>
     </div>
 
@@ -332,7 +349,7 @@
 
     <!-- Handwritten observation (desktop) -->
     <p
-      class="hero-anim-fade hero-anim--aside pointer-events-none absolute bottom-[8%] left-[clamp(3.25rem,5vw,5.75rem)] z-10 hidden font-hand text-[1.15rem] leading-none text-(--ink)/55 lg:block"
+      class="hero-anim-fade hero-anim--aside font-hand pointer-events-none absolute bottom-[8%] left-[clamp(3.25rem,5vw,5.75rem)] z-10 hidden text-[1.15rem] leading-none text-(--ink)/55 lg:block"
       aria-hidden="true"
     >
       observe → build → repeat

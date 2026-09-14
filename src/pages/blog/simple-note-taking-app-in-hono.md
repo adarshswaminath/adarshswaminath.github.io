@@ -228,7 +228,7 @@ These map service logic to API routes using Hono’s context.
 
 `src/controller/handle-create-note.ts`
 
-> **_POST /note_** _  Creates a new note_
+> **_POST /note_** _ Creates a new note_
 
 ```
 import { createNote } from "../service/create-note.js";
@@ -242,7 +242,7 @@ export const handleCreateNote = async (c: Context) => {
 
 `src/controller/handle-all-notes.ts`
 
-> **_GET /notes_** _  Gets all notes_
+> **_GET /notes_** _ Gets all notes_
 
 ```
 import { allNotes } from "../service/list-all.js";
@@ -255,7 +255,7 @@ export const handleAllNotes = async (c: Context) => {
 
 `src/controller/handle-note-by-id.ts`
 
-> **_GET /note/:id_** _  Gets a single note_
+> **_GET /note/:id_** _ Gets a single note_
 
 ```
 import { listNoteById } from "../service/list-note-by-id.js";
@@ -269,7 +269,7 @@ export const handleNoteById = async (c: Context) => {
 
 `src/controller/handle-update-note.ts`
 
-> **_PUT /note/:id_** _  Updates a note_
+> **_PUT /note/:id_** _ Updates a note_
 
 ```
 import { updateNote } from "../service/update-note.js";
@@ -284,7 +284,7 @@ export const handleUpdateNote = async (c: Context) => {
 
 `src/controller/handle-delete-note.ts`
 
-> **_DELETE /note/:id_** _  Deletes a note_
+> **_DELETE /note/:id_** _ Deletes a note_
 
 ```
 import { deleteNote } from "../service/delete-note.js";

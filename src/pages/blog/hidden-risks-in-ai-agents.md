@@ -48,8 +48,7 @@ thousands of open-source templates like sub2api and new-api
 ![captionless image](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*RiX7jnKu2MkD2OvhGZdXjg.png)
 
 In real production systems, it’s rarely just one hop. Traffic often travels
-through multiple routers a reseller → aggregator → OpenRouter → final
-provider.
+through multiple routers a reseller → aggregator → OpenRouter → final provider.
 
 ![captionless image](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*JJwL-t19dXv5-xBqWsLdaw.png)
 
@@ -226,8 +225,7 @@ single compromised router can hand an attacker full control of your systems.
 Whoever controls the router ultimately controls the agent.
 
 If you run AI agents that touch code, credentials, or real infrastructure, it’s
-time to treat routers as part of your threat model not just a convenience
-layer.
+time to treat routers as part of your threat model not just a convenience layer.
 
 Read the full paper here:
 [arXiv:2604.08407](https://arxiv.org/html/2604.08407v1)

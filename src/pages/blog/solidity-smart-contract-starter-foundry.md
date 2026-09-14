@@ -101,8 +101,8 @@ MIT open-source license.
 `pragma solidity ^0.8.19;` Specifies that Solidity version 0.8.19 or higher is
 required to compile the contract.
 
-`string public current_message;` A public state variable that stores the
-current message.
+`string public current_message;` A public state variable that stores the current
+message.
 
 `string public previous_message;` A public state variable that stores the
 previous message.
@@ -174,11 +174,11 @@ provides testing utilities.
 `contract MessageTest is Test` Declares the test contract, inheriting Forge's
 `Test` utilities.
 
-`setUp()` An optional function that runs before each test case. Here it
-creates a fresh `Message` instance.
+`setUp()` An optional function that runs before each test case. Here it creates
+a fresh `Message` instance.
 
-`testChange()` Calls `ChangeMessage` twice, then uses `assertEq` to verify
-that `current_message` is `"Second"` and `previous_message` is `"First"`.
+`testChange()` Calls `ChangeMessage` twice, then uses `assertEq` to verify that
+`current_message` is `"Second"` and `previous_message` is `"First"`.
 
 Run the tests:
 
