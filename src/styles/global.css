@@ -2,11 +2,12 @@
 
 /* ===== Field Notebook Design Tokens ===== */
 :root {
-  --paper: #ede4d3;
+  /* --paper: #ede4d3; */
+  --paper: #f3f0eb;
   --paper-dark: #e4d9c4;
-  --ink: #174a91;
-  --ink-deep: #123a70;
-  --ink-muted: #6383b0;
+  --ink: #2b5699;
+  --ink-deep: #1f3f78;
+  --ink-muted: #7188b2;
   --ink-faint: color-mix(in srgb, var(--ink) 18%, transparent);
   --annotation: #a94a4a;
   --line: color-mix(in srgb, var(--ink-muted) 55%, transparent);
@@ -21,34 +22,42 @@
   from {
     transform: translateX(100%);
   }
+
   to {
     transform: translateX(0);
   }
 }
+
 @keyframes slideOutRight {
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(100%);
   }
 }
+
 @keyframes fadeIn {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
+
 @keyframes fadeOut {
   from {
     opacity: 1;
   }
+
   to {
     opacity: 0;
   }
 }
+
 @keyframes inkDraw {
   to {
     stroke-dashoffset: 0;
@@ -58,6 +67,7 @@
 .drawer-panel {
   animation: slideInRight 280ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
 .drawer-panel.closing {
   animation: slideOutRight 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -65,6 +75,7 @@
 .drawer-backdrop {
   animation: fadeIn 220ms ease forwards;
 }
+
 .drawer-backdrop.closing {
   animation: fadeOut 160ms ease forwards;
 }
@@ -81,12 +92,14 @@ html {
   html {
     scroll-behavior: auto;
   }
+
   .drawer-panel,
   .drawer-panel.closing,
   .drawer-backdrop,
   .drawer-backdrop.closing {
     animation-duration: 0.01ms !important;
   }
+
   .ink-draw {
     animation: none !important;
     stroke-dasharray: none !important;
@@ -210,6 +223,7 @@ body::before {
     font-weight: 400;
     color: var(--ink-deep);
   }
+
   .prose h3 {
     font-family: var(--font-display);
     font-size: 1.3em;
@@ -218,12 +232,14 @@ body::before {
     font-weight: 400;
     color: var(--ink-deep);
   }
+
   .prose p {
     margin-top: 1.25em;
     margin-bottom: 1.25em;
     color: color-mix(in srgb, var(--ink-deep) 78%, #4a5568);
     line-height: 1.8;
   }
+
   .prose ul {
     list-style-type: disc;
     padding-left: 1.625em;
@@ -231,10 +247,12 @@ body::before {
     margin-bottom: 1.25em;
     color: color-mix(in srgb, var(--ink-deep) 78%, #4a5568);
   }
+
   .prose li {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
   }
+
   .prose pre {
     background-color: var(--ink-deep);
     color: var(--paper);
@@ -245,6 +263,7 @@ body::before {
     margin-top: 1.7em;
     margin-bottom: 1.7em;
   }
+
   .prose code {
     font-family: var(--font-mono);
     font-size: 0.875em;
@@ -253,11 +272,13 @@ body::before {
     border-radius: 0.2rem;
     color: var(--ink-deep);
   }
+
   .prose pre code {
     background-color: transparent;
     color: inherit;
     padding: 0;
   }
+
   .prose a {
     color: var(--ink);
     text-decoration: underline;
@@ -265,9 +286,11 @@ body::before {
     font-weight: 500;
     transition: color 0.2s;
   }
+
   .prose a:hover {
     color: var(--ink-deep);
   }
+
   .prose blockquote {
     border-left: 2px solid var(--ink-muted);
     padding: 0.75em 1.25em;
@@ -277,6 +300,7 @@ body::before {
     margin-top: 1.6em;
     margin-bottom: 1.6em;
   }
+
   .prose img {
     border: 1px solid var(--ink-faint);
   }
