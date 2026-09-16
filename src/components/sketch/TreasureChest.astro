@@ -1,0 +1,157 @@
+---
+/**
+ * Hidden field-journal treasure chest discovery.
+ * `margin` — right notebook gutter beside a section (e.g. about).
+ * `divider` — anchored to an expedition SketchDivider.
+ */
+interface Props {
+  variant?: 'margin' | 'divider'
+  artifactId?: string
+}
+
+const { variant = 'margin', artifactId = 'treasure-chest-artifact' } =
+  Astro.props
+
+const chestSize =
+  variant === 'margin'
+    ? 'h-[5.25rem] w-28 xl:h-[6rem] xl:w-32'
+    : 'h-20 w-20 xl:h-24 xl:w-24'
+
+const clusterPosition =
+  variant === 'margin'
+    ? 'absolute top-[48%] right-6 w-max translate-x-[calc(100%+0.75rem)] -translate-y-1/2 xl:right-8 xl:translate-x-[calc(100%+1.25rem)]'
+    : 'absolute right-6 bottom-0 mb-1.5 w-max xl:right-8'
+---
+
+<div
+  class="treasure-chest-root pointer-events-none absolute inset-0 z-20 hidden lg:block"
+  data-treasure-chest
+>
+  <div class="relative mx-auto h-full w-full max-w-5xl px-6">
+    <div
+      class={`pointer-events-auto flex flex-col items-center gap-1 text-(--ink) ${clusterPosition}`}
+      data-treasure-cluster
+    >
+      <div
+        id={artifactId}
+        class={`treasure-chest__box ${chestSize} shrink-0 cursor-pointer`}
+        data-treasure-box
+        role="img"
+        aria-label="Treasure chest, closed"
+      >
+        <img
+          class="treasure-chest__img pointer-events-none block h-full w-full object-contain object-bottom select-none"
+          data-treasure-img
+          src="/trussure-chest.png"
+          alt="treasure chest"
+          width="160"
+          height="160"
+          draggable="false"
+        />
+      </div>
+
+      <div
+        class="treasure-chest__hint text-center"
+        data-treasure-hint
+      >
+        <button
+          type="button"
+          class="treasure-chest__trigger focus-ink font-hand max-w-38 cursor-pointer bg-transparent p-0 text-[clamp(1rem,1.05vw,1.2rem)] leading-[1.15] text-(--ink)"
+          data-treasure-trigger
+          aria-expanded="false"
+          aria-controls={artifactId}
+          aria-label="Open the treasure chest"
+        >
+          <span data-treasure-label>[Open the chest!]</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .treasure-chest__trigger {
+    opacity: 0.78;
+    transform: rotate(-3deg);
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .treasure-chest__trigger:hover,
+  .treasure-chest__trigger:focus-visible {
+    opacity: 1;
+    transform: rotate(-3deg) translateY(-1px);
+  }
+
+  .treasure-chest__trigger:hover [data-treasure-label],
+  .treasure-chest__trigger:focus-visible [data-treasure-label] {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: color-mix(in srgb, var(--ink) 45%, transparent);
+  }
+
+  .treasure-chest__box.is-shaking {
+    animation: treasure-shake 0.3s ease-in-out;
+  }
+
+  .treasure-chest__box {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .treasure-chest__box.is-open .treasure-chest__img {
+    animation: treasure-settle 0.35s ease-out;
+  }
+
+  @keyframes treasure-shake {
+    0%,
+    100% {
+      transform: translateX(0) rotate(0deg);
+    }
+    20% {
+      transform: translateX(-2px) rotate(-1deg);
+    }
+    40% {
+      transform: translateX(2px) rotate(1deg);
+    }
+    60% {
+      transform: translateX(-3px) rotate(-1.5deg);
+    }
+    80% {
+      transform: translateX(3px) rotate(1.5deg);
+    }
+  }
+
+  @keyframes treasure-settle {
+    0% {
+      opacity: 0.82;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .treasure-chest__box.is-shaking {
+      animation: none;
+    }
+
+    .treasure-chest__box.is-open .treasure-chest__img {
+      animation: none;
+    }
+
+    .treasure-chest__trigger {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import { setupTreasureChest } from '../../scripts/treasure-chest'
+
+  setupTreasureChest()
+  document.addEventListener('astro:page-load', setupTreasureChest)
+</script>

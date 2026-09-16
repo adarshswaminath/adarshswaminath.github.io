@@ -17,8 +17,9 @@ const { id, kicker, heading } = Astro.props
 
 <section
   id={id}
-  class="relative py-16 md:py-20 lg:py-24"
+  class="relative overflow-visible py-16 md:py-20 lg:py-24"
 >
+  <slot name="margin" />
   <div class="mx-auto max-w-5xl px-6">
     <header class="mb-10 md:mb-12">
       <p
