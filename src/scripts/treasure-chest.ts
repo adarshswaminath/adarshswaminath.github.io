@@ -24,7 +24,9 @@ export function setupTreasureChest() {
     if (root.dataset.treasureBound === 'true') return
 
     const cluster = root.querySelector<HTMLElement>('[data-treasure-cluster]')
-    const trigger = root.querySelector<HTMLButtonElement>('[data-treasure-trigger]')
+    const trigger = root.querySelector<HTMLButtonElement>(
+      '[data-treasure-trigger]',
+    )
     const label = root.querySelector<HTMLElement>('[data-treasure-label]')
     const box = root.querySelector<HTMLElement>('[data-treasure-box]')
     const img = root.querySelector<HTMLImageElement>('[data-treasure-img]')

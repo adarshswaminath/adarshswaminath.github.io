@@ -31,7 +31,6 @@ const { class: className = '', flagFor } = Astro.props
         fill="none"
         opacity="0.55"
       ></path>
-      <!-- measurement ticks -->
       <path
         d="M200,6 L200,14 M400,4 L400,16 M600,6 L600,14"
         stroke="currentColor"
@@ -44,7 +43,7 @@ const { class: className = '', flagFor } = Astro.props
     {
       flagFor && (
         <span
-          class="expedition-flag pointer-events-none absolute top-0 bottom-0 left-[3%] hidden  lg:block"
+          class="expedition-flag pointer-events-none absolute top-0 bottom-0 left-[3%] hidden lg:block"
           data-expedition-flag
         >
           <svg
@@ -55,15 +54,13 @@ const { class: className = '', flagFor } = Astro.props
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <!-- thin pole -->
             <path
               d="M3.2 1.2 C3.15 7.5 3.25 14.2 3.3 20.6"
               stroke="var(--ink-deep)"
               stroke-width="1.05"
               stroke-linecap="round"
               opacity="0.7"
-            ></path>
-            <!-- small red field flag -->
+            />
             <path
               class="expedition-flag__cloth"
               d="
@@ -78,7 +75,7 @@ const { class: className = '', flagFor } = Astro.props
               stroke="var(--annotation)"
               stroke-width="0.9"
               stroke-linejoin="round"
-            ></path>
+            />
           </svg>
         </span>
       )

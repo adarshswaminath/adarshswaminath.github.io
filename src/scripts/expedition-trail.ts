@@ -218,12 +218,7 @@ export function setupExpeditionTrail() {
   }
 
   /** One alternating step on its own walking track (L / R zigzag). */
-  const plantStep = (
-    x: number,
-    y: number,
-    travelDeg: number,
-    side: 1 | -1,
-  ) => {
+  const plantStep = (x: number, y: number, travelDeg: number, side: 1 | -1) => {
     const rad = (travelDeg * Math.PI) / 180
     const forwardX = Math.cos(rad)
     const forwardY = Math.sin(rad)
@@ -385,8 +380,7 @@ export function setupExpeditionTrail() {
       walkPhase = (walkPhase + step * WALK_PHASE_PER_PX) % 1
 
       const raw = (Math.atan2(dy, dx) * 180) / Math.PI
-      const folded =
-        raw > 90 || raw < -90 ? raw - Math.sign(raw) * 180 : raw
+      const folded = raw > 90 || raw < -90 ? raw - Math.sign(raw) * 180 : raw
       targetAngle = clamp(folded, -16, 16) * 0.35
       if (Math.abs(dx) > 0.4) {
         facing = dx >= 0 ? 1 : -1

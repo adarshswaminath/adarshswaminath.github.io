@@ -11,7 +11,9 @@ export function setupCampfire() {
     if (root.dataset.campfireBound === 'true') return
 
     const cluster = root.querySelector<HTMLElement>('[data-campfire-cluster]')
-    const trigger = root.querySelector<HTMLButtonElement>('[data-campfire-trigger]')
+    const trigger = root.querySelector<HTMLButtonElement>(
+      '[data-campfire-trigger]',
+    )
     const label = root.querySelector<HTMLElement>('[data-campfire-label]')
     const box = root.querySelector<HTMLElement>('[data-campfire-box]')
 
