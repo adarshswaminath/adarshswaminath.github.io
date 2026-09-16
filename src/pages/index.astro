@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import TracingBeam from '../components/layout/TracingBeam.astro'
+import ExpeditionTrail from '../components/layout/ExpeditionTrail.astro'
 import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer.astro'
 import {
@@ -27,38 +28,44 @@ const featuredBlogs = posts
 ---
 
 <Layout>
-  <div
-    class="relative mx-3 mt-2.5 border border-(--ink)/45 bg-(--paper) lg:mx-4 lg:mt-3.5"
-  >
-    <Navbar client:load />
-    <Hero />
+  <ExpeditionTrail />
+  <div class="relative z-10">
+    <div
+      class="relative mx-3 mt-2.5 border border-(--ink)/45 bg-(--paper) lg:mx-4 lg:mt-3.5"
+    >
+      <Navbar client:load />
+      <Hero />
+    </div>
+    <TracingBeam />
+    <SketchDivider flagFor="projects" />
+    <Projects />
+    <SketchDivider flagFor="about" />
+    <About />
+    <SketchDivider flagFor="experience" />
+    <Experience />
+    <SketchDivider flagFor="blog" />
+    <BlogPreview posts={featuredBlogs} />
+    <SketchDivider flagFor="contact" />
+    <Contact />
+    <Footer />
   </div>
-  <TracingBeam />
-  <SketchDivider />
-  <Projects />
-  <SketchDivider />
-  <About />
-  <SketchDivider />
-  <Experience />
-  <SketchDivider />
-  <BlogPreview posts={featuredBlogs} />
-  <SketchDivider />
-  <Contact />
-  <Footer />
 </Layout>
 
 <script>
   import { setupTyping } from '../scripts/typing'
   import { setupTracingBeam } from '../scripts/tracing-beam'
+  import { setupExpeditionTrail } from '../scripts/expedition-trail'
   import { setupDrawer } from '../scripts/drawer'
 
   setupTyping()
   setupTracingBeam()
+  setupExpeditionTrail()
   setupDrawer()
 
   document.addEventListener('astro:page-load', () => {
     setupTyping()
     setupTracingBeam()
+    setupExpeditionTrail()
     setupDrawer()
   })
 </script>

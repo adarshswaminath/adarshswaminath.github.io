@@ -1,0 +1,269 @@
+---
+/**
+ * Desktop-only expedition trail: tiny field explorer follows the cursor
+ * and leaves a dotted ink trail. Logic lives in expedition-trail.ts.
+ */
+---
+
+<div
+  id="expedition-trail"
+  class="expedition-trail pointer-events-none absolute inset-x-0 top-0 z-[999] hidden lg:block"
+  aria-hidden="true"
+>
+  <div
+    id="expedition-trail-frame"
+    class="expedition-trail__frame relative mx-auto h-full w-full max-w-5xl"
+  >
+    <svg
+      id="expedition-trail-svg"
+      class="expedition-trail__svg absolute inset-0 h-full w-full overflow-visible"
+      viewBox="0 0 1024 1000"
+      preserveAspectRatio="none"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        id="expedition-route"
+        class="expedition-trail__route"
+        d=""
+        fill="none"
+        stroke="var(--ink)"
+        stroke-opacity="0.4"
+        stroke-width="1.35"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-dasharray="1.6 7"
+        vector-effect="non-scaling-stroke"
+      ></path>
+    </svg>
+
+    <div
+      id="expedition-explorer"
+      class="expedition-trail__explorer"
+    >
+      <svg
+        class="expedition-trail__hiker"
+        viewBox="0 0 28 36"
+        width="26"
+        height="33"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <!-- Tiny field-journal hiker: side view, facing right.
+             Mass (pack / torso / head) is inked solid so the silhouette
+             survives at ~25px; limbs are round-cap pen strokes. -->
+        <g class="hiker">
+          <!-- Hiking pole: drawn first so the hand reads over it -->
+          <path
+            class="hiker__pole"
+            d="M18.4 13.3 C18.9 18.1 19.4 24.1 19.9 30.6"
+            stroke="var(--ink)"
+            stroke-width="0.85"
+            stroke-linecap="round"
+            opacity="0.5"
+          ></path>
+
+          <!-- Far leg (back, pushing off) -->
+          <g class="hiker__leg hiker__leg--left">
+            <path
+              d="M12.6 19.1 C11.9 21.5 11.3 22.9 11.2 24.5 C11.1 26.3 10.5 28.2 10.0 29.6"
+              stroke="var(--ink-deep)"
+              stroke-width="1.65"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+            <path
+              d="M9.8 29.6 C10.5 30.2 11.1 30.6 11.8 30.7"
+              stroke="var(--ink-deep)"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            ></path>
+          </g>
+
+          <!-- Far arm (back swing) -->
+          <path
+            class="hiker__arm hiker__arm--left"
+            d="M12.8 12.1 C12.4 14.0 11.8 15.9 11.0 17.5"
+            stroke="var(--ink-deep)"
+            stroke-width="1.35"
+            stroke-linecap="round"
+          ></path>
+
+          <!-- Backpack: secondary ink so it separates from the torso
+               without an extra outline. Biggest read after the hat. -->
+          <path
+            class="hiker__backpack"
+            d="
+              M11.9 9.9
+              C9.5 9.3 7.3 10.5 6.9 12.9
+              C6.5 15.3 7.4 17.7 9.4 18.4
+              C10.8 18.9 12.0 18.2 12.4 16.7
+              C12.8 14.3 12.7 11.8 11.9 9.9 Z
+            "
+            fill="var(--ink)"
+          ></path>
+          <path
+            class="hiker__backpack-detail"
+            d="M7.5 12.6 C8.9 13.2 10.7 13.1 11.9 12.4"
+            stroke="var(--paper)"
+            stroke-width="0.7"
+            stroke-linecap="round"
+            opacity="0.5"
+          ></path>
+
+          <!-- Torso: jacket shape, leaning into the climb -->
+          <path
+            class="hiker__body"
+            d="
+              M12.5 9.5
+              C14.4 8.9 16.2 9.9 16.6 12.0
+              C17.0 14.2 16.4 17.0 15.6 19.2
+              C14.2 19.9 12.6 19.8 11.6 19.0
+              C11.0 16.4 11.1 12.0 12.5 9.5 Z
+            "
+            fill="var(--ink-deep)"
+          ></path>
+          <path
+            class="hiker__strap"
+            d="M13.3 10.5 C13.7 12.6 14.0 14.6 13.9 16.3"
+            stroke="var(--paper)"
+            stroke-width="0.75"
+            stroke-linecap="round"
+            opacity="0.4"
+          ></path>
+
+          <!-- Head + field hat (one inked mass, no face) -->
+          <path
+            class="hiker__head"
+            d="
+              M13.2 5.3
+              C14.8 5.1 15.9 6.2 15.7 7.6
+              C15.5 9.0 14.2 9.8 12.9 9.4
+              C11.7 9.0 11.2 7.8 11.5 6.7
+              C11.8 5.8 12.4 5.4 13.2 5.3 Z
+            "
+            fill="var(--ink-deep)"
+          ></path>
+          <path
+            class="hiker__hat-crown"
+            d="
+              M11.7 6.2
+              C11.9 4.4 14.6 4.2 15.3 5.9
+              C14.3 6.4 12.7 6.5 11.7 6.2 Z
+            "
+            fill="var(--ink-deep)"
+          ></path>
+          <path
+            class="hiker__hat-brim"
+            d="M9.9 6.4 C11.7 5.5 15.4 5.4 17.3 6.2"
+            stroke="var(--ink-deep)"
+            stroke-width="1.15"
+            stroke-linecap="round"
+          ></path>
+
+          <!-- Near arm (forward, on the pole) -->
+          <path
+            class="hiker__arm hiker__arm--right"
+            d="M15.4 11.5 C16.6 12.9 17.4 14.2 17.7 15.5"
+            stroke="var(--ink-deep)"
+            stroke-width="1.35"
+            stroke-linecap="round"
+          ></path>
+
+          <!-- Near leg (front, heel strike) -->
+          <g class="hiker__leg hiker__leg--right">
+            <path
+              d="M13.9 18.9 C15.4 21.2 16.0 22.7 15.9 24.4 C15.8 26.4 16.2 28.4 16.5 29.8"
+              stroke="var(--ink-deep)"
+              stroke-width="1.65"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+            <path
+              d="M16.1 30.5 C17.0 30.8 18.0 30.6 18.5 30.1"
+              stroke="var(--ink-deep)"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            ></path>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<style>
+  .expedition-trail {
+    height: 0;
+  }
+
+  .expedition-trail__explorer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 26px;
+    height: 33px;
+    margin-left: -13px;
+    margin-top: -31px;
+    transform: translate3d(0, 0, 0);
+    transform-origin: 50% 100%;
+    will-change: transform;
+    opacity: 0.92;
+    z-index: 999;
+  }
+
+  .expedition-trail__hiker {
+    display: block;
+    overflow: visible;
+  }
+
+  .hiker__arm,
+  .hiker__leg,
+  .hiker__backpack,
+  .hiker__body,
+  .hiker__head,
+  .hiker__pole,
+  .hiker {
+    transform-box: fill-box;
+    will-change: transform;
+  }
+
+  /* Joint pivots, expressed against each element's own fill-box.
+     Shoulders and hips sit at the top corner of their bounding box. */
+  .hiker__arm--right,
+  .hiker__leg--right {
+    transform-origin: 0% 0%;
+  }
+
+  .hiker__arm--left,
+  .hiker__leg--left {
+    transform-origin: 100% 0%;
+  }
+
+  .hiker__pole {
+    transform-origin: 0% 0%;
+  }
+
+  .hiker__backpack {
+    transform-origin: 85% 15%;
+  }
+
+  .hiker__body,
+  .hiker {
+    transform-origin: 50% 100%;
+  }
+
+  /* Walk cycle is driven by expedition-trail.ts (limb transforms).
+     Suggested amplitudes: legs ±11deg, arms ±7deg, body ±1.5deg,
+     backpack ±1.5deg lagging the body by ~80ms. */
+  @media (prefers-reduced-motion: reduce) {
+    .hiker__arm,
+    .hiker__leg,
+    .hiker__backpack,
+    .hiker__body,
+    .hiker__pole,
+    .hiker {
+      transition: none !important;
+    }
+  }
+</style>
