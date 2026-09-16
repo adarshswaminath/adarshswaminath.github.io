@@ -185,6 +185,8 @@
 
 <style>
   .expedition-trail {
+    /* Height is set in JS from content size; start at 0 so the overlay
+       never feeds document.scrollHeight before the first sync. */
     height: 0;
   }
 

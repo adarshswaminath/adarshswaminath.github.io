@@ -75,11 +75,25 @@ function clamp(n: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, n))
 }
 
-function documentHeight() {
-  return Math.max(
-    document.body.scrollHeight,
-    document.documentElement.scrollHeight,
-  )
+/**
+ * Measure the in-flow content height without the absolute trail.
+ * Reading document.scrollHeight while the trail has a tall height, then
+ * writing that back onto the trail, creates a ResizeObserver feedback loop
+ * (scrollbar ↔ width ↔ height) that makes the whole page vibrate in Chrome.
+ */
+function contentHeight(content: HTMLElement | null, root: HTMLElement) {
+  const prev = root.style.height
+  root.style.height = '0px'
+
+  const measured = content
+    ? Math.max(content.scrollHeight, content.offsetHeight)
+    : Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight,
+      )
+
+  root.style.height = prev
+  return Math.max(1, measured)
 }
 
 export function setupExpeditionTrail() {
@@ -97,6 +111,12 @@ export function setupExpeditionTrail() {
   const explorer = document.getElementById('expedition-explorer')
 
   if (!root || !frame || !svg || !footprintsLayer || !explorer) return
+
+  // In-flow page content (sibling) — never measure document.scrollHeight
+  const content =
+    (document.querySelector(
+      '[data-expedition-content]',
+    ) as HTMLElement | null) ?? (root.nextElementSibling as HTMLElement | null)
 
   const limb = {
     legL: explorer.querySelector<SVGGElement>('.hiker__leg--left'),
@@ -172,9 +192,21 @@ export function setupExpeditionTrail() {
   }
 
   const syncSize = () => {
-    height = documentHeight()
+    const nextHeight = contentHeight(content, root)
+    const nextWidth = Math.max(320, frame.getBoundingClientRect().width || 1024)
+
+    // Ignore sub-pixel / scrollbar noise that would re-trigger layout
+    if (
+      Math.abs(nextHeight - height) < 1 &&
+      Math.abs(nextWidth - width) < 1 &&
+      root.style.height === `${height}px`
+    ) {
+      return
+    }
+
+    height = nextHeight
+    width = nextWidth
     root.style.height = `${height}px`
-    width = Math.max(320, frame.getBoundingClientRect().width || 1024)
     svg.setAttribute('viewBox', `0 0 ${width} ${height}`)
 
     currentX = clamp(currentX, PAD, width - PAD)
@@ -467,7 +499,10 @@ export function setupExpeditionTrail() {
           })
         })
       : null
-  ro?.observe(document.documentElement)
+  // Observe the in-flow content only — never <html>, or scrollbar
+  // toggles keep bouncing width/height and vibrating the page.
+  if (content) ro?.observe(content)
+  else ro?.observe(document.body)
 
   // Ensure limb transforms pivot from the hip / shoulder
   ;[
