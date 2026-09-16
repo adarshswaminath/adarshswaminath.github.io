@@ -1,7 +1,7 @@
 ---
 /**
  * Hidden field-journal treasure chest discovery.
- * `margin` — left notebook gutter beside a section (e.g. projects).
+ * `margin` — right notebook gutter beside a section (e.g. about).
  * `divider` — anchored to an expedition SketchDivider.
  */
 interface Props {
@@ -17,12 +17,9 @@ const chestSize =
     ? 'h-[5.25rem] w-28 xl:h-[6rem] xl:w-32'
     : 'h-20 w-20 xl:h-24 xl:w-24'
 
-const chestBoxExtra =
-  variant === 'margin' ? 'relative -mt-2.5' : 'relative -mt-1 md:-mt-1.5'
-
 const clusterPosition =
   variant === 'margin'
-    ? 'absolute top-[52%] left-6 w-max -translate-x-[calc(100%+0.75rem)] -translate-y-1/2 xl:left-8 xl:-translate-x-[calc(100%+1.25rem)]'
+    ? 'absolute top-[48%] right-6 w-max translate-x-[calc(100%+0.75rem)] -translate-y-1/2 xl:right-8 xl:translate-x-[calc(100%+1.25rem)]'
     : 'absolute right-6 bottom-0 mb-1.5 w-max xl:right-8'
 ---
 
@@ -32,11 +29,29 @@ const clusterPosition =
 >
   <div class="relative mx-auto h-full w-full max-w-5xl px-6">
     <div
-      class={`pointer-events-auto flex flex-col items-center gap-0 text-(--ink) ${clusterPosition}`}
+      class={`pointer-events-auto flex flex-col items-center gap-1 text-(--ink) ${clusterPosition}`}
       data-treasure-cluster
     >
       <div
-        class="treasure-chest__hint flex flex-col items-center gap-0 text-center"
+        id={artifactId}
+        class={`treasure-chest__box ${chestSize} shrink-0 cursor-pointer`}
+        data-treasure-box
+        role="img"
+        aria-label="Treasure chest, closed"
+      >
+        <img
+          class="treasure-chest__img pointer-events-none block h-full w-full select-none object-contain object-bottom"
+          data-treasure-img
+          src="/trussure-chest.png"
+          alt="treasure chest"
+          width="160"
+          height="160"
+          draggable="false"
+        />
+      </div>
+
+      <div
+        class="treasure-chest__hint text-center"
         data-treasure-hint
       >
         <button
@@ -45,50 +60,10 @@ const clusterPosition =
           data-treasure-trigger
           aria-expanded="false"
           aria-controls={artifactId}
-          aria-label="Discover a hidden field note"
+          aria-label="Open the treasure chest"
         >
-          <span data-treasure-label>Open the chest!</span>
+          <span data-treasure-label>[Open the chest!]</span>
         </button>
-        <svg
-          class="-mb-1 h-4 w-3.5 text-(--ink)"
-          viewBox="0 0 20 28"
-          fill="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M10,2 C11,7 10.5,12 10.2,18 C10.1,21 10,24 10,26"
-            stroke="currentColor"
-            stroke-width="1.3"
-            stroke-linecap="round"
-            fill="none"
-            opacity="0.85"
-          />
-          <path
-            d="M5.5,19.5 C7.5,22 9,24 10,26 C11,24 12.5,22 14.5,19.5"
-            stroke="currentColor"
-            stroke-width="1.3"
-            stroke-linecap="round"
-            fill="none"
-            opacity="0.85"
-          />
-        </svg>
-      </div>
-
-      <div
-        id={artifactId}
-        class={`treasure-chest__box ${chestSize} ${chestBoxExtra} shrink-0 cursor-pointer`}
-        data-treasure-box
-        aria-hidden="true"
-      >
-        <img
-          class="treasure-chest__img pointer-events-none block h-full w-full select-none object-contain object-bottom pb-5"
-          data-treasure-img
-          src="/trussure-chest.png"
-          alt="treasure chest"
-          width="160"
-          height="160"
-          draggable="false"
-        />
       </div>
     </div>
   </div>
@@ -103,39 +78,22 @@ const clusterPosition =
       transform 0.25s ease;
   }
 
-  .treasure-chest__trigger:hover:not(:disabled),
-  .treasure-chest__trigger:focus-visible:not(:disabled) {
+  .treasure-chest__trigger:hover,
+  .treasure-chest__trigger:focus-visible {
     opacity: 1;
     transform: rotate(-3deg) translateY(-1px);
   }
 
-  .treasure-chest__trigger:hover:not(:disabled) [data-treasure-label],
-  .treasure-chest__trigger:focus-visible:not(:disabled) [data-treasure-label] {
+  .treasure-chest__trigger:hover [data-treasure-label],
+  .treasure-chest__trigger:focus-visible [data-treasure-label] {
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
     text-decoration-color: color-mix(in srgb, var(--ink) 45%, transparent);
   }
 
-  .treasure-chest__trigger:disabled {
-    cursor: default;
-    opacity: 0.72;
-  }
-
-  .treasure-chest__hint.is-hidden {
-    display: none;
-  }
-
-  .treasure-chest-root.is-discovered [data-treasure-cluster] {
-    justify-content: flex-end;
-  }
-
   .treasure-chest__box.is-shaking {
     animation: treasure-shake 0.3s ease-in-out;
-  }
-
-  .treasure-chest__box.is-open {
-    cursor: default;
   }
 
   .treasure-chest__box {

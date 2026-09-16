@@ -1,3 +1,4 @@
+const CLOSED_SRC = '/trussure-chest.png'
 const OPEN_SRC = '/trussure-chest-open.png'
 const SOUND_SRC = '/unlock.mp3'
 const SHAKE_MS = 300
@@ -13,7 +14,7 @@ function wait(ms: number) {
 }
 
 /**
- * Field-notebook treasure chest: click the note or chest to open.
+ * Field-notebook treasure chest: click to open / close.
  * Idempotent; safe to call on astro:page-load.
  */
 export function setupTreasureChest() {
@@ -24,11 +25,11 @@ export function setupTreasureChest() {
 
     const cluster = root.querySelector<HTMLElement>('[data-treasure-cluster]')
     const trigger = root.querySelector<HTMLButtonElement>('[data-treasure-trigger]')
-    const hint = root.querySelector<HTMLElement>('[data-treasure-hint]')
+    const label = root.querySelector<HTMLElement>('[data-treasure-label]')
     const box = root.querySelector<HTMLElement>('[data-treasure-box]')
     const img = root.querySelector<HTMLImageElement>('[data-treasure-img]')
 
-    if (!cluster || !trigger || !hint || !box || !img) return
+    if (!cluster || !trigger || !label || !box || !img) return
 
     root.dataset.treasureBound = 'true'
 
@@ -48,21 +49,25 @@ export function setupTreasureChest() {
       })
     }
 
-    const markOpened = () => {
-      img.src = OPEN_SRC
-      box.classList.add('is-open')
-      hint.classList.add('is-hidden')
-      hint.setAttribute('aria-hidden', 'true')
-      root.classList.add('is-discovered')
-      trigger.setAttribute('aria-expanded', 'true')
-      trigger.setAttribute('aria-label', 'Field note discovered')
-      trigger.disabled = true
-      trigger.tabIndex = -1
-      opened = true
+    const setOpened = (next: boolean) => {
+      opened = next
+      img.src = opened ? OPEN_SRC : CLOSED_SRC
+      box.classList.toggle('is-open', opened)
+      root.classList.toggle('is-open', opened)
+      trigger.setAttribute('aria-expanded', opened ? 'true' : 'false')
+      trigger.setAttribute(
+        'aria-label',
+        opened ? 'Close the treasure chest' : 'Open the treasure chest',
+      )
+      label.textContent = opened ? '[Close the chest!]' : '[Open the chest!]'
+      box.setAttribute(
+        'aria-label',
+        opened ? 'Treasure chest, open' : 'Treasure chest, closed',
+      )
     }
 
-    const open = async () => {
-      if (opened || animating) return
+    const toggle = async () => {
+      if (animating) return
       animating = true
 
       playUnlock()
@@ -73,14 +78,13 @@ export function setupTreasureChest() {
         box.classList.remove('is-shaking')
       }
 
-      markOpened()
+      setOpened(!opened)
       animating = false
     }
 
-    // Text button, chest, or arrow — any click in the cluster opens it
     cluster.addEventListener('click', (event) => {
       event.preventDefault()
-      void open()
+      void toggle()
     })
   })
 }

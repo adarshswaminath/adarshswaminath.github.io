@@ -57,12 +57,14 @@ const featuredBlogs = posts
   import { setupExpeditionTrail } from '../scripts/expedition-trail'
   import { setupDrawer } from '../scripts/drawer'
   import { setupTreasureChest } from '../scripts/treasure-chest'
+  import { setupCampfire } from '../scripts/campfire'
 
   setupTyping()
   setupTracingBeam()
   setupExpeditionTrail()
   setupDrawer()
   setupTreasureChest()
+  setupCampfire()
 
   document.addEventListener('astro:page-load', () => {
     setupTyping()
@@ -70,5 +72,6 @@ const featuredBlogs = posts
     setupExpeditionTrail()
     setupDrawer()
     setupTreasureChest()
+    setupCampfire()
   })
 </script>

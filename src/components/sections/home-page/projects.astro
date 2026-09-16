@@ -3,7 +3,7 @@ import Section from '../../layout/Section.astro'
 import { ProjectCard } from '../../ui'
 import ProjectDrawer from '../../layout/ProjectDrawer.astro'
 import { projects } from '../../../data/projects'
-import TreasureChest from '@/components/sketch/TreasureChest.astro'
+import Campfire from '@/components/sketch/Campfire.astro'
 
 const entries = projects.slice(0, 5)
 ---
@@ -13,10 +13,10 @@ const entries = projects.slice(0, 5)
   kicker="Field Notes / 002"
   heading="Selected work"
 >
-  <TreasureChest
+  <Campfire
     slot="margin"
     variant="margin"
-    artifactId="treasure-chest-projects"
+    artifactId="campfire-projects"
   />
   <div class="relative mb-10">
     <p class="max-w-xl text-[14px] leading-relaxed text-(--ink-muted)">
