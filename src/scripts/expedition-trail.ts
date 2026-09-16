@@ -502,9 +502,10 @@ export function setupExpeditionTrail() {
   // Observe the in-flow content only — never <html>, or scrollbar
   // toggles keep bouncing width/height and vibrating the page.
   if (content) ro?.observe(content)
-  else ro?.observe(document.body)
+  else
+    ro?.observe(document.body)
 
-  // Ensure limb transforms pivot from the hip / shoulder
+    // Ensure limb transforms pivot from the hip / shoulder
   ;[
     limb.legL,
     limb.legR,
