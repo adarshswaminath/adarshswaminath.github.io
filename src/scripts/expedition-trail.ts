@@ -1,21 +1,67 @@
 /**
  * Expedition Trail — cursor-following explorer for desktop.
  * The hiker tracks the pointer in 2D, walks with a JS-driven stride cycle,
- * and leaves a dotted ink trail behind.
+ * and leaves a short fading footprint trail (max 4 prints).
  */
 
 const LG_MIN = 1024
 const SMOOTHING = 0.14
 const ANGLE_SMOOTHING = 0.18
 const IDLE_MS = 220
-const TRAIL_MIN_DIST = 10
-const TRAIL_MAX_POINTS = 220
+/** Half-stride distance before the next foot can plant */
+const FOOTPRINT_STEP_DIST = 18
+/** Max visible prints (alternating L/R) */
+const FOOTPRINT_MAX = 4
 const PAD = 28
 /** Radians of walk-cycle advance per px of remaining distance */
 const WALK_PHASE_PER_PX = 0.085
 const WALK_SPEED_MIN = 0.45
+/** Lateral offset from walking centerline (each track) */
+const FOOT_OFFSET = 3.2
+/** Explorer center → planted foot (along travel) */
+const FOOT_BEHIND = 8
+/** Alternating forward offset along the path (L/R zigzag) */
+const FOOT_FORWARD_STAGGER = 3.5
+const TOE_ANGLE_LEFT = -3.5
+const TOE_ANGLE_RIGHT = 2.5
+/** Render scale applied on top of path geometry */
+const FOOTPRINT_BASE_SCALE = 1.12
+const FOOTPRINT_PATH_SCALE = 1.22
 
 let cleanup: (() => void) | null = null
+
+function printVariation(seed: number) {
+  const t = ((seed * 7919) % 1000) / 1000
+  const u = ((seed * 6271) % 1000) / 1000
+  return {
+    scale: 0.97 + t * 0.04,
+    rotJitter: (t - 0.5) * 1.8,
+    jitterX: (u - 0.5) * 0.7,
+    jitterY: (t - 0.5) * 0.7,
+  }
+}
+
+/**
+ * Single human foot impression (local −Y = toes, +Y = heel).
+ * Reads like a tiny 👣 glyph: wide forefoot, pinched arch, round heel.
+ */
+function humanFootprintPath(side: 1 | -1): string {
+  const s = FOOTPRINT_PATH_SCALE
+  const o = (x: number, y: number) =>
+    `${(x * side * s).toFixed(2)} ${(y * s).toFixed(2)}`
+  const inn = (x: number, y: number) =>
+    `${(-x * side * s).toFixed(2)} ${(y * s).toFixed(2)}`
+  return [
+    `M ${inn(0.18, -6.6)}`,
+    `C ${inn(0.05, -7.25)} ${o(0.5, -7.45)} ${o(1.05, -6.85)}`,
+    `C ${o(1.28, -5.75)} ${o(1.22, -4.05)} ${o(0.95, -3.05)}`,
+    `C ${o(1.08, -1.55)} ${o(0.82, 0.15)} ${inn(0.2, 0.95)}`,
+    `C ${inn(0.1, 2.65)} ${inn(0.14, 4.85)} ${o(0.48, 6.15)}`,
+    `C ${o(0.18, 7.05)} ${inn(0.08, 6.95)} ${inn(0.16, 5.85)}`,
+    `C ${inn(0.14, 3.85)} ${inn(0.1, 1.35)} ${inn(0.16, -1.15)}`,
+    `C ${inn(0.2, -3.35)} ${inn(0.22, -5.35)} ${inn(0.18, -6.6)} Z`,
+  ].join(' ')
+}
 
 function prefersReducedMotion(): boolean {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -36,25 +82,6 @@ function documentHeight() {
   )
 }
 
-function buildTrailPath(points: { x: number; y: number }[]): string {
-  if (points.length === 0) return ''
-  if (points.length === 1) {
-    return `M ${points[0].x.toFixed(1)} ${points[0].y.toFixed(1)}`
-  }
-
-  let d = `M ${points[0].x.toFixed(1)} ${points[0].y.toFixed(1)}`
-  for (let i = 1; i < points.length; i++) {
-    const prev = points[i - 1]
-    const curr = points[i]
-    const mx = (prev.x + curr.x) / 2
-    const my = (prev.y + curr.y) / 2
-    d += ` Q ${prev.x.toFixed(1)} ${prev.y.toFixed(1)} ${mx.toFixed(1)} ${my.toFixed(1)}`
-  }
-  const last = points[points.length - 1]
-  d += ` L ${last.x.toFixed(1)} ${last.y.toFixed(1)}`
-  return d
-}
-
 export function setupExpeditionTrail() {
   cleanup?.()
   cleanup = null
@@ -64,12 +91,12 @@ export function setupExpeditionTrail() {
   const svg = document.getElementById(
     'expedition-trail-svg',
   ) as SVGSVGElement | null
-  const route = document.getElementById(
-    'expedition-route',
-  ) as SVGPathElement | null
+  const footprintsLayer = document.getElementById(
+    'expedition-footprints',
+  ) as SVGGElement | null
   const explorer = document.getElementById('expedition-explorer')
 
-  if (!root || !frame || !svg || !route || !explorer) return
+  if (!root || !frame || !svg || !footprintsLayer || !explorer) return
 
   const limb = {
     legL: explorer.querySelector<SVGGElement>('.hiker__leg--left'),
@@ -100,7 +127,16 @@ export function setupExpeditionTrail() {
   let currentAngle = 0
   let targetAngle = 0
 
-  const trail: { x: number; y: number }[] = [{ x: currentX, y: currentY }]
+  let lastPrintX = currentX
+  let lastPrintY = currentY
+  let lastPlantPhase = -1
+  let printSeed = 0
+
+  type Footprint = {
+    el: SVGGElement
+    removeTimer: number
+  }
+  const footprints: Footprint[] = []
 
   type Checkpoint = {
     el: Element
@@ -157,16 +193,120 @@ export function setupExpeditionTrail() {
     return { x, y }
   }
 
-  const pushTrail = (x: number, y: number) => {
-    const last = trail[trail.length - 1]
-    const dx = x - last.x
-    const dy = y - last.y
-    if (dx * dx + dy * dy < TRAIL_MIN_DIST * TRAIL_MIN_DIST) return
-    trail.push({ x, y })
-    if (trail.length > TRAIL_MAX_POINTS) {
-      trail.splice(0, trail.length - TRAIL_MAX_POINTS)
+  const fadeOldestFootprint = () => {
+    const oldest = footprints.shift()
+    if (!oldest) return
+    oldest.el.classList.remove('is-visible')
+    oldest.el.classList.add('is-fading')
+    window.clearTimeout(oldest.removeTimer)
+    oldest.removeTimer = window.setTimeout(
+      () => {
+        oldest.el.remove()
+      },
+      reduced ? 0 : 450,
+    )
+    refreshFootprintOpacity()
+  }
+
+  const refreshFootprintOpacity = () => {
+    const n = footprints.length
+    footprints.forEach((fp, idx) => {
+      const age = n - 1 - idx
+      fp.el.classList.remove('is-age-0', 'is-age-1', 'is-age-2', 'is-age-3')
+      fp.el.classList.add(`is-age-${Math.min(age, 3)}`)
+    })
+  }
+
+  /** One alternating step on its own walking track (L / R zigzag). */
+  const plantStep = (
+    x: number,
+    y: number,
+    travelDeg: number,
+    side: 1 | -1,
+  ) => {
+    const rad = (travelDeg * Math.PI) / 180
+    const forwardX = Math.cos(rad)
+    const forwardY = Math.sin(rad)
+    const lateralX = -Math.sin(rad)
+    const lateralY = Math.cos(rad)
+
+    const varn = printVariation(printSeed++)
+    const forwardAlong =
+      side === -1 ? -FOOT_FORWARD_STAGGER : FOOT_FORWARD_STAGGER
+
+    const footX =
+      x -
+      forwardX * FOOT_BEHIND +
+      lateralX * side * FOOT_OFFSET +
+      forwardX * forwardAlong +
+      lateralX * varn.jitterX +
+      forwardX * varn.jitterY * 0.3
+    const footY =
+      y -
+      forwardY * FOOT_BEHIND +
+      lateralY * side * FOOT_OFFSET +
+      forwardY * forwardAlong +
+      lateralY * varn.jitterX +
+      forwardY * varn.jitterY * 0.3
+
+    const toeOut = side === -1 ? TOE_ANGLE_LEFT : TOE_ANGLE_RIGHT
+    const rot = travelDeg + 270 + toeOut + varn.rotJitter
+    const scale = FOOTPRINT_BASE_SCALE * varn.scale
+
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g')
+    g.setAttribute('class', 'expedition-trail__footprint')
+    g.setAttribute(
+      'transform',
+      `translate(${footX.toFixed(2)} ${footY.toFixed(2)}) rotate(${rot.toFixed(2)}) scale(${scale.toFixed(3)})`,
+    )
+
+    const shape = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+    shape.setAttribute('class', 'footprint__shape')
+    shape.setAttribute('d', humanFootprintPath(side))
+    shape.setAttribute('fill', 'var(--ink)')
+    shape.setAttribute('stroke', 'none')
+    g.appendChild(shape)
+
+    footprintsLayer.appendChild(g)
+
+    const fp: Footprint = { el: g, removeTimer: 0 }
+    footprints.push(fp)
+
+    while (footprints.length > FOOTPRINT_MAX) {
+      fadeOldestFootprint()
     }
-    route.setAttribute('d', buildTrailPath(trail))
+
+    refreshFootprintOpacity()
+
+    if (reduced) {
+      g.classList.add('is-visible')
+    } else {
+      requestAnimationFrame(() => {
+        g.classList.add('is-visible')
+      })
+    }
+  }
+
+  const maybePlantFootprint = (
+    x: number,
+    y: number,
+    walking: boolean,
+    travelDeg: number,
+  ) => {
+    if (!walking) return
+
+    const stepBeat = Math.floor(walkPhase * 2)
+    if (stepBeat === lastPlantPhase) return
+
+    const dx = x - lastPrintX
+    const dy = y - lastPrintY
+    if (dx * dx + dy * dy < FOOTPRINT_STEP_DIST * FOOTPRINT_STEP_DIST) return
+
+    lastPlantPhase = stepBeat
+    const side: 1 | -1 = stepBeat === 0 ? -1 : 1
+    plantStep(x, y, travelDeg, side)
+    lastPrintX = x
+    lastPrintY = y
   }
 
   /** Apply a natural opposite-limb hiking pose from walkPhase (0–1). */
@@ -219,10 +359,10 @@ export function setupExpeditionTrail() {
     }
   }
 
-  const applyFrame = (walking: boolean) => {
+  const applyFrame = (walking: boolean, travelDeg: number) => {
     explorer.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) rotate(${currentAngle.toFixed(2)}deg) scaleX(${facing})`
     applyWalkPose(walkPhase, walking)
-    pushTrail(currentX, currentY)
+    maybePlantFootprint(currentX, currentY, walking, travelDeg)
     updateFlags()
   }
 
@@ -236,6 +376,8 @@ export function setupExpeditionTrail() {
 
     const speed = Math.hypot(dx, dy)
     const walking = speed > WALK_SPEED_MIN && !reduced
+
+    const travelDeg = (Math.atan2(dy, dx) * 180) / Math.PI
 
     if (walking) {
       // Advance stride from travel distance this frame
@@ -259,11 +401,12 @@ export function setupExpeditionTrail() {
       currentX = targetX
       currentY = targetY
       isAnimating = false
-      applyFrame(false)
+      lastPlantPhase = -1
+      applyFrame(false, travelDeg)
       return
     }
 
-    applyFrame(walking)
+    applyFrame(walking, travelDeg)
     requestAnimationFrame(tick)
   }
 
@@ -303,10 +446,10 @@ export function setupExpeditionTrail() {
     }
     syncSize()
     if (reduced) {
-      applyFrame(false)
+      applyFrame(false, 0)
       return
     }
-    applyFrame(false)
+    applyFrame(false, 0)
     if (isMoving) requestTick()
   }
 
@@ -357,13 +500,18 @@ export function setupExpeditionTrail() {
   })
 
   onResize()
-  route.setAttribute('d', buildTrailPath(trail))
-  applyFrame(false)
+  applyFrame(false, 0)
 
   cleanup = () => {
     disposed = true
     window.clearTimeout(idleTimer)
     if (resizeRaf) window.cancelAnimationFrame(resizeRaf)
+    footprints.forEach((fp) => {
+      window.clearTimeout(fp.removeTimer)
+      fp.el.remove()
+    })
+    footprints.length = 0
+    footprintsLayer.replaceChildren()
     mqDesktop.removeEventListener('change', onMq)
     mqMotion.removeEventListener('change', onMq)
     window.removeEventListener('pointermove', onPointerMove)

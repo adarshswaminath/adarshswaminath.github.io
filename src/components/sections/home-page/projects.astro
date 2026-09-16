@@ -3,6 +3,7 @@ import Section from '../../layout/Section.astro'
 import { ProjectCard } from '../../ui'
 import ProjectDrawer from '../../layout/ProjectDrawer.astro'
 import { projects } from '../../../data/projects'
+import TreasureChest from '@/components/sketch/TreasureChest.astro'
 
 const entries = projects.slice(0, 5)
 ---
@@ -12,6 +13,11 @@ const entries = projects.slice(0, 5)
   kicker="Field Notes / 002"
   heading="Selected work"
 >
+  <TreasureChest
+    slot="margin"
+    variant="margin"
+    artifactId="treasure-chest-projects"
+  />
   <div class="relative mb-10">
     <p class="max-w-xl text-[14px] leading-relaxed text-(--ink-muted)">
       Case studies from systems I’ve built recorded like engineering notebook
@@ -42,27 +48,6 @@ const entries = projects.slice(0, 5)
       ))
     }
   </div>
-
-  <!-- Tiny measurement mark -->
-  <svg
-    class="mx-auto mt-10 hidden h-3 w-32 text-(--ink)/35 md:block"
-    viewBox="0 0 128 12"
-    fill="none"
-    aria-hidden="true"
-  >
-    <path
-      d="M2,8 L126,8"
-      stroke="currentColor"
-      stroke-width="1"
-      stroke-linecap="round"
-    ></path>
-    <path
-      d="M2,4 L2,10 M32,5 L32,10 M64,3 L64,11 M96,5 L96,10 M126,4 L126,10"
-      stroke="currentColor"
-      stroke-width="1"
-      stroke-linecap="round"
-    ></path>
-  </svg>
 </Section>
 
 <ProjectDrawer projects={projects} />

@@ -1,7 +1,7 @@
 ---
 /**
  * Desktop-only expedition trail: tiny field explorer follows the cursor
- * and leaves a dotted ink trail. Logic lives in expedition-trail.ts.
+ * and leaves a short footprint trail (3–4 prints). Logic in expedition-trail.ts.
  */
 ---
 
@@ -22,19 +22,7 @@
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path
-        id="expedition-route"
-        class="expedition-trail__route"
-        d=""
-        fill="none"
-        stroke="var(--ink)"
-        stroke-opacity="0.4"
-        stroke-width="1.35"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-dasharray="1.6 7"
-        vector-effect="non-scaling-stroke"
-      ></path>
+      <g id="expedition-footprints" class="expedition-trail__footprints"></g>
     </svg>
 
     <div
@@ -215,6 +203,43 @@
   .expedition-trail__hiker {
     display: block;
     overflow: visible;
+  }
+
+  :global(.expedition-trail__footprint) {
+    opacity: 0;
+    transition: opacity 0.28s ease;
+  }
+
+  :global(.expedition-trail__footprint.is-visible.is-age-0) {
+    opacity: 0.42;
+  }
+
+  :global(.expedition-trail__footprint.is-visible.is-age-1) {
+    opacity: 0.32;
+  }
+
+  :global(.expedition-trail__footprint.is-visible.is-age-2) {
+    opacity: 0.22;
+  }
+
+  :global(.expedition-trail__footprint.is-visible.is-age-3) {
+    opacity: 0.14;
+  }
+
+  :global(.expedition-trail__footprint .footprint__shape) {
+    fill: var(--ink);
+  }
+
+  :global(.expedition-trail__footprint.is-fading) {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.expedition-trail__footprint),
+    :global(.expedition-trail__footprint.is-fading) {
+      transition: none;
+    }
   }
 
   .hiker__arm,

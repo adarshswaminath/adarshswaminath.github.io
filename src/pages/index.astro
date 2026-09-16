@@ -56,16 +56,19 @@ const featuredBlogs = posts
   import { setupTracingBeam } from '../scripts/tracing-beam'
   import { setupExpeditionTrail } from '../scripts/expedition-trail'
   import { setupDrawer } from '../scripts/drawer'
+  import { setupTreasureChest } from '../scripts/treasure-chest'
 
   setupTyping()
   setupTracingBeam()
   setupExpeditionTrail()
   setupDrawer()
+  setupTreasureChest()
 
   document.addEventListener('astro:page-load', () => {
     setupTyping()
     setupTracingBeam()
     setupExpeditionTrail()
     setupDrawer()
+    setupTreasureChest()
   })
 </script>
