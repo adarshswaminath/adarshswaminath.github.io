@@ -2,8 +2,7 @@
 
 /* ===== Field Notebook Design Tokens ===== */
 :root {
-  /* --paper: #ede4d3; */
-  --paper: #f3f0eb;
+  --paper: #f0e7d7;
   --paper-dark: #e4d9c4;
   --ink: #2b5699;
   --ink-deep: #1f3f78;
