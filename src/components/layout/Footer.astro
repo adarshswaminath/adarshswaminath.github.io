@@ -1,72 +1,71 @@
 ---
 import { navItems } from '../../data/navigation'
-import SketchUnderline from '../sketch/SketchUnderline.astro';
+import SketchUnderline from '../sketch/SketchUnderline.astro'
 
 const year = new Date().getFullYear()
 ---
 
-<footer class="relative mx-auto max-w-5xl px-6 pt-2 pb-8 ">
+<footer class="relative mx-auto max-w-5xl px-6 pt-2 pb-8">
   <div
     class="flex flex-col gap-4 pt-5 sm:flex-row sm:items-center sm:justify-between"
   >
-  <div class="flex flex-col">
-    <p
-      class="font-hand flex items-center gap-1 text-[1.5rem] leading-none text-(--ink)"
-    >
-      <span>made with coffee</span>
-      <svg
-        class="inline-block size-6 shrink-0 text-(--ink)"
-        viewBox="0 0 28 28"
-        fill="none"
-        stroke="currentColor"
-        aria-hidden="true"
+    <div class="flex flex-col">
+      <p
+        class="font-hand flex items-center gap-1 text-[1.5rem] leading-none text-(--ink)"
       >
-        <path
-          d="M9.2 7.2 C9.6 5.6 8.8 4.4 9.4 3.2 M13.2 6.8 C13.8 5.2 12.9 4.1 13.6 2.8 M17 7 C17.5 5.5 16.7 4.3 17.3 3.1"
-          stroke-width="1.05"
-          stroke-linecap="round"
-          opacity="0.5"
-        ></path>
-        <path
-          d="M5.2 9.2 C5 12 5.5 16.8 6.3 19.6 C6.9 21.5 8.8 22.9 11.4 23.2 C14.4 23.5 17.5 23.2 19.7 22.6 C21.4 22.1 22.5 20.5 22.7 18.4 C23 15.2 22.8 11.5 22.4 9.2"
-          stroke-width="1.25"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></path>
-        <path
-          d="M4.6 9.1 C8 7.9 14 7.8 19.2 8.4 C21.4 8.7 23.2 9 24 9.4"
-          stroke-width="1.2"
-          stroke-linecap="round"
-        ></path>
-        <path
-          d="M22.6 11.2 C25.4 11.6 26.8 13.8 26.2 16.2 C25.6 18.4 23.8 19.4 22.4 18.8"
-          stroke-width="1.15"
-          stroke-linecap="round"
-        ></path>
-        <path
-          d="M6.4 24.8 C10.2 26.2 16.5 26.4 21.2 24.6"
-          stroke-width="1"
-          stroke-linecap="round"
-          opacity="0.65"
-        ></path>
-      </svg>
-      <span>and tokens</span>
-    </p>
-    <SketchUnderline
-    class="my-1.5 opacity-70"
-    width={240}
-  />
-    <p class="font-hand text-[1.2rem] text-(--ink-muted)">
-      <span
-        class="mr-1.5 inline-block size-1.5 shrink-0 animate-pulse rounded-full bg-emerald-500 align-middle"
-        aria-hidden="true"
-      ></span>
-      {year}
-      <span>·</span>
-      AdarshSwaminath
-    </p>
+        <span>made with coffee</span>
+        <svg
+          class="inline-block size-6 shrink-0 text-(--ink)"
+          viewBox="0 0 28 28"
+          fill="none"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            d="M9.2 7.2 C9.6 5.6 8.8 4.4 9.4 3.2 M13.2 6.8 C13.8 5.2 12.9 4.1 13.6 2.8 M17 7 C17.5 5.5 16.7 4.3 17.3 3.1"
+            stroke-width="1.05"
+            stroke-linecap="round"
+            opacity="0.5"
+          ></path>
+          <path
+            d="M5.2 9.2 C5 12 5.5 16.8 6.3 19.6 C6.9 21.5 8.8 22.9 11.4 23.2 C14.4 23.5 17.5 23.2 19.7 22.6 C21.4 22.1 22.5 20.5 22.7 18.4 C23 15.2 22.8 11.5 22.4 9.2"
+            stroke-width="1.25"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+          <path
+            d="M4.6 9.1 C8 7.9 14 7.8 19.2 8.4 C21.4 8.7 23.2 9 24 9.4"
+            stroke-width="1.2"
+            stroke-linecap="round"
+          ></path>
+          <path
+            d="M22.6 11.2 C25.4 11.6 26.8 13.8 26.2 16.2 C25.6 18.4 23.8 19.4 22.4 18.8"
+            stroke-width="1.15"
+            stroke-linecap="round"
+          ></path>
+          <path
+            d="M6.4 24.8 C10.2 26.2 16.5 26.4 21.2 24.6"
+            stroke-width="1"
+            stroke-linecap="round"
+            opacity="0.65"
+          ></path>
+        </svg>
+        <span>and tokens</span>
+      </p>
+      <SketchUnderline
+        class="my-1.5 opacity-70"
+        width={240}
+      />
+      <p class="font-hand text-[1.2rem] text-(--ink-muted)">
+        <span
+          class="mr-1.5 inline-block size-1.5 shrink-0 animate-pulse rounded-full bg-emerald-500 align-middle"
+          aria-hidden="true"
+        ></span>
+        {year}
+        <span>·</span>
+        AdarshSwaminath
+      </p>
     </div>
-    
 
     <div class="flex flex-wrap items-center gap-x-4 gap-y-2 sm:justify-end">
       <nav aria-label="Footer">
