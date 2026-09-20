@@ -1,6 +1,7 @@
 ---
 import Section from '../../layout/Section.astro'
 import type { MarkdownPost } from '../../../data/types'
+import SketchArtifact from '@/components/sketch/SketchArtifact.astro'
 
 interface Props {
   posts: MarkdownPost[]
@@ -14,6 +15,12 @@ const { posts } = Astro.props
   kicker="Field Notes / 005"
   heading="Writing & thoughts"
 >
+  <SketchArtifact
+    slot="margin"
+    preset="monster-door"
+    variant="margin"
+    artifactId="monster-door-blog"
+  />
   <div class="mb-8 space-y-0">
     {
       posts.map((post, i) => (

@@ -1,0 +1,191 @@
+---
+/**
+ * Shared gutter easter-egg shell for campfire / chest / door.
+ * Pass `preset` from sketch-artifacts; slot custom visuals (e.g. campfire SVG).
+ */
+import {
+  getSketchArtifact,
+  type SketchArtifactKey,
+  type SketchArtifactVariant,
+} from '../../data/sketch-artifacts'
+
+interface Props {
+  preset: SketchArtifactKey
+  variant?: SketchArtifactVariant
+  artifactId?: string
+}
+
+const { preset: presetKey, variant = 'margin', artifactId } = Astro.props
+const preset = getSketchArtifact(presetKey)
+const id = artifactId ?? preset.defaultId
+
+const boxSize =
+  variant === 'margin'
+    ? 'h-[5.25rem] w-28 xl:h-[6rem] xl:w-32'
+    : 'h-20 w-20 xl:h-24 xl:w-24'
+
+const sideClasses =
+  preset.side === 'left'
+    ? variant === 'margin'
+      ? 'absolute left-6 w-max -translate-x-[calc(100%+0.75rem)] -translate-y-1/2 xl:left-8 xl:-translate-x-[calc(100%+1.25rem)]'
+      : 'absolute left-6 bottom-0 mb-1.5 w-max xl:left-8'
+    : variant === 'margin'
+      ? 'absolute right-6 w-max translate-x-[calc(100%+0.75rem)] -translate-y-1/2 xl:right-8 xl:translate-x-[calc(100%+1.25rem)]'
+      : 'absolute right-6 bottom-0 mb-1.5 w-max xl:right-8'
+
+// Tailwind needs full class strings — map known tops explicitly
+const topClass =
+  variant === 'margin' ? (preset.top === '52%' ? 'top-[52%]' : 'top-[48%]') : ''
+
+const clusterClass = [
+  'pointer-events-auto flex flex-col items-center gap-1 text-(--ink)',
+  sideClasses,
+  topClass,
+]
+  .filter(Boolean)
+  .join(' ')
+
+const tilt = preset.tilt
+---
+
+<div
+  class:list={[
+    'sketch-artifact pointer-events-none absolute inset-0 z-20 hidden lg:block',
+    `sketch-artifact--${preset.key}`,
+  ]}
+  data-sketch-artifact={preset.key}
+>
+  <div class="relative mx-auto h-full w-full max-w-5xl px-6">
+    <div
+      class={clusterClass}
+      data-sketch-cluster
+    >
+      <div
+        id={id}
+        class:list={['sketch-artifact__box shrink-0 cursor-pointer', boxSize]}
+        data-sketch-box
+        role="img"
+        aria-label={preset.aria.boxOff}
+      >
+        {
+          preset.images ? (
+            <img
+              class="sketch-artifact__img pointer-events-none block h-full w-full object-contain object-bottom select-none"
+              data-sketch-img
+              src={preset.images.off}
+              alt={preset.images.alt}
+              width="160"
+              height="160"
+              draggable="false"
+            />
+          ) : (
+            <slot />
+          )
+        }
+      </div>
+
+      <div class="sketch-artifact__hint text-center">
+        <button
+          type="button"
+          class="sketch-artifact__trigger focus-ink font-hand max-w-38 cursor-pointer bg-transparent p-0 text-[clamp(1rem,1.05vw,1.2rem)] leading-[1.15] text-(--ink)"
+          data-sketch-trigger
+          style={`--sketch-tilt: ${tilt}deg`}
+          aria-controls={id}
+          aria-label={preset.aria.triggerOff}
+          {...preset.toggleAttr === 'pressed'
+            ? { 'aria-pressed': 'false' }
+            : { 'aria-expanded': 'false' }}
+        >
+          <span data-sketch-label>{preset.labels.off}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .sketch-artifact__trigger {
+    opacity: 0.78;
+    transform: rotate(var(--sketch-tilt, 0deg));
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .sketch-artifact__trigger:hover,
+  .sketch-artifact__trigger:focus-visible {
+    opacity: 1;
+    transform: rotate(var(--sketch-tilt, 0deg)) translateY(-1px);
+  }
+
+  .sketch-artifact__trigger:hover [data-sketch-label],
+  .sketch-artifact__trigger:focus-visible [data-sketch-label] {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: color-mix(in srgb, var(--ink) 45%, transparent);
+  }
+
+  .sketch-artifact__box {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .sketch-artifact__box.is-shaking {
+    animation: sketch-artifact-shake 0.3s ease-in-out;
+  }
+
+  .sketch-artifact__box.is-open .sketch-artifact__img {
+    animation: sketch-artifact-settle 0.35s ease-out;
+  }
+
+  @keyframes sketch-artifact-shake {
+    0%,
+    100% {
+      transform: translateX(0) rotate(0deg);
+    }
+    20% {
+      transform: translateX(-2px) rotate(-1deg);
+    }
+    40% {
+      transform: translateX(2px) rotate(1deg);
+    }
+    60% {
+      transform: translateX(-3px) rotate(-1.5deg);
+    }
+    80% {
+      transform: translateX(3px) rotate(1.5deg);
+    }
+  }
+
+  @keyframes sketch-artifact-settle {
+    0% {
+      opacity: 0.82;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sketch-artifact__box.is-shaking {
+      animation: none;
+    }
+
+    .sketch-artifact__box.is-open .sketch-artifact__img {
+      animation: none;
+    }
+
+    .sketch-artifact__trigger {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import { setupSketchArtifacts } from '../../scripts/sketch-artifact'
+
+  setupSketchArtifacts()
+  document.addEventListener('astro:page-load', setupSketchArtifacts)
+</script>
