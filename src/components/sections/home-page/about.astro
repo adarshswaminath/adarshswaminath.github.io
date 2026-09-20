@@ -2,7 +2,7 @@
 import Section from '../../layout/Section.astro'
 import { MetaLabel, Divider } from '../../ui'
 import { achievements } from '../../../data/navigation'
-import TreasureChest from '@/components/sketch/TreasureChest.astro'
+import SketchArtifact from '@/components/sketch/SketchArtifact.astro'
 ---
 
 <Section
@@ -10,8 +10,9 @@ import TreasureChest from '@/components/sketch/TreasureChest.astro'
   kicker="Field Notes / 003"
   heading="A bit about me"
 >
-  <TreasureChest
+  <SketchArtifact
     slot="margin"
+    preset="treasure-chest"
     variant="margin"
     artifactId="treasure-chest-about"
   />

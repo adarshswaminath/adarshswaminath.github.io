@@ -124,33 +124,35 @@
           ></path>
 
           <!-- Head + field hat (one inked mass, no face) -->
-          <path
-            class="hiker__head"
-            d="
-              M13.2 5.3
-              C14.8 5.1 15.9 6.2 15.7 7.6
-              C15.5 9.0 14.2 9.8 12.9 9.4
-              C11.7 9.0 11.2 7.8 11.5 6.7
-              C11.8 5.8 12.4 5.4 13.2 5.3 Z
-            "
-            fill="var(--ink-deep)"
-          ></path>
-          <path
-            class="hiker__hat-crown"
-            d="
-              M11.7 6.2
-              C11.9 4.4 14.6 4.2 15.3 5.9
-              C14.3 6.4 12.7 6.5 11.7 6.2 Z
-            "
-            fill="var(--ink-deep)"
-          ></path>
-          <path
-            class="hiker__hat-brim"
-            d="M9.9 6.4 C11.7 5.5 15.4 5.4 17.3 6.2"
-            stroke="var(--ink-deep)"
-            stroke-width="1.15"
-            stroke-linecap="round"
-          ></path>
+          <g class="hiker__head-group">
+            <path
+              class="hiker__head"
+              d="
+                M13.2 5.3
+                C14.8 5.1 15.9 6.2 15.7 7.6
+                C15.5 9.0 14.2 9.8 12.9 9.4
+                C11.7 9.0 11.2 7.8 11.5 6.7
+                C11.8 5.8 12.4 5.4 13.2 5.3 Z
+              "
+              fill="var(--ink-deep)"
+            ></path>
+            <path
+              class="hiker__hat-crown"
+              d="
+                M11.7 6.2
+                C11.9 4.4 14.6 4.2 15.3 5.9
+                C14.3 6.4 12.7 6.5 11.7 6.2 Z
+              "
+              fill="var(--ink-deep)"
+            ></path>
+            <path
+              class="hiker__hat-brim"
+              d="M9.9 6.4 C11.7 5.5 15.4 5.4 17.3 6.2"
+              stroke="var(--ink-deep)"
+              stroke-width="1.15"
+              stroke-linecap="round"
+            ></path>
+          </g>
 
           <!-- Near arm (forward, on the pole) -->
           <path
@@ -210,6 +212,124 @@
     overflow: visible;
   }
 
+  /* Gunshot scatter — monster door easter egg */
+  .expedition-trail__explorer.is-downed {
+    width: 38px;
+    height: 48px;
+    margin-left: -19px;
+    margin-top: -42px;
+    z-index: 1000;
+  }
+
+  .expedition-trail__explorer.is-downed .expedition-trail__hiker {
+    width: 38px;
+    height: 48px;
+    overflow: visible;
+  }
+
+  .expedition-trail__explorer.is-downed .hiker__head-group,
+  .expedition-trail__explorer.is-downed .hiker__body,
+  .expedition-trail__explorer.is-downed .hiker__backpack,
+  .expedition-trail__explorer.is-downed .hiker__backpack-detail,
+  .expedition-trail__explorer.is-downed .hiker__strap,
+  .expedition-trail__explorer.is-downed .hiker__arm,
+  .expedition-trail__explorer.is-downed .hiker__leg,
+  .expedition-trail__explorer.is-downed .hiker__pole {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: hiker-scatter 0.7s cubic-bezier(0.18, 0.7, 0.25, 1) forwards;
+  }
+
+  .expedition-trail__explorer.is-downed .hiker__head-group {
+    --sx: -22px;
+    --sy: -36px;
+    --sr: -55deg;
+    animation-delay: 0ms;
+  }
+
+  .expedition-trail__explorer.is-downed .hiker__body {
+    --sx: 10px;
+    --sy: 8px;
+    --sr: 18deg;
+    animation-delay: 20ms;
+  }
+
+  .expedition-trail__explorer.is-downed .hiker__backpack {
+    --sx: -30px;
+    --sy: 12px;
+    --sr: -40deg;
+    animation-delay: 30ms;
+  }
+
+  .expedition-trail__explorer.is-downed .hiker__strap {
+    --sx: 16px;
+    --sy: -10px;
+    --sr: 70deg;
+    animation-delay: 40ms;
+  }
+
+  .expedition-trail__explorer.is-downed .hiker__arm--left {
+    --sx: -34px;
+    --sy: 4px;
+    --sr: -95deg;
+    animation-delay: 35ms;
+  }
+
+  .expedition-trail__explorer.is-downed .hiker__arm--right {
+    --sx: 32px;
+    --sy: -14px;
+    --sr: 110deg;
+    animation-delay: 45ms;
+  }
+
+  .expedition-trail__explorer.is-downed .hiker__leg--left {
+    --sx: -18px;
+    --sy: 30px;
+    --sr: -65deg;
+    animation-delay: 50ms;
+  }
+
+  .expedition-trail__explorer.is-downed .hiker__leg--right {
+    --sx: 28px;
+    --sy: 32px;
+    --sr: 75deg;
+    animation-delay: 55ms;
+  }
+
+  .expedition-trail__explorer.is-downed .hiker__pole {
+    --sx: 36px;
+    --sy: 20px;
+    --sr: 125deg;
+    animation-delay: 25ms;
+  }
+
+  .expedition-trail__explorer.is-downed .hiker__backpack-detail {
+    --sx: -26px;
+    --sy: 16px;
+    --sr: -25deg;
+    animation-delay: 35ms;
+  }
+
+  @keyframes hiker-scatter {
+    0% {
+      transform: translate(0, 0) rotate(0deg) scale(1);
+      opacity: 1;
+    }
+    40% {
+      transform: translate(
+          calc(var(--sx, 0px) * 0.55),
+          calc(var(--sy, 0px) * 0.45)
+        )
+        rotate(calc(var(--sr, 0deg) * 0.5)) scale(1.05);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(var(--sx, 0px), var(--sy, 0px))
+        rotate(var(--sr, 0deg)) scale(0.7);
+      opacity: 0;
+    }
+  }
+
   :global(.expedition-trail__footprint) {
     opacity: 0;
     transition: opacity 0.28s ease;
@@ -244,6 +364,18 @@
     :global(.expedition-trail__footprint),
     :global(.expedition-trail__footprint.is-fading) {
       transition: none;
+    }
+
+    .expedition-trail__explorer.is-downed .hiker__head-group,
+    .expedition-trail__explorer.is-downed .hiker__body,
+    .expedition-trail__explorer.is-downed .hiker__backpack,
+    .expedition-trail__explorer.is-downed .hiker__backpack-detail,
+    .expedition-trail__explorer.is-downed .hiker__strap,
+    .expedition-trail__explorer.is-downed .hiker__arm,
+    .expedition-trail__explorer.is-downed .hiker__leg,
+    .expedition-trail__explorer.is-downed .hiker__pole {
+      animation: none;
+      opacity: 0;
     }
   }
 

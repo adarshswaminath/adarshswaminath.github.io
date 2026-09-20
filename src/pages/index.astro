@@ -60,22 +60,19 @@ const featuredBlogs = posts
   import { setupTracingBeam } from '../scripts/tracing-beam'
   import { setupExpeditionTrail } from '../scripts/expedition-trail'
   import { setupDrawer } from '../scripts/drawer'
-  import { setupTreasureChest } from '../scripts/treasure-chest'
-  import { setupCampfire } from '../scripts/campfire'
+  import { setupSketchArtifacts } from '../scripts/sketch-artifact'
 
   setupTyping()
   setupTracingBeam()
   setupExpeditionTrail()
   setupDrawer()
-  setupTreasureChest()
-  setupCampfire()
+  setupSketchArtifacts()
 
   document.addEventListener('astro:page-load', () => {
     setupTyping()
     setupTracingBeam()
     setupExpeditionTrail()
     setupDrawer()
-    setupTreasureChest()
-    setupCampfire()
+    setupSketchArtifacts()
   })
 </script>

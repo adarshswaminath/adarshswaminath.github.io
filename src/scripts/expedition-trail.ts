@@ -133,6 +133,7 @@ export function setupExpeditionTrail() {
   let disposed = false
   let isAnimating = false
   let isMoving = false
+  let isDowned = false
   let idleTimer = 0
   let facing = 1
   let walkPhase = 0
@@ -157,6 +158,11 @@ export function setupExpeditionTrail() {
     removeTimer: number
   }
   const footprints: Footprint[] = []
+
+  type KnockDetail = {
+    clientX?: number
+    clientY?: number
+  }
 
   type Checkpoint = {
     el: Element
@@ -388,13 +394,85 @@ export function setupExpeditionTrail() {
 
   const applyFrame = (walking: boolean, travelDeg: number) => {
     explorer.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) rotate(${currentAngle.toFixed(2)}deg) scaleX(${facing})`
+    if (isDowned) {
+      applyWalkPose(0, false)
+      return
+    }
     applyWalkPose(walkPhase, walking)
     maybePlantFootprint(currentX, currentY, walking, travelDeg)
     updateFlags()
   }
 
+  /**
+   * Pull the explorer next to the monster door (left gutter click is outside
+   * normal cursor tracking, so without this the scatter happens off-screen).
+   */
+  const snapBesideShot = (detail?: KnockDetail) => {
+    let x = clamp(width * 0.18, PAD + 48, width * 0.4)
+    let y = currentY
+
+    if (
+      detail &&
+      typeof detail.clientX === 'number' &&
+      typeof detail.clientY === 'number'
+    ) {
+      const local = clientToFrame(detail.clientX, detail.clientY)
+      if (local) {
+        // Door sits in the left margin — nudge onto the paper so he reads.
+        x = clamp(
+          Math.max(local.x, 0) + 72,
+          PAD + 48,
+          Math.min(width * 0.38, 280),
+        )
+        y = clamp(local.y + 10, PAD, height - PAD)
+      }
+    } else {
+      const rect = frame.getBoundingClientRect()
+      const local = clientToFrame(
+        rect.left + Math.min(140, rect.width * 0.14),
+        window.innerHeight * 0.48,
+      )
+      if (local) {
+        x = clamp(local.x + 48, PAD + 48, width * 0.38)
+        y = clamp(local.y, PAD, height - PAD)
+      }
+    }
+
+    currentX = x
+    currentY = y
+    targetX = x
+    targetY = y
+    currentAngle = 0
+    targetAngle = 0
+    facing = 1
+  }
+
+  const knockDown = (detail?: KnockDetail) => {
+    if (disposed || isDowned) return
+    isDowned = true
+    isAnimating = false
+    isMoving = false
+    window.clearTimeout(idleTimer)
+
+    snapBesideShot(detail)
+    applyWalkPose(0, false)
+    explorer.classList.add('is-downed')
+    applyFrame(false, 0)
+  }
+
+  const revive = () => {
+    if (disposed || !isDowned) return
+    isDowned = false
+    explorer.classList.remove('is-downed')
+    applyFrame(false, 0)
+  }
+
   const tick = () => {
     if (disposed) return
+    if (isDowned) {
+      isAnimating = false
+      return
+    }
 
     const dx = targetX - currentX
     const dy = targetY - currentY
@@ -451,7 +529,7 @@ export function setupExpeditionTrail() {
   }
 
   const onPointerMove = (event: PointerEvent) => {
-    if (!isDesktop() || reduced) return
+    if (!isDesktop() || reduced || isDowned) return
 
     const local = clientToFrame(event.clientX, event.clientY)
     if (!local) return
@@ -463,6 +541,12 @@ export function setupExpeditionTrail() {
     markMoving()
     requestTick()
   }
+
+  const onKnockDown = (event: Event) => {
+    const detail = (event as CustomEvent<KnockDetail>).detail
+    knockDown(detail)
+  }
+  const onRevive = () => revive()
 
   const onResize = () => {
     reduced = prefersReducedMotion()
@@ -487,6 +571,8 @@ export function setupExpeditionTrail() {
   mqMotion.addEventListener('change', onMq)
   window.addEventListener('pointermove', onPointerMove, { passive: true })
   window.addEventListener('resize', onResize, { passive: true })
+  window.addEventListener('expedition:knockdown', onKnockDown)
+  window.addEventListener('expedition:revive', onRevive)
 
   let resizeRaf = 0
   const ro =
@@ -534,6 +620,8 @@ export function setupExpeditionTrail() {
 
   cleanup = () => {
     disposed = true
+    isDowned = false
+    explorer.classList.remove('is-downed')
     window.clearTimeout(idleTimer)
     if (resizeRaf) window.cancelAnimationFrame(resizeRaf)
     footprints.forEach((fp) => {
@@ -546,6 +634,8 @@ export function setupExpeditionTrail() {
     mqMotion.removeEventListener('change', onMq)
     window.removeEventListener('pointermove', onPointerMove)
     window.removeEventListener('resize', onResize)
+    window.removeEventListener('expedition:knockdown', onKnockDown)
+    window.removeEventListener('expedition:revive', onRevive)
     ro?.disconnect()
   }
 }
