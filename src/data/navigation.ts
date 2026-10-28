@@ -8,6 +8,9 @@ export const navItems = [
   { label: 'Contact', href: '/#contact' },
 ]
 
+/** Public file: public/Adarsh's Resume.pdf */
+export const resumePdfHref = '/Adarsh%27s%20Resume.pdf'
+
 export const stackTags = [
   'React',
   'Next.js',
